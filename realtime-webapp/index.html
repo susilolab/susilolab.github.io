@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Realtime Web Application</title>
+
+		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/league.css" id="theme">
+		<link rel="icon" type="image/png" href="favicon.png">
+		<style type="text/css" media="screen">
+			.slides section.has-dark-background,
+			.slides section.has-dark-background h3 {
+				color: #fff;
+			}
+			.slides section.has-light-background,
+			.slides section.has-light-background h3 {
+				color: #222;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<div class="slides">
+
+				<section>
+					<h2>Realtime Web Application</h2>
+				</section>
+
+				<section>
+					<h3>About Me</h3>
+					<p>
+						Agus Susilo<br />
+						Software Engineer<br />
+						<a href="http://github.com/susilolab">github.com/susilolab</a><br />
+					</p>
+				</section>
+
+				<section>
+					<h3>Realtime Web?</h3>
+					<blockquote>
+						<p>
+						"Realtime web adalah jaringan web yang menggunakan teknologi yang memungkinkan pengguna memperoleh informasi segera setelah dipublikasikan oleh pembuat."
+						</p>
+					</blockquote>
+				</section>
+
+				<section>
+					<h3>Samples</h3>
+					<section>
+						<img src="images/bar.gif" />
+					</section>
+
+					<section>
+						<img src="images/donut.gif" />
+					</section>
+
+					<section>
+						<img src="images/gauge.gif" />
+					</section>
+
+					<section>
+						<img src="images/bus.gif" />
+					</section>					
+				</section>
+
+				<section>
+					<h3>Default</h3>
+				</section>
+
+				<section>
+					<h3>Contoh web</h3>
+					<a href="https://www.pubnub.com/">pubnub.com</a>
+				</section>
+
+				<section>
+					<h3>data-transition: convex</h3>
+				</section>
+
+				<section>
+					<h3>data-transition: convex-in concave-out</h3>
+				</section>
+
+				<section>
+					<section>
+						<h3>Default</h3>
+					</section>
+					<section>
+						<h3>data-transition: concave</h3>
+					</section>
+					<section>
+						<h3>data-transition: convex-in fade-out</h3>
+					</section>
+					<section>
+						<h3>Default</h3>
+					</section>
+				</section>
+
+				<section>
+					<h3>data-transition: none</h3>
+				</section>
+
+				<section>
+					<h3>Default</h3>
+				</section>
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				touch: true,
+				center: true,
+				history: true,
+				showNotes: true,
+				mouseWheel: true,
+				transition: 'convex',
+				// transitionSpeed: 'slow',
+				backgroundTransition: 'convex',
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
