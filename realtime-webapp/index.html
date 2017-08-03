@@ -24,6 +24,9 @@
         font-size: 12px;
         font-style: italic;
       }
+      a.source-slide {
+        font-size: 30px;
+      }
     </style>
   </head>
 
@@ -99,7 +102,12 @@
           <section>
             <h3>Konsep</h3>
             <img src="images/konsep.png" />
+
+            <aside class="notes">
+              Konsep ini memungkinkan kita membangun aplikasi hybrid, karena dg pola pub/sub dapat digunakan untuk komunikasi antara server/services.
+            </aside>
           </section>
+
 
           <section>
             <h3>Cara Kerja 1</h3>
@@ -153,13 +161,17 @@
 
         <section>
           <h3>Demo</h3>
-          <iframe src="http://localhost/susilolab.github.io/realtime-webapp/demo/index.html" height="400" width="800"></iframe><br />
+          <div class="row">
+            <div class="col-md-12">
+              <iframe src="http://demos.kaazing.com/portfolio-web/index.html" height="800" width="800"></iframe>
+            </div>
+          </div>
         </section>
 
         <section>
           <h3>Sekian</h3>
           <p>
-            <a href="https://github.com/susilolab/susilolab.github.io">github.com/susilolab/susilolab.github.io</a><br />
+            <a href="https://github.com/susilolab/susilolab.github.io" class="source-slide">github.com/susilolab/susilolab.github.io</a><br />
             <br />
             Terima kasih
           </p>
