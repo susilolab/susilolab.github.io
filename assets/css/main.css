@@ -28,7 +28,7 @@ main, article, section {
   display: block; }
 
 a {
-  color: #268bd2;
+  color: #ac4142;
   text-decoration: none; }
   a:hover, a:focus {
     text-decoration: underline; }
@@ -70,11 +70,11 @@ button, input[type="submit"] {
   cursor: pointer;
   background: transparent;
   border-color: #e5e5e5;
-  color: #268bd2;
+  color: #ac4142;
   transition: color 0.6s ease-in-out, border-color 0.6s ease-in-out, background 0.6s ease-in-out; }
   button:hover, input[type="submit"]:hover {
-    background: #268bd2;
-    border-color: #268bd2;
+    background: #ac4142;
+    border-color: #ac4142;
     color: white;
     box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.16); }
 
@@ -163,7 +163,7 @@ a svg, .icon svg {
   height: 1em; }
 
 a svg {
-  fill: #268bd2; }
+  fill: #ac4142; }
 
 .icon {
   vertical-align: middle; }
@@ -487,8 +487,8 @@ pre {
 */
 body {
   color: rgba(255, 255, 255, 0.75);
-  background-color: #202020;
-  background-image: linear-gradient(to bottom, #323232, #0e0e0e);
+  background-color: #ac4142;
+  background-image: linear-gradient(to bottom, #be5354, #923738);
   display: flex;
   flex-direction: column;
   min-width: 100vw;
@@ -648,9 +648,6 @@ body {
   Set $sidebar-stick variable to affix sidebar contents to the
   bottom of the sidebar in tablets and up.
 ----------------------------------------------------------- */
-@media (min-width: 49rem) {
-  body {
-    align-items: flex-end; } }
 /* -----------------------------------------------------------
   Reverse layout
 
@@ -724,7 +721,7 @@ h2.post-title, h2.page-title {
     color: #999;
     white-space: nowrap; }
   .posts-list li a:hover {
-    color: #268bd2;
+    color: #ac4142;
     text-decoration: none; }
     .posts-list li a:hover small {
       color: inherit; }
@@ -806,7 +803,7 @@ button.disqus-load {
   white-space: nowrap;
   opacity: 0.75; }
   .tags-list a .tag-count {
-    background: #268bd2;
+    background: #ac4142;
     color: rgba(255, 255, 255, 0.8);
     margin-left: 0.25em;
     border-radius: 1000px;
