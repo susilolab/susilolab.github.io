@@ -188,125 +188,8 @@
 
     
       <p>Event pada <code class="highlighter-rouge">yii2</code> telah ditulis ulang dari versi sebelumnya dan disempurnakan sehingga lebih mudah dan dapat digunakan
-secara global. Nah kali ini saya ingin berbagai sedikit tip bagaimana membuat event secara global di <code class="highlighter-rouge">Yii2</code>. Saya asumsikan bahwa kamu sudah memiliki pengetahuan tentang dasar-dasar <code class="highlighter-rouge">PHP7</code> dan <code class="highlighter-rouge">Yii2</code>. 
-<!--more--></p>
+secara global. Nah kali ini saya ingin berbagai sedikit tip bagaimana membuat event secara global di <code class="highlighter-rouge">Yii2</code>. Saya asumsikan bahwa kamu sudah memiliki pengetahuan tentang dasar-dasar <code class="highlighter-rouge">PHP7</code> dan <code class="highlighter-rouge">Yii2</code>.</p>
 
-<p>Secara sederhana event pada <code class="highlighter-rouge">yii2</code> mirip event pada <code class="highlighter-rouge">jquery</code> dan cara pemakaiannya pun mirip. Untuk listening pada
-event tertentu kita gunakan <code class="highlighter-rouge">on</code> dan untuk mentrigger event menggunakan fungsi <code class="highlighter-rouge">trigger</code>. Detil fungsi <code class="highlighter-rouge">on</code> dan <code class="highlighter-rouge">trigger</code> dapat dilihat dibawah ini:</p>
-<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">Event</span><span class="o">::</span><span class="na">on</span><span class="p">(</span><span class="nv">$class</span><span class="p">,</span> <span class="nv">$name</span><span class="p">,</span> <span class="nv">$handle</span><span class="p">,</span> <span class="nv">$data</span> <span class="o">=</span> <span class="kc">null</span><span class="p">,</span> <span class="nv">$append</span> <span class="o">=</span> <span class="kc">true</span><span class="p">);</span>
-<span class="nx">Event</span><span class="o">::</span><span class="na">trigger</span><span class="p">(</span><span class="nv">$class</span><span class="p">,</span> <span class="nv">$name</span><span class="p">,</span> <span class="nv">$event</span> <span class="o">=</span> <span class="kc">null</span><span class="p">);</span>
-</code></pre></div></div>
-
-<p>Tiga parameter utama pada fungsi <code class="highlighter-rouge">on</code> wajib ada, sedangkan selebihnya boleh diabaikan. Karena kita akan fokus pada bagaimana menggunakan event yii2 secara global maka kita hanya akan menggunakan 3 parameter pertama. contoh penggunaan event secara umum seperti berikut:</p>
-<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// SiteController.php</span>
-<span class="o">...</span>
-<span class="k">use</span> <span class="nx">yii\base\Event</span><span class="p">;</span>
-
-<span class="o">...</span>
-<span class="k">const</span> <span class="no">EVENT_HELLO</span> <span class="o">=</span> <span class="s1">'hello'</span><span class="p">;</span>
-
-<span class="k">public</span> <span class="k">function</span> <span class="nf">init</span><span class="p">()</span>
-<span class="p">{</span>
-  <span class="k">parent</span><span class="o">::</span><span class="na">init</span><span class="p">();</span>
-  <span class="nx">Event</span><span class="o">::</span><span class="na">on</span><span class="p">(</span><span class="nx">self</span><span class="o">::</span><span class="na">className</span><span class="p">(),</span> <span class="nx">self</span><span class="o">::</span><span class="na">EVENT_HELLO</span><span class="p">,</span> <span class="p">[</span><span class="nx">self</span><span class="o">::</span><span class="na">className</span><span class="p">(),</span> <span class="s1">'helloLog'</span><span class="p">]);</span>
-<span class="p">}</span>
-
-<span class="k">public</span> <span class="k">function</span> <span class="nf">actionIndex</span><span class="p">()</span>
-<span class="p">{</span>
-  <span class="nv">$event</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Event</span><span class="p">();</span>
-  <span class="nx">Event</span><span class="o">::</span><span class="na">trigger</span><span class="p">(</span><span class="nx">self</span><span class="o">::</span><span class="na">className</span><span class="p">(),</span> <span class="nx">self</span><span class="o">::</span><span class="na">EVENT_HELLO</span><span class="p">,</span> <span class="nv">$event</span><span class="p">);</span>
-  <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span><span class="s1">'index'</span><span class="p">);</span>
-<span class="p">}</span>
-
-<span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">helloLog</span><span class="p">()</span>
-<span class="p">{</span>
-  <span class="nx">Yii</span><span class="o">::</span><span class="na">error</span><span class="p">(</span><span class="s1">'---Hello world---'</span><span class="p">);</span> 
-<span class="p">}</span>
-<span class="o">...</span>
-</code></pre></div></div>
-
-<p>Pada contoh di atas kita mengimport klas <code class="highlighter-rouge">Event</code> kemudian membuat konstanta nama event. Lalu pada fungsi <code class="highlighter-rouge">init</code> kita mendaftarkan event melalui fungsi <code class="highlighter-rouge">on</code> dengan nama fungsi yang akan dijalankan setelah event ditrigger yaitu <code class="highlighter-rouge">helloLog</code>. 
-Selanjutnya pada fungsi <code class="highlighter-rouge">actionIndex</code> kita mentrigger event <code class="highlighter-rouge">EVENT_HELLO</code> memakai fungsi <code class="highlighter-rouge">trigger</code>.<br />
-Perhatikan parameter ketiga, karena fungsi <code class="highlighter-rouge">helloLog</code> bertipe static maka nama klasnya menggunakan <code class="highlighter-rouge">self::className</code>. Jika menggunakan fungsi yang bukan static kita bisa menggunakan <code class="highlighter-rouge">$this</code> seperti ini:</p>
-<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">Event</span><span class="o">::</span><span class="na">on</span><span class="p">(</span><span class="nx">self</span><span class="o">::</span><span class="na">className</span><span class="p">(),</span> <span class="nx">self</span><span class="o">::</span><span class="na">EVENT_HELLO</span><span class="p">,</span> <span class="p">[</span><span class="nv">$this</span><span class="p">,</span> <span class="s1">'helloLog'</span><span class="p">]);</span>
-</code></pre></div></div>
-<p>Kemudian jalankan dengan mengakses controller site, jika tidak ada error maka akan ada log error dengan pesan hello world pada file <code class="highlighter-rouge">runtime/logs/app.log</code> seperti berikut ini:</p>
-
-<p><img src="/assets/img/001-2019-03-06-event-globalyii2.png" alt="log app" title="Log Hello" /></p>
-
-<p>Semoga dengan penjelasan dan contoh di atas kita sudah bisa memahami dasar-dasar event pada <code class="highlighter-rouge">yii2</code>, sekarang kita bikin event listenernya secara global sehingga kita dapat memicu/mentriggernya dari mana saja(model/controller/module).
-Agar event dapat didaftarkan secara global pada saat aplikasinya jalan maka kita akan menggunakan BootstrapInterface. kita akan bikin klas implementasi dari BootstrapInterface.</p>
-
-<p>Pertama kita bikin klas dengan nama <code class="highlighter-rouge">EventAutoLoader.php</code> pada folder <code class="highlighter-rouge">nama_app/components</code>, Klas ini berguna agar aplikasi dapat memuat konfigurasi event-event pada saat proses booting aplikasi. klas ini turunan dari <code class="highlighter-rouge">BootstrapInterface</code> yang hanya memiliki satu definisi fungsi yang harus di implementasikan pada klas turunan.</p>
-
-<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
-<span class="k">namespace</span> <span class="nx">app\components</span><span class="p">;</span>
-
-<span class="k">use</span> <span class="nx">Yii</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">yii\base\BootstrapInterface</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">yii\base\Event</span><span class="p">;</span>
-
-<span class="k">class</span> <span class="nc">EventAutoLoader</span> <span class="k">implements</span> <span class="nx">BootstrapInterface</span>
-<span class="p">{</span>
-  <span class="k">public</span> <span class="k">function</span> <span class="nf">bootstrap</span><span class="p">(</span><span class="nv">$app</span><span class="p">)</span>
-  <span class="p">{</span>
-    <span class="nv">$eventConfigFile</span> <span class="o">=</span> <span class="k">require</span><span class="p">(</span><span class="nx">Yii</span><span class="o">::</span><span class="na">getAlias</span><span class="p">(</span><span class="s1">'@app'</span><span class="p">)</span> <span class="o">.</span> <span class="s1">'/config/event-config.php'</span><span class="p">);</span>
-    <span class="k">foreach</span> <span class="p">(</span><span class="nv">$eventConfigFile</span> <span class="k">as</span> <span class="nv">$config</span><span class="p">)</span> <span class="p">{</span>
-      <span class="nx">Event</span><span class="o">::</span><span class="na">on</span><span class="p">(</span><span class="nv">$config</span><span class="p">[</span><span class="s1">'class'</span><span class="p">],</span> <span class="nv">$config</span><span class="p">[</span><span class="s1">'event'</span><span class="p">],</span> <span class="nv">$config</span><span class="p">[</span><span class="s1">'callback'</span><span class="p">]);</span>
-    <span class="p">}</span>
-  <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p>Kemudian buka file <code class="highlighter-rouge">config/web.php</code> dan tambahkan klas yang baru saja kita buat pada config <code class="highlighter-rouge">bootstrap</code>.</p>
-
-<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s1">'bootstrap'</span> <span class="o">=&gt;</span> <span class="p">[</span>
-  <span class="o">...</span>
-  <span class="s1">'app\components\EventAutoLoader'</span><span class="p">,</span>
-  <span class="o">...</span>
-<span class="p">],</span>
-</code></pre></div></div>
-
-<p>Tak lupa buat file dengan nama <code class="highlighter-rouge">event-config.php</code> pada folder config untuk menyimpan semua event dan event handler. Dan isinya kurang lebih seperti ini:</p>
-
-<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
-<span class="k">use</span> <span class="nx">app\controllers\SiteController</span><span class="p">;</span>
-
-<span class="k">return</span> <span class="p">[</span>
-  <span class="p">[</span>
-    <span class="s1">'class'</span>    <span class="o">=&gt;</span> <span class="nx">SiteController</span><span class="o">::</span><span class="na">className</span><span class="p">(),</span>
-    <span class="s1">'event'</span>    <span class="o">=&gt;</span> <span class="nx">SiteController</span><span class="o">::</span><span class="na">EVENT_HELLO</span><span class="p">,</span>
-    <span class="s1">'callback'</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="nx">SiteController</span><span class="o">::</span><span class="na">className</span><span class="p">(),</span> <span class="s1">'helloLog'</span><span class="p">],</span>
-  <span class="p">]</span>
-<span class="p">];</span>
-
-</code></pre></div></div>
-
-<p>Sampai tahap ini kita sudah mendaftarkan event secara global dan event tersebut dapat kita dari mana saja, karena klas <code class="highlighter-rouge">EventAutoLoader</code> akan dijalankan pada saat aplikasi booting pertama kali. Untuk memastikan bahwa event dapat dipanggil dari mana saja, kita akan membuat controller baru dengan nama <code class="highlighter-rouge">HelloController</code> dan mentrigger event yang ada di <code class="highlighter-rouge">SiteController</code>.</p>
-
-<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
-<span class="k">namespace</span> <span class="nx">app\controllers</span><span class="p">;</span>
-
-<span class="k">use</span> <span class="nx">Yii</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">yii\web\Controller</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">yii\base\Event</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">app\controllers\SiteController</span><span class="p">;</span>
-
-<span class="k">class</span> <span class="nc">HelloController</span> <span class="k">extends</span> <span class="nx">Controller</span>
-<span class="p">{</span>
-    <span class="k">public</span> <span class="k">function</span> <span class="nf">actionIndex</span><span class="p">()</span>
-    <span class="p">{</span>
-      <span class="nv">$event</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Event</span><span class="p">();</span>
-      <span class="nx">Event</span><span class="o">::</span><span class="na">trigger</span><span class="p">(</span><span class="nx">SiteController</span><span class="o">::</span><span class="na">className</span><span class="p">(),</span> <span class="nx">SiteController</span><span class="o">::</span><span class="na">EVENT_HELLO</span><span class="p">,</span> <span class="nv">$event</span><span class="p">);</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p>Kemudian akses hello controller melalui browser, jika semua lancar maka akan ada pesan Hello world di <code class="highlighter-rouge">app.log</code></p>
-
-<p><img src="susilolab.github.io/assets/img/002-2019-03-06-event-globalyii2.png" alt="app log2" title="Log hello 2" /></p>
-
-<p>Sekian untuk artikel kali semoga bermanfaat. Insya Allah pada artikel berikutnya saya akan membahas sedikit bagaimana melewatkan data pada event yang telah kita buat. Apabila kamu mempunyai saran dan kritik untuk artikel jangan sungkan2 untuk berkomentar dibawah.</p>
 
     
 
@@ -315,6 +198,8 @@ Agar event dapat didaftarkan secara global pada saat aplikasinya jalan maka kita
       
       
 
+      
+        <a href="/programming/php/2019/03/06/event-global-yii2.html">More &hellip;</a>
       
     
   </article>
@@ -357,116 +242,8 @@ Agar event dapat didaftarkan secara global pada saat aplikasinya jalan maka kita
       <p>Gorm adalah pustaka ORM untuk golang, ORM itu singkatan dari object-relational mapping walaupun sebenarnya golang bukan bahasa OOP seperti pada umumnya. Alasan kenapa saya menggunakan gorm adalah karena kita tidak perlu merubah tipe data dari mysql ke struk, apalagi jika field struk tersebut ada yang null maka kita harus menggunakan tipe data yang nullable.</p>
 
 <p>Contohnya string nullable, int nullable dll.
-Akan sangat repot sekali jika kolomnya banyak, oleh karena itu saya memakai gorm untuk memudahkan hal tersebut.
-<!--more--></p>
+Akan sangat repot sekali jika kolomnya banyak, oleh karena itu saya memakai gorm untuk memudahkan hal tersebut.</p>
 
-<h4 id="install">Install</h4>
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>go get github.com/jinzhu/gorm
-</code></pre></div></div>
-
-<p>Untuk contoh saya akan membuat tabel <code class="highlighter-rouge">posts</code>, silahkan buat tabel posts dengan aplikasi favorit Anda.</p>
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">create</span> <span class="k">table</span> <span class="n">posts</span><span class="p">(</span>
-  <span class="n">id</span> <span class="n">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span> <span class="k">not</span> <span class="k">null</span> <span class="k">primary</span> <span class="k">key</span> <span class="n">auto_increment</span><span class="p">,</span>
-  <span class="n">title</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span> <span class="k">not</span> <span class="k">null</span><span class="p">,</span>
-  <span class="n">body</span> <span class="n">text</span><span class="p">,</span>
-  <span class="n">published</span> <span class="n">tinyint</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="n">unsigned</span> <span class="k">default</span> <span class="mi">0</span>
-<span class="p">);</span>
-</code></pre></div></div>
-
-<p>Setelah kita selesai membuat tabel posts, maka kita akan membuat folder gorm. Karena akun github saya adalah susilolab maka saya akan membuat folder di <code class="highlighter-rouge">github.com/susilolab/blog/gorm</code> dan kita membuat file <code class="highlighter-rouge">main.go</code>.</p>
-
-<h4 id="koneksi-ke-database-mysql">Koneksi ke database mysql</h4>
-
-<p>kita akan mencoba menghubungkan ke database mysql. Kita juga membutuhkan pustaka driver mysql selain gorm untuk menghubungkan ke database.
-Ok, pertama kita bikin paket main dan import paket <code class="highlighter-rouge">fmt</code>, <code class="highlighter-rouge">log</code>, driver <code class="highlighter-rouge">mysql</code> dan <code class="highlighter-rouge">gorm</code>.</p>
-
-<p>Dan buat struk <code class="highlighter-rouge">Post</code>, struk ini untuk mewakili dari table <code class="highlighter-rouge">posts</code>. Struk pada Go konsepnya mirip klas pada PHP. Berikut potongan kodenya:</p>
-
-<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">package</span><span class="x"> </span><span class="n">main</span><span class="x">
-
-</span><span class="k">import</span><span class="x"> </span><span class="p">(</span><span class="x">
-    </span><span class="s">"fmt"</span><span class="x">
-    </span><span class="s">"log"</span><span class="x">
-
-    </span><span class="n">_</span><span class="x"> </span><span class="s">"github.com/go-sql-driver/mysql"</span><span class="x">
-    </span><span class="s">"github.com/jinzhu/gorm"</span><span class="x">
-</span><span class="p">)</span><span class="x">
-
-</span><span class="k">type</span><span class="x"> </span><span class="n">Post</span><span class="x"> </span><span class="k">struct</span><span class="x"> </span><span class="p">{</span><span class="x">
-    </span><span class="n">ID</span><span class="x">        </span><span class="kt">int</span><span class="x">
-    </span><span class="n">Title</span><span class="x">     </span><span class="kt">string</span><span class="x">
-    </span><span class="n">Body</span><span class="x">      </span><span class="kt">string</span><span class="x">
-    </span><span class="n">Published</span><span class="x"> </span><span class="kt">int</span><span class="x">
-</span><span class="p">}</span><span class="x">
-</span></code></pre></div></div>
-
-<h4 id="koneksi-database">Koneksi database</h4>
-<p>Kemudian pada fungsi main kita buat koneksi ke database dengan memanggil fungsi <code class="highlighter-rouge">gorm.Open</code>, fungsi <code class="highlighter-rouge">Open</code> akan mengembalikan struk <code class="highlighter-rouge">gorm.DB</code> dan <code class="highlighter-rouge">err</code>. Jika <code class="highlighter-rouge">err</code> tidak sama dengan nil munculkan pesan error dan exit, cukup tuliskan <code class="highlighter-rouge">log.Fatalln</code>. <code class="highlighter-rouge">Defer.Close()</code> setelah error handling berguna untuk menutup koneksi mysql.</p>
-
-<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">func</span><span class="x"> </span><span class="n">main</span><span class="p">()</span><span class="x"> </span><span class="p">{</span><span class="x">
-    </span><span class="n">conn</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="s">"root:password@tcp(127.0.0.1:3306)/blog?charset=utf8&amp;parseTime=True"</span><span class="x">
-    </span><span class="n">db</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">gorm</span><span class="o">.</span><span class="n">Open</span><span class="p">(</span><span class="s">"mysql"</span><span class="p">,</span><span class="x"> </span><span class="n">conn</span><span class="p">)</span><span class="x">
-    </span><span class="k">if</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">!=</span><span class="x"> </span><span class="no">nil</span><span class="x"> </span><span class="p">{</span><span class="x">
-        </span><span class="n">log</span><span class="o">.</span><span class="n">Fatalln</span><span class="p">(</span><span class="n">err</span><span class="p">)</span><span class="x">
-    </span><span class="p">}</span><span class="x">
-    </span><span class="k">defer</span><span class="x"> </span><span class="n">db</span><span class="o">.</span><span class="n">Close</span><span class="p">()</span><span class="x">
-</span><span class="p">}</span><span class="x">
-</span></code></pre></div></div>
-
-<h4 id="query-data">Query data</h4>
-
-<p>Kemudian kita bisa memulai query data, kita akan mencoba mengambil semua data yang ada pada tabel <code class="highlighter-rouge">posts</code>, perlu di ingat bahwa gorm akan menggangap nama tabel semua dalam bentuk jamak kecuali kita mengaktifkan mode singular atau menyebutkan nama tabel dengan fungsi Table. Misalnya struk <code class="highlighter-rouge">User</code> maka nama tabelnya akan dianggap <code class="highlighter-rouge">users</code>, struk <code class="highlighter-rouge">UserGroup</code> namanya tabelnya akan dianggap <code class="highlighter-rouge">user_groups</code> dll.
-Pertama kita bikin slice <code class="highlighter-rouge">Post</code> dengan nama posts untuk menampung datanya.</p>
-
-<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">posts</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="nb">make</span><span class="p">([]</span><span class="n">Post</span><span class="p">,</span><span class="x"> </span><span class="m">0</span><span class="p">)</span><span class="x">
-</span><span class="k">if</span><span class="x"> </span><span class="n">db</span><span class="o">.</span><span class="n">Find</span><span class="p">(</span><span class="o">&amp;</span><span class="n">posts</span><span class="p">)</span><span class="o">.</span><span class="n">RecordNotFound</span><span class="p">()</span><span class="x"> </span><span class="p">{</span><span class="x">
-    </span><span class="n">log</span><span class="o">.</span><span class="n">Fatalln</span><span class="p">(</span><span class="s">"record tidak ada"</span><span class="p">)</span><span class="x">
-</span><span class="p">}</span><span class="x">
-
-</span><span class="k">for</span><span class="x"> </span><span class="n">_</span><span class="p">,</span><span class="x"> </span><span class="n">val</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="k">range</span><span class="x"> </span><span class="n">posts</span><span class="x"> </span><span class="p">{</span><span class="x">
-    </span><span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">val</span><span class="o">.</span><span class="n">Title</span><span class="p">)</span><span class="x">
-</span><span class="p">}</span><span class="x">
-</span></code></pre></div></div>
-
-<h5 id="mendapat-data-pertama-dan-terakhir">Mendapat data pertama dan terakhir</h5>
-
-<p>Untuk mendapatkan record pertama kita bisa menggunakan fungsi First dan untuk data terakhir menggunakan fungsi Last</p>
-
-<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">var</span><span class="x"> </span><span class="n">post</span><span class="x"> </span><span class="n">Post</span><span class="x">
-</span><span class="n">db</span><span class="o">.</span><span class="n">First</span><span class="p">(</span><span class="o">&amp;</span><span class="n">post</span><span class="p">)</span><span class="x">
-</span><span class="n">db</span><span class="o">.</span><span class="n">First</span><span class="p">(</span><span class="o">&amp;</span><span class="n">post</span><span class="p">,</span><span class="x"> </span><span class="m">10</span><span class="p">)</span><span class="x">
-
-</span><span class="k">var</span><span class="x"> </span><span class="n">lastPost</span><span class="x"> </span><span class="n">Post</span><span class="x">
-</span><span class="n">db</span><span class="o">.</span><span class="n">Last</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lastPost</span><span class="p">)</span><span class="x">
-</span></code></pre></div></div>
-
-<h4 id="insert-data-ke-tabel">Insert data ke tabel</h4>
-
-<p>Untuk insert data ke tabel ada 2 cara, pertama menggunakan fungsi <code class="highlighter-rouge">Create</code> dan yang kedua dengan fungsi <code class="highlighter-rouge">NewRecord</code>. Fungsi <code class="highlighter-rouge">Create</code> akan mengembalikan struk <code class="highlighter-rouge">gorm.DB</code>, untuk melihat errornya bisa melalui property <code class="highlighter-rouge">Error</code>. Sedangkan <code class="highlighter-rouge">NewRecord</code> akan mengembalikan nilai <code class="highlighter-rouge">true</code> jika sukses dan <code class="highlighter-rouge">false</code> jika gagal.</p>
-
-<p>Pertama buat struk Post dan isi field-fieldnya.</p>
-
-<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Post</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">Post</span><span class="p">{</span><span class="n">ID</span><span class="o">:</span><span class="x"> </span><span class="m">2</span><span class="p">,</span><span class="x"> </span><span class="n">Title</span><span class="o">:</span><span class="x"> </span><span class="s">"belajar gorm"</span><span class="p">,</span><span class="x"> </span><span class="n">Body</span><span class="o">:</span><span class="x"> </span><span class="s">"awesome"</span><span class="p">,</span><span class="x"> </span><span class="n">Published</span><span class="o">:</span><span class="x"> </span><span class="m">1</span><span class="p">}</span><span class="x">
-</span><span class="k">if</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">db</span><span class="o">.</span><span class="n">Create</span><span class="p">()</span><span class="o">.</span><span class="n">Error</span><span class="p">;</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">==</span><span class="x"> </span><span class="no">nil</span><span class="x"> </span><span class="p">{</span><span class="x">
-    </span><span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"data sukses disimpan."</span><span class="p">);</span><span class="x">
-</span><span class="p">}</span><span class="x">
-</span></code></pre></div></div>
-
-<h4 id="update">Update</h4>
-
-<p>Update dapat dilakukan dengan memanggil fungsi <code class="highlighter-rouge">Save</code>, setelah kita mencari recordnya terlebih dahulu.</p>
-
-<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">post</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">Post</span><span class="p">{}</span><span class="x">
-</span><span class="k">if</span><span class="x"> </span><span class="n">db</span><span class="o">.</span><span class="n">First</span><span class="p">(</span><span class="o">&amp;</span><span class="n">post</span><span class="p">,</span><span class="x"> </span><span class="m">1</span><span class="p">)</span><span class="o">.</span><span class="n">RecordNotFound</span><span class="p">()</span><span class="x"> </span><span class="p">{</span><span class="x">
-  </span><span class="n">log</span><span class="o">.</span><span class="n">Fatalln</span><span class="p">(</span><span class="s">"Record not found."</span><span class="p">)</span><span class="x">
-</span><span class="p">}</span><span class="x">
-
-</span><span class="n">post</span><span class="o">.</span><span class="n">Title</span><span class="x"> </span><span class="o">=</span><span class="x"> </span><span class="s">"Belajar ORM dengan Gorm"</span><span class="x">
-</span><span class="n">db</span><span class="o">.</span><span class="n">Save</span><span class="p">(</span><span class="o">&amp;</span><span class="n">post</span><span class="p">)</span><span class="x">
-</span></code></pre></div></div>
-
-<p>Sekian dari saya dan semoga bermanfaat. 
-Untuk dokumentasi lengkapnya dapat Anda baca disini <a href="https://jinzhu.me/gorm">jinzhu.me/gorm</a>.</p>
 
     
 
@@ -475,6 +252,8 @@ Untuk dokumentasi lengkapnya dapat Anda baca disini <a href="https://jinzhu.me/g
       
       
 
+      
+        <a href="/programming/go/2019/03/06/mengenal-gorm.html">More &hellip;</a>
       
     
   </article>
