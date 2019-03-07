@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /*
   Most of these imports are derived from https://github.com/poole/poole.
   Designed, built, and released under MIT license by @mdo.
@@ -824,3 +825,6 @@ button.disqus-load {
   .posts-for-tag:target {
     display: block;
     animation: posts-for-tag-fade-in 0.6s ease-in-out; }
+
+.post-read:before {
+  content: "•"; }
