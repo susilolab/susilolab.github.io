@@ -11,7 +11,7 @@
 
   <title>
     
-      susilolab &middot; Berbagi ilmu yang bermanfaat
+      Event Global di Yii2 &middot; susilolab
     
   </title>
 
@@ -35,21 +35,26 @@
 </head>
 
 
-  <body class="index home">
+  <body class="post">
 
     <div id="sidebar">
   <header>
-    <h1 class="site-title">
+    <div class="site-title">
       <a href="/">
+        
+          <span class="back-arrow icon"><svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+  <path d="M0 0h24v24H0z" fill="none"/>
+  <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+</svg></span>
         
         susilolab
       </a>
-    </h1>
+    </div>
     <p class="lead">“Sebaik-baik manusia adalah yang paling bermanfaat bagi manusia” (HR. Ahmad, ath-Thabrani, ad-Daruqutni)</p>
   </header>
   <nav id="sidebar-nav-links">
   
-    <a class="home-link  active"
+    <a class="home-link "
         href="/">Home</a>
   
   
@@ -145,20 +150,11 @@
 </div>
 
     <main class="container">
-      <div class="content">
-  
-
-
-  
-
-  
-  <article class="post-body">
-    <h2 class="post-title">
-      <a href="/programming/php/2019/03/06/event-global-yii2.html">
-        Event Global di Yii2
-      </a>
-    </h2>
-    <div class="post-meta">
+      <header>
+  <h1 class="post-title">Event Global di Yii2</h1>
+</header>
+<div class="content">
+  <div class="post-meta">
   <span class="post-date">06 Mar 2019</span>
   <span class="post-categories">
     
@@ -186,8 +182,8 @@
 </div>
 
 
-    
-      <p>Event pada <code class="highlighter-rouge">yii2</code> telah ditulis ulang dari versi sebelumnya dan disempurnakan sehingga lebih mudah dan dapat digunakan
+  <div class="post-body">
+    <p>Event pada <code class="highlighter-rouge">yii2</code> telah ditulis ulang dari versi sebelumnya dan disempurnakan sehingga lebih mudah dan dapat digunakan
 secara global. Nah kali ini saya ingin berbagai sedikit tip bagaimana membuat event secara global di <code class="highlighter-rouge">Yii2</code>. Saya asumsikan bahwa kamu sudah memiliki pengetahuan tentang dasar-dasar <code class="highlighter-rouge">PHP7</code> dan <code class="highlighter-rouge">Yii2</code>. 
 <!--more--></p>
 
@@ -310,179 +306,96 @@ Agar event dapat didaftarkan secara global pada saat aplikasinya jalan maka kita
 
     
 
-    
-      
-      
-      
 
-      
-    
-  </article>
+
+<div class="post-tags">
   
-  <article class="post-body">
-    <h2 class="post-title">
-      <a href="/programming/go/2019/03/06/mengenal-gorm.html">
-        Mengenal Gorm
-      </a>
-    </h2>
-    <div class="post-meta">
-  <span class="post-date">06 Mar 2019</span>
-  <span class="post-categories">
+    <span>
+      <span class="icon">
+        <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+      </span>&nbsp;<span class="tag-name">event</span>
+    </span>
+  
+    <span>
+      <span class="icon">
+        <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+      </span>&nbsp;<span class="tag-name">yii2</span>
+    </span>
+  
+    <span>
+      <span class="icon">
+        <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+      </span>&nbsp;<span class="tag-name">php7</span>
+    </span>
+  
+</div>
+  </div>
+
+  
+  <section class="comments">
+    <h2>Comments</h2>
     
-      &bull;
+  <div id="disqus_thread">
+    <button class="disqus-load" onClick="loadDisqusComments()">
+      Load Comments
+    </button>
+  </div>
+  <script>
 
-      
-      
-      
+  /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW
+  *  TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT:s
+  *  https://disqus.com/admin/universalcode/#configuration-variables
+  */
+  var disqus_config = function () {
+    this.page.url = "susilolab.github.io/programming/php/2019/03/06/event-global-yii2.html";
+    this.page.identifier = "" ||
+                           "susilolab.github.io/programming/php/2019/03/06/event-global-yii2.html";
+  }
+  function loadDisqusComments() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = '//susilolab.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  }
+  </script>
+  <noscript>
+    Please enable JavaScript to view the
+    <a href="https://disqus.com/?ref_noscript">comments powered by Disqus</a>.
+  </noscript>
 
-      
-        programming
-      
+
+
+  </section>
+
+  <section class="related">
+  <h2>Related Posts</h2>
+  <ul class="posts-list">
     
-      &bull;
-
-      
-      
-      
-
-      
-        go
-      
+      <li>
+        <h3>
+          <a href="/programming/go/2019/03/06/mengenal-gorm.html">
+            Mengenal Gorm
+            <small>06 Mar 2019</small>
+          </a>
+        </h3>
+      </li>
     
-  </span>
+  </ul>
+</section>
+
 </div>
 
-
-    
-      <p>Gorm adalah pustaka ORM untuk golang, ORM itu singkatan dari object-relational mapping walaupun sebenarnya golang bukan bahasa OOP seperti pada umumnya. Alasan kenapa saya menggunakan gorm adalah karena kita tidak perlu merubah tipe data dari mysql ke struk, apalagi jika field struk tersebut ada yang null maka kita harus menggunakan tipe data yang nullable.</p>
-
-<p>Contohnya string nullable, int nullable dll.
-Akan sangat repot sekali jika kolomnya banyak, oleh karena itu saya memakai gorm untuk memudahkan hal tersebut.
-<!--more--></p>
-
-<h4 id="install">Install</h4>
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>go get github.com/jinzhu/gorm
-</code></pre></div></div>
-
-<p>Untuk contoh saya akan membuat tabel <code class="highlighter-rouge">posts</code>, silahkan buat tabel posts dengan aplikasi favorit Anda.</p>
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">create</span> <span class="k">table</span> <span class="n">posts</span><span class="p">(</span>
-  <span class="n">id</span> <span class="n">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span> <span class="k">not</span> <span class="k">null</span> <span class="k">primary</span> <span class="k">key</span> <span class="n">auto_increment</span><span class="p">,</span>
-  <span class="n">title</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span> <span class="k">not</span> <span class="k">null</span><span class="p">,</span>
-  <span class="n">body</span> <span class="n">text</span><span class="p">,</span>
-  <span class="n">published</span> <span class="n">tinyint</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="n">unsigned</span> <span class="k">default</span> <span class="mi">0</span>
-<span class="p">);</span>
-</code></pre></div></div>
-
-<p>Setelah kita selesai membuat tabel posts, maka kita akan membuat folder gorm. Karena akun github saya adalah susilolab maka saya akan membuat folder di <code class="highlighter-rouge">github.com/susilolab/blog/gorm</code> dan kita membuat file <code class="highlighter-rouge">main.go</code>.</p>
-
-<h4 id="koneksi-ke-database-mysql">Koneksi ke database mysql</h4>
-
-<p>kita akan mencoba menghubungkan ke database mysql. Kita juga membutuhkan pustaka driver mysql selain gorm untuk menghubungkan ke database.
-Ok, pertama kita bikin paket main dan import paket <code class="highlighter-rouge">fmt</code>, <code class="highlighter-rouge">log</code>, driver <code class="highlighter-rouge">mysql</code> dan <code class="highlighter-rouge">gorm</code>.</p>
-
-<p>Dan buat struk <code class="highlighter-rouge">Post</code>, struk ini untuk mewakili dari table <code class="highlighter-rouge">posts</code>. Struk pada Go konsepnya mirip klas pada PHP. Berikut potongan kodenya:</p>
-
-<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">package</span><span class="x"> </span><span class="n">main</span><span class="x">
-
-</span><span class="k">import</span><span class="x"> </span><span class="p">(</span><span class="x">
-    </span><span class="s">"fmt"</span><span class="x">
-    </span><span class="s">"log"</span><span class="x">
-
-    </span><span class="n">_</span><span class="x"> </span><span class="s">"github.com/go-sql-driver/mysql"</span><span class="x">
-    </span><span class="s">"github.com/jinzhu/gorm"</span><span class="x">
-</span><span class="p">)</span><span class="x">
-
-</span><span class="k">type</span><span class="x"> </span><span class="n">Post</span><span class="x"> </span><span class="k">struct</span><span class="x"> </span><span class="p">{</span><span class="x">
-    </span><span class="n">ID</span><span class="x">        </span><span class="kt">int</span><span class="x">
-    </span><span class="n">Title</span><span class="x">     </span><span class="kt">string</span><span class="x">
-    </span><span class="n">Body</span><span class="x">      </span><span class="kt">string</span><span class="x">
-    </span><span class="n">Published</span><span class="x"> </span><span class="kt">int</span><span class="x">
-</span><span class="p">}</span><span class="x">
-</span></code></pre></div></div>
-
-<h4 id="koneksi-database">Koneksi database</h4>
-<p>Kemudian pada fungsi main kita buat koneksi ke database dengan memanggil fungsi <code class="highlighter-rouge">gorm.Open</code>, fungsi <code class="highlighter-rouge">Open</code> akan mengembalikan struk <code class="highlighter-rouge">gorm.DB</code> dan <code class="highlighter-rouge">err</code>. Jika <code class="highlighter-rouge">err</code> tidak sama dengan nil munculkan pesan error dan exit, cukup tuliskan <code class="highlighter-rouge">log.Fatalln</code>. <code class="highlighter-rouge">Defer.Close()</code> setelah error handling berguna untuk menutup koneksi mysql.</p>
-
-<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">func</span><span class="x"> </span><span class="n">main</span><span class="p">()</span><span class="x"> </span><span class="p">{</span><span class="x">
-    </span><span class="n">conn</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="s">"root:password@tcp(127.0.0.1:3306)/blog?charset=utf8&amp;parseTime=True"</span><span class="x">
-    </span><span class="n">db</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">gorm</span><span class="o">.</span><span class="n">Open</span><span class="p">(</span><span class="s">"mysql"</span><span class="p">,</span><span class="x"> </span><span class="n">conn</span><span class="p">)</span><span class="x">
-    </span><span class="k">if</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">!=</span><span class="x"> </span><span class="no">nil</span><span class="x"> </span><span class="p">{</span><span class="x">
-        </span><span class="n">log</span><span class="o">.</span><span class="n">Fatalln</span><span class="p">(</span><span class="n">err</span><span class="p">)</span><span class="x">
-    </span><span class="p">}</span><span class="x">
-    </span><span class="k">defer</span><span class="x"> </span><span class="n">db</span><span class="o">.</span><span class="n">Close</span><span class="p">()</span><span class="x">
-</span><span class="p">}</span><span class="x">
-</span></code></pre></div></div>
-
-<h4 id="query-data">Query data</h4>
-
-<p>Kemudian kita bisa memulai query data, kita akan mencoba mengambil semua data yang ada pada tabel <code class="highlighter-rouge">posts</code>, perlu di ingat bahwa gorm akan menggangap nama tabel semua dalam bentuk jamak kecuali kita mengaktifkan mode singular atau menyebutkan nama tabel dengan fungsi Table. Misalnya struk <code class="highlighter-rouge">User</code> maka nama tabelnya akan dianggap <code class="highlighter-rouge">users</code>, struk <code class="highlighter-rouge">UserGroup</code> namanya tabelnya akan dianggap <code class="highlighter-rouge">user_groups</code> dll.
-Pertama kita bikin slice <code class="highlighter-rouge">Post</code> dengan nama posts untuk menampung datanya.</p>
-
-<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">posts</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="nb">make</span><span class="p">([]</span><span class="n">Post</span><span class="p">,</span><span class="x"> </span><span class="m">0</span><span class="p">)</span><span class="x">
-</span><span class="k">if</span><span class="x"> </span><span class="n">db</span><span class="o">.</span><span class="n">Find</span><span class="p">(</span><span class="o">&amp;</span><span class="n">posts</span><span class="p">)</span><span class="o">.</span><span class="n">RecordNotFound</span><span class="p">()</span><span class="x"> </span><span class="p">{</span><span class="x">
-    </span><span class="n">log</span><span class="o">.</span><span class="n">Fatalln</span><span class="p">(</span><span class="s">"record tidak ada"</span><span class="p">)</span><span class="x">
-</span><span class="p">}</span><span class="x">
-
-</span><span class="k">for</span><span class="x"> </span><span class="n">_</span><span class="p">,</span><span class="x"> </span><span class="n">val</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="k">range</span><span class="x"> </span><span class="n">posts</span><span class="x"> </span><span class="p">{</span><span class="x">
-    </span><span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">val</span><span class="o">.</span><span class="n">Title</span><span class="p">)</span><span class="x">
-</span><span class="p">}</span><span class="x">
-</span></code></pre></div></div>
-
-<h5 id="mendapat-data-pertama-dan-terakhir">Mendapat data pertama dan terakhir</h5>
-
-<p>Untuk mendapatkan record pertama kita bisa menggunakan fungsi First dan untuk data terakhir menggunakan fungsi Last</p>
-
-<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">var</span><span class="x"> </span><span class="n">post</span><span class="x"> </span><span class="n">Post</span><span class="x">
-</span><span class="n">db</span><span class="o">.</span><span class="n">First</span><span class="p">(</span><span class="o">&amp;</span><span class="n">post</span><span class="p">)</span><span class="x">
-</span><span class="n">db</span><span class="o">.</span><span class="n">First</span><span class="p">(</span><span class="o">&amp;</span><span class="n">post</span><span class="p">,</span><span class="x"> </span><span class="m">10</span><span class="p">)</span><span class="x">
-
-</span><span class="k">var</span><span class="x"> </span><span class="n">lastPost</span><span class="x"> </span><span class="n">Post</span><span class="x">
-</span><span class="n">db</span><span class="o">.</span><span class="n">Last</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lastPost</span><span class="p">)</span><span class="x">
-</span></code></pre></div></div>
-
-<h4 id="insert-data-ke-tabel">Insert data ke tabel</h4>
-
-<p>Untuk insert data ke tabel ada 2 cara, pertama menggunakan fungsi <code class="highlighter-rouge">Create</code> dan yang kedua dengan fungsi <code class="highlighter-rouge">NewRecord</code>. Fungsi <code class="highlighter-rouge">Create</code> akan mengembalikan struk <code class="highlighter-rouge">gorm.DB</code>, untuk melihat errornya bisa melalui property <code class="highlighter-rouge">Error</code>. Sedangkan <code class="highlighter-rouge">NewRecord</code> akan mengembalikan nilai <code class="highlighter-rouge">true</code> jika sukses dan <code class="highlighter-rouge">false</code> jika gagal.</p>
-
-<p>Pertama buat struk Post dan isi field-fieldnya.</p>
-
-<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Post</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">Post</span><span class="p">{</span><span class="n">ID</span><span class="o">:</span><span class="x"> </span><span class="m">2</span><span class="p">,</span><span class="x"> </span><span class="n">Title</span><span class="o">:</span><span class="x"> </span><span class="s">"belajar gorm"</span><span class="p">,</span><span class="x"> </span><span class="n">Body</span><span class="o">:</span><span class="x"> </span><span class="s">"awesome"</span><span class="p">,</span><span class="x"> </span><span class="n">Published</span><span class="o">:</span><span class="x"> </span><span class="m">1</span><span class="p">}</span><span class="x">
-</span><span class="k">if</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">db</span><span class="o">.</span><span class="n">Create</span><span class="p">()</span><span class="o">.</span><span class="n">Error</span><span class="p">;</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">==</span><span class="x"> </span><span class="no">nil</span><span class="x"> </span><span class="p">{</span><span class="x">
-    </span><span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"data sukses disimpan."</span><span class="p">);</span><span class="x">
-</span><span class="p">}</span><span class="x">
-</span></code></pre></div></div>
-
-<h4 id="update">Update</h4>
-
-<p>Update dapat dilakukan dengan memanggil fungsi <code class="highlighter-rouge">Save</code>, setelah kita mencari recordnya terlebih dahulu.</p>
-
-<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">post</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">Post</span><span class="p">{}</span><span class="x">
-</span><span class="k">if</span><span class="x"> </span><span class="n">db</span><span class="o">.</span><span class="n">First</span><span class="p">(</span><span class="o">&amp;</span><span class="n">post</span><span class="p">,</span><span class="x"> </span><span class="m">1</span><span class="p">)</span><span class="o">.</span><span class="n">RecordNotFound</span><span class="p">()</span><span class="x"> </span><span class="p">{</span><span class="x">
-  </span><span class="n">log</span><span class="o">.</span><span class="n">Fatalln</span><span class="p">(</span><span class="s">"Record not found."</span><span class="p">)</span><span class="x">
-</span><span class="p">}</span><span class="x">
-
-</span><span class="n">post</span><span class="o">.</span><span class="n">Title</span><span class="x"> </span><span class="o">=</span><span class="x"> </span><span class="s">"Belajar ORM dengan Gorm"</span><span class="x">
-</span><span class="n">db</span><span class="o">.</span><span class="n">Save</span><span class="p">(</span><span class="o">&amp;</span><span class="n">post</span><span class="p">)</span><span class="x">
-</span></code></pre></div></div>
-
-<p>Sekian dari saya dan semoga bermanfaat. 
-Untuk dokumentasi lengkapnya dapat Anda baca disini <a href="https://jinzhu.me/gorm">jinzhu.me/gorm</a>.</p>
-
-    
-
-    
-      
-      
-      
-
-      
-    
-  </article>
-  
-
-  
-
-</div>
     </main>
 
     <!-- Optional footer content -->

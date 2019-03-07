@@ -11,7 +11,7 @@
 
   <title>
     
-      susilolab &middot; Berbagi ilmu yang bermanfaat
+      Mengenal Gorm &middot; susilolab
     
   </title>
 
@@ -35,21 +35,26 @@
 </head>
 
 
-  <body class="index home">
+  <body class="post">
 
     <div id="sidebar">
   <header>
-    <h1 class="site-title">
+    <div class="site-title">
       <a href="/">
+        
+          <span class="back-arrow icon"><svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+  <path d="M0 0h24v24H0z" fill="none"/>
+  <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+</svg></span>
         
         susilolab
       </a>
-    </h1>
+    </div>
     <p class="lead">“Sebaik-baik manusia adalah yang paling bermanfaat bagi manusia” (HR. Ahmad, ath-Thabrani, ad-Daruqutni)</p>
   </header>
   <nav id="sidebar-nav-links">
   
-    <a class="home-link  active"
+    <a class="home-link "
         href="/">Home</a>
   
   
@@ -145,187 +150,11 @@
 </div>
 
     <main class="container">
-      <div class="content">
-  
-
-
-  
-
-  
-  <article class="post-body">
-    <h2 class="post-title">
-      <a href="/programming/php/2019/03/06/event-global-yii2.html">
-        Event Global di Yii2
-      </a>
-    </h2>
-    <div class="post-meta">
-  <span class="post-date">06 Mar 2019</span>
-  <span class="post-categories">
-    
-      &bull;
-
-      
-      
-      
-
-      
-        programming
-      
-    
-      &bull;
-
-      
-      
-      
-
-      
-        php
-      
-    
-  </span>
-</div>
-
-
-    
-      <p>Event pada <code class="highlighter-rouge">yii2</code> telah ditulis ulang dari versi sebelumnya dan disempurnakan sehingga lebih mudah dan dapat digunakan
-secara global. Nah kali ini saya ingin berbagai sedikit tip bagaimana membuat event secara global di <code class="highlighter-rouge">Yii2</code>. Saya asumsikan bahwa kamu sudah memiliki pengetahuan tentang dasar-dasar <code class="highlighter-rouge">PHP7</code> dan <code class="highlighter-rouge">Yii2</code>. 
-<!--more--></p>
-
-<p>Secara sederhana event pada <code class="highlighter-rouge">yii2</code> mirip event pada <code class="highlighter-rouge">jquery</code> dan cara pemakaiannya pun mirip. Untuk listening pada
-event tertentu kita gunakan <code class="highlighter-rouge">on</code> dan untuk mentrigger event menggunakan fungsi <code class="highlighter-rouge">trigger</code>. Detil fungsi <code class="highlighter-rouge">on</code> dan <code class="highlighter-rouge">trigger</code> dapat dilihat dibawah ini:</p>
-<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">Event</span><span class="o">::</span><span class="na">on</span><span class="p">(</span><span class="nv">$class</span><span class="p">,</span> <span class="nv">$name</span><span class="p">,</span> <span class="nv">$handle</span><span class="p">,</span> <span class="nv">$data</span> <span class="o">=</span> <span class="kc">null</span><span class="p">,</span> <span class="nv">$append</span> <span class="o">=</span> <span class="kc">true</span><span class="p">);</span>
-<span class="nx">Event</span><span class="o">::</span><span class="na">trigger</span><span class="p">(</span><span class="nv">$class</span><span class="p">,</span> <span class="nv">$name</span><span class="p">,</span> <span class="nv">$event</span> <span class="o">=</span> <span class="kc">null</span><span class="p">);</span>
-</code></pre></div></div>
-
-<p>Tiga parameter utama pada fungsi <code class="highlighter-rouge">on</code> wajib ada, sedangkan selebihnya boleh diabaikan. Karena kita akan fokus pada bagaimana menggunakan event yii2 secara global maka kita hanya akan menggunakan 3 parameter pertama. contoh penggunaan event secara umum seperti berikut:</p>
-<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// SiteController.php</span>
-<span class="o">...</span>
-<span class="k">use</span> <span class="nx">yii\base\Event</span><span class="p">;</span>
-
-<span class="o">...</span>
-<span class="k">const</span> <span class="no">EVENT_HELLO</span> <span class="o">=</span> <span class="s1">'hello'</span><span class="p">;</span>
-
-<span class="k">public</span> <span class="k">function</span> <span class="nf">init</span><span class="p">()</span>
-<span class="p">{</span>
-  <span class="k">parent</span><span class="o">::</span><span class="na">init</span><span class="p">();</span>
-  <span class="nx">Event</span><span class="o">::</span><span class="na">on</span><span class="p">(</span><span class="nx">self</span><span class="o">::</span><span class="na">className</span><span class="p">(),</span> <span class="nx">self</span><span class="o">::</span><span class="na">EVENT_HELLO</span><span class="p">,</span> <span class="p">[</span><span class="nx">self</span><span class="o">::</span><span class="na">className</span><span class="p">(),</span> <span class="s1">'helloLog'</span><span class="p">]);</span>
-<span class="p">}</span>
-
-<span class="k">public</span> <span class="k">function</span> <span class="nf">actionIndex</span><span class="p">()</span>
-<span class="p">{</span>
-  <span class="nv">$event</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Event</span><span class="p">();</span>
-  <span class="nx">Event</span><span class="o">::</span><span class="na">trigger</span><span class="p">(</span><span class="nx">self</span><span class="o">::</span><span class="na">className</span><span class="p">(),</span> <span class="nx">self</span><span class="o">::</span><span class="na">EVENT_HELLO</span><span class="p">,</span> <span class="nv">$event</span><span class="p">);</span>
-  <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span><span class="s1">'index'</span><span class="p">);</span>
-<span class="p">}</span>
-
-<span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">helloLog</span><span class="p">()</span>
-<span class="p">{</span>
-  <span class="nx">Yii</span><span class="o">::</span><span class="na">error</span><span class="p">(</span><span class="s1">'---Hello world---'</span><span class="p">);</span> 
-<span class="p">}</span>
-<span class="o">...</span>
-</code></pre></div></div>
-
-<p>Pada contoh di atas kita mengimport klas <code class="highlighter-rouge">Event</code> kemudian membuat konstanta nama event. Lalu pada fungsi <code class="highlighter-rouge">init</code> kita mendaftarkan event melalui fungsi <code class="highlighter-rouge">on</code> dengan nama fungsi yang akan dijalankan setelah event ditrigger yaitu <code class="highlighter-rouge">helloLog</code>. 
-Selanjutnya pada fungsi <code class="highlighter-rouge">actionIndex</code> kita mentrigger event <code class="highlighter-rouge">EVENT_HELLO</code> memakai fungsi <code class="highlighter-rouge">trigger</code>.<br />
-Perhatikan parameter ketiga, karena fungsi <code class="highlighter-rouge">helloLog</code> bertipe static maka nama klasnya menggunakan <code class="highlighter-rouge">self::className</code>. Jika menggunakan fungsi yang bukan static kita bisa menggunakan <code class="highlighter-rouge">$this</code> seperti ini:</p>
-<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">Event</span><span class="o">::</span><span class="na">on</span><span class="p">(</span><span class="nx">self</span><span class="o">::</span><span class="na">className</span><span class="p">(),</span> <span class="nx">self</span><span class="o">::</span><span class="na">EVENT_HELLO</span><span class="p">,</span> <span class="p">[</span><span class="nv">$this</span><span class="p">,</span> <span class="s1">'helloLog'</span><span class="p">]);</span>
-</code></pre></div></div>
-<p>Kemudian jalankan dengan mengakses controller site, jika tidak ada error maka akan ada log error dengan pesan hello world pada file <code class="highlighter-rouge">runtime/logs/app.log</code> seperti berikut ini:</p>
-
-<p><img src="/assets/img/001-2019-03-06-event-globalyii2.png" alt="log app" title="Log Hello" /></p>
-
-<p>Semoga dengan penjelasan dan contoh di atas kita sudah bisa memahami dasar-dasar event pada <code class="highlighter-rouge">yii2</code>, sekarang kita bikin event listenernya secara global sehingga kita dapat memicu/mentriggernya dari mana saja(model/controller/module).
-Agar event dapat didaftarkan secara global pada saat aplikasinya jalan maka kita akan menggunakan BootstrapInterface. kita akan bikin klas implementasi dari BootstrapInterface.</p>
-
-<p>Pertama kita bikin klas dengan nama <code class="highlighter-rouge">EventAutoLoader.php</code> pada folder <code class="highlighter-rouge">nama_app/components</code>, Klas ini berguna agar aplikasi dapat memuat konfigurasi event-event pada saat proses booting aplikasi. klas ini turunan dari <code class="highlighter-rouge">BootstrapInterface</code> yang hanya memiliki satu definisi fungsi yang harus di implementasikan pada klas turunan.</p>
-
-<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
-<span class="k">namespace</span> <span class="nx">app\components</span><span class="p">;</span>
-
-<span class="k">use</span> <span class="nx">Yii</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">yii\base\BootstrapInterface</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">yii\base\Event</span><span class="p">;</span>
-
-<span class="k">class</span> <span class="nc">EventAutoLoader</span> <span class="k">implements</span> <span class="nx">BootstrapInterface</span>
-<span class="p">{</span>
-  <span class="k">public</span> <span class="k">function</span> <span class="nf">bootstrap</span><span class="p">(</span><span class="nv">$app</span><span class="p">)</span>
-  <span class="p">{</span>
-    <span class="nv">$eventConfigFile</span> <span class="o">=</span> <span class="k">require</span><span class="p">(</span><span class="nx">Yii</span><span class="o">::</span><span class="na">getAlias</span><span class="p">(</span><span class="s1">'@app'</span><span class="p">)</span> <span class="o">.</span> <span class="s1">'/config/event-config.php'</span><span class="p">);</span>
-    <span class="k">foreach</span> <span class="p">(</span><span class="nv">$eventConfigFile</span> <span class="k">as</span> <span class="nv">$config</span><span class="p">)</span> <span class="p">{</span>
-      <span class="nx">Event</span><span class="o">::</span><span class="na">on</span><span class="p">(</span><span class="nv">$config</span><span class="p">[</span><span class="s1">'class'</span><span class="p">],</span> <span class="nv">$config</span><span class="p">[</span><span class="s1">'event'</span><span class="p">],</span> <span class="nv">$config</span><span class="p">[</span><span class="s1">'callback'</span><span class="p">]);</span>
-    <span class="p">}</span>
-  <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p>Kemudian buka file <code class="highlighter-rouge">config/web.php</code> dan tambahkan klas yang baru saja kita buat pada config <code class="highlighter-rouge">bootstrap</code>.</p>
-
-<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s1">'bootstrap'</span> <span class="o">=&gt;</span> <span class="p">[</span>
-  <span class="o">...</span>
-  <span class="s1">'app\components\EventAutoLoader'</span><span class="p">,</span>
-  <span class="o">...</span>
-<span class="p">],</span>
-</code></pre></div></div>
-
-<p>Tak lupa buat file dengan nama <code class="highlighter-rouge">event-config.php</code> pada folder config untuk menyimpan semua event dan event handler. Dan isinya kurang lebih seperti ini:</p>
-
-<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
-<span class="k">use</span> <span class="nx">app\controllers\SiteController</span><span class="p">;</span>
-
-<span class="k">return</span> <span class="p">[</span>
-  <span class="p">[</span>
-    <span class="s1">'class'</span>    <span class="o">=&gt;</span> <span class="nx">SiteController</span><span class="o">::</span><span class="na">className</span><span class="p">(),</span>
-    <span class="s1">'event'</span>    <span class="o">=&gt;</span> <span class="nx">SiteController</span><span class="o">::</span><span class="na">EVENT_HELLO</span><span class="p">,</span>
-    <span class="s1">'callback'</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="nx">SiteController</span><span class="o">::</span><span class="na">className</span><span class="p">(),</span> <span class="s1">'helloLog'</span><span class="p">],</span>
-  <span class="p">]</span>
-<span class="p">];</span>
-
-</code></pre></div></div>
-
-<p>Sampai tahap ini kita sudah mendaftarkan event secara global dan event tersebut dapat kita dari mana saja, karena klas <code class="highlighter-rouge">EventAutoLoader</code> akan dijalankan pada saat aplikasi booting pertama kali. Untuk memastikan bahwa event dapat dipanggil dari mana saja, kita akan membuat controller baru dengan nama <code class="highlighter-rouge">HelloController</code> dan mentrigger event yang ada di <code class="highlighter-rouge">SiteController</code>.</p>
-
-<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
-<span class="k">namespace</span> <span class="nx">app\controllers</span><span class="p">;</span>
-
-<span class="k">use</span> <span class="nx">Yii</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">yii\web\Controller</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">yii\base\Event</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">app\controllers\SiteController</span><span class="p">;</span>
-
-<span class="k">class</span> <span class="nc">HelloController</span> <span class="k">extends</span> <span class="nx">Controller</span>
-<span class="p">{</span>
-    <span class="k">public</span> <span class="k">function</span> <span class="nf">actionIndex</span><span class="p">()</span>
-    <span class="p">{</span>
-      <span class="nv">$event</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Event</span><span class="p">();</span>
-      <span class="nx">Event</span><span class="o">::</span><span class="na">trigger</span><span class="p">(</span><span class="nx">SiteController</span><span class="o">::</span><span class="na">className</span><span class="p">(),</span> <span class="nx">SiteController</span><span class="o">::</span><span class="na">EVENT_HELLO</span><span class="p">,</span> <span class="nv">$event</span><span class="p">);</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p>Kemudian akses hello controller melalui browser, jika semua lancar maka akan ada pesan Hello world di <code class="highlighter-rouge">app.log</code></p>
-
-<p><img src="susilolab.github.io/assets/img/002-2019-03-06-event-globalyii2.png" alt="app log2" title="Log hello 2" /></p>
-
-<p>Sekian untuk artikel kali semoga bermanfaat. Insya Allah pada artikel berikutnya saya akan membahas sedikit bagaimana melewatkan data pada event yang telah kita buat. Apabila kamu mempunyai saran dan kritik untuk artikel jangan sungkan2 untuk berkomentar dibawah.</p>
-
-    
-
-    
-      
-      
-      
-
-      
-    
-  </article>
-  
-  <article class="post-body">
-    <h2 class="post-title">
-      <a href="/programming/go/2019/03/06/mengenal-gorm.html">
-        Mengenal Gorm
-      </a>
-    </h2>
-    <div class="post-meta">
+      <header>
+  <h1 class="post-title">Mengenal Gorm</h1>
+</header>
+<div class="content">
+  <div class="post-meta">
   <span class="post-date">06 Mar 2019</span>
   <span class="post-categories">
     
@@ -353,8 +182,8 @@ Agar event dapat didaftarkan secara global pada saat aplikasinya jalan maka kita
 </div>
 
 
-    
-      <p>Gorm adalah pustaka ORM untuk golang, ORM itu singkatan dari object-relational mapping walaupun sebenarnya golang bukan bahasa OOP seperti pada umumnya. Alasan kenapa saya menggunakan gorm adalah karena kita tidak perlu merubah tipe data dari mysql ke struk, apalagi jika field struk tersebut ada yang null maka kita harus menggunakan tipe data yang nullable.</p>
+  <div class="post-body">
+    <p>Gorm adalah pustaka ORM untuk golang, ORM itu singkatan dari object-relational mapping walaupun sebenarnya golang bukan bahasa OOP seperti pada umumnya. Alasan kenapa saya menggunakan gorm adalah karena kita tidak perlu merubah tipe data dari mysql ke struk, apalagi jika field struk tersebut ada yang null maka kita harus menggunakan tipe data yang nullable.</p>
 
 <p>Contohnya string nullable, int nullable dll.
 Akan sangat repot sekali jika kolomnya banyak, oleh karena itu saya memakai gorm untuk memudahkan hal tersebut.
@@ -470,19 +299,105 @@ Untuk dokumentasi lengkapnya dapat Anda baca disini <a href="https://jinzhu.me/g
 
     
 
-    
-      
-      
-      
 
-      
-    
-  </article>
+
+<div class="post-tags">
   
+    <span>
+      <span class="icon">
+        <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+      </span>&nbsp;<span class="tag-name">orm</span>
+    </span>
+  
+    <span>
+      <span class="icon">
+        <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+      </span>&nbsp;<span class="tag-name">database</span>
+    </span>
+  
+    <span>
+      <span class="icon">
+        <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+      </span>&nbsp;<span class="tag-name">go</span>
+    </span>
+  
+    <span>
+      <span class="icon">
+        <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+      </span>&nbsp;<span class="tag-name">golang</span>
+    </span>
+  
+</div>
+  </div>
 
   
+  <section class="comments">
+    <h2>Comments</h2>
+    
+  <div id="disqus_thread">
+    <button class="disqus-load" onClick="loadDisqusComments()">
+      Load Comments
+    </button>
+  </div>
+  <script>
+
+  /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW
+  *  TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT:s
+  *  https://disqus.com/admin/universalcode/#configuration-variables
+  */
+  var disqus_config = function () {
+    this.page.url = "susilolab.github.io/programming/go/2019/03/06/mengenal-gorm.html";
+    this.page.identifier = "" ||
+                           "susilolab.github.io/programming/go/2019/03/06/mengenal-gorm.html";
+  }
+  function loadDisqusComments() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = '//susilolab.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  }
+  </script>
+  <noscript>
+    Please enable JavaScript to view the
+    <a href="https://disqus.com/?ref_noscript">comments powered by Disqus</a>.
+  </noscript>
+
+
+
+  </section>
+
+  <section class="related">
+  <h2>Related Posts</h2>
+  <ul class="posts-list">
+    
+      <li>
+        <h3>
+          <a href="/programming/php/2019/03/06/event-global-yii2.html">
+            Event Global di Yii2
+            <small>06 Mar 2019</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</section>
 
 </div>
+
     </main>
 
     <!-- Optional footer content -->
