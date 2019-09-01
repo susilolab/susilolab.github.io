@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Event Global Yii2 | susilolab</title>
+<meta name="generator" content="Jekyll v3.8.6" />
+<meta property="og:title" content="Event Global Yii2" />
+<meta name="author" content="Agus Susilo" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Event pada yii2 telah ditulis ulang dari versi sebelumnya dan disempurnakan sehingga lebih mudah dan dapat digunakan secara global. Nah kali ini saya ingin berbagai sedikit tip bagaimana membuat event secara global di Yii2. Saya asumsikan bahwa kamu sudah memiliki pengetahuan tentang dasar-dasar PHP7 dan Yii2. Secara sederhana event pada yii2 mirip event pada jquery dan cara pemakaiannya pun mirip. Untuk listening pada event tertentu kita gunakan on dan untuk mentrigger event menggunakan fungsi trigger. Detil fungsi on dan trigger dapat dilihat dibawah ini: Event::on($class, $name, $handle, $data = null, $append = true); Event::trigger($class, $name, $event = null); Tiga parameter utama pada fungsi on wajib ada, sedangkan selebihnya boleh diabaikan. Karena kita akan fokus pada bagaimana menggunakan event yii2 secara global maka kita hanya akan menggunakan 3 parameter pertama. contoh penggunaan event secara umum seperti berikut: // SiteController.php ... use yii\base\Event; ... const EVENT_HELLO = &#39;hello&#39;; public function init() { parent::init(); Event::on(self::className(), self::EVENT_HELLO, [self::className(), &#39;helloLog&#39;]); } public function actionIndex() { $event = new Event(); Event::trigger(self::className(), self::EVENT_HELLO, $event); return $this-&gt;render(&#39;index&#39;); } public static function helloLog() { Yii::error(&#39;---Hello world---&#39;); } ... Pada contoh di atas kita mengimport klas Event kemudian membuat konstanta nama event. Lalu pada fungsi init kita mendaftarkan event melalui fungsi on dengan nama fungsi yang akan dijalankan setelah event ditrigger yaitu helloLog. Selanjutnya pada fungsi actionIndex kita mentrigger event EVENT_HELLO memakai fungsi trigger. Perhatikan parameter ketiga, karena fungsi helloLog bertipe static maka nama klasnya menggunakan self::className. Jika menggunakan fungsi yang bukan static kita bisa menggunakan $this seperti ini: Event::on(self::className(), self::EVENT_HELLO, [$this, &#39;helloLog&#39;]); Kemudian jalankan dengan mengakses controller site, jika tidak ada error maka akan ada log error dengan pesan hello world pada file runtime/logs/app.log seperti berikut ini: Semoga dengan penjelasan dan contoh di atas kita sudah bisa memahami dasar-dasar event pada yii2, sekarang kita bikin event listenernya secara global sehingga kita dapat memicu/mentriggernya dari mana saja(model/controller/module). Agar event dapat didaftarkan secara global pada saat aplikasinya jalan maka kita akan menggunakan BootstrapInterface. kita akan bikin klas implementasi dari BootstrapInterface. Pertama kita bikin klas dengan nama EventAutoLoader.php pada folder nama_app/components, Klas ini berguna agar aplikasi dapat memuat konfigurasi event-event pada saat proses booting aplikasi. klas ini turunan dari BootstrapInterface yang hanya memiliki satu definisi fungsi yang harus di implementasikan pada klas turunan. &lt;?php namespace app\components; use Yii; use yii\base\BootstrapInterface; use yii\base\Event; class EventAutoLoader implements BootstrapInterface { public function bootstrap($app) { $eventConfigFile = require(Yii::getAlias(&#39;@app&#39;) . &#39;/config/event-config.php&#39;); foreach ($eventConfigFile as $config) { Event::on($config[&#39;class&#39;], $config[&#39;event&#39;], $config[&#39;callback&#39;]); } } } Kemudian buka file config/web.php dan tambahkan klas yang baru saja kita buat pada config bootstrap. &#39;bootstrap&#39; =&gt; [ ... &#39;app\components\EventAutoLoader&#39;, ... ], Tak lupa buat file dengan nama event-config.php pada folder config untuk menyimpan semua event dan event handler. Dan isinya kurang lebih seperti ini: &lt;?php use app\controllers\SiteController; return [ [ &#39;class&#39; =&gt; SiteController::className(), &#39;event&#39; =&gt; SiteController::EVENT_HELLO, &#39;callback&#39; =&gt; [SiteController::className(), &#39;helloLog&#39;], ] ]; Sampai tahap ini kita sudah mendaftarkan event secara global dan event tersebut dapat kita dari mana saja, karena klas EventAutoLoader akan dijalankan pada saat aplikasi booting pertama kali. Untuk memastikan bahwa event dapat dipanggil dari mana saja, kita akan membuat controller baru dengan nama HelloController dan mentrigger event yang ada di SiteController. &lt;?php namespace app\controllers; use Yii; use yii\web\Controller; use yii\base\Event; use app\controllers\SiteController; class HelloController extends Controller { public function actionIndex() { $event = new Event(); Event::trigger(SiteController::className(), SiteController::EVENT_HELLO, $event); } } Kemudian akses hello controller melalui browser, jika semua lancar maka akan ada pesan Hello world di app.log Sekian untuk artikel kali semoga bermanfaat. Insya Allah pada artikel berikutnya saya akan membahas sedikit bagaimana melewatkan data pada event yang telah kita buat. Apabila kamu mempunyai saran dan kritik untuk artikel jangan sungkan2 untuk berkomentar dibawah." />
+<meta property="og:description" content="Event pada yii2 telah ditulis ulang dari versi sebelumnya dan disempurnakan sehingga lebih mudah dan dapat digunakan secara global. Nah kali ini saya ingin berbagai sedikit tip bagaimana membuat event secara global di Yii2. Saya asumsikan bahwa kamu sudah memiliki pengetahuan tentang dasar-dasar PHP7 dan Yii2. Secara sederhana event pada yii2 mirip event pada jquery dan cara pemakaiannya pun mirip. Untuk listening pada event tertentu kita gunakan on dan untuk mentrigger event menggunakan fungsi trigger. Detil fungsi on dan trigger dapat dilihat dibawah ini: Event::on($class, $name, $handle, $data = null, $append = true); Event::trigger($class, $name, $event = null); Tiga parameter utama pada fungsi on wajib ada, sedangkan selebihnya boleh diabaikan. Karena kita akan fokus pada bagaimana menggunakan event yii2 secara global maka kita hanya akan menggunakan 3 parameter pertama. contoh penggunaan event secara umum seperti berikut: // SiteController.php ... use yii\base\Event; ... const EVENT_HELLO = &#39;hello&#39;; public function init() { parent::init(); Event::on(self::className(), self::EVENT_HELLO, [self::className(), &#39;helloLog&#39;]); } public function actionIndex() { $event = new Event(); Event::trigger(self::className(), self::EVENT_HELLO, $event); return $this-&gt;render(&#39;index&#39;); } public static function helloLog() { Yii::error(&#39;---Hello world---&#39;); } ... Pada contoh di atas kita mengimport klas Event kemudian membuat konstanta nama event. Lalu pada fungsi init kita mendaftarkan event melalui fungsi on dengan nama fungsi yang akan dijalankan setelah event ditrigger yaitu helloLog. Selanjutnya pada fungsi actionIndex kita mentrigger event EVENT_HELLO memakai fungsi trigger. Perhatikan parameter ketiga, karena fungsi helloLog bertipe static maka nama klasnya menggunakan self::className. Jika menggunakan fungsi yang bukan static kita bisa menggunakan $this seperti ini: Event::on(self::className(), self::EVENT_HELLO, [$this, &#39;helloLog&#39;]); Kemudian jalankan dengan mengakses controller site, jika tidak ada error maka akan ada log error dengan pesan hello world pada file runtime/logs/app.log seperti berikut ini: Semoga dengan penjelasan dan contoh di atas kita sudah bisa memahami dasar-dasar event pada yii2, sekarang kita bikin event listenernya secara global sehingga kita dapat memicu/mentriggernya dari mana saja(model/controller/module). Agar event dapat didaftarkan secara global pada saat aplikasinya jalan maka kita akan menggunakan BootstrapInterface. kita akan bikin klas implementasi dari BootstrapInterface. Pertama kita bikin klas dengan nama EventAutoLoader.php pada folder nama_app/components, Klas ini berguna agar aplikasi dapat memuat konfigurasi event-event pada saat proses booting aplikasi. klas ini turunan dari BootstrapInterface yang hanya memiliki satu definisi fungsi yang harus di implementasikan pada klas turunan. &lt;?php namespace app\components; use Yii; use yii\base\BootstrapInterface; use yii\base\Event; class EventAutoLoader implements BootstrapInterface { public function bootstrap($app) { $eventConfigFile = require(Yii::getAlias(&#39;@app&#39;) . &#39;/config/event-config.php&#39;); foreach ($eventConfigFile as $config) { Event::on($config[&#39;class&#39;], $config[&#39;event&#39;], $config[&#39;callback&#39;]); } } } Kemudian buka file config/web.php dan tambahkan klas yang baru saja kita buat pada config bootstrap. &#39;bootstrap&#39; =&gt; [ ... &#39;app\components\EventAutoLoader&#39;, ... ], Tak lupa buat file dengan nama event-config.php pada folder config untuk menyimpan semua event dan event handler. Dan isinya kurang lebih seperti ini: &lt;?php use app\controllers\SiteController; return [ [ &#39;class&#39; =&gt; SiteController::className(), &#39;event&#39; =&gt; SiteController::EVENT_HELLO, &#39;callback&#39; =&gt; [SiteController::className(), &#39;helloLog&#39;], ] ]; Sampai tahap ini kita sudah mendaftarkan event secara global dan event tersebut dapat kita dari mana saja, karena klas EventAutoLoader akan dijalankan pada saat aplikasi booting pertama kali. Untuk memastikan bahwa event dapat dipanggil dari mana saja, kita akan membuat controller baru dengan nama HelloController dan mentrigger event yang ada di SiteController. &lt;?php namespace app\controllers; use Yii; use yii\web\Controller; use yii\base\Event; use app\controllers\SiteController; class HelloController extends Controller { public function actionIndex() { $event = new Event(); Event::trigger(SiteController::className(), SiteController::EVENT_HELLO, $event); } } Kemudian akses hello controller melalui browser, jika semua lancar maka akan ada pesan Hello world di app.log Sekian untuk artikel kali semoga bermanfaat. Insya Allah pada artikel berikutnya saya akan membahas sedikit bagaimana melewatkan data pada event yang telah kita buat. Apabila kamu mempunyai saran dan kritik untuk artikel jangan sungkan2 untuk berkomentar dibawah." />
+<link rel="canonical" href="http://localhost:4000/yii2/2019/03/06/event-global-yii2.html" />
+<meta property="og:url" content="http://localhost:4000/yii2/2019/03/06/event-global-yii2.html" />
+<meta property="og:site_name" content="susilolab" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-03-06T10:14:42+07:00" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","headline":"Event Global Yii2","dateModified":"2019-03-06T10:14:42+07:00","datePublished":"2019-03-06T10:14:42+07:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/yii2/2019/03/06/event-global-yii2.html"},"url":"http://localhost:4000/yii2/2019/03/06/event-global-yii2.html","author":{"@type":"Person","name":"Agus Susilo"},"description":"Event pada yii2 telah ditulis ulang dari versi sebelumnya dan disempurnakan sehingga lebih mudah dan dapat digunakan secara global. Nah kali ini saya ingin berbagai sedikit tip bagaimana membuat event secara global di Yii2. Saya asumsikan bahwa kamu sudah memiliki pengetahuan tentang dasar-dasar PHP7 dan Yii2. Secara sederhana event pada yii2 mirip event pada jquery dan cara pemakaiannya pun mirip. Untuk listening pada event tertentu kita gunakan on dan untuk mentrigger event menggunakan fungsi trigger. Detil fungsi on dan trigger dapat dilihat dibawah ini: Event::on($class, $name, $handle, $data = null, $append = true); Event::trigger($class, $name, $event = null); Tiga parameter utama pada fungsi on wajib ada, sedangkan selebihnya boleh diabaikan. Karena kita akan fokus pada bagaimana menggunakan event yii2 secara global maka kita hanya akan menggunakan 3 parameter pertama. contoh penggunaan event secara umum seperti berikut: // SiteController.php ... use yii\\base\\Event; ... const EVENT_HELLO = &#39;hello&#39;; public function init() { parent::init(); Event::on(self::className(), self::EVENT_HELLO, [self::className(), &#39;helloLog&#39;]); } public function actionIndex() { $event = new Event(); Event::trigger(self::className(), self::EVENT_HELLO, $event); return $this-&gt;render(&#39;index&#39;); } public static function helloLog() { Yii::error(&#39;---Hello world---&#39;); } ... Pada contoh di atas kita mengimport klas Event kemudian membuat konstanta nama event. Lalu pada fungsi init kita mendaftarkan event melalui fungsi on dengan nama fungsi yang akan dijalankan setelah event ditrigger yaitu helloLog. Selanjutnya pada fungsi actionIndex kita mentrigger event EVENT_HELLO memakai fungsi trigger. Perhatikan parameter ketiga, karena fungsi helloLog bertipe static maka nama klasnya menggunakan self::className. Jika menggunakan fungsi yang bukan static kita bisa menggunakan $this seperti ini: Event::on(self::className(), self::EVENT_HELLO, [$this, &#39;helloLog&#39;]); Kemudian jalankan dengan mengakses controller site, jika tidak ada error maka akan ada log error dengan pesan hello world pada file runtime/logs/app.log seperti berikut ini: Semoga dengan penjelasan dan contoh di atas kita sudah bisa memahami dasar-dasar event pada yii2, sekarang kita bikin event listenernya secara global sehingga kita dapat memicu/mentriggernya dari mana saja(model/controller/module). Agar event dapat didaftarkan secara global pada saat aplikasinya jalan maka kita akan menggunakan BootstrapInterface. kita akan bikin klas implementasi dari BootstrapInterface. Pertama kita bikin klas dengan nama EventAutoLoader.php pada folder nama_app/components, Klas ini berguna agar aplikasi dapat memuat konfigurasi event-event pada saat proses booting aplikasi. klas ini turunan dari BootstrapInterface yang hanya memiliki satu definisi fungsi yang harus di implementasikan pada klas turunan. &lt;?php namespace app\\components; use Yii; use yii\\base\\BootstrapInterface; use yii\\base\\Event; class EventAutoLoader implements BootstrapInterface { public function bootstrap($app) { $eventConfigFile = require(Yii::getAlias(&#39;@app&#39;) . &#39;/config/event-config.php&#39;); foreach ($eventConfigFile as $config) { Event::on($config[&#39;class&#39;], $config[&#39;event&#39;], $config[&#39;callback&#39;]); } } } Kemudian buka file config/web.php dan tambahkan klas yang baru saja kita buat pada config bootstrap. &#39;bootstrap&#39; =&gt; [ ... &#39;app\\components\\EventAutoLoader&#39;, ... ], Tak lupa buat file dengan nama event-config.php pada folder config untuk menyimpan semua event dan event handler. Dan isinya kurang lebih seperti ini: &lt;?php use app\\controllers\\SiteController; return [ [ &#39;class&#39; =&gt; SiteController::className(), &#39;event&#39; =&gt; SiteController::EVENT_HELLO, &#39;callback&#39; =&gt; [SiteController::className(), &#39;helloLog&#39;], ] ]; Sampai tahap ini kita sudah mendaftarkan event secara global dan event tersebut dapat kita dari mana saja, karena klas EventAutoLoader akan dijalankan pada saat aplikasi booting pertama kali. Untuk memastikan bahwa event dapat dipanggil dari mana saja, kita akan membuat controller baru dengan nama HelloController dan mentrigger event yang ada di SiteController. &lt;?php namespace app\\controllers; use Yii; use yii\\web\\Controller; use yii\\base\\Event; use app\\controllers\\SiteController; class HelloController extends Controller { public function actionIndex() { $event = new Event(); Event::trigger(SiteController::className(), SiteController::EVENT_HELLO, $event); } } Kemudian akses hello controller melalui browser, jika semua lancar maka akan ada pesan Hello world di app.log Sekian untuk artikel kali semoga bermanfaat. Insya Allah pada artikel berikutnya saya akan membahas sedikit bagaimana melewatkan data pada event yang telah kita buat. Apabila kamu mempunyai saran dan kritik untuk artikel jangan sungkan2 untuk berkomentar dibawah.","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="susilolab" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">susilolab</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Event Global Yii2</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2019-03-06T10:14:42+07:00" itemprop="datePublished">Mar 6, 2019
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>Event pada <code class="highlighter-rouge">yii2</code> telah ditulis ulang dari versi sebelumnya dan disempurnakan sehingga lebih mudah dan dapat digunakan secara global. Nah kali ini saya ingin berbagai sedikit tip bagaimana membuat event secara global di Yii2. Saya asumsikan bahwa kamu sudah memiliki pengetahuan tentang dasar-dasar <strong>PHP7</strong> dan <strong>Yii2</strong>.</p>
+
+<p>Secara sederhana event pada yii2 mirip event pada <strong>jquery</strong> dan cara pemakaiannya pun mirip. Untuk listening pada event tertentu kita gunakan <strong>on</strong> dan untuk mentrigger event menggunakan fungsi <strong>trigger</strong>. Detil fungsi on dan trigger dapat dilihat dibawah ini:</p>
+
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="nx">Event</span><span class="o">::</span><span class="na">on</span><span class="p">(</span><span class="nv">$class</span><span class="p">,</span> <span class="nv">$name</span><span class="p">,</span> <span class="nv">$handle</span><span class="p">,</span> <span class="nv">$data</span> <span class="o">=</span> <span class="kc">null</span><span class="p">,</span> <span class="nv">$append</span> <span class="o">=</span> <span class="kc">true</span><span class="p">);</span>
+<span class="nx">Event</span><span class="o">::</span><span class="na">trigger</span><span class="p">(</span><span class="nv">$class</span><span class="p">,</span> <span class="nv">$name</span><span class="p">,</span> <span class="nv">$event</span> <span class="o">=</span> <span class="kc">null</span><span class="p">);</span></code></pre></figure>
+
+<p>Tiga parameter utama pada fungsi <code class="highlighter-rouge">on</code> wajib ada, sedangkan selebihnya boleh diabaikan. Karena kita akan fokus pada bagaimana menggunakan event yii2 secara global maka kita hanya akan menggunakan 3 parameter pertama. contoh penggunaan event secara umum seperti berikut:</p>
+
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="c1">// SiteController.php</span>
+<span class="o">...</span>
+<span class="kn">use</span> <span class="nn">yii\base\Event</span><span class="p">;</span>
+
+<span class="o">...</span>
+<span class="k">const</span> <span class="no">EVENT_HELLO</span> <span class="o">=</span> <span class="s1">'hello'</span><span class="p">;</span>
+
+<span class="k">public</span> <span class="k">function</span> <span class="nf">init</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="k">parent</span><span class="o">::</span><span class="na">init</span><span class="p">();</span>
+  <span class="nx">Event</span><span class="o">::</span><span class="na">on</span><span class="p">(</span><span class="nx">self</span><span class="o">::</span><span class="na">className</span><span class="p">(),</span> <span class="nx">self</span><span class="o">::</span><span class="na">EVENT_HELLO</span><span class="p">,</span> <span class="p">[</span><span class="nx">self</span><span class="o">::</span><span class="na">className</span><span class="p">(),</span> <span class="s1">'helloLog'</span><span class="p">]);</span>
+<span class="p">}</span>
+
+<span class="k">public</span> <span class="k">function</span> <span class="nf">actionIndex</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="nv">$event</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Event</span><span class="p">();</span>
+  <span class="nx">Event</span><span class="o">::</span><span class="na">trigger</span><span class="p">(</span><span class="nx">self</span><span class="o">::</span><span class="na">className</span><span class="p">(),</span> <span class="nx">self</span><span class="o">::</span><span class="na">EVENT_HELLO</span><span class="p">,</span> <span class="nv">$event</span><span class="p">);</span>
+  <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span><span class="s1">'index'</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">helloLog</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="nx">Yii</span><span class="o">::</span><span class="na">error</span><span class="p">(</span><span class="s1">'---Hello world---'</span><span class="p">);</span> 
+<span class="p">}</span>
+<span class="o">...</span></code></pre></figure>
+
+<p>Pada contoh di atas kita mengimport klas <code class="highlighter-rouge">Event</code> kemudian membuat konstanta nama event. Lalu pada fungsi <code class="highlighter-rouge">init</code> kita mendaftarkan event melalui fungsi <code class="highlighter-rouge">on</code> dengan nama fungsi yang akan dijalankan setelah event ditrigger yaitu <code class="highlighter-rouge">helloLog</code>. Selanjutnya pada fungsi <code class="highlighter-rouge">actionIndex</code> kita mentrigger event <code class="highlighter-rouge">EVENT_HELLO</code> memakai fungsi trigger.</p>
+
+<p>Perhatikan parameter ketiga, karena fungsi <code class="highlighter-rouge">helloLog</code> bertipe static maka nama klasnya menggunakan <code class="highlighter-rouge">self::className</code>. Jika menggunakan fungsi yang bukan static kita bisa menggunakan <code class="highlighter-rouge">$this</code> seperti ini:</p>
+
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="nx">Event</span><span class="o">::</span><span class="na">on</span><span class="p">(</span><span class="nx">self</span><span class="o">::</span><span class="na">className</span><span class="p">(),</span> <span class="nx">self</span><span class="o">::</span><span class="na">EVENT_HELLO</span><span class="p">,</span> <span class="p">[</span><span class="nv">$this</span><span class="p">,</span> <span class="s1">'helloLog'</span><span class="p">]);</span></code></pre></figure>
+
+<p>Kemudian jalankan dengan mengakses controller site, jika tidak ada error maka akan ada log error dengan pesan hello world pada file <code class="highlighter-rouge">runtime/logs/app.log</code> seperti berikut ini:</p>
+
+<p><img src="/assets/img/001-2019-03-06-event-globalyii2.png" alt="event-global" /></p>
+
+<p>Semoga dengan penjelasan dan contoh di atas kita sudah bisa memahami dasar-dasar event pada <code class="highlighter-rouge">yii2</code>, sekarang kita bikin event listenernya secara global sehingga kita dapat memicu/mentriggernya dari mana saja(model/controller/module). Agar event dapat didaftarkan secara global pada saat aplikasinya jalan maka kita akan menggunakan BootstrapInterface. kita akan bikin klas implementasi dari BootstrapInterface.</p>
+
+<p>Pertama kita bikin klas dengan nama <code class="highlighter-rouge">EventAutoLoader.php</code> pada folder <code class="highlighter-rouge">nama_app/components</code>, Klas ini berguna agar aplikasi dapat memuat konfigurasi event-event pada saat proses booting aplikasi. klas ini turunan dari <code class="highlighter-rouge">BootstrapInterface</code> yang hanya memiliki satu definisi fungsi yang harus di implementasikan pada klas turunan.</p>
+
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="kn">namespace</span> <span class="nn">app\components</span><span class="p">;</span>
+
+<span class="kn">use</span> <span class="nn">Yii</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nn">yii\base\BootstrapInterface</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nn">yii\base\Event</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nc">EventAutoLoader</span> <span class="k">implements</span> <span class="nx">BootstrapInterface</span>
+<span class="p">{</span>
+  <span class="k">public</span> <span class="k">function</span> <span class="nf">bootstrap</span><span class="p">(</span><span class="nv">$app</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="nv">$eventConfigFile</span> <span class="o">=</span> <span class="k">require</span><span class="p">(</span><span class="nx">Yii</span><span class="o">::</span><span class="na">getAlias</span><span class="p">(</span><span class="s1">'@app'</span><span class="p">)</span> <span class="o">.</span> <span class="s1">'/config/event-config.php'</span><span class="p">);</span>
+    <span class="k">foreach</span> <span class="p">(</span><span class="nv">$eventConfigFile</span> <span class="k">as</span> <span class="nv">$config</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">Event</span><span class="o">::</span><span class="na">on</span><span class="p">(</span><span class="nv">$config</span><span class="p">[</span><span class="s1">'class'</span><span class="p">],</span> <span class="nv">$config</span><span class="p">[</span><span class="s1">'event'</span><span class="p">],</span> <span class="nv">$config</span><span class="p">[</span><span class="s1">'callback'</span><span class="p">]);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>Kemudian buka file <code class="highlighter-rouge">config/web.php</code> dan tambahkan klas yang baru saja kita buat pada config <code class="highlighter-rouge">bootstrap</code>.</p>
+
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="s1">'bootstrap'</span> <span class="o">=&gt;</span> <span class="p">[</span>
+  <span class="o">...</span>
+  <span class="s1">'app\components\EventAutoLoader'</span><span class="p">,</span>
+  <span class="o">...</span>
+<span class="p">],</span></code></pre></figure>
+
+<p>Tak lupa buat file dengan nama event-config.php pada folder config untuk menyimpan semua event dan event handler. Dan isinya kurang lebih seperti ini:</p>
+
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="kn">use</span> <span class="nn">app\controllers\SiteController</span><span class="p">;</span>
+
+<span class="k">return</span> <span class="p">[</span>
+  <span class="p">[</span>
+    <span class="s1">'class'</span>    <span class="o">=&gt;</span> <span class="nx">SiteController</span><span class="o">::</span><span class="na">className</span><span class="p">(),</span>
+    <span class="s1">'event'</span>    <span class="o">=&gt;</span> <span class="nx">SiteController</span><span class="o">::</span><span class="na">EVENT_HELLO</span><span class="p">,</span>
+    <span class="s1">'callback'</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="nx">SiteController</span><span class="o">::</span><span class="na">className</span><span class="p">(),</span> <span class="s1">'helloLog'</span><span class="p">],</span>
+  <span class="p">]</span>
+<span class="p">];</span></code></pre></figure>
+
+<p>Sampai tahap ini kita sudah mendaftarkan event secara global dan event tersebut dapat kita dari mana saja, karena klas <code class="highlighter-rouge">EventAutoLoader</code> akan dijalankan pada saat aplikasi booting pertama kali. Untuk memastikan bahwa event dapat dipanggil dari mana saja, kita akan membuat controller baru dengan nama <code class="highlighter-rouge">HelloController</code> dan mentrigger event yang ada di <code class="highlighter-rouge">SiteController</code>.</p>
+
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="kn">namespace</span> <span class="nn">app\controllers</span><span class="p">;</span>
+
+<span class="kn">use</span> <span class="nn">Yii</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nn">yii\web\Controller</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nn">yii\base\Event</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nn">app\controllers\SiteController</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nc">HelloController</span> <span class="k">extends</span> <span class="nx">Controller</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">actionIndex</span><span class="p">()</span>
+    <span class="p">{</span>
+      <span class="nv">$event</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Event</span><span class="p">();</span>
+      <span class="nx">Event</span><span class="o">::</span><span class="na">trigger</span><span class="p">(</span><span class="nx">SiteController</span><span class="o">::</span><span class="na">className</span><span class="p">(),</span> <span class="nx">SiteController</span><span class="o">::</span><span class="na">EVENT_HELLO</span><span class="p">,</span> <span class="nv">$event</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>Kemudian akses hello controller melalui browser, jika semua lancar maka akan ada pesan Hello world di <code class="highlighter-rouge">app.log</code></p>
+
+<p><img src="/assets/img/002-2019-03-06-event-globalyii2.png" alt="event-global" /></p>
+
+<p>Sekian untuk artikel kali semoga bermanfaat. Insya Allah pada artikel berikutnya saya akan membahas sedikit bagaimana melewatkan data pada event yang telah kita buat. Apabila kamu mempunyai saran dan kritik untuk artikel jangan sungkan2 untuk berkomentar dibawah.</p>
+
+  </div><a class="u-url" href="/yii2/2019/03/06/event-global-yii2.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper"><div class="footer-col-wrapper">
+      <div class="footer-col footer-col-3"><ul class="social-media-list"><li><a href="https://github.com/susilolab"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">susilolab</span></a></li><li><a href="https://instagram.com/mas.agus"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#instagram"></use></svg> <span class="username">mas.agus</span></a></li><li><a href="https://www.twitter.com/susil0"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">susil0</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>“Sebaik-baik manusia adalah yang paling bermanfaat bagi manusia” (HR. Ahmad, ath-Thabrani, ad-Daruqutni)</p>
+        <p>&copy;2019&nbsp;Agus Susilo</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
