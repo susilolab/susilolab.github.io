@@ -1,4 +1,54 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-09-01T20:35:52+07:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">susilolab</title><subtitle>“Sebaik-baik manusia adalah yang paling bermanfaat bagi manusia” (HR. Ahmad, ath-Thabrani, ad-Daruqutni)</subtitle><author><name>Agus Susilo</name></author><entry><title type="html">Baca file di Elixir dengan with</title><link href="http://localhost:4000/elixir/2019/09/01/baca-file-di-elixir-dengan-with.html" rel="alternate" type="text/html" title="Baca file di Elixir dengan with" /><published>2019-09-01T15:00:00+07:00</published><updated>2019-09-01T15:00:00+07:00</updated><id>http://localhost:4000/elixir/2019/09/01/baca-file-di-elixir-dengan-with</id><content type="html" xml:base="http://localhost:4000/elixir/2019/09/01/baca-file-di-elixir-dengan-with.html">&lt;p&gt;Kita tahu elixir kebanyakan menggunakan kembalian berupa tuple &lt;code class=&quot;highlighter-rouge&quot;&gt;{:ok, hasil}&lt;/code&gt; jika sukses dan tuple &lt;code class=&quot;highlighter-rouge&quot;&gt;{:error, alasan}&lt;/code&gt; jika error pada fungsinya. Contoh kita akan membaca file dengan &lt;code class=&quot;highlighter-rouge&quot;&gt;File.read&lt;/code&gt; &lt;strong&gt;tanpa&lt;/strong&gt; &lt;code class=&quot;highlighter-rouge&quot;&gt;with&lt;/code&gt; dan yang kedua &lt;strong&gt;dengan&lt;/strong&gt; &lt;code class=&quot;highlighter-rouge&quot;&gt;with&lt;/code&gt;. Buat file &lt;code class=&quot;highlighter-rouge&quot;&gt;file_read_with.exs&lt;/code&gt;&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-09-02T11:05:54+07:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">susilolab</title><subtitle>“Sebaik-baik manusia adalah yang paling bermanfaat bagi manusia” (HR. Ahmad, ath-Thabrani, ad-Daruqutni)</subtitle><author><name>Agus Susilo</name></author><entry><title type="html">Mengenal Trait di PHP</title><link href="http://localhost:4000/php/2019/09/02/mengenal-trait-php.html" rel="alternate" type="text/html" title="Mengenal Trait di PHP" /><published>2019-09-02T08:00:00+07:00</published><updated>2019-09-02T08:00:00+07:00</updated><id>http://localhost:4000/php/2019/09/02/mengenal-trait-php</id><content type="html" xml:base="http://localhost:4000/php/2019/09/02/mengenal-trait-php.html">&lt;p&gt;Trait adalah mekanisme untuk penggunaan kembali kode dalam single inheritance&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;namespace&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;app\traits&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;trait&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Foo&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;hello&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'Hello'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;sekian.&lt;/p&gt;</content><author><name>Agus Susilo</name></author><summary type="html">Trait adalah mekanisme untuk penggunaan kembali kode dalam single inheritance &amp;lt;?php namespace app\traits; trait Foo { public function hello() { return 'Hello'; } } sekian.</summary></entry><entry><title type="html">Memecah file dengan 7z cli dilinux</title><link href="http://localhost:4000/bash/cli/2019/09/02/split-file-di-7z-cli.html" rel="alternate" type="text/html" title="Memecah file dengan 7z cli dilinux" /><published>2019-09-02T08:00:00+07:00</published><updated>2019-09-02T08:00:00+07:00</updated><id>http://localhost:4000/bash/cli/2019/09/02/split-file-di-7z-cli</id><content type="html" xml:base="http://localhost:4000/bash/cli/2019/09/02/split-file-di-7z-cli.html">&lt;p&gt;Kadang kita butuh memecah file menjadi beberapa bagian agar dapat disalin ke flash disk terutama flash disk yang formatnya fat32. Fat32 hanya mampu menyalin file maksimal file berukuran 4GB. Berikut ini cara memecah file menggunakan 7z cli di linux:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;7z a &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-mx&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;0 &lt;span class=&quot;nt&quot;&gt;-v2500m&lt;/span&gt; namafile.7z folder_berkas/&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Penjelasan parameternya&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;a&lt;/td&gt;
+      &lt;td&gt;Perintah menambah berkas pada 7z&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;-y&lt;/td&gt;
+      &lt;td&gt;Kita paksa 7z agar mengiyakan semua konfirmasi&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;-mx=0&lt;/td&gt;
+      &lt;td&gt;Tingkatan kompresi antara 0 s/d 7. 0 brarti tanpa kompresi&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;-v2500m&lt;/td&gt;
+      &lt;td&gt;Berapa ukuran tiap file yang dipecah. ukuran bisa dalam b, k, m dan g&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;nama_file.7z&lt;/td&gt;
+      &lt;td&gt;Nama file yang diinginkan&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;folder_berkas/&lt;/td&gt;
+      &lt;td&gt;Folder yang akan dipecah&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;Khusus parameter &lt;code class=&quot;highlighter-rouge&quot;&gt;-v&lt;/code&gt; gunakan ukuran dibawahnya misal kita ingin memecah file menjadi 2G perfile maka gunakan ukuran &lt;code class=&quot;highlighter-rouge&quot;&gt;-v1900m&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;semoga bermanfaat&lt;/p&gt;</content><author><name>Agus Susilo</name></author><summary type="html">Kadang kita butuh memecah file menjadi beberapa bagian agar dapat disalin ke flash disk terutama flash disk yang formatnya fat32. Fat32 hanya mampu menyalin file maksimal file berukuran 4GB. Berikut ini cara memecah file menggunakan 7z cli di linux: $ 7z a -y -mx=0 -v2500m namafile.7z folder_berkas/ Penjelasan parameternya a Perintah menambah berkas pada 7z -y Kita paksa 7z agar mengiyakan semua konfirmasi -mx=0 Tingkatan kompresi antara 0 s/d 7. 0 brarti tanpa kompresi -v2500m Berapa ukuran tiap file yang dipecah. ukuran bisa dalam b, k, m dan g nama_file.7z Nama file yang diinginkan folder_berkas/ Folder yang akan dipecah Khusus parameter -v gunakan ukuran dibawahnya misal kita ingin memecah file menjadi 2G perfile maka gunakan ukuran -v1900m semoga bermanfaat</summary></entry><entry><title type="html">Baca file di Elixir dengan with</title><link href="http://localhost:4000/elixir/2019/09/01/baca-file-di-elixir-dengan-with.html" rel="alternate" type="text/html" title="Baca file di Elixir dengan with" /><published>2019-09-01T15:00:00+07:00</published><updated>2019-09-01T15:00:00+07:00</updated><id>http://localhost:4000/elixir/2019/09/01/baca-file-di-elixir-dengan-with</id><content type="html" xml:base="http://localhost:4000/elixir/2019/09/01/baca-file-di-elixir-dengan-with.html">&lt;p&gt;Kita tahu elixir kebanyakan menggunakan kembalian berupa tuple &lt;code class=&quot;highlighter-rouge&quot;&gt;{:ok, hasil}&lt;/code&gt; jika sukses dan tuple &lt;code class=&quot;highlighter-rouge&quot;&gt;{:error, alasan}&lt;/code&gt; jika error pada fungsinya. Contoh kita akan membaca file dengan &lt;code class=&quot;highlighter-rouge&quot;&gt;File.read&lt;/code&gt; &lt;strong&gt;tanpa&lt;/strong&gt; &lt;code class=&quot;highlighter-rouge&quot;&gt;with&lt;/code&gt; dan yang kedua &lt;strong&gt;dengan&lt;/strong&gt; &lt;code class=&quot;highlighter-rouge&quot;&gt;with&lt;/code&gt;. Buat file &lt;code class=&quot;highlighter-rouge&quot;&gt;file_read_with.exs&lt;/code&gt;&lt;/p&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-elixir&quot; data-lang=&quot;elixir&quot;&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:ok&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;content&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;File&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;read&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;hello.txt&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;span class=&quot;no&quot;&gt;IO&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;content&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
