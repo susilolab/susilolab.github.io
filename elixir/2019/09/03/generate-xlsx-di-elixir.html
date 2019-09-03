@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Generate file xls di Elixir | susilolab</title>
+<meta name="generator" content="Jekyll v3.8.6" />
+<meta property="og:title" content="Generate file xls di Elixir" />
+<meta name="author" content="Agus Susilo" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Tips singkat bagaimana mengenerate file xlsx di Elixir dengan paket elixlsx. Pertama tambahkan ektensi ke file mix.exs pada bagian fungsi deps defp deps do {:elixlsx, &quot;~&gt; 0.4.2&quot;} end Kemudian jalankan perintah berikut diterminal kamu $ mix deps.get Setelah itu baru kita bisa mengenerate file xls. saya asumsikan bahwa kamu sudah membuat modul jadi tinggal tambahkan fungsi download. Misal nama modulnya Playgorund lalu tambahkan alias Elixlsx.Sheet dan Elixlsx.Workbook pada bagian setelah definisi modul. defmodule Playground do alias Elixlsx.{Workbook, Sheet} def download do rows = [ %{id: 1, name: &quot;PHP&quot;}, %{id: 2, name: &quot;Go&quot;}, %{id: 3, name: &quot;Javascript&quot;}, %{id: 4, name: &quot;Elixir&quot;}, %{id: 5, name: &quot;Rust&quot;} ] sheets = rows |&gt; Stream.with_index |&gt; Enum.reduce(%Sheet{}, fn({row, idx}, acc) -&gt; acc |&gt; Sheet.set_at(idx, 0, row.id) |&gt; Sheet.set_at(idx, 1, row.name) end) Workbook.append_sheet(%Workbook{}, sheets) |&gt; Elixlsx.write_to(&quot;todos.xlsx&quot;) end end Pada fungsi download kita membuat variabel rows menyimpan struct yang berisi id dan name. Kemudian variabel sheets menyimpan daftar Sheet. Pertama rows kita kirim ke pemipaan(|&gt;) Stream.with_index rows |&gt; Stream.with_index Stream.with_index berfungsi membuat stream data dengan setiap datanya terdiri dari tuple data dan index seperti ini {data, index} sehingga index bisa digunakan untuk isian baris pada sheet. Hasil dari Stream.with_index kita pipakan lagi ke fungsi sebelah kanan yaitu Enum.reduce, fungsi ini akan mengembalikan daftar sheet. Fungsi ini parameter kedua berupa struct %Sheet{} sebagai accumulator/variabel yang akan menyimpan hasil reduce, parameter ketiga berupa fungsi data dan acc kemudian didalamnya akumulator akan diisi dengan data dari rows di atas. Sheet.set_at(idx, 0, row.id) fungsi akan menset data pada baris idx, kolom 0 dengan value berupa row.id lalu fungsi yang kedua menset data berupa row.name sampai data pada rows habis. Enum.reduce(%Sheet{}, fn({row, idx}, acc) -&gt; acc |&gt; Sheet.set_at(idx, 0, row.id) |&gt; Sheet.set_at(idx, 1, row.name) end) Terakhir sheets akan ditambahkan ke Workbook lalu dipipakan ke fungsi write_to untuk disimpan menjadi file todos.xlsx. Workbook.append_sheet(%Workbook{}, sheets) |&gt; Elixlsx.write_to(&quot;todos.xlsx&quot;) Kemudian buka iex diterminal kamu, lalu seperti biasa ketikan alias Playgorund baru jalankan fungsi download. $ iex iex(1)&gt; alias Playground iex(2)&gt; Playground.download() sekian." />
+<meta property="og:description" content="Tips singkat bagaimana mengenerate file xlsx di Elixir dengan paket elixlsx. Pertama tambahkan ektensi ke file mix.exs pada bagian fungsi deps defp deps do {:elixlsx, &quot;~&gt; 0.4.2&quot;} end Kemudian jalankan perintah berikut diterminal kamu $ mix deps.get Setelah itu baru kita bisa mengenerate file xls. saya asumsikan bahwa kamu sudah membuat modul jadi tinggal tambahkan fungsi download. Misal nama modulnya Playgorund lalu tambahkan alias Elixlsx.Sheet dan Elixlsx.Workbook pada bagian setelah definisi modul. defmodule Playground do alias Elixlsx.{Workbook, Sheet} def download do rows = [ %{id: 1, name: &quot;PHP&quot;}, %{id: 2, name: &quot;Go&quot;}, %{id: 3, name: &quot;Javascript&quot;}, %{id: 4, name: &quot;Elixir&quot;}, %{id: 5, name: &quot;Rust&quot;} ] sheets = rows |&gt; Stream.with_index |&gt; Enum.reduce(%Sheet{}, fn({row, idx}, acc) -&gt; acc |&gt; Sheet.set_at(idx, 0, row.id) |&gt; Sheet.set_at(idx, 1, row.name) end) Workbook.append_sheet(%Workbook{}, sheets) |&gt; Elixlsx.write_to(&quot;todos.xlsx&quot;) end end Pada fungsi download kita membuat variabel rows menyimpan struct yang berisi id dan name. Kemudian variabel sheets menyimpan daftar Sheet. Pertama rows kita kirim ke pemipaan(|&gt;) Stream.with_index rows |&gt; Stream.with_index Stream.with_index berfungsi membuat stream data dengan setiap datanya terdiri dari tuple data dan index seperti ini {data, index} sehingga index bisa digunakan untuk isian baris pada sheet. Hasil dari Stream.with_index kita pipakan lagi ke fungsi sebelah kanan yaitu Enum.reduce, fungsi ini akan mengembalikan daftar sheet. Fungsi ini parameter kedua berupa struct %Sheet{} sebagai accumulator/variabel yang akan menyimpan hasil reduce, parameter ketiga berupa fungsi data dan acc kemudian didalamnya akumulator akan diisi dengan data dari rows di atas. Sheet.set_at(idx, 0, row.id) fungsi akan menset data pada baris idx, kolom 0 dengan value berupa row.id lalu fungsi yang kedua menset data berupa row.name sampai data pada rows habis. Enum.reduce(%Sheet{}, fn({row, idx}, acc) -&gt; acc |&gt; Sheet.set_at(idx, 0, row.id) |&gt; Sheet.set_at(idx, 1, row.name) end) Terakhir sheets akan ditambahkan ke Workbook lalu dipipakan ke fungsi write_to untuk disimpan menjadi file todos.xlsx. Workbook.append_sheet(%Workbook{}, sheets) |&gt; Elixlsx.write_to(&quot;todos.xlsx&quot;) Kemudian buka iex diterminal kamu, lalu seperti biasa ketikan alias Playgorund baru jalankan fungsi download. $ iex iex(1)&gt; alias Playground iex(2)&gt; Playground.download() sekian." />
+<link rel="canonical" href="http://localhost:4000/elixir/2019/09/03/generate-xlsx-di-elixir.html" />
+<meta property="og:url" content="http://localhost:4000/elixir/2019/09/03/generate-xlsx-di-elixir.html" />
+<meta property="og:site_name" content="susilolab" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-09-03T09:00:00+07:00" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","headline":"Generate file xls di Elixir","dateModified":"2019-09-03T09:00:00+07:00","datePublished":"2019-09-03T09:00:00+07:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/elixir/2019/09/03/generate-xlsx-di-elixir.html"},"url":"http://localhost:4000/elixir/2019/09/03/generate-xlsx-di-elixir.html","author":{"@type":"Person","name":"Agus Susilo"},"description":"Tips singkat bagaimana mengenerate file xlsx di Elixir dengan paket elixlsx. Pertama tambahkan ektensi ke file mix.exs pada bagian fungsi deps defp deps do {:elixlsx, &quot;~&gt; 0.4.2&quot;} end Kemudian jalankan perintah berikut diterminal kamu $ mix deps.get Setelah itu baru kita bisa mengenerate file xls. saya asumsikan bahwa kamu sudah membuat modul jadi tinggal tambahkan fungsi download. Misal nama modulnya Playgorund lalu tambahkan alias Elixlsx.Sheet dan Elixlsx.Workbook pada bagian setelah definisi modul. defmodule Playground do alias Elixlsx.{Workbook, Sheet} def download do rows = [ %{id: 1, name: &quot;PHP&quot;}, %{id: 2, name: &quot;Go&quot;}, %{id: 3, name: &quot;Javascript&quot;}, %{id: 4, name: &quot;Elixir&quot;}, %{id: 5, name: &quot;Rust&quot;} ] sheets = rows |&gt; Stream.with_index |&gt; Enum.reduce(%Sheet{}, fn({row, idx}, acc) -&gt; acc |&gt; Sheet.set_at(idx, 0, row.id) |&gt; Sheet.set_at(idx, 1, row.name) end) Workbook.append_sheet(%Workbook{}, sheets) |&gt; Elixlsx.write_to(&quot;todos.xlsx&quot;) end end Pada fungsi download kita membuat variabel rows menyimpan struct yang berisi id dan name. Kemudian variabel sheets menyimpan daftar Sheet. Pertama rows kita kirim ke pemipaan(|&gt;) Stream.with_index rows |&gt; Stream.with_index Stream.with_index berfungsi membuat stream data dengan setiap datanya terdiri dari tuple data dan index seperti ini {data, index} sehingga index bisa digunakan untuk isian baris pada sheet. Hasil dari Stream.with_index kita pipakan lagi ke fungsi sebelah kanan yaitu Enum.reduce, fungsi ini akan mengembalikan daftar sheet. Fungsi ini parameter kedua berupa struct %Sheet{} sebagai accumulator/variabel yang akan menyimpan hasil reduce, parameter ketiga berupa fungsi data dan acc kemudian didalamnya akumulator akan diisi dengan data dari rows di atas. Sheet.set_at(idx, 0, row.id) fungsi akan menset data pada baris idx, kolom 0 dengan value berupa row.id lalu fungsi yang kedua menset data berupa row.name sampai data pada rows habis. Enum.reduce(%Sheet{}, fn({row, idx}, acc) -&gt; acc |&gt; Sheet.set_at(idx, 0, row.id) |&gt; Sheet.set_at(idx, 1, row.name) end) Terakhir sheets akan ditambahkan ke Workbook lalu dipipakan ke fungsi write_to untuk disimpan menjadi file todos.xlsx. Workbook.append_sheet(%Workbook{}, sheets) |&gt; Elixlsx.write_to(&quot;todos.xlsx&quot;) Kemudian buka iex diterminal kamu, lalu seperti biasa ketikan alias Playgorund baru jalankan fungsi download. $ iex iex(1)&gt; alias Playground iex(2)&gt; Playground.download() sekian.","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="susilolab" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">susilolab</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Generate file xls di Elixir</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2019-09-03T09:00:00+07:00" itemprop="datePublished">Sep 3, 2019
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>Tips singkat bagaimana mengenerate file <strong>xlsx</strong> di Elixir dengan paket <code class="highlighter-rouge">elixlsx</code>. Pertama tambahkan ektensi ke file <code class="highlighter-rouge">mix.exs</code> pada bagian fungsi <code class="highlighter-rouge">deps</code></p>
+
+<figure class="highlight"><pre><code class="language-elixir" data-lang="elixir"><span class="k">defp</span> <span class="n">deps</span> <span class="k">do</span>
+    <span class="p">{</span><span class="ss">:elixlsx</span><span class="p">,</span> <span class="s2">"~&gt; 0.4.2"</span><span class="p">}</span>
+<span class="k">end</span></code></pre></figure>
+
+<p>Kemudian jalankan perintah berikut diterminal kamu</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>mix deps.get</code></pre></figure>
+
+<p>Setelah itu baru kita bisa mengenerate file xls. saya asumsikan bahwa kamu sudah membuat modul jadi tinggal tambahkan fungsi download. Misal nama modulnya <code class="highlighter-rouge">Playgorund</code> lalu tambahkan alias <code class="highlighter-rouge">Elixlsx.Sheet</code> dan <code class="highlighter-rouge">Elixlsx.Workbook</code> pada bagian setelah definisi modul.</p>
+
+<figure class="highlight"><pre><code class="language-elixir" data-lang="elixir"><span class="k">defmodule</span> <span class="no">Playground</span> <span class="k">do</span>
+    <span class="n">alias</span> <span class="no">Elixlsx</span><span class="o">.</span><span class="p">{</span><span class="no">Workbook</span><span class="p">,</span> <span class="no">Sheet</span><span class="p">}</span>
+
+    <span class="k">def</span> <span class="n">download</span> <span class="k">do</span>
+        <span class="n">rows</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">%{</span><span class="ss">id:</span> <span class="mi">1</span><span class="p">,</span> <span class="ss">name:</span> <span class="s2">"PHP"</span><span class="p">},</span>
+            <span class="p">%{</span><span class="ss">id:</span> <span class="mi">2</span><span class="p">,</span> <span class="ss">name:</span> <span class="s2">"Go"</span><span class="p">},</span>
+            <span class="p">%{</span><span class="ss">id:</span> <span class="mi">3</span><span class="p">,</span> <span class="ss">name:</span> <span class="s2">"Javascript"</span><span class="p">},</span>
+            <span class="p">%{</span><span class="ss">id:</span> <span class="mi">4</span><span class="p">,</span> <span class="ss">name:</span> <span class="s2">"Elixir"</span><span class="p">},</span>
+            <span class="p">%{</span><span class="ss">id:</span> <span class="mi">5</span><span class="p">,</span> <span class="ss">name:</span> <span class="s2">"Rust"</span><span class="p">}</span>
+        <span class="p">]</span>
+
+        <span class="n">sheets</span> <span class="o">=</span> 
+            <span class="n">rows</span>
+            <span class="o">|&gt;</span> <span class="no">Stream</span><span class="o">.</span><span class="n">with_index</span>
+            <span class="o">|&gt;</span> <span class="no">Enum</span><span class="o">.</span><span class="n">reduce</span><span class="p">(%</span><span class="no">Sheet</span><span class="p">{},</span> <span class="k">fn</span><span class="p">({</span><span class="n">row</span><span class="p">,</span> <span class="n">idx</span><span class="p">},</span> <span class="n">acc</span><span class="p">)</span> <span class="o">-&gt;</span> 
+                <span class="n">acc</span> 
+                <span class="o">|&gt;</span> <span class="no">Sheet</span><span class="o">.</span><span class="n">set_at</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">id</span><span class="p">)</span> 
+                <span class="o">|&gt;</span> <span class="no">Sheet</span><span class="o">.</span><span class="n">set_at</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+            <span class="k">end</span><span class="p">)</span>
+
+        <span class="no">Workbook</span><span class="o">.</span><span class="n">append_sheet</span><span class="p">(%</span><span class="no">Workbook</span><span class="p">{},</span> <span class="n">sheets</span><span class="p">)</span> <span class="o">|&gt;</span> <span class="no">Elixlsx</span><span class="o">.</span><span class="n">write_to</span><span class="p">(</span><span class="s2">"todos.xlsx"</span><span class="p">)</span>
+    <span class="k">end</span>
+<span class="k">end</span></code></pre></figure>
+
+<p>Pada fungsi <code class="highlighter-rouge">download</code> kita membuat variabel <code class="highlighter-rouge">rows</code> menyimpan struct yang berisi <code class="highlighter-rouge">id</code> dan <code class="highlighter-rouge">name</code>. Kemudian variabel <code class="highlighter-rouge">sheets</code> menyimpan daftar <code class="highlighter-rouge">Sheet</code>. Pertama <code class="highlighter-rouge">rows</code> kita kirim ke pemipaan(<code class="highlighter-rouge">|&gt;</code>) <code class="highlighter-rouge">Stream.with_index</code></p>
+
+<figure class="highlight"><pre><code class="language-elixir" data-lang="elixir"><span class="n">rows</span> <span class="o">|&gt;</span> <span class="no">Stream</span><span class="o">.</span><span class="n">with_index</span> </code></pre></figure>
+
+<p><code class="highlighter-rouge">Stream.with_index</code> berfungsi membuat stream data dengan setiap datanya terdiri dari tuple <code class="highlighter-rouge">data</code> dan <code class="highlighter-rouge">index</code> seperti ini <code class="highlighter-rouge">{data, index}</code> sehingga <code class="highlighter-rouge">index</code> bisa digunakan untuk isian baris pada sheet.</p>
+
+<p>Hasil dari <code class="highlighter-rouge">Stream.with_index</code> kita pipakan lagi ke fungsi sebelah kanan yaitu <code class="highlighter-rouge">Enum.reduce</code>, fungsi ini akan mengembalikan daftar sheet. Fungsi ini parameter kedua berupa struct <code class="highlighter-rouge">%Sheet{}</code> sebagai accumulator/variabel yang akan menyimpan hasil reduce, parameter ketiga berupa fungsi <code class="highlighter-rouge">data</code> dan <code class="highlighter-rouge">acc</code> kemudian didalamnya akumulator akan diisi dengan data dari <code class="highlighter-rouge">rows</code> di atas. <code class="highlighter-rouge">Sheet.set_at(idx, 0, row.id)</code> fungsi akan menset data pada baris <code class="highlighter-rouge">idx</code>, kolom <code class="highlighter-rouge">0</code> dengan value berupa <code class="highlighter-rouge">row.id</code> lalu fungsi yang kedua menset data berupa <code class="highlighter-rouge">row.name</code> sampai data pada <code class="highlighter-rouge">rows</code> habis.</p>
+
+<figure class="highlight"><pre><code class="language-elixir" data-lang="elixir"><span class="no">Enum</span><span class="o">.</span><span class="n">reduce</span><span class="p">(%</span><span class="no">Sheet</span><span class="p">{},</span> <span class="k">fn</span><span class="p">({</span><span class="n">row</span><span class="p">,</span> <span class="n">idx</span><span class="p">},</span> <span class="n">acc</span><span class="p">)</span> <span class="o">-&gt;</span> 
+    <span class="n">acc</span> 
+    <span class="o">|&gt;</span> <span class="no">Sheet</span><span class="o">.</span><span class="n">set_at</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">id</span><span class="p">)</span> 
+    <span class="o">|&gt;</span> <span class="no">Sheet</span><span class="o">.</span><span class="n">set_at</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+<span class="k">end</span><span class="p">)</span></code></pre></figure>
+
+<p>Terakhir <code class="highlighter-rouge">sheets</code> akan ditambahkan ke <code class="highlighter-rouge">Workbook</code> lalu dipipakan ke fungsi <code class="highlighter-rouge">write_to</code> untuk disimpan menjadi file <code class="highlighter-rouge">todos.xlsx</code>.</p>
+
+<figure class="highlight"><pre><code class="language-elixir" data-lang="elixir"><span class="no">Workbook</span><span class="o">.</span><span class="n">append_sheet</span><span class="p">(%</span><span class="no">Workbook</span><span class="p">{},</span> <span class="n">sheets</span><span class="p">)</span> <span class="o">|&gt;</span> <span class="no">Elixlsx</span><span class="o">.</span><span class="n">write_to</span><span class="p">(</span><span class="s2">"todos.xlsx"</span><span class="p">)</span></code></pre></figure>
+
+<p>Kemudian buka <code class="highlighter-rouge">iex</code> diterminal kamu, lalu seperti biasa ketikan alias <code class="highlighter-rouge">Playgorund</code> baru jalankan fungsi download.</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>iex
+iex<span class="o">(</span>1<span class="o">)&gt;</span> <span class="nb">alias </span>Playground
+iex<span class="o">(</span>2<span class="o">)&gt;</span> Playground.download<span class="o">()</span></code></pre></figure>
+
+<p>sekian.</p>
+
+  </div><a class="u-url" href="/elixir/2019/09/03/generate-xlsx-di-elixir.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper"><div class="footer-col-wrapper">
+      <div class="footer-col footer-col-3"><ul class="social-media-list"><li><a href="https://github.com/susilolab"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">susilolab</span></a></li><li><a href="https://instagram.com/mas.agus"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#instagram"></use></svg> <span class="username">mas.agus</span></a></li><li><a href="https://www.twitter.com/susil0"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">susil0</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>“Sebaik-baik manusia adalah yang paling bermanfaat bagi manusia” (HR. Ahmad, ath-Thabrani, ad-Daruqutni)</p>
+        <p>&copy;2019&nbsp;Agus Susilo</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
