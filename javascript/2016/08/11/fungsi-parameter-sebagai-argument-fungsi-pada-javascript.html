@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Fungsi parameter sebagai argument fungsi pada javascript | susilolab</title>
+<meta name="generator" content="Jekyll v3.8.6" />
+<meta property="og:title" content="Fungsi parameter sebagai argument fungsi pada javascript" />
+<meta name="author" content="Agus Susilo" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Javascript adalah bahasa scripting yang berorientasi object yang berjalan pada sisi client browser dan juga Javascript menerapkan function sebagai sebuah object. Bagaimana javascript menangani parameter yang berupa function? Nah kali ini saya ingin sedikit berbagi tentang bagaimana membuat fungsi yang argumentnya berupa fungsi, bingung?, penasaran?. Ada dua cara dalam pemanggilan fungsi dalam javascript, yang pertama menggunakan fungsi call dan yang kedua menggunakan fungsi apply. Perbedaan dari kedua fungsi tersebut adalah pada parameternya, fungsi apply mengharuskan penggunaan array sebagai parameter sedangkan call tidak. Sebelum memanggil fungsi kita perlu memeriksa apakah sebuah variabel itu tipenya berupa fungsi atau tidak, caranya adalah dengan menggunakan fungsi bawaan yaitu typeof, fungsi ini akan memeriksa tipe dari sebuah object, apakah berupa string, number, object, function atau tipe yang lain. Untuk lebih jelasnya bisa dilihat pada contoh kode berikut: function greeting(name, filter) { if(typeof filter === &#39;function&#39;) name = filter.call(this, name); console.log(name); } // Pemanggilan 1, dengan parameter fungsi greeting(&#39;Agus Susilo&#39;, function(name) { return name.toUpperCase(); }); // output: AGUS SUSILO // Pemanggilan 2, tanpa parameter fungsi greeting(&#39;Agus Susilo&#39;);// output: Agus Susilo Pada contoh di atas saya membuat fungsi sederhana yang akan mencetak nama dengan dua buah parameter, parameter yang pertama adalah name bertype string dan parameter kedua berupa fungsi atau diharapkan fungsi namun jika parameter kedua bukan fungsipun fungsi akan tetap mencetak name. Parameter kedua ini diperiksa terlebih dahulu dengan typeof, jika berupa fungsi maka fungsi yang dilewatkan pada parameter kedua akan dipanggil dengan method call, parameter this pada call adalah si pemanggil fungsi. Nah mudah bukan, semoga bermanfaat." />
+<meta property="og:description" content="Javascript adalah bahasa scripting yang berorientasi object yang berjalan pada sisi client browser dan juga Javascript menerapkan function sebagai sebuah object. Bagaimana javascript menangani parameter yang berupa function? Nah kali ini saya ingin sedikit berbagi tentang bagaimana membuat fungsi yang argumentnya berupa fungsi, bingung?, penasaran?. Ada dua cara dalam pemanggilan fungsi dalam javascript, yang pertama menggunakan fungsi call dan yang kedua menggunakan fungsi apply. Perbedaan dari kedua fungsi tersebut adalah pada parameternya, fungsi apply mengharuskan penggunaan array sebagai parameter sedangkan call tidak. Sebelum memanggil fungsi kita perlu memeriksa apakah sebuah variabel itu tipenya berupa fungsi atau tidak, caranya adalah dengan menggunakan fungsi bawaan yaitu typeof, fungsi ini akan memeriksa tipe dari sebuah object, apakah berupa string, number, object, function atau tipe yang lain. Untuk lebih jelasnya bisa dilihat pada contoh kode berikut: function greeting(name, filter) { if(typeof filter === &#39;function&#39;) name = filter.call(this, name); console.log(name); } // Pemanggilan 1, dengan parameter fungsi greeting(&#39;Agus Susilo&#39;, function(name) { return name.toUpperCase(); }); // output: AGUS SUSILO // Pemanggilan 2, tanpa parameter fungsi greeting(&#39;Agus Susilo&#39;);// output: Agus Susilo Pada contoh di atas saya membuat fungsi sederhana yang akan mencetak nama dengan dua buah parameter, parameter yang pertama adalah name bertype string dan parameter kedua berupa fungsi atau diharapkan fungsi namun jika parameter kedua bukan fungsipun fungsi akan tetap mencetak name. Parameter kedua ini diperiksa terlebih dahulu dengan typeof, jika berupa fungsi maka fungsi yang dilewatkan pada parameter kedua akan dipanggil dengan method call, parameter this pada call adalah si pemanggil fungsi. Nah mudah bukan, semoga bermanfaat." />
+<link rel="canonical" href="http://localhost:4000/javascript/2016/08/11/fungsi-parameter-sebagai-argument-fungsi-pada-javascript.html" />
+<meta property="og:url" content="http://localhost:4000/javascript/2016/08/11/fungsi-parameter-sebagai-argument-fungsi-pada-javascript.html" />
+<meta property="og:site_name" content="susilolab" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2016-08-11T08:00:00+07:00" />
+<script type="application/ld+json">
+{"mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/javascript/2016/08/11/fungsi-parameter-sebagai-argument-fungsi-pada-javascript.html"},"@type":"BlogPosting","url":"http://localhost:4000/javascript/2016/08/11/fungsi-parameter-sebagai-argument-fungsi-pada-javascript.html","headline":"Fungsi parameter sebagai argument fungsi pada javascript","dateModified":"2016-08-11T08:00:00+07:00","datePublished":"2016-08-11T08:00:00+07:00","author":{"@type":"Person","name":"Agus Susilo"},"description":"Javascript adalah bahasa scripting yang berorientasi object yang berjalan pada sisi client browser dan juga Javascript menerapkan function sebagai sebuah object. Bagaimana javascript menangani parameter yang berupa function? Nah kali ini saya ingin sedikit berbagi tentang bagaimana membuat fungsi yang argumentnya berupa fungsi, bingung?, penasaran?. Ada dua cara dalam pemanggilan fungsi dalam javascript, yang pertama menggunakan fungsi call dan yang kedua menggunakan fungsi apply. Perbedaan dari kedua fungsi tersebut adalah pada parameternya, fungsi apply mengharuskan penggunaan array sebagai parameter sedangkan call tidak. Sebelum memanggil fungsi kita perlu memeriksa apakah sebuah variabel itu tipenya berupa fungsi atau tidak, caranya adalah dengan menggunakan fungsi bawaan yaitu typeof, fungsi ini akan memeriksa tipe dari sebuah object, apakah berupa string, number, object, function atau tipe yang lain. Untuk lebih jelasnya bisa dilihat pada contoh kode berikut: function greeting(name, filter) { if(typeof filter === &#39;function&#39;) name = filter.call(this, name); console.log(name); } // Pemanggilan 1, dengan parameter fungsi greeting(&#39;Agus Susilo&#39;, function(name) { return name.toUpperCase(); }); // output: AGUS SUSILO // Pemanggilan 2, tanpa parameter fungsi greeting(&#39;Agus Susilo&#39;);// output: Agus Susilo Pada contoh di atas saya membuat fungsi sederhana yang akan mencetak nama dengan dua buah parameter, parameter yang pertama adalah name bertype string dan parameter kedua berupa fungsi atau diharapkan fungsi namun jika parameter kedua bukan fungsipun fungsi akan tetap mencetak name. Parameter kedua ini diperiksa terlebih dahulu dengan typeof, jika berupa fungsi maka fungsi yang dilewatkan pada parameter kedua akan dipanggil dengan method call, parameter this pada call adalah si pemanggil fungsi. Nah mudah bukan, semoga bermanfaat.","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="susilolab" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">susilolab</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Fungsi parameter sebagai argument fungsi pada javascript</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2016-08-11T08:00:00+07:00" itemprop="datePublished">Aug 11, 2016
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>Javascript adalah bahasa scripting yang berorientasi object yang berjalan pada sisi client browser dan juga Javascript menerapkan function sebagai sebuah object. Bagaimana javascript menangani parameter yang berupa function?</p>
+
+<p>Nah kali ini saya ingin sedikit berbagi tentang bagaimana membuat fungsi yang argumentnya berupa fungsi, bingung?, penasaran?. Ada dua cara dalam pemanggilan fungsi dalam javascript, yang pertama menggunakan fungsi <code class="highlighter-rouge">call</code> dan yang kedua menggunakan fungsi <code class="highlighter-rouge">apply</code>. Perbedaan dari kedua fungsi tersebut adalah pada parameternya, fungsi <code class="highlighter-rouge">apply</code> mengharuskan penggunaan array sebagai parameter sedangkan <code class="highlighter-rouge">call</code> tidak.</p>
+
+<p>Sebelum memanggil fungsi kita perlu memeriksa apakah sebuah variabel itu tipenya berupa fungsi atau tidak, caranya adalah dengan menggunakan fungsi bawaan yaitu <code class="highlighter-rouge">typeof</code>, fungsi ini akan memeriksa tipe dari sebuah object, apakah berupa string, number, object, function atau tipe yang lain.</p>
+
+<p>Untuk lebih jelasnya bisa dilihat pada contoh kode berikut:</p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">function</span> <span class="nx">greeting</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">filter</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="k">typeof</span> <span class="nx">filter</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">function</span><span class="dl">'</span><span class="p">)</span>
+        <span class="nx">name</span> <span class="o">=</span> <span class="nx">filter</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nx">name</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// Pemanggilan 1, dengan parameter fungsi</span>
+<span class="nx">greeting</span><span class="p">(</span><span class="dl">'</span><span class="s1">Agus Susilo</span><span class="dl">'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">name</span><span class="p">.</span><span class="nx">toUpperCase</span><span class="p">();</span>
+<span class="p">});</span>
+<span class="c1">// output: AGUS SUSILO</span>
+
+<span class="c1">// Pemanggilan 2, tanpa parameter fungsi</span>
+<span class="nx">greeting</span><span class="p">(</span><span class="dl">'</span><span class="s1">Agus Susilo</span><span class="dl">'</span><span class="p">);</span><span class="c1">// output: Agus Susilo</span></code></pre></figure>
+
+<p>Pada contoh di atas saya membuat fungsi sederhana yang akan mencetak nama dengan dua buah parameter, parameter yang pertama adalah name bertype string dan parameter kedua berupa fungsi atau diharapkan fungsi namun jika parameter kedua bukan fungsipun fungsi akan tetap mencetak name.</p>
+
+<p>Parameter kedua ini diperiksa terlebih dahulu dengan <code class="highlighter-rouge">typeof</code>, jika berupa fungsi maka fungsi yang dilewatkan pada parameter kedua akan dipanggil dengan method call, parameter this pada call adalah si pemanggil fungsi.</p>
+
+<p>Nah mudah bukan, semoga bermanfaat.</p>
+
+  </div><a class="u-url" href="/javascript/2016/08/11/fungsi-parameter-sebagai-argument-fungsi-pada-javascript.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper"><div class="footer-col-wrapper">
+      <div class="footer-col footer-col-3"><ul class="social-media-list"><li><a href="https://github.com/susilolab"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">susilolab</span></a></li><li><a href="https://instagram.com/mas.agus"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#instagram"></use></svg> <span class="username">mas.agus</span></a></li><li><a href="https://www.twitter.com/susil0"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">susil0</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>“Sebaik-baik manusia adalah yang paling bermanfaat bagi manusia” (HR. Ahmad, ath-Thabrani, ad-Daruqutni)</p>
+        <p>&copy;2019&nbsp;Agus Susilo</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
