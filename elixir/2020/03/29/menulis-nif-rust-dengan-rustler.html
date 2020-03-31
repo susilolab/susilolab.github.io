@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Menulis NIF Rust dengan Rustler | susilolab</title>
+<meta name="generator" content="Jekyll v3.8.6" />
+<meta property="og:title" content="Menulis NIF Rust dengan Rustler" />
+<meta name="author" content="Agus Susilo" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Kali ini saya ingin berbagi pengetahuan mengenai cara menulis NIF dengan Rustler tapi sebelum itu saya ingin mengenalkan apa itu NIF. NIF kependekan dari Native Implemented Function yaitu memanggil fungsi dari pustaka luar. Kenapa harus menggunakan NIF? alasan pertama karena beberapa fungsi pada pustaka tertentu tidak ada di elixir, alasan kedua yaitu agar performa aplikasi meningkat. NIF biasanya dibuat dengan bahasa C namun kali ini saya ingin menggunakan bahasa Rust karena alasan keamanan dan kecepatan. Pustaka rustler mengklaim library yang ditulis tidak akan menyebabkan virtual mesin BEAM crash sehingga kita tidak perlu khawatir dan fokus ke penulisan pustaka. Ok kita mulai saja pertama buat project elixir dengan command mix. pertama-tama buat project elixir dengan nama hello_nif $ mix new hello_nif Lalu tambah pustaka rustler ke file mix.exs defp deps do [ {:rustler, &quot;~&gt; 0.21.0&quot;} ] end Kemudian jalankan mix deps.get $ mix deps.get Setelah itu compile project elixir dengan mix compile agar mix task dari rustler muncul $ mix compile Kemudian kita akan memulai membuat pustaka nif. Untuk nama modul kita samakan dengan nama project elixir yaitu HelloNif dan nama libnya hello_nif. rustler akan membuatkan rust project yang akan mengkompile otomatis saat kita menjalankan mix compile atau iex -S mix $ mix rustler.new This is the name of the Elixir module the NIF module will be registered to. Module name &gt; HelloNif This is the name used for the generated Rust crate. The default is most likely fine. Library name (hellonif) &gt; hello_nif * creating native/hello_nif/.cargo/config * creating native/hello_nif/README.md * creating native/hello_nif/Cargo.toml * creating native/hello_nif/src/lib.rs Ready to go! See /home/susilo/var/Elixir/hello_nif/native/hello_nif/README.md for further instructions. Maka akan ada folder native/hello_nif didalam folder project elixir, folder ini akan berisi pustaka nif yang kita buat dengan perintah mix rustler.new. source code dari lib.rs kurang lebih akan seperti dibawah ini #[macro_use] extern crate rustler; use rustler::{Encoder, Env, Error, Term}; mod atoms { rustler_atoms! { atom ok; //atom error; //atom __true__ = &quot;true&quot;; //atom __false__ = &quot;false&quot;; } } rustler::rustler_export_nifs! { &quot;Elixir.HelloNif&quot;, [ (&quot;add&quot;, 2, add) ], None } fn add&lt;&#39;a&gt;(env: Env&lt;&#39;a&gt;, args: &amp;[Term&lt;&#39;a&gt;]) -&gt; Result&lt;Term&lt;&#39;a&gt;, Error&gt; { let num1: i64 = args[0].decode()?; let num2: i64 = args[1].decode()?; Ok((atoms::ok(), num1 + num2).encode(env)) } Kode diatas hanya ada satu fungsi yaitu add dengan 2 parameter berupa angka. rustler_atoms! berguna untuk membuat atom elixir dan rustler::rustler_export_nifs! berguna untuk mengexport modul dan fungsinya sehingga dapat diakses dari elixir. Langkah selanjutnya adalah menambah informasi agar mix dapat mengkompile pustaka yang kita buat. tambahkan custom compiler dan daftar pustaka nif ke dalam fungsi project, lalu buat fungsi rustler_crates yang memuat lokasi pustaka nif. defmodule HelloNif.MixProject do use Mix.Project def project do [ ... compilers: [:rustler] ++ Mix.compilers(), rustler_crates: rustler_crates(), ... ] end defp rustler_crates do [ hello_nif: [path: &quot;native/hello_nif&quot;, mode: if(Mix.env() == :prod, do: :release, else: :debug)], ] end end Langkah selanjutnya adalah menambahkan use Rustler dan definisi nama fungsi pada modul HelloNif sehingga fungsi yang dibuat dengan rust dapat diakses di dalam elixir. defmodule HelloNif do use Rustler, otp_app: :hello_nif, crate: :hello_nif def add(_a, _b), do: :erlang.nif_error(:nif_not_loaded) def hello do :world end end Kemudian kita bisa mengujinya menggunakan interaktif elixir atau iex dengan cara mengetikan perintah berikut ini pada terminal $ iex -S mix Pada saat kita menjalankan perintah iex -S mix library dari rustler akan otomatis mengkompile pustaka yang kita tulis dengan bahasa pemrograman rust. Setelah rustler selesai mengkompile pustaka maka konsol iex juga akan muncul. nah setelah muncul kita bisa mencoba mengakses fungsi yang telah kita buat dengan rust. iex(1)&gt; HelloNif.add(1, 2) {:ok, 3} iex(2)&gt; Jika tidak ada error maka akan keluar pesan berupa tuple atom :ok dan angka 3. Sekian semoga bermanfaat." />
+<meta property="og:description" content="Kali ini saya ingin berbagi pengetahuan mengenai cara menulis NIF dengan Rustler tapi sebelum itu saya ingin mengenalkan apa itu NIF. NIF kependekan dari Native Implemented Function yaitu memanggil fungsi dari pustaka luar. Kenapa harus menggunakan NIF? alasan pertama karena beberapa fungsi pada pustaka tertentu tidak ada di elixir, alasan kedua yaitu agar performa aplikasi meningkat. NIF biasanya dibuat dengan bahasa C namun kali ini saya ingin menggunakan bahasa Rust karena alasan keamanan dan kecepatan. Pustaka rustler mengklaim library yang ditulis tidak akan menyebabkan virtual mesin BEAM crash sehingga kita tidak perlu khawatir dan fokus ke penulisan pustaka. Ok kita mulai saja pertama buat project elixir dengan command mix. pertama-tama buat project elixir dengan nama hello_nif $ mix new hello_nif Lalu tambah pustaka rustler ke file mix.exs defp deps do [ {:rustler, &quot;~&gt; 0.21.0&quot;} ] end Kemudian jalankan mix deps.get $ mix deps.get Setelah itu compile project elixir dengan mix compile agar mix task dari rustler muncul $ mix compile Kemudian kita akan memulai membuat pustaka nif. Untuk nama modul kita samakan dengan nama project elixir yaitu HelloNif dan nama libnya hello_nif. rustler akan membuatkan rust project yang akan mengkompile otomatis saat kita menjalankan mix compile atau iex -S mix $ mix rustler.new This is the name of the Elixir module the NIF module will be registered to. Module name &gt; HelloNif This is the name used for the generated Rust crate. The default is most likely fine. Library name (hellonif) &gt; hello_nif * creating native/hello_nif/.cargo/config * creating native/hello_nif/README.md * creating native/hello_nif/Cargo.toml * creating native/hello_nif/src/lib.rs Ready to go! See /home/susilo/var/Elixir/hello_nif/native/hello_nif/README.md for further instructions. Maka akan ada folder native/hello_nif didalam folder project elixir, folder ini akan berisi pustaka nif yang kita buat dengan perintah mix rustler.new. source code dari lib.rs kurang lebih akan seperti dibawah ini #[macro_use] extern crate rustler; use rustler::{Encoder, Env, Error, Term}; mod atoms { rustler_atoms! { atom ok; //atom error; //atom __true__ = &quot;true&quot;; //atom __false__ = &quot;false&quot;; } } rustler::rustler_export_nifs! { &quot;Elixir.HelloNif&quot;, [ (&quot;add&quot;, 2, add) ], None } fn add&lt;&#39;a&gt;(env: Env&lt;&#39;a&gt;, args: &amp;[Term&lt;&#39;a&gt;]) -&gt; Result&lt;Term&lt;&#39;a&gt;, Error&gt; { let num1: i64 = args[0].decode()?; let num2: i64 = args[1].decode()?; Ok((atoms::ok(), num1 + num2).encode(env)) } Kode diatas hanya ada satu fungsi yaitu add dengan 2 parameter berupa angka. rustler_atoms! berguna untuk membuat atom elixir dan rustler::rustler_export_nifs! berguna untuk mengexport modul dan fungsinya sehingga dapat diakses dari elixir. Langkah selanjutnya adalah menambah informasi agar mix dapat mengkompile pustaka yang kita buat. tambahkan custom compiler dan daftar pustaka nif ke dalam fungsi project, lalu buat fungsi rustler_crates yang memuat lokasi pustaka nif. defmodule HelloNif.MixProject do use Mix.Project def project do [ ... compilers: [:rustler] ++ Mix.compilers(), rustler_crates: rustler_crates(), ... ] end defp rustler_crates do [ hello_nif: [path: &quot;native/hello_nif&quot;, mode: if(Mix.env() == :prod, do: :release, else: :debug)], ] end end Langkah selanjutnya adalah menambahkan use Rustler dan definisi nama fungsi pada modul HelloNif sehingga fungsi yang dibuat dengan rust dapat diakses di dalam elixir. defmodule HelloNif do use Rustler, otp_app: :hello_nif, crate: :hello_nif def add(_a, _b), do: :erlang.nif_error(:nif_not_loaded) def hello do :world end end Kemudian kita bisa mengujinya menggunakan interaktif elixir atau iex dengan cara mengetikan perintah berikut ini pada terminal $ iex -S mix Pada saat kita menjalankan perintah iex -S mix library dari rustler akan otomatis mengkompile pustaka yang kita tulis dengan bahasa pemrograman rust. Setelah rustler selesai mengkompile pustaka maka konsol iex juga akan muncul. nah setelah muncul kita bisa mencoba mengakses fungsi yang telah kita buat dengan rust. iex(1)&gt; HelloNif.add(1, 2) {:ok, 3} iex(2)&gt; Jika tidak ada error maka akan keluar pesan berupa tuple atom :ok dan angka 3. Sekian semoga bermanfaat." />
+<link rel="canonical" href="http://localhost:4040/elixir/2020/03/29/menulis-nif-rust-dengan-rustler.html" />
+<meta property="og:url" content="http://localhost:4040/elixir/2020/03/29/menulis-nif-rust-dengan-rustler.html" />
+<meta property="og:site_name" content="susilolab" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-03-29T08:00:00+07:00" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","headline":"Menulis NIF Rust dengan Rustler","dateModified":"2020-03-29T08:00:00+07:00","datePublished":"2020-03-29T08:00:00+07:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4040/elixir/2020/03/29/menulis-nif-rust-dengan-rustler.html"},"url":"http://localhost:4040/elixir/2020/03/29/menulis-nif-rust-dengan-rustler.html","author":{"@type":"Person","name":"Agus Susilo"},"description":"Kali ini saya ingin berbagi pengetahuan mengenai cara menulis NIF dengan Rustler tapi sebelum itu saya ingin mengenalkan apa itu NIF. NIF kependekan dari Native Implemented Function yaitu memanggil fungsi dari pustaka luar. Kenapa harus menggunakan NIF? alasan pertama karena beberapa fungsi pada pustaka tertentu tidak ada di elixir, alasan kedua yaitu agar performa aplikasi meningkat. NIF biasanya dibuat dengan bahasa C namun kali ini saya ingin menggunakan bahasa Rust karena alasan keamanan dan kecepatan. Pustaka rustler mengklaim library yang ditulis tidak akan menyebabkan virtual mesin BEAM crash sehingga kita tidak perlu khawatir dan fokus ke penulisan pustaka. Ok kita mulai saja pertama buat project elixir dengan command mix. pertama-tama buat project elixir dengan nama hello_nif $ mix new hello_nif Lalu tambah pustaka rustler ke file mix.exs defp deps do [ {:rustler, &quot;~&gt; 0.21.0&quot;} ] end Kemudian jalankan mix deps.get $ mix deps.get Setelah itu compile project elixir dengan mix compile agar mix task dari rustler muncul $ mix compile Kemudian kita akan memulai membuat pustaka nif. Untuk nama modul kita samakan dengan nama project elixir yaitu HelloNif dan nama libnya hello_nif. rustler akan membuatkan rust project yang akan mengkompile otomatis saat kita menjalankan mix compile atau iex -S mix $ mix rustler.new This is the name of the Elixir module the NIF module will be registered to. Module name &gt; HelloNif This is the name used for the generated Rust crate. The default is most likely fine. Library name (hellonif) &gt; hello_nif * creating native/hello_nif/.cargo/config * creating native/hello_nif/README.md * creating native/hello_nif/Cargo.toml * creating native/hello_nif/src/lib.rs Ready to go! See /home/susilo/var/Elixir/hello_nif/native/hello_nif/README.md for further instructions. Maka akan ada folder native/hello_nif didalam folder project elixir, folder ini akan berisi pustaka nif yang kita buat dengan perintah mix rustler.new. source code dari lib.rs kurang lebih akan seperti dibawah ini #[macro_use] extern crate rustler; use rustler::{Encoder, Env, Error, Term}; mod atoms { rustler_atoms! { atom ok; //atom error; //atom __true__ = &quot;true&quot;; //atom __false__ = &quot;false&quot;; } } rustler::rustler_export_nifs! { &quot;Elixir.HelloNif&quot;, [ (&quot;add&quot;, 2, add) ], None } fn add&lt;&#39;a&gt;(env: Env&lt;&#39;a&gt;, args: &amp;[Term&lt;&#39;a&gt;]) -&gt; Result&lt;Term&lt;&#39;a&gt;, Error&gt; { let num1: i64 = args[0].decode()?; let num2: i64 = args[1].decode()?; Ok((atoms::ok(), num1 + num2).encode(env)) } Kode diatas hanya ada satu fungsi yaitu add dengan 2 parameter berupa angka. rustler_atoms! berguna untuk membuat atom elixir dan rustler::rustler_export_nifs! berguna untuk mengexport modul dan fungsinya sehingga dapat diakses dari elixir. Langkah selanjutnya adalah menambah informasi agar mix dapat mengkompile pustaka yang kita buat. tambahkan custom compiler dan daftar pustaka nif ke dalam fungsi project, lalu buat fungsi rustler_crates yang memuat lokasi pustaka nif. defmodule HelloNif.MixProject do use Mix.Project def project do [ ... compilers: [:rustler] ++ Mix.compilers(), rustler_crates: rustler_crates(), ... ] end defp rustler_crates do [ hello_nif: [path: &quot;native/hello_nif&quot;, mode: if(Mix.env() == :prod, do: :release, else: :debug)], ] end end Langkah selanjutnya adalah menambahkan use Rustler dan definisi nama fungsi pada modul HelloNif sehingga fungsi yang dibuat dengan rust dapat diakses di dalam elixir. defmodule HelloNif do use Rustler, otp_app: :hello_nif, crate: :hello_nif def add(_a, _b), do: :erlang.nif_error(:nif_not_loaded) def hello do :world end end Kemudian kita bisa mengujinya menggunakan interaktif elixir atau iex dengan cara mengetikan perintah berikut ini pada terminal $ iex -S mix Pada saat kita menjalankan perintah iex -S mix library dari rustler akan otomatis mengkompile pustaka yang kita tulis dengan bahasa pemrograman rust. Setelah rustler selesai mengkompile pustaka maka konsol iex juga akan muncul. nah setelah muncul kita bisa mencoba mengakses fungsi yang telah kita buat dengan rust. iex(1)&gt; HelloNif.add(1, 2) {:ok, 3} iex(2)&gt; Jika tidak ada error maka akan keluar pesan berupa tuple atom :ok dan angka 3. Sekian semoga bermanfaat.","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4040/feed.xml" title="susilolab" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">susilolab</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Menulis NIF Rust dengan Rustler</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2020-03-29T08:00:00+07:00" itemprop="datePublished">Mar 29, 2020
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>Kali ini saya ingin berbagi pengetahuan mengenai cara menulis NIF dengan <code class="highlighter-rouge">Rustler</code> tapi sebelum itu saya ingin mengenalkan apa itu <code class="highlighter-rouge">NIF</code>. NIF kependekan dari Native Implemented Function yaitu memanggil fungsi dari pustaka luar. Kenapa harus menggunakan NIF? alasan pertama karena beberapa fungsi pada pustaka tertentu tidak ada di elixir, alasan kedua yaitu agar performa aplikasi meningkat. NIF biasanya dibuat dengan bahasa C namun kali ini saya ingin menggunakan bahasa Rust karena alasan keamanan dan kecepatan. Pustaka rustler mengklaim library yang ditulis tidak akan menyebabkan virtual mesin BEAM crash sehingga kita tidak perlu khawatir dan fokus ke penulisan pustaka.</p>
+
+<p>Ok kita mulai saja pertama buat project elixir dengan command mix. pertama-tama buat project elixir dengan nama hello_nif</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>mix new hello_nif</code></pre></figure>
+
+<p><img src="/assets/img/2019-10-14-new-mix-project.png" alt="new-mix-project" /></p>
+
+<p>Lalu tambah pustaka <em>rustler</em> ke file mix.exs</p>
+
+<figure class="highlight"><pre><code class="language-elixir" data-lang="elixir"><span class="k">defp</span> <span class="n">deps</span> <span class="k">do</span>
+  <span class="p">[</span>
+    <span class="p">{</span><span class="ss">:rustler</span><span class="p">,</span> <span class="s2">"~&gt; 0.21.0"</span><span class="p">}</span>
+  <span class="p">]</span>
+<span class="k">end</span></code></pre></figure>
+
+<p>Kemudian jalankan mix deps.get</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>mix deps.get</code></pre></figure>
+
+<p><img src="/assets/img/2019-10-14-mix-deps-get.png" alt="mix-deps-get" /></p>
+
+<p>Setelah itu compile project elixir dengan mix compile agar mix task dari rustler muncul</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>mix compile</code></pre></figure>
+
+<p><img src="/assets/img/2019-10-14-mix-compile.png" alt="mix-compile" /></p>
+
+<p>Kemudian kita akan memulai membuat pustaka nif. Untuk nama modul kita samakan dengan nama project elixir yaitu <strong>HelloNif</strong> dan nama libnya <strong>hello_nif</strong>. rustler akan membuatkan rust project yang akan mengkompile otomatis saat kita menjalankan <code class="highlighter-rouge">mix compile</code> atau <code class="highlighter-rouge">iex -S mix</code></p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>mix rustler.new
+This is the name of the Elixir module the NIF module will be registered to.
+Module name <span class="o">&gt;</span> HelloNif
+This is the name used <span class="k">for </span>the generated Rust crate. The default is most likely fine.
+Library name <span class="o">(</span>hellonif<span class="o">)</span> <span class="o">&gt;</span> hello_nif
+<span class="k">*</span> creating native/hello_nif/.cargo/config
+<span class="k">*</span> creating native/hello_nif/README.md
+<span class="k">*</span> creating native/hello_nif/Cargo.toml
+<span class="k">*</span> creating native/hello_nif/src/lib.rs
+Ready to go! See /home/susilo/var/Elixir/hello_nif/native/hello_nif/README.md <span class="k">for </span>further instructions.</code></pre></figure>
+
+<p>Maka akan ada folder native/hello_nif didalam folder project elixir, folder ini akan berisi pustaka nif yang kita buat dengan perintah <code class="highlighter-rouge">mix rustler.new</code>. source code dari lib.rs kurang lebih akan seperti dibawah ini</p>
+
+<figure class="highlight"><pre><code class="language-rust" data-lang="rust"><span class="nd">#[macro_use]</span> <span class="k">extern</span> <span class="n">crate</span> <span class="n">rustler</span><span class="p">;</span>
+<span class="k">use</span> <span class="nn">rustler</span><span class="p">::{</span><span class="n">Encoder</span><span class="p">,</span> <span class="n">Env</span><span class="p">,</span> <span class="n">Error</span><span class="p">,</span> <span class="n">Term</span><span class="p">};</span>
+
+<span class="k">mod</span> <span class="n">atoms</span> <span class="p">{</span>
+    <span class="nd">rustler_atoms!</span> <span class="p">{</span>
+        <span class="n">atom</span> <span class="n">ok</span><span class="p">;</span>
+        <span class="c">//atom error;</span>
+        <span class="c">//atom __true__ = "true";</span>
+        <span class="c">//atom __false__ = "false";</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nn">rustler</span><span class="p">::</span><span class="nd">rustler_export_nifs!</span> <span class="p">{</span>
+    <span class="s">"Elixir.HelloNif"</span><span class="p">,</span>
+    <span class="p">[</span>
+        <span class="p">(</span><span class="s">"add"</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">add</span><span class="p">)</span>
+    <span class="p">],</span>
+    <span class="nb">None</span>
+<span class="p">}</span>
+
+<span class="k">fn</span> <span class="n">add</span><span class="o">&lt;</span><span class="nv">'a</span><span class="o">&gt;</span><span class="p">(</span><span class="n">env</span><span class="p">:</span> <span class="n">Env</span><span class="o">&lt;</span><span class="nv">'a</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">args</span><span class="p">:</span> <span class="o">&amp;</span><span class="p">[</span><span class="n">Term</span><span class="o">&lt;</span><span class="nv">'a</span><span class="o">&gt;</span><span class="p">])</span> <span class="k">-&gt;</span> <span class="n">Result</span><span class="o">&lt;</span><span class="n">Term</span><span class="o">&lt;</span><span class="nv">'a</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">Error</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="n">num1</span><span class="p">:</span> <span class="nb">i64</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="nf">.decode</span><span class="p">()</span><span class="o">?</span><span class="p">;</span>
+    <span class="k">let</span> <span class="n">num2</span><span class="p">:</span> <span class="nb">i64</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="nf">.decode</span><span class="p">()</span><span class="o">?</span><span class="p">;</span>
+
+    <span class="nf">Ok</span><span class="p">((</span><span class="nn">atoms</span><span class="p">::</span><span class="nf">ok</span><span class="p">(),</span> <span class="n">num1</span> <span class="o">+</span> <span class="n">num2</span><span class="p">)</span><span class="nf">.encode</span><span class="p">(</span><span class="n">env</span><span class="p">))</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>Kode diatas hanya ada satu fungsi yaitu <code class="highlighter-rouge">add</code> dengan 2 parameter berupa angka. <code class="highlighter-rouge">rustler_atoms!</code> berguna untuk membuat atom elixir dan <code class="highlighter-rouge">rustler::rustler_export_nifs!</code> berguna untuk mengexport modul dan fungsinya sehingga dapat diakses dari elixir.</p>
+
+<p>Langkah selanjutnya adalah menambah informasi agar mix dapat mengkompile pustaka yang kita buat. tambahkan custom compiler dan daftar pustaka nif ke dalam fungsi project, lalu buat fungsi rustler_crates yang memuat lokasi pustaka nif.</p>
+
+<figure class="highlight"><pre><code class="language-elixir" data-lang="elixir"><span class="k">defmodule</span> <span class="no">HelloNif</span><span class="o">.</span><span class="no">MixProject</span> <span class="k">do</span>
+  <span class="kn">use</span> <span class="no">Mix</span><span class="o">.</span><span class="no">Project</span>
+
+  <span class="k">def</span> <span class="n">project</span> <span class="k">do</span>
+    <span class="p">[</span>
+      <span class="o">...</span>
+      <span class="ss">compilers:</span> <span class="p">[</span><span class="ss">:rustler</span><span class="p">]</span> <span class="o">++</span> <span class="no">Mix</span><span class="o">.</span><span class="n">compilers</span><span class="p">(),</span>
+      <span class="ss">rustler_crates:</span> <span class="n">rustler_crates</span><span class="p">(),</span>
+      <span class="o">...</span>
+    <span class="p">]</span>
+  <span class="k">end</span>
+
+  <span class="k">defp</span> <span class="n">rustler_crates</span> <span class="k">do</span>
+    <span class="p">[</span>
+      <span class="ss">hello_nif:</span> <span class="p">[</span><span class="ss">path:</span> <span class="s2">"native/hello_nif"</span><span class="p">,</span> <span class="ss">mode:</span> <span class="k">if</span><span class="p">(</span><span class="no">Mix</span><span class="o">.</span><span class="n">env</span><span class="p">()</span> <span class="o">==</span> <span class="ss">:prod</span><span class="p">,</span> <span class="k">do</span><span class="p">:</span> <span class="ss">:release</span><span class="p">,</span> <span class="k">else</span><span class="p">:</span> <span class="ss">:debug</span><span class="p">)],</span>
+    <span class="p">]</span>
+  <span class="k">end</span>
+<span class="k">end</span></code></pre></figure>
+
+<p>Langkah selanjutnya adalah menambahkan <code class="highlighter-rouge">use Rustler</code> dan definisi nama fungsi pada modul <code class="highlighter-rouge">HelloNif</code> sehingga fungsi yang dibuat dengan rust dapat diakses di dalam elixir.</p>
+
+<figure class="highlight"><pre><code class="language-elixir" data-lang="elixir"><span class="k">defmodule</span> <span class="no">HelloNif</span> <span class="k">do</span>
+  <span class="kn">use</span> <span class="no">Rustler</span><span class="p">,</span> <span class="ss">otp_app:</span> <span class="ss">:hello_nif</span><span class="p">,</span> <span class="ss">crate:</span> <span class="ss">:hello_nif</span>
+
+  <span class="k">def</span> <span class="n">add</span><span class="p">(</span><span class="n">_a</span><span class="p">,</span> <span class="n">_b</span><span class="p">),</span> <span class="k">do</span><span class="p">:</span> <span class="ss">:erlang</span><span class="o">.</span><span class="n">nif_error</span><span class="p">(</span><span class="ss">:nif_not_loaded</span><span class="p">)</span>
+
+  <span class="k">def</span> <span class="n">hello</span> <span class="k">do</span>
+    <span class="ss">:world</span>
+  <span class="k">end</span>
+<span class="k">end</span></code></pre></figure>
+
+<p>Kemudian kita bisa mengujinya menggunakan interaktif elixir atau <code class="highlighter-rouge">iex</code> dengan cara mengetikan perintah berikut ini pada terminal</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>iex <span class="nt">-S</span> mix</code></pre></figure>
+
+<p>Pada saat kita menjalankan perintah <code class="highlighter-rouge">iex -S mix</code> library dari rustler akan otomatis mengkompile pustaka yang kita tulis dengan bahasa pemrograman rust.
+<img src="/assets/img/2020-03-25-iex-smix.png" alt="mix-compile" /></p>
+
+<p>Setelah rustler selesai mengkompile pustaka maka konsol <code class="highlighter-rouge">iex</code> juga akan muncul. nah setelah muncul kita bisa mencoba mengakses fungsi yang telah kita buat dengan rust.</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">iex<span class="o">(</span>1<span class="o">)&gt;</span> HelloNif.add<span class="o">(</span>1, 2<span class="o">)</span>
+<span class="o">{</span>:ok, 3<span class="o">}</span>
+iex<span class="o">(</span>2<span class="o">)&gt;</span></code></pre></figure>
+
+<p>Jika tidak ada error maka akan keluar pesan berupa tuple atom <code class="highlighter-rouge">:ok</code> dan angka 3.</p>
+
+<p>Sekian semoga bermanfaat.</p>
+
+  </div><a class="u-url" href="/elixir/2020/03/29/menulis-nif-rust-dengan-rustler.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper"><div class="footer-col-wrapper">
+      <div class="footer-col footer-col-3"><ul class="social-media-list"><li><a href="https://github.com/susilolab"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">susilolab</span></a></li><li><a href="https://instagram.com/mas.agus"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#instagram"></use></svg> <span class="username">mas.agus</span></a></li><li><a href="https://www.twitter.com/susil0"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">susil0</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>“Sebaik-baik manusia adalah yang paling bermanfaat bagi manusia” (HR. Ahmad, ath-Thabrani, ad-Daruqutni)</p>
+        <p>&copy;2020&nbsp;Agus Susilo</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
