@@ -1,14 +1,7 @@
-/*
 @font-face {
-	font-family: "Jetbrains Mono";
-    src: url("jetbrains-mono/JetBrainsMono-Regular.ttf") format("truetype"),
-    url("jetbrains-mono/JetBrainsMono-Italic.ttf") format("truetype"),
-    url("jetbrains-mono/JetBrainsMono-Bold.ttf") format("truetype"),
-    url("jetbrains-mono/JetBrainsMono-Bold-Italic.ttf") format("truetype"),
-    url("jetbrains-mono/JetBrainsMono-Medium.ttf") format("truetype"),
-    url("jetbrains-mono/JetBrainsMono-Medium-Italic.ttf") format("truetype");
-}
-
+  font-family: "Jetbrains Mono";
+  src: url("jetbrains-mono/JetBrainsMono-Regular.ttf") format("truetype"), url("jetbrains-mono/JetBrainsMono-Italic.ttf") format("truetype"), url("jetbrains-mono/JetBrainsMono-Bold.ttf") format("truetype"), url("jetbrains-mono/JetBrainsMono-Bold-Italic.ttf") format("truetype"), url("jetbrains-mono/JetBrainsMono-Medium.ttf") format("truetype"), url("jetbrains-mono/JetBrainsMono-Medium-Italic.ttf") format("truetype"); }
+/*
 @font-face {
     font-family: "Roboto";
     src: url("Roboto/Roboto-Regular.ttf") format("truetype"),
