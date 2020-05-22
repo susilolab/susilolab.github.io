@@ -1,4 +1,368 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="http://localhost:4040/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4040/" rel="alternate" type="text/html" /><updated>2020-05-22T09:46:10+07:00</updated><id>http://localhost:4040/feed.xml</id><title type="html">susilolab</title><subtitle>“Sebaik-baik manusia adalah yang paling bermanfaat bagi manusia” (HR. Ahmad, ath-Thabrani, ad-Daruqutni)</subtitle><author><name>Agus Susilo</name></author><entry><title type="html">Default run pada cargo run</title><link href="http://localhost:4040/rust/2020/05/22/default-run-pada-cargo-run.html" rel="alternate" type="text/html" title="Default run pada cargo run" /><published>2020-05-22T08:00:00+07:00</published><updated>2020-05-22T08:00:00+07:00</updated><id>http://localhost:4040/rust/2020/05/22/default-run-pada-cargo-run</id><content type="html" xml:base="http://localhost:4040/rust/2020/05/22/default-run-pada-cargo-run.html">&lt;p&gt;Sebelumnya pada postingan tentang &lt;a href=&quot;/rust/2020/04/18/cargo-run-multi-binary.html&quot;&gt;Cargo run multi binary&lt;/a&gt; saya mencontohkan bagaimana menjalankan binary khusus menggunakan &lt;code class=&quot;highlighter-rouge&quot;&gt;cargo run&lt;/code&gt;, sehingga kita bisa bikin aplikasi secara terpisah berdasarkan nama file.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="http://localhost:4040/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4040/" rel="alternate" type="text/html" /><updated>2020-05-23T00:11:46+07:00</updated><id>http://localhost:4040/feed.xml</id><title type="html">susilolab</title><subtitle>“Sebaik-baik manusia adalah yang paling bermanfaat bagi manusia” (HR. Ahmad, ath-Thabrani, ad-Daruqutni)</subtitle><author><name>Agus Susilo</name></author><entry><title type="html">Mengenal Trait di PHP</title><link href="http://localhost:4040/php/2020/05/23/mengenal-trait-php.html" rel="alternate" type="text/html" title="Mengenal Trait di PHP" /><published>2020-05-23T00:00:00+07:00</published><updated>2020-05-23T00:00:00+07:00</updated><id>http://localhost:4040/php/2020/05/23/mengenal-trait-php</id><content type="html" xml:base="http://localhost:4040/php/2020/05/23/mengenal-trait-php.html">&lt;p&gt;Trait adalah mekanisme untuk penggunaan kembali kode dalam single inheritance. Trait dimaksudkan untuk mengurangi beberapa keterbatasan dari turunan tunggal dengan memungkinkan pengembang untuk menggunakan kembali serangkain fungsi-fungsi secara bebas pada beberapa klas yang independen yang hidup dalam hirarki klas yang berbeda.&lt;/p&gt;
+
+&lt;p&gt;Trait mirip dengan klas, hanya saja trait dimaksudkan untuk mengelompokan fungsi menjadi kecil dan konsisten. Kita tidak bisa meng-instansi trait pada dirinya sendiri tetapi kita bisa menggunakannya tanpa harus menurukannya(inheritance).&lt;/p&gt;
+
+&lt;p&gt;Daftar Isi:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;#precedence&quot;&gt;Precedence&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;#trait-multiple&quot;&gt;Trait Multiple&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;#conflict-resolution&quot;&gt;Resolusi Konflik&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;#visibility&quot;&gt;Merubah visibility metode&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;#composed&quot;&gt;Trait disusun dari Trait&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;#abstract-trait&quot;&gt;Anggota Trait Abstract&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;#static-trait&quot;&gt;Anggota Static Trait&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;#property&quot;&gt;Property&lt;/a&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;Contoh trait:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;namespace&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;app\traits&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;trait&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Foo&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;hello&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'Hello'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Untuk menggunakan trait pada klas kita cukup gunakan keyword &lt;code class=&quot;highlighter-rouge&quot;&gt;use&lt;/code&gt; didalam definisi klas.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;User&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;\app\traits\Foo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;c1&quot;&gt;// kita dapat menggunakan fungsi dari trait Foo &lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// secara langsung menggunakan $this&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;world&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;hello&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;' world!'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h4 id=&quot;hal-mendahului-precedence&quot;&gt;&lt;a name=&quot;precedence&quot;&gt;&lt;/a&gt;Hal mendahului/ Precedence&lt;/h4&gt;
+
+&lt;p&gt;Anggota turunan dari klas dasar ditumpuki oleh anggota yang disisipi oleh Trait. Urutan precedence adalah bahwa member dari klas saat ini ditumpuk oleh trait yang disisipkan.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Contoh&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Fungsi turunan dari klas dasar (&lt;code class=&quot;highlighter-rouge&quot;&gt;Base&lt;/code&gt;) ditumpuk oleh fungsi yang disisipkan pada klas &lt;code class=&quot;highlighter-rouge&quot;&gt;MyHelloWorld&lt;/code&gt; yaitu dari trait &lt;code class=&quot;highlighter-rouge&quot;&gt;SayWorld&lt;/code&gt;. Aturan ini akan sama untuk fungsi yang didefinisikan di dalam klas &lt;code class=&quot;highlighter-rouge&quot;&gt;MyHelloWorld&lt;/code&gt;.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Base&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;sayHello&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'Hello '&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;trait&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;SayWorld&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;sayHello&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'World!'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;MyHelloWorld&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Base&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kn&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;SayWorld&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;nv&quot;&gt;$o&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;MyHelloWorld&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$o&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;sayHello&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// output:&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// World&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Contoh lain dari urutan precedence&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;trait&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;HelloWorld&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;sayHello&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'Hello World!'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;DuniaTidakCukup&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kn&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;HelloWorld&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;sayHello&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'Halo Dunia!'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;nv&quot;&gt;$o&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;DuniaTidakCukup&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$o&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;sayHello&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Contoh di atas akan menghasilkan keluaran:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;Halo Dunia!&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h4 id=&quot;trait-multiple&quot;&gt;&lt;a name=&quot;trait-multiple&quot;&gt;&lt;/a&gt;Trait Multiple&lt;/h4&gt;
+
+&lt;p&gt;Multiple trait dapat disisipkan ke dalam klas dengan mendaftarkannya pada statemen &lt;code class=&quot;highlighter-rouge&quot;&gt;use&lt;/code&gt;, dipisahkan dengan koma.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;trait&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Hello&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;sayHello&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'Hello '&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;trait&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;World&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;sayWorld&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'World'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;MyHelloWorld&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kn&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;Hello&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;, World&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;sayExclamationMark&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'!'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;nv&quot;&gt;$o&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;MyHelloWorld&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$o&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;sayHello&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$o&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;sayWorld&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$o&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;sayExclamationMark&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h4 id=&quot;resolusi-konflik&quot;&gt;&lt;a name=&quot;conflict-resolution&quot;&gt;&lt;/a&gt;Resolusi Konflik&lt;/h4&gt;
+
+&lt;p&gt;Jika dua Trait disisipkan dengan nama yang sama maka akan terjadi kesalahan fatal, jika masalah tidak dipecahkan secara eksplisit. Untuk memecahkan konflik penamaan antara Trait pada klas yang sama, operator &lt;code class=&quot;highlighter-rouge&quot;&gt;insteadof&lt;/code&gt; diperlukan untuk memilih tepat satu dari method yang konflik. Karena hal ini hanya boleh membuat satu pengecualian, operator &lt;code class=&quot;highlighter-rouge&quot;&gt;as&lt;/code&gt; dapat digunakan untuk menambah alias ke suatu method. Perlu dicatat bahwa operator &lt;code class=&quot;highlighter-rouge&quot;&gt;as&lt;/code&gt; tidak merubah nama method dan tidak mempengaruhi method lain.&lt;/p&gt;
+
+&lt;p&gt;Contoh&lt;/p&gt;
+
+&lt;p&gt;Pada contoh ini, klas &lt;code class=&quot;highlighter-rouge&quot;&gt;Talker&lt;/code&gt; menggunakan trait &lt;code class=&quot;highlighter-rouge&quot;&gt;A&lt;/code&gt; dan &lt;code class=&quot;highlighter-rouge&quot;&gt;B&lt;/code&gt;. Karena trait &lt;code class=&quot;highlighter-rouge&quot;&gt;A&lt;/code&gt; dan &lt;code class=&quot;highlighter-rouge&quot;&gt;B&lt;/code&gt; memiliki konflik, maka klas ini akan perlu mendefinisikan penggunaan method &lt;code class=&quot;highlighter-rouge&quot;&gt;smallTalk&lt;/code&gt; dari trait &lt;code class=&quot;highlighter-rouge&quot;&gt;B&lt;/code&gt; dan method &lt;code class=&quot;highlighter-rouge&quot;&gt;bigTalk&lt;/code&gt; dari trait &lt;code class=&quot;highlighter-rouge&quot;&gt;A&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Klas &lt;code class=&quot;highlighter-rouge&quot;&gt;Alias_Talker&lt;/code&gt; menggunakan operator &lt;code class=&quot;highlighter-rouge&quot;&gt;as&lt;/code&gt; untuk dapat menggunakan method &lt;code class=&quot;highlighter-rouge&quot;&gt;bigTalk&lt;/code&gt; dari trait &lt;code class=&quot;highlighter-rouge&quot;&gt;B&lt;/code&gt; dengan nama alias &lt;code class=&quot;highlighter-rouge&quot;&gt;talk&lt;/code&gt;.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;trait&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;A&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;smallTalk&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'a'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;bigTalk&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'A'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;trait&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;B&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;smallTalk&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'b'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;bigTalk&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'B'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Talker&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kn&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;A&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;, B {
+        B::smallTalk insteadof A&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;A&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;bigTalk&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;insteadof&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;B&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Aliased_Talker&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kn&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;A&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;, B {
+        B::smallTalk insteadof A&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;A&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;bigTalk&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;insteadof&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;B&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;B&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;bigTalk&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;talk&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h4 id=&quot;merubah-visibility-metode&quot;&gt;&lt;a name=&quot;visibility&quot;&gt;&lt;/a&gt;Merubah visibility metode&lt;/h4&gt;
+
+&lt;p&gt;Dengan menggunakan syntax &lt;code class=&quot;highlighter-rouge&quot;&gt;as&lt;/code&gt; method pada trait dapat dirubah visibilitynya pada klas yang menggunakan trait.&lt;/p&gt;
+
+&lt;p&gt;Contoh&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;trait&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;HelloWorld&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;sayHello&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'Hello world!'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// Merubah visibility fungsi sayHello&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;MyClass1&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kn&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;HelloWorld&lt;/span&gt;&lt;span class=&quot;err&quot;&gt; { sayHello&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;protected&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// Alias method dengan perubahan visibility&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// Visibility sayHello tetap tidak berubah&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;MyClass2&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kn&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;HelloWorld&lt;/span&gt;&lt;span class=&quot;err&quot;&gt; { sayHello&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;private&lt;/span&gt;&lt;span class=&quot;err&quot;&gt; myPrivateHello&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h4 id=&quot;trait-disusun-dari-trait&quot;&gt;&lt;a name=&quot;composed&quot;&gt;&lt;/a&gt;Trait disusun dari Trait&lt;/h4&gt;
+
+&lt;p&gt;Seperti pada klas yang dapat menggunakan trait, jadi trait juga dapat menggunakan trait lain. Dengan menggunakan satu atau lebih trait di dalam definisi trait, trait ini dapat disusun sebagian atau semuanya dari anggota yang mendefinisikan pada trait lain.&lt;/p&gt;
+
+&lt;p&gt;Contoh&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;trait&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Hello&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;sayHello&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'Hello'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;trait&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;World&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;sayWorld&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'World'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;trait&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;HelloWorld&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kn&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;Hello&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;, World&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;MyHelloWorld&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kn&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;HelloWorld&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;nv&quot;&gt;$o&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;MyHelloWorld&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$o&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;sayHello&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$o&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;sayWorld&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h4 id=&quot;anggota-trait-abstract&quot;&gt;&lt;a name=&quot;abstract-trait&quot;&gt;&lt;/a&gt;Anggota Trait Abstract&lt;/h4&gt;
+
+&lt;p&gt;Trait mendukung penggunaan abstract method untuk memaksa kebutuhan pada class yang menggunakan trait.&lt;/p&gt;
+
+&lt;p&gt;Contoh abstract method&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;trait&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Hello&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;sayHelloWorld&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'Hello'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getWorld&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;abstract&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getWorld&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;MyHelloWorld&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$world&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kn&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;Hello&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getWorld&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;world&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;setWorld&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$val&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;world&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$val&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h4 id=&quot;anggota-static-trait&quot;&gt;&lt;a name=&quot;static-trait&quot;&gt;&lt;/a&gt;Anggota Static Trait&lt;/h4&gt;
+
+&lt;p&gt;Trait dapat mendefinisikan static property dan static method&lt;/p&gt;
+
+&lt;p&gt;Contoh static variabel&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;trait&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Counter&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;inc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$c&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;nv&quot;&gt;$c&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$c&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$c&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;C1&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kn&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;Counter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;C2&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kn&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;Counter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;nv&quot;&gt;$o&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;C1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$o&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;inc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// echo 1&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$p&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;C2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$p&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;inc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// echo 1&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Contoh static method&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;trait&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;StaticExample&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;doSomething&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'Doing Something'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Example&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kn&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;StaticExample&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;Example&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;doSomething&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h4 id=&quot;property&quot;&gt;&lt;a name=&quot;property&quot;&gt;&lt;/a&gt;Property&lt;/h4&gt;
+
+&lt;p&gt;Di dalam Trait kita juga dapat mendefinisikan &lt;code class=&quot;highlighter-rouge&quot;&gt;property&lt;/code&gt; sama seperti pada klas.&lt;/p&gt;
+
+&lt;p&gt;Contoh&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;kd&quot;&gt;trait&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;PropertiesTrait&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;PropertiesExample&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kn&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;PropertiesTrait&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;nv&quot;&gt;$ex&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;PropertiesExample&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ex&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;sekian.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;sumber: php.net&lt;/em&gt;&lt;/p&gt;</content><author><name>Agus Susilo</name></author><summary type="html">Trait adalah mekanisme untuk penggunaan kembali kode dalam single inheritance. Trait dimaksudkan untuk mengurangi beberapa keterbatasan dari turunan tunggal dengan memungkinkan pengembang untuk menggunakan kembali serangkain fungsi-fungsi secara bebas pada beberapa klas yang independen yang hidup dalam hirarki klas yang berbeda. Trait mirip dengan klas, hanya saja trait dimaksudkan untuk mengelompokan fungsi menjadi kecil dan konsisten. Kita tidak bisa meng-instansi trait pada dirinya sendiri tetapi kita bisa menggunakannya tanpa harus menurukannya(inheritance). Daftar Isi: Precedence Trait Multiple Resolusi Konflik Merubah visibility metode Trait disusun dari Trait Anggota Trait Abstract Anggota Static Trait Property Contoh trait: &amp;lt;?php namespace app\traits; trait Foo { public function hello() { return 'Hello'; } } Untuk menggunakan trait pada klas kita cukup gunakan keyword use didalam definisi klas. &amp;lt;?php class User { use \app\traits\Foo; // kita dapat menggunakan fungsi dari trait Foo // secara langsung menggunakan $this public function world() { echo $this-&amp;gt;hello() . ' world!'; } } Hal mendahului/ Precedence Anggota turunan dari klas dasar ditumpuki oleh anggota yang disisipi oleh Trait. Urutan precedence adalah bahwa member dari klas saat ini ditumpuk oleh trait yang disisipkan. Contoh Fungsi turunan dari klas dasar (Base) ditumpuk oleh fungsi yang disisipkan pada klas MyHelloWorld yaitu dari trait SayWorld. Aturan ini akan sama untuk fungsi yang didefinisikan di dalam klas MyHelloWorld. &amp;lt;?php class Base { public function sayHello() { echo 'Hello '; } } trait SayWorld { public function sayHello() { echo 'World!'; } } class MyHelloWorld extends Base { use SayWorld; } $o = new MyHelloWorld(); $o-&amp;gt;sayHello(); // output: // World Contoh lain dari urutan precedence &amp;lt;?php trait HelloWorld { public function sayHello() { echo 'Hello World!'; } } class DuniaTidakCukup { use HelloWorld; public function sayHello() { echo 'Halo Dunia!'; } } $o = new DuniaTidakCukup(); $o-&amp;gt;sayHello(); Contoh di atas akan menghasilkan keluaran: Halo Dunia! Trait Multiple Multiple trait dapat disisipkan ke dalam klas dengan mendaftarkannya pada statemen use, dipisahkan dengan koma. &amp;lt;?php trait Hello { public function sayHello() { echo 'Hello '; } } trait World { public function sayWorld() { echo 'World'; } } class MyHelloWorld { use Hello, World; public function sayExclamationMark() { echo '!'; } } $o = new MyHelloWorld(); $o-&amp;gt;sayHello(); $o-&amp;gt;sayWorld(); $o-&amp;gt;sayExclamationMark(); Resolusi Konflik Jika dua Trait disisipkan dengan nama yang sama maka akan terjadi kesalahan fatal, jika masalah tidak dipecahkan secara eksplisit. Untuk memecahkan konflik penamaan antara Trait pada klas yang sama, operator insteadof diperlukan untuk memilih tepat satu dari method yang konflik. Karena hal ini hanya boleh membuat satu pengecualian, operator as dapat digunakan untuk menambah alias ke suatu method. Perlu dicatat bahwa operator as tidak merubah nama method dan tidak mempengaruhi method lain. Contoh Pada contoh ini, klas Talker menggunakan trait A dan B. Karena trait A dan B memiliki konflik, maka klas ini akan perlu mendefinisikan penggunaan method smallTalk dari trait B dan method bigTalk dari trait A. Klas Alias_Talker menggunakan operator as untuk dapat menggunakan method bigTalk dari trait B dengan nama alias talk. &amp;lt;?php trait A { public function smallTalk() { echo 'a'; } public function bigTalk() { echo 'A'; } } trait B { public function smallTalk() { echo 'b'; } public function bigTalk() { echo 'B'; } } class Talker { use A, B { B::smallTalk insteadof A; A::bigTalk insteadof B; } } class Aliased_Talker { use A, B { B::smallTalk insteadof A; A::bigTalk insteadof B; B::bigTalk as talk; } } Merubah visibility metode Dengan menggunakan syntax as method pada trait dapat dirubah visibilitynya pada klas yang menggunakan trait. Contoh &amp;lt;?php trait HelloWorld { public function sayHello() { echo 'Hello world!'; } } // Merubah visibility fungsi sayHello class MyClass1 { use HelloWorld { sayHello as protected; } } // Alias method dengan perubahan visibility // Visibility sayHello tetap tidak berubah class MyClass2 { use HelloWorld { sayHello as private myPrivateHello; } } Trait disusun dari Trait Seperti pada klas yang dapat menggunakan trait, jadi trait juga dapat menggunakan trait lain. Dengan menggunakan satu atau lebih trait di dalam definisi trait, trait ini dapat disusun sebagian atau semuanya dari anggota yang mendefinisikan pada trait lain. Contoh &amp;lt;?php trait Hello { public function sayHello() { echo 'Hello'; } } trait World { public function sayWorld() { echo 'World'; } } trait HelloWorld { use Hello, World; } class MyHelloWorld { use HelloWorld; } $o = new MyHelloWorld(); $o-&amp;gt;sayHello(); $o-&amp;gt;sayWorld(); Anggota Trait Abstract Trait mendukung penggunaan abstract method untuk memaksa kebutuhan pada class yang menggunakan trait. Contoh abstract method &amp;lt;?php trait Hello { public function sayHelloWorld() { echo 'Hello' . $this-&amp;gt;getWorld(); } abstract public function getWorld(); } class MyHelloWorld { private $world; use Hello; public function getWorld() { return $this-&amp;gt;world; } public function setWorld($val) { $this-&amp;gt;world = $val; } } Anggota Static Trait Trait dapat mendefinisikan static property dan static method Contoh static variabel &amp;lt;?php trait Counter { public function inc() { static $c = 0; $c = $c + 1; echo &quot;$c\n&quot;; } } class C1 { use Counter; } class C2 { use Counter; } $o = new C1(); $o-&amp;gt;inc(); // echo 1 $p = new C2(); $p-&amp;gt;inc(); // echo 1 Contoh static method &amp;lt;?php trait StaticExample { public static function doSomething() { return 'Doing Something'; } } class Example { use StaticExample; } Example::doSomething(); Property Di dalam Trait kita juga dapat mendefinisikan property sama seperti pada klas. Contoh trait PropertiesTrait { public $x = 1; } class PropertiesExample { use PropertiesTrait; } $ex = new PropertiesExample(); $ex-&amp;gt;x; sekian. sumber: php.net</summary></entry><entry><title type="html">Default run pada cargo run</title><link href="http://localhost:4040/rust/2020/05/22/default-run-pada-cargo-run.html" rel="alternate" type="text/html" title="Default run pada cargo run" /><published>2020-05-22T08:00:00+07:00</published><updated>2020-05-22T08:00:00+07:00</updated><id>http://localhost:4040/rust/2020/05/22/default-run-pada-cargo-run</id><content type="html" xml:base="http://localhost:4040/rust/2020/05/22/default-run-pada-cargo-run.html">&lt;p&gt;Sebelumnya pada postingan tentang &lt;a href=&quot;/rust/2020/04/18/cargo-run-multi-binary.html&quot;&gt;Cargo run multi binary&lt;/a&gt; saya mencontohkan bagaimana menjalankan binary khusus menggunakan &lt;code class=&quot;highlighter-rouge&quot;&gt;cargo run&lt;/code&gt;, sehingga kita bisa bikin aplikasi secara terpisah berdasarkan nama file.&lt;/p&gt;
 
 &lt;p&gt;Kenapa menggunakan multi binary pada saat menjalankan &lt;code class=&quot;highlighter-rouge&quot;&gt;cargo run&lt;/code&gt; ?. Karena code &lt;code class=&quot;highlighter-rouge&quot;&gt;fn main()&lt;/code&gt; dapat digunakan pada setiap file.&lt;/p&gt;
 
@@ -288,66 +652,4 @@ php &lt;span class=&quot;nv&quot;&gt;$HOME&lt;/span&gt;/.local/bin/composer.phar
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;paths]
 default &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; ssh://username@192.168.1.100//home/username
-remote &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; ssh://username@example.com:5022//home/username&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>Agus Susilo</name></author><summary type="html">Ingin switch konfigurasi saat menjalankan hg pull dan push?. Misalkan kita punya 2 konfigurasi default dan remote maka kita dapat menjalankan hg pull dan push seperi berikut ini $ hg pull remote --debug $ hg push default --debug Letak konfig tsb ada di file hgrc [paths] default = ssh://username@192.168.1.100//home/username remote = ssh://username@example.com:5022//home/username</summary></entry><entry><title type="html">Mengkompress file dengan tar di linux</title><link href="http://localhost:4040/bash/cli/2020/03/31/mengkompress-file-dengan-tar-di-linux.html" rel="alternate" type="text/html" title="Mengkompress file dengan tar di linux" /><published>2020-03-31T08:00:00+07:00</published><updated>2020-03-31T08:00:00+07:00</updated><id>http://localhost:4040/bash/cli/2020/03/31/mengkompress-file-dengan-tar-di-linux</id><content type="html" xml:base="http://localhost:4040/bash/cli/2020/03/31/mengkompress-file-dengan-tar-di-linux.html">&lt;p&gt;Bismillah,
-Pernahkah temen-temen semua ingin mengkompress file di server linux tapi ndak tahu perintahnya apa?. Nah disini saya ingin berbagi tips bagaimana caranya mengkompres file/folder kedalam format tertentu dengan perintah &lt;code class=&quot;highlighter-rouge&quot;&gt;tar&lt;/code&gt;, berikut ini cara mengkompres file/folder dengan format mulai dari &lt;code class=&quot;highlighter-rouge&quot;&gt;.tar&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;tar.bz2&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;tar.gz&lt;/code&gt; dan &lt;code class=&quot;highlighter-rouge&quot;&gt;tar.xz&lt;/code&gt;.&lt;/p&gt;
-
-&lt;h4 id=&quot;tarbz2&quot;&gt;tar.bz2&lt;/h4&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;tar &lt;/span&gt;cjf nama_file.tar.bz2 nama_folder/&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;h4 id=&quot;ekstrak-file-tarbz2&quot;&gt;ekstrak file tar.bz2&lt;/h4&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;tar&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-jxvf&lt;/span&gt; nama_file.tar.bz2&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;h4 id=&quot;targz&quot;&gt;tar.gz&lt;/h4&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;tar &lt;/span&gt;czf nama_file.tar.gz nama_folder/&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;h4 id=&quot;ekstrak-file-targz&quot;&gt;ekstrak file tar.gz&lt;/h4&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;tar&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-zxvf&lt;/span&gt; nama_file.tar.gz&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;h4 id=&quot;tar&quot;&gt;.tar&lt;/h4&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;tar &lt;/span&gt;cf nama_file.tar nama_folder/&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;h4 id=&quot;ekstrak-file-tar&quot;&gt;ekstrak file .tar&lt;/h4&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;tar&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-xvf&lt;/span&gt; nama_file.tar&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;h4 id=&quot;tarxz&quot;&gt;tar.xz&lt;/h4&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;tar &lt;/span&gt;cfJ nama_file.tar.xz folders/
-&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;tar&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-cvJf&lt;/span&gt; nama_file.tar.xz folders/&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;h4 id=&quot;ekstrak-file-tarxz&quot;&gt;ekstrak file tar.xz&lt;/h4&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;tar&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-xJf&lt;/span&gt; p.tar.xz&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Dari ke-4 format di atas yang paling kecil rasio kompresnya yaitu &lt;code class=&quot;highlighter-rouge&quot;&gt;tar.xz&lt;/code&gt; tetapi tidak didukung oleh windows. Jika kamu memilih kecepatan namun tidak terlalu memikirkan masalah ukuran file maka &lt;code class=&quot;highlighter-rouge&quot;&gt;tar.gz&lt;/code&gt; paling pas karena selain cepat juga hasil kompresnya lumayan kecil.&lt;/p&gt;
-
-&lt;h4 id=&quot;tips-menghafal-perintah-di-atas&quot;&gt;Tips menghafal perintah di atas&lt;/h4&gt;
-&lt;p&gt;Coba perhatikan perintah di atas semuanya menggunakan parameter &lt;code class=&quot;highlighter-rouge&quot;&gt;cf&lt;/code&gt; tinggal kita menghafalkan huruf selain &lt;code class=&quot;highlighter-rouge&quot;&gt;c&lt;/code&gt; dan &lt;code class=&quot;highlighter-rouge&quot;&gt;f&lt;/code&gt; yaitu:&lt;/p&gt;
-
-&lt;table&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;j&lt;/td&gt;
-      &lt;td&gt;Untuk format .tar.bz2&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;z&lt;/td&gt;
-      &lt;td&gt;Untuk format .tar.gz&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;J&lt;/td&gt;
-      &lt;td&gt;Untuk format .tar.xz&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;_&lt;/td&gt;
-      &lt;td&gt;Cuma c dan f, untuk format .tar&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p&gt;Semoga bermanfaat, sekian.&lt;/p&gt;</content><author><name>Agus Susilo</name></author><summary type="html">Bismillah, Pernahkah temen-temen semua ingin mengkompress file di server linux tapi ndak tahu perintahnya apa?. Nah disini saya ingin berbagi tips bagaimana caranya mengkompres file/folder kedalam format tertentu dengan perintah tar, berikut ini cara mengkompres file/folder dengan format mulai dari .tar, tar.bz2, tar.gz dan tar.xz. tar.bz2 $ tar cjf nama_file.tar.bz2 nama_folder/ ekstrak file tar.bz2 $ tar -jxvf nama_file.tar.bz2 tar.gz $ tar czf nama_file.tar.gz nama_folder/ ekstrak file tar.gz tar -zxvf nama_file.tar.gz .tar $ tar cf nama_file.tar nama_folder/ ekstrak file .tar $ tar -xvf nama_file.tar tar.xz $ tar cfJ nama_file.tar.xz folders/ $ tar -cvJf nama_file.tar.xz folders/ ekstrak file tar.xz $ tar -xJf p.tar.xz Dari ke-4 format di atas yang paling kecil rasio kompresnya yaitu tar.xz tetapi tidak didukung oleh windows. Jika kamu memilih kecepatan namun tidak terlalu memikirkan masalah ukuran file maka tar.gz paling pas karena selain cepat juga hasil kompresnya lumayan kecil. Tips menghafal perintah di atas Coba perhatikan perintah di atas semuanya menggunakan parameter cf tinggal kita menghafalkan huruf selain c dan f yaitu: j Untuk format .tar.bz2 z Untuk format .tar.gz J Untuk format .tar.xz _ Cuma c dan f, untuk format .tar Semoga bermanfaat, sekian.</summary></entry></feed>
+remote &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; ssh://username@example.com:5022//home/username&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>Agus Susilo</name></author><summary type="html">Ingin switch konfigurasi saat menjalankan hg pull dan push?. Misalkan kita punya 2 konfigurasi default dan remote maka kita dapat menjalankan hg pull dan push seperi berikut ini $ hg pull remote --debug $ hg push default --debug Letak konfig tsb ada di file hgrc [paths] default = ssh://username@192.168.1.100//home/username remote = ssh://username@example.com:5022//home/username</summary></entry></feed>
