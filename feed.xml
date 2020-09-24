@@ -1,4 +1,32 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="http://localhost:4040/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4040/" rel="alternate" type="text/html" /><updated>2020-09-24T07:40:55+07:00</updated><id>http://localhost:4040/feed.xml</id><title type="html">susilolab</title><subtitle>“Sebaik-baik manusia adalah yang paling bermanfaat bagi manusia” (HR. Ahmad, ath-Thabrani, ad-Daruqutni)</subtitle><author><name>Agus Susilo</name></author><entry><title type="html">Perulangan terbalik pada rust</title><link href="http://localhost:4040/rust/2020/09/23/perulangan-terbalik-pada-rust.html" rel="alternate" type="text/html" title="Perulangan terbalik pada rust" /><published>2020-09-23T07:00:00+07:00</published><updated>2020-09-23T07:00:00+07:00</updated><id>http://localhost:4040/rust/2020/09/23/perulangan-terbalik-pada-rust</id><content type="html" xml:base="http://localhost:4040/rust/2020/09/23/perulangan-terbalik-pada-rust.html">&lt;p&gt;Kali ini saya ingin berbagi sedikit tip bagaimana melakukan loop secara terbalik pada Rust.
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="http://localhost:4040/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4040/" rel="alternate" type="text/html" /><updated>2020-09-24T08:03:36+07:00</updated><id>http://localhost:4040/feed.xml</id><title type="html">susilolab</title><subtitle>“Sebaik-baik manusia adalah yang paling bermanfaat bagi manusia” (HR. Ahmad, ath-Thabrani, ad-Daruqutni)</subtitle><author><name>Agus Susilo</name></author><entry><title type="html">Status service systemd Elixir activating terus</title><link href="http://localhost:4040/linux/2020/09/24/status-service-systemd-elixir-activating-terus.html" rel="alternate" type="text/html" title="Status service systemd Elixir activating terus" /><published>2020-09-24T07:00:00+07:00</published><updated>2020-09-24T07:00:00+07:00</updated><id>http://localhost:4040/linux/2020/09/24/status-service-systemd-elixir-activating-terus</id><content type="html" xml:base="http://localhost:4040/linux/2020/09/24/status-service-systemd-elixir-activating-terus.html">&lt;p&gt;&lt;img src=&quot;/assets/img/20200806-elixir-systemd.png&quot; alt=&quot;elixir-systemd&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Jadi ini ceritanya saya ada pekerjaan untuk merubah salah satu fungsi pada aplikasi di kantor ke bahasa Elixir,
+pada saat aplikasi sudah siap dideploy ke server production status servisnya tidak normal, selalu &lt;code class=&quot;highlighter-rouge&quot;&gt;activating&lt;/code&gt; terus.
+Sebelumnya saya mencoba mengirim data ke servis untuk memastikan apakah aplikasinya jalan apa tidak. Ternyata aplikasinya jalan,
+itu artinya tidak ada masalah diaplikasi.&lt;/p&gt;
+
+&lt;p&gt;Kemudian saya coba otak-atik service di systemdnya, setelah beberapa lama baru ketahuan setelah tak coba didatacenter.
+Penyebabnya ada pada &lt;code class=&quot;highlighter-rouge&quot;&gt;type&lt;/code&gt; service pada file konfigurasinya. Awalnya saya pakai type &lt;code class=&quot;highlighter-rouge&quot;&gt;forking&lt;/code&gt; dan setelah ganti ke type &lt;code class=&quot;highlighter-rouge&quot;&gt;simple&lt;/code&gt;,
+Alhamdulillah normal.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-conf&quot; data-lang=&quot;conf&quot;&gt;[&lt;span class=&quot;n&quot;&gt;Unit&lt;/span&gt;]
+...
+
+[&lt;span class=&quot;n&quot;&gt;Service&lt;/span&gt;]
+&lt;span class=&quot;n&quot;&gt;Type&lt;/span&gt;=&lt;span class=&quot;n&quot;&gt;simple&lt;/span&gt;
+...
+
+[&lt;span class=&quot;n&quot;&gt;Install&lt;/span&gt;]
+&lt;span class=&quot;n&quot;&gt;WantedBy&lt;/span&gt; = &lt;span class=&quot;n&quot;&gt;multi&lt;/span&gt;-&lt;span class=&quot;n&quot;&gt;user&lt;/span&gt;.&lt;span class=&quot;n&quot;&gt;target&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/20200924-elixir-systemd.png&quot; alt=&quot;elixir-systemd&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Alasan kenapa setelah saya ganti typenya ke &lt;code class=&quot;highlighter-rouge&quot;&gt;simple&lt;/code&gt; menjadi normal karena type simple cocok jika aplikasi yang akan dijadikan
+service memiliki karakteristik aplikasinya jalan dan prompt tidak mengembalikan apa-apa sampai kita tekan &lt;code class=&quot;highlighter-rouge&quot;&gt;Ctrl+C&lt;/code&gt; atau menghentikan servisnya.&lt;/p&gt;
+
+&lt;p&gt;Type &lt;code class=&quot;highlighter-rouge&quot;&gt;forking&lt;/code&gt; cocok jika karakteristik aplikasi pada saat jalan langsung mengembalikan sesuatu dan servis tetep jalan.&lt;/p&gt;
+
+&lt;p&gt;Sekian, semoga bermanfaat.&lt;/p&gt;</content><author><name>Agus Susilo</name></author><summary type="html">Jadi ini ceritanya saya ada pekerjaan untuk merubah salah satu fungsi pada aplikasi di kantor ke bahasa Elixir, pada saat aplikasi sudah siap dideploy ke server production status servisnya tidak normal, selalu activating terus. Sebelumnya saya mencoba mengirim data ke servis untuk memastikan apakah aplikasinya jalan apa tidak. Ternyata aplikasinya jalan, itu artinya tidak ada masalah diaplikasi. Kemudian saya coba otak-atik service di systemdnya, setelah beberapa lama baru ketahuan setelah tak coba didatacenter. Penyebabnya ada pada type service pada file konfigurasinya. Awalnya saya pakai type forking dan setelah ganti ke type simple, Alhamdulillah normal. [Unit] ... [Service] Type=simple ... [Install] WantedBy = multi-user.target Alasan kenapa setelah saya ganti typenya ke simple menjadi normal karena type simple cocok jika aplikasi yang akan dijadikan service memiliki karakteristik aplikasinya jalan dan prompt tidak mengembalikan apa-apa sampai kita tekan Ctrl+C atau menghentikan servisnya. Type forking cocok jika karakteristik aplikasi pada saat jalan langsung mengembalikan sesuatu dan servis tetep jalan. Sekian, semoga bermanfaat.</summary></entry><entry><title type="html">Perulangan terbalik pada rust</title><link href="http://localhost:4040/rust/2020/09/23/perulangan-terbalik-pada-rust.html" rel="alternate" type="text/html" title="Perulangan terbalik pada rust" /><published>2020-09-23T07:00:00+07:00</published><updated>2020-09-23T07:00:00+07:00</updated><id>http://localhost:4040/rust/2020/09/23/perulangan-terbalik-pada-rust</id><content type="html" xml:base="http://localhost:4040/rust/2020/09/23/perulangan-terbalik-pada-rust.html">&lt;p&gt;Kali ini saya ingin berbagi sedikit tip bagaimana melakukan loop secara terbalik pada Rust.
 Biasanya kita akan melakukan loop seperti ini:&lt;/p&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;
@@ -584,102 +612,4 @@ Hello, world!&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;Selain tipe data yang saya sebutkan di atas Rust masih memiliki tipe data lain seperti &lt;code class=&quot;highlighter-rouge&quot;&gt;String&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;Vector&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;HashMap&lt;/code&gt;. Insya Allah pada kesempatan berikutnya saya akan membahasa tentang konversi dari tipe data satu ke tipe data lain dan juga tentang &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;amp;str&lt;/code&gt; dan &lt;code class=&quot;highlighter-rouge&quot;&gt;String&lt;/code&gt;&lt;/p&gt;
 
-&lt;p&gt;Semoga pengenalan tipe data ini dapat bermanfaat. sekian.&lt;/p&gt;</content><author><name>Agus Susilo</name></author><summary type="html">Rust memiliki beberapa tipe data dasar antara lain booleans - bool untuk data berupa benar/salah true dan false integer tak bertanda - u8, u32, u64, u128 untuk mewakili bilangan bulat positif integer bertanda - i8, i32, i64, i128 untuk mewakili bilangan bulat positif dan negatif pointer sized integer - usize, isize untuk mewakili data yang berindex dan memiliki ukuran dimemori bilangan pecah - f32, f64 terkait text - str, chr tuple - (value, value, ...) untuk data berurutan dengan ukuran tetap slices - &amp;amp;[T] untuk mewakili data berurutan pada memori atau biasa dikenal dengan nama array/larik Untuk tipe data text mungkin akan lebih komplek dari pada yang biasa kamu gunakan pada bahasa pemrogramana lain dan tidak akan dibahas disini. Catatan bahwa tipe data numerik dapat ditulis tipenya secara eksplisit dengan menambahkan tipe setelah angka. (contoh: 12u32) Contoh kodenya let angka = 10; let nama = &quot;Agus&quot;; Untuk membuat variabel Rust memiliki keyword let yang berguna untuk mendefinisikan variabel dan default variabelnya immutable atau tidak dapat dirubah. Rust memiliki fitur Type Inference yang sangat berguna bagi pengembang, jadi kita boleh membuat variabel tanpa menyebutkan tipe datanya seperti pada contoh di atas. Contoh kode lengkap: let angka = 10; // defaultnya i32 let nama = &quot;Agus&quot;; // defaultnya &amp;amp;str let angka_lain = 20u32; let memsize: usize = 1usize; let jutaan = 1_000_000; let bil_pecah: f64 = 1.00; let hello: String = String::from(&quot;Hello world!&quot;); let tuple = (1, 2, 3); let slices = &amp;amp;[1, 2, 3]; println!(&quot;{} {} {} {} {} {} {} {:?} {:?}&quot;, angka, nama, angka_lain, memsize, jutaan, bil_pecah, hello, tuple, slices ); Pada variabel jutaan di atas Rust juga membolehkan menulis angka dengan menambahkan underscore agar angka lebih mudah terbaca. Selain tipe data yang saya sebutkan di atas Rust masih memiliki tipe data lain seperti String, Vector, HashMap. Insya Allah pada kesempatan berikutnya saya akan membahasa tentang konversi dari tipe data satu ke tipe data lain dan juga tentang &amp;amp;str dan String Semoga pengenalan tipe data ini dapat bermanfaat. sekian.</summary></entry><entry><title type="html">Mengenal Bahasa Pemrograman Rust</title><link href="http://localhost:4040/rust/2020/05/14/mengenal-bahasa-pemrograman-rust.html" rel="alternate" type="text/html" title="Mengenal Bahasa Pemrograman Rust" /><published>2020-05-14T08:00:00+07:00</published><updated>2020-05-14T08:00:00+07:00</updated><id>http://localhost:4040/rust/2020/05/14/mengenal-bahasa-pemrograman-rust</id><content type="html" xml:base="http://localhost:4040/rust/2020/05/14/mengenal-bahasa-pemrograman-rust.html">&lt;p&gt;Rust adalah bahasa pemrograman multi-paradigma yang fokus pada performa dan keamanan terutama &lt;code class=&quot;highlighter-rouge&quot;&gt;safe concurrency&lt;/code&gt;, 
-Rust secara syntax mirip C++ tetapi menyediakan kemanan memory tanpa menggunakan Garbage Collector pada pengelolaan memorinya. (wikipedia)&lt;/p&gt;
-
-&lt;p&gt;Menurut website resmi rust-lang.org yang lama, rust adalah&lt;/p&gt;
-&lt;blockquote&gt;
-  &lt;p&gt;Rust is a systems programming language that runs blazingly fast, prevents segfaults, and guarantees thread safety.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;itu artinya Rust berjalan sangat cepat, mencegah segfaults dan menjamin keamanan thread tanpa garbage collector.&lt;/p&gt;
-
-&lt;p&gt;dengan beberapa fitur seperti&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;zero-cost abstractions&lt;/li&gt;
-  &lt;li&gt;move semantics&lt;/li&gt;
-  &lt;li&gt;guaranteed memory safety&lt;/li&gt;
-  &lt;li&gt;threads without data races&lt;/li&gt;
-  &lt;li&gt;trait-based generics&lt;/li&gt;
-  &lt;li&gt;pattern matching&lt;/li&gt;
-  &lt;li&gt;type inference&lt;/li&gt;
-  &lt;li&gt;minimal runtime&lt;/li&gt;
-  &lt;li&gt;efficient C bindings&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;menginstall-rust&quot;&gt;Menginstall Rust&lt;/h3&gt;
-
-&lt;p&gt;Salah satu yang membuat saya tertarik termasuk pada instalasinya yang sangat mudah dan rust juga menyediakan &lt;a href=&quot;https://play.rust-lang.org/&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Rust Playground&lt;/code&gt;&lt;/a&gt; sebagai tempat mencoba kode rust tanpa harus menginstal dikomputermu.&lt;/p&gt;
-
-&lt;h4 id=&quot;rustup-installer-rust-dan-alat-pengelola-versi&quot;&gt;Rustup: Installer rust dan alat pengelola versi&lt;/h4&gt;
-
-&lt;p&gt;Cara install paling adalah mudah adalah menggunakan rustup yang merupakan installer resmi dari rust-lang. Installer ini mendukung 3 sistem operasi seperti linux, mac dan windows. Jika kamu menggunakan sistem operasi berbasis unix, cukup copas kode berikut ke terminal Anda&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;curl &lt;span class=&quot;nt&quot;&gt;--proto&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'=https'&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--tlsv1&lt;/span&gt;.2 &lt;span class=&quot;nt&quot;&gt;-sSf&lt;/span&gt; https://sh.rustup.rs | sh&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Jika kamu menggunakan windows 64bit download dan jalankan file berikut &lt;a href=&quot;https://win.rustup.rs/x86_64&quot;&gt;rustup-init.exe&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Jika kamu menggunakan windows 32bit download dan jalankan file berikut &lt;a href=&quot;https://win.rustup.rs/i686&quot;&gt;rustup-init.exe&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Setelah instalasi selesai kamu bisa memeriksa di terminal untuk memastikan apakah Rust sudah terinstall atau belum dengan mengetik perintah berikut ini, jika outputnya seperti pada gambar berikut ini maka instalasi Rust sukses.
-&lt;img src=&quot;/assets/img/20200406-rustup-show.png&quot; alt=&quot;rustup-show&quot; /&gt;&lt;/p&gt;
-
-&lt;h4 id=&quot;hello-world&quot;&gt;Hello World&lt;/h4&gt;
-
-&lt;p&gt;Untuk pengenalan dasar rust kita akan membuat aplikasi sederhana yang hanya akan mencetak tulisan &lt;code class=&quot;highlighter-rouge&quot;&gt;Hello World&lt;/code&gt; pada konsole.&lt;/p&gt;
-
-&lt;p&gt;Buat file dengan &lt;code class=&quot;highlighter-rouge&quot;&gt;hello.rs&lt;/code&gt; kemudian ketikan kode seperti berikut ini.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span class=&quot;k&quot;&gt;fn&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nd&quot;&gt;println!&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Hello World&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Kemudian kompile dengan mengetikan perintah berikut ini pada terminal.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;rustc hello.rs&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Lalu jalankan dengan perintah&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;./hello
-&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;Hello World&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;h4 id=&quot;cargo&quot;&gt;Cargo&lt;/h4&gt;
-
-&lt;p&gt;Untuk aplikasi sederhana penggunaan file tunggal tidak ada masalah namun untuk aplikasi besar disarankan untuk menggunakan aplikasi bernama &lt;code class=&quot;highlighter-rouge&quot;&gt;cargo&lt;/code&gt;. &lt;code class=&quot;highlighter-rouge&quot;&gt;cargo&lt;/code&gt; adalah alat untuk membangun aplikasi dan pengelola paket bawaan dari Rust. Dengan adanya cargo membuat aplikasi kecil ataupun besar menjadi mudah.&lt;/p&gt;
-
-&lt;p&gt;Nah untuk pengenalan kita akan membuat aplikasi sederhana dengan menggunakan cargo dan aplikasi ini hanya akan mencetak &lt;code class=&quot;highlighter-rouge&quot;&gt;Hello, world!&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;Ok berikut ini perintah dari cargo yang akan kita gunakan&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;new&lt;/code&gt; untuk membuat project baru&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;run&lt;/code&gt; untuk menjalankan project&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Buat project dengan nama &lt;code class=&quot;highlighter-rouge&quot;&gt;hello_rust&lt;/code&gt; dengan mengetik perintah berikut ini ke terminal&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;cargo new hello_rust&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Maka cargo akan mengenerate-kan project seperti ini&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;hello_rust
-|-- Cargo.toml
-|-- src
-   |-- main.rs&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Cargo.toml&lt;/code&gt; adalah file manifest dari Rust, dimana menyimpan metadata project kita dan dependecy-nya.&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;main.rs&lt;/code&gt; adalah file dimana aplikasi kita akan ditulis.&lt;/p&gt;
-
-&lt;p&gt;Kita langsung bisa menjalankan aplikasi dengan mengetik&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;cargo run
-   Compiling hello_rust v0.1.0 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;/tmp/hello_rust&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-    Finished dev &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;unoptimized + debuginfo] target&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;s&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;0.63s
-     Running &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;target/debug/hello_rust&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;
-Hello, world!&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Cukup sekian dari saya tentang pengenalan bahasa pemrograman Rust, semoga bermanfaat.&lt;/p&gt;
-
-&lt;p&gt;Jika kamu berkenan membaca artikel dengan bahasa inggris saya sarankan langsung ke &lt;a href=&quot;https://www.rust-lang.org/learn&quot;&gt;website resmi rust&lt;/a&gt; untuk mempelajari lebih lanjut tentang rust&lt;/p&gt;
-
-&lt;p&gt;Wassalam.&lt;/p&gt;</content><author><name>Agus Susilo</name></author><summary type="html">Rust adalah bahasa pemrograman multi-paradigma yang fokus pada performa dan keamanan terutama safe concurrency, Rust secara syntax mirip C++ tetapi menyediakan kemanan memory tanpa menggunakan Garbage Collector pada pengelolaan memorinya. (wikipedia) Menurut website resmi rust-lang.org yang lama, rust adalah Rust is a systems programming language that runs blazingly fast, prevents segfaults, and guarantees thread safety. itu artinya Rust berjalan sangat cepat, mencegah segfaults dan menjamin keamanan thread tanpa garbage collector. dengan beberapa fitur seperti zero-cost abstractions move semantics guaranteed memory safety threads without data races trait-based generics pattern matching type inference minimal runtime efficient C bindings Menginstall Rust Salah satu yang membuat saya tertarik termasuk pada instalasinya yang sangat mudah dan rust juga menyediakan Rust Playground sebagai tempat mencoba kode rust tanpa harus menginstal dikomputermu. Rustup: Installer rust dan alat pengelola versi Cara install paling adalah mudah adalah menggunakan rustup yang merupakan installer resmi dari rust-lang. Installer ini mendukung 3 sistem operasi seperti linux, mac dan windows. Jika kamu menggunakan sistem operasi berbasis unix, cukup copas kode berikut ke terminal Anda curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh Jika kamu menggunakan windows 64bit download dan jalankan file berikut rustup-init.exe Jika kamu menggunakan windows 32bit download dan jalankan file berikut rustup-init.exe Setelah instalasi selesai kamu bisa memeriksa di terminal untuk memastikan apakah Rust sudah terinstall atau belum dengan mengetik perintah berikut ini, jika outputnya seperti pada gambar berikut ini maka instalasi Rust sukses. Hello World Untuk pengenalan dasar rust kita akan membuat aplikasi sederhana yang hanya akan mencetak tulisan Hello World pada konsole. Buat file dengan hello.rs kemudian ketikan kode seperti berikut ini. fn main() { println!(&quot;Hello World&quot;); } Kemudian kompile dengan mengetikan perintah berikut ini pada terminal. $ rustc hello.rs Lalu jalankan dengan perintah $ ./hello $ Hello World Cargo Untuk aplikasi sederhana penggunaan file tunggal tidak ada masalah namun untuk aplikasi besar disarankan untuk menggunakan aplikasi bernama cargo. cargo adalah alat untuk membangun aplikasi dan pengelola paket bawaan dari Rust. Dengan adanya cargo membuat aplikasi kecil ataupun besar menjadi mudah. Nah untuk pengenalan kita akan membuat aplikasi sederhana dengan menggunakan cargo dan aplikasi ini hanya akan mencetak Hello, world!. Ok berikut ini perintah dari cargo yang akan kita gunakan new untuk membuat project baru run untuk menjalankan project Buat project dengan nama hello_rust dengan mengetik perintah berikut ini ke terminal $ cargo new hello_rust Maka cargo akan mengenerate-kan project seperti ini hello_rust |-- Cargo.toml |-- src |-- main.rs Cargo.toml adalah file manifest dari Rust, dimana menyimpan metadata project kita dan dependecy-nya. main.rs adalah file dimana aplikasi kita akan ditulis. Kita langsung bisa menjalankan aplikasi dengan mengetik $ cargo run Compiling hello_rust v0.1.0 (/tmp/hello_rust) Finished dev [unoptimized + debuginfo] target(s) in 0.63s Running `target/debug/hello_rust` Hello, world! Cukup sekian dari saya tentang pengenalan bahasa pemrograman Rust, semoga bermanfaat. Jika kamu berkenan membaca artikel dengan bahasa inggris saya sarankan langsung ke website resmi rust untuk mempelajari lebih lanjut tentang rust Wassalam.</summary></entry></feed>
+&lt;p&gt;Semoga pengenalan tipe data ini dapat bermanfaat. sekian.&lt;/p&gt;</content><author><name>Agus Susilo</name></author><summary type="html">Rust memiliki beberapa tipe data dasar antara lain booleans - bool untuk data berupa benar/salah true dan false integer tak bertanda - u8, u32, u64, u128 untuk mewakili bilangan bulat positif integer bertanda - i8, i32, i64, i128 untuk mewakili bilangan bulat positif dan negatif pointer sized integer - usize, isize untuk mewakili data yang berindex dan memiliki ukuran dimemori bilangan pecah - f32, f64 terkait text - str, chr tuple - (value, value, ...) untuk data berurutan dengan ukuran tetap slices - &amp;amp;[T] untuk mewakili data berurutan pada memori atau biasa dikenal dengan nama array/larik Untuk tipe data text mungkin akan lebih komplek dari pada yang biasa kamu gunakan pada bahasa pemrogramana lain dan tidak akan dibahas disini. Catatan bahwa tipe data numerik dapat ditulis tipenya secara eksplisit dengan menambahkan tipe setelah angka. (contoh: 12u32) Contoh kodenya let angka = 10; let nama = &quot;Agus&quot;; Untuk membuat variabel Rust memiliki keyword let yang berguna untuk mendefinisikan variabel dan default variabelnya immutable atau tidak dapat dirubah. Rust memiliki fitur Type Inference yang sangat berguna bagi pengembang, jadi kita boleh membuat variabel tanpa menyebutkan tipe datanya seperti pada contoh di atas. Contoh kode lengkap: let angka = 10; // defaultnya i32 let nama = &quot;Agus&quot;; // defaultnya &amp;amp;str let angka_lain = 20u32; let memsize: usize = 1usize; let jutaan = 1_000_000; let bil_pecah: f64 = 1.00; let hello: String = String::from(&quot;Hello world!&quot;); let tuple = (1, 2, 3); let slices = &amp;amp;[1, 2, 3]; println!(&quot;{} {} {} {} {} {} {} {:?} {:?}&quot;, angka, nama, angka_lain, memsize, jutaan, bil_pecah, hello, tuple, slices ); Pada variabel jutaan di atas Rust juga membolehkan menulis angka dengan menambahkan underscore agar angka lebih mudah terbaca. Selain tipe data yang saya sebutkan di atas Rust masih memiliki tipe data lain seperti String, Vector, HashMap. Insya Allah pada kesempatan berikutnya saya akan membahasa tentang konversi dari tipe data satu ke tipe data lain dan juga tentang &amp;amp;str dan String Semoga pengenalan tipe data ini dapat bermanfaat. sekian.</summary></entry></feed>
