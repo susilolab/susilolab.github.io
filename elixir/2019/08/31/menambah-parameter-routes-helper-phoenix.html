@@ -10,15 +10,27 @@
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="Tips singkat ini saya dapat saat membuat aplikasi todo sederhana dengan phoenix. kasusnya saya menambah custom rute get /profile/edit/:id dengan parameter :id. awalnya saya pikir harus pakai key dan value. &lt;%= link &quot;Edit&quot;, to: Routes.user_path(@conn, :edit, id: @user.id) %&gt; Ternyata tidak dikenali oleh phoenix, akhirnya saya hapus key id dan sukses. &lt;%= link &quot;Edit&quot;, to: Routes.user_path(@conn, :edit, @user.id) %&gt; sekian." />
 <meta property="og:description" content="Tips singkat ini saya dapat saat membuat aplikasi todo sederhana dengan phoenix. kasusnya saya menambah custom rute get /profile/edit/:id dengan parameter :id. awalnya saya pikir harus pakai key dan value. &lt;%= link &quot;Edit&quot;, to: Routes.user_path(@conn, :edit, id: @user.id) %&gt; Ternyata tidak dikenali oleh phoenix, akhirnya saya hapus key id dan sukses. &lt;%= link &quot;Edit&quot;, to: Routes.user_path(@conn, :edit, @user.id) %&gt; sekian." />
-<link rel="canonical" href="http://localhost:4040/elixir/2019/08/31/menambah-parameter-routes-helper-phoenix.html" />
-<meta property="og:url" content="http://localhost:4040/elixir/2019/08/31/menambah-parameter-routes-helper-phoenix.html" />
+<link rel="canonical" href="https://susilolab.github.io/elixir/2019/08/31/menambah-parameter-routes-helper-phoenix.html" />
+<meta property="og:url" content="https://susilolab.github.io/elixir/2019/08/31/menambah-parameter-routes-helper-phoenix.html" />
 <meta property="og:site_name" content="susilolab" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2019-08-31T13:47:42+07:00" />
 <script type="application/ld+json">
-{"headline":"Menambah parameter pada routes helper Phoenix","dateModified":"2019-08-31T13:47:42+07:00","description":"Tips singkat ini saya dapat saat membuat aplikasi todo sederhana dengan phoenix. kasusnya saya menambah custom rute get /profile/edit/:id dengan parameter :id. awalnya saya pikir harus pakai key dan value. &lt;%= link &quot;Edit&quot;, to: Routes.user_path(@conn, :edit, id: @user.id) %&gt; Ternyata tidak dikenali oleh phoenix, akhirnya saya hapus key id dan sukses. &lt;%= link &quot;Edit&quot;, to: Routes.user_path(@conn, :edit, @user.id) %&gt; sekian.","datePublished":"2019-08-31T13:47:42+07:00","url":"http://localhost:4040/elixir/2019/08/31/menambah-parameter-routes-helper-phoenix.html","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4040/elixir/2019/08/31/menambah-parameter-routes-helper-phoenix.html"},"author":{"@type":"Person","name":"Agus Susilo"},"@context":"https://schema.org"}</script>
+{"headline":"Menambah parameter pada routes helper Phoenix","dateModified":"2019-08-31T13:47:42+07:00","description":"Tips singkat ini saya dapat saat membuat aplikasi todo sederhana dengan phoenix. kasusnya saya menambah custom rute get /profile/edit/:id dengan parameter :id. awalnya saya pikir harus pakai key dan value. &lt;%= link &quot;Edit&quot;, to: Routes.user_path(@conn, :edit, id: @user.id) %&gt; Ternyata tidak dikenali oleh phoenix, akhirnya saya hapus key id dan sukses. &lt;%= link &quot;Edit&quot;, to: Routes.user_path(@conn, :edit, @user.id) %&gt; sekian.","datePublished":"2019-08-31T13:47:42+07:00","url":"https://susilolab.github.io/elixir/2019/08/31/menambah-parameter-routes-helper-phoenix.html","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://susilolab.github.io/elixir/2019/08/31/menambah-parameter-routes-helper-phoenix.html"},"author":{"@type":"Person","name":"Agus Susilo"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
-<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4040/feed.xml" title="susilolab" /><!-- Begin Jekyll SEO tag v2.6.1 -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://susilolab.github.io/feed.xml" title="susilolab" /><script>
+if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1")) {
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-173956394-1', 'auto');
+  ga('send', 'pageview');
+}
+</script>
+  
+<!-- Begin Jekyll SEO tag v2.6.1 -->
 <title>Menambah parameter pada routes helper Phoenix | susilolab</title>
 <meta name="generator" content="Jekyll v3.8.6" />
 <meta property="og:title" content="Menambah parameter pada routes helper Phoenix" />
@@ -26,13 +38,13 @@
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="Tips singkat ini saya dapat saat membuat aplikasi todo sederhana dengan phoenix. kasusnya saya menambah custom rute get /profile/edit/:id dengan parameter :id. awalnya saya pikir harus pakai key dan value. &lt;%= link &quot;Edit&quot;, to: Routes.user_path(@conn, :edit, id: @user.id) %&gt; Ternyata tidak dikenali oleh phoenix, akhirnya saya hapus key id dan sukses. &lt;%= link &quot;Edit&quot;, to: Routes.user_path(@conn, :edit, @user.id) %&gt; sekian." />
 <meta property="og:description" content="Tips singkat ini saya dapat saat membuat aplikasi todo sederhana dengan phoenix. kasusnya saya menambah custom rute get /profile/edit/:id dengan parameter :id. awalnya saya pikir harus pakai key dan value. &lt;%= link &quot;Edit&quot;, to: Routes.user_path(@conn, :edit, id: @user.id) %&gt; Ternyata tidak dikenali oleh phoenix, akhirnya saya hapus key id dan sukses. &lt;%= link &quot;Edit&quot;, to: Routes.user_path(@conn, :edit, @user.id) %&gt; sekian." />
-<link rel="canonical" href="http://localhost:4040/elixir/2019/08/31/menambah-parameter-routes-helper-phoenix.html" />
-<meta property="og:url" content="http://localhost:4040/elixir/2019/08/31/menambah-parameter-routes-helper-phoenix.html" />
+<link rel="canonical" href="https://susilolab.github.io/elixir/2019/08/31/menambah-parameter-routes-helper-phoenix.html" />
+<meta property="og:url" content="https://susilolab.github.io/elixir/2019/08/31/menambah-parameter-routes-helper-phoenix.html" />
 <meta property="og:site_name" content="susilolab" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2019-08-31T13:47:42+07:00" />
 <script type="application/ld+json">
-{"headline":"Menambah parameter pada routes helper Phoenix","dateModified":"2019-08-31T13:47:42+07:00","description":"Tips singkat ini saya dapat saat membuat aplikasi todo sederhana dengan phoenix. kasusnya saya menambah custom rute get /profile/edit/:id dengan parameter :id. awalnya saya pikir harus pakai key dan value. &lt;%= link &quot;Edit&quot;, to: Routes.user_path(@conn, :edit, id: @user.id) %&gt; Ternyata tidak dikenali oleh phoenix, akhirnya saya hapus key id dan sukses. &lt;%= link &quot;Edit&quot;, to: Routes.user_path(@conn, :edit, @user.id) %&gt; sekian.","datePublished":"2019-08-31T13:47:42+07:00","url":"http://localhost:4040/elixir/2019/08/31/menambah-parameter-routes-helper-phoenix.html","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4040/elixir/2019/08/31/menambah-parameter-routes-helper-phoenix.html"},"author":{"@type":"Person","name":"Agus Susilo"},"@context":"https://schema.org"}</script>
+{"headline":"Menambah parameter pada routes helper Phoenix","dateModified":"2019-08-31T13:47:42+07:00","description":"Tips singkat ini saya dapat saat membuat aplikasi todo sederhana dengan phoenix. kasusnya saya menambah custom rute get /profile/edit/:id dengan parameter :id. awalnya saya pikir harus pakai key dan value. &lt;%= link &quot;Edit&quot;, to: Routes.user_path(@conn, :edit, id: @user.id) %&gt; Ternyata tidak dikenali oleh phoenix, akhirnya saya hapus key id dan sukses. &lt;%= link &quot;Edit&quot;, to: Routes.user_path(@conn, :edit, @user.id) %&gt; sekian.","datePublished":"2019-08-31T13:47:42+07:00","url":"https://susilolab.github.io/elixir/2019/08/31/menambah-parameter-routes-helper-phoenix.html","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://susilolab.github.io/elixir/2019/08/31/menambah-parameter-routes-helper-phoenix.html"},"author":{"@type":"Person","name":"Agus Susilo"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 </head>
@@ -85,7 +97,7 @@
 </div>
 
       <div class="footer-col footer-col-3">
-        <p>“Sebaik-baik manusia adalah yang paling bermanfaat bagi manusia” (HR. Ahmad, ath-Thabrani, ad-Daruqutni)</p>
+        <p>&quot;Sebaik-baik manusia adalah yang paling bermanfaat bagi manusia&quot; (HR. Ahmad, ath-Thabrani, ad-Daruqutni)</p>
         <p>&copy;2020&nbsp;Agus Susilo</p>
       </div>
     </div>

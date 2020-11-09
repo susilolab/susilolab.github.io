@@ -1,19 +1,6 @@
 @font-face {
   font-family: "Jetbrains Mono";
   src: url("jetbrains-mono/JetBrainsMono-Regular.ttf") format("truetype"), url("jetbrains-mono/JetBrainsMono-Italic.ttf") format("truetype"), url("jetbrains-mono/JetBrainsMono-Bold.ttf") format("truetype"), url("jetbrains-mono/JetBrainsMono-Bold-Italic.ttf") format("truetype"), url("jetbrains-mono/JetBrainsMono-Medium.ttf") format("truetype"), url("jetbrains-mono/JetBrainsMono-Medium-Italic.ttf") format("truetype"); }
-/*
-@font-face {
-    font-family: "Roboto";
-    src: url("Roboto/Roboto-Regular.ttf") format("truetype"),
-        url("Roboto/Roboto-Medium.ttf") format("truetype"),
-        url("Roboto/Roboto-MediumItalic.ttf") format("truetype"),
-        url("Roboto/Roboto-Light.ttf") format("truetype"),
-        url("Roboto/Roboto-LightItalic.ttf") format("truetype"),
-        url("Roboto/Roboto-Bold.ttf") format("truetype"),
-        url("Roboto/Roboto-BoldItalic.ttf") format("truetype"),
-        url("Roboto/Roboto-Italic.ttf") format("truetype");
-}
-*/
 @font-face {
   font-family: 'Inter';
   font-style: normal;

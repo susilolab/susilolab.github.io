@@ -10,15 +10,27 @@
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="Kali ini saya ingin berbagi sedikit tip bagaimana melakukan loop secara terbalik pada Rust. Biasanya kita akan melakukan loop seperti ini: ... for i in 0..5 { println!(&quot;{}&quot;, i); } ... Bagaimana jika ingin loop dari 5 s/d 0 ?. Mungkin kita akan berpikiran seperti ini ... for i in 5..0 { println!(&quot;{}&quot;, i); } ... Jika dijalankan kode di atas tidak akan jalan. Lalu bagaimana cara yang benar jika ingin perulangannya terbalik ?. Kita bisa menggunakan unit jangkuan dan fungsi rev(). ... for i in (0..5).rev() { println!(&quot;{}&quot;, i); } ... Kode di atas akan jalan dengan sukses dan menghasilkan keluaran seperti berikut ini: 4 3 2 1 0 Demikian tips singkat kali ini semoga bermanfaat." />
 <meta property="og:description" content="Kali ini saya ingin berbagi sedikit tip bagaimana melakukan loop secara terbalik pada Rust. Biasanya kita akan melakukan loop seperti ini: ... for i in 0..5 { println!(&quot;{}&quot;, i); } ... Bagaimana jika ingin loop dari 5 s/d 0 ?. Mungkin kita akan berpikiran seperti ini ... for i in 5..0 { println!(&quot;{}&quot;, i); } ... Jika dijalankan kode di atas tidak akan jalan. Lalu bagaimana cara yang benar jika ingin perulangannya terbalik ?. Kita bisa menggunakan unit jangkuan dan fungsi rev(). ... for i in (0..5).rev() { println!(&quot;{}&quot;, i); } ... Kode di atas akan jalan dengan sukses dan menghasilkan keluaran seperti berikut ini: 4 3 2 1 0 Demikian tips singkat kali ini semoga bermanfaat." />
-<link rel="canonical" href="http://localhost:4040/rust/2020/09/23/perulangan-terbalik-pada-rust.html" />
-<meta property="og:url" content="http://localhost:4040/rust/2020/09/23/perulangan-terbalik-pada-rust.html" />
+<link rel="canonical" href="https://susilolab.github.io/rust/2020/09/23/perulangan-terbalik-pada-rust.html" />
+<meta property="og:url" content="https://susilolab.github.io/rust/2020/09/23/perulangan-terbalik-pada-rust.html" />
 <meta property="og:site_name" content="susilolab" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2020-09-23T07:00:00+07:00" />
 <script type="application/ld+json">
-{"headline":"Perulangan terbalik pada rust","dateModified":"2020-09-23T07:00:00+07:00","description":"Kali ini saya ingin berbagi sedikit tip bagaimana melakukan loop secara terbalik pada Rust. Biasanya kita akan melakukan loop seperti ini: ... for i in 0..5 { println!(&quot;{}&quot;, i); } ... Bagaimana jika ingin loop dari 5 s/d 0 ?. Mungkin kita akan berpikiran seperti ini ... for i in 5..0 { println!(&quot;{}&quot;, i); } ... Jika dijalankan kode di atas tidak akan jalan. Lalu bagaimana cara yang benar jika ingin perulangannya terbalik ?. Kita bisa menggunakan unit jangkuan dan fungsi rev(). ... for i in (0..5).rev() { println!(&quot;{}&quot;, i); } ... Kode di atas akan jalan dengan sukses dan menghasilkan keluaran seperti berikut ini: 4 3 2 1 0 Demikian tips singkat kali ini semoga bermanfaat.","datePublished":"2020-09-23T07:00:00+07:00","url":"http://localhost:4040/rust/2020/09/23/perulangan-terbalik-pada-rust.html","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4040/rust/2020/09/23/perulangan-terbalik-pada-rust.html"},"author":{"@type":"Person","name":"Agus Susilo"},"@context":"https://schema.org"}</script>
+{"headline":"Perulangan terbalik pada rust","dateModified":"2020-09-23T07:00:00+07:00","description":"Kali ini saya ingin berbagi sedikit tip bagaimana melakukan loop secara terbalik pada Rust. Biasanya kita akan melakukan loop seperti ini: ... for i in 0..5 { println!(&quot;{}&quot;, i); } ... Bagaimana jika ingin loop dari 5 s/d 0 ?. Mungkin kita akan berpikiran seperti ini ... for i in 5..0 { println!(&quot;{}&quot;, i); } ... Jika dijalankan kode di atas tidak akan jalan. Lalu bagaimana cara yang benar jika ingin perulangannya terbalik ?. Kita bisa menggunakan unit jangkuan dan fungsi rev(). ... for i in (0..5).rev() { println!(&quot;{}&quot;, i); } ... Kode di atas akan jalan dengan sukses dan menghasilkan keluaran seperti berikut ini: 4 3 2 1 0 Demikian tips singkat kali ini semoga bermanfaat.","datePublished":"2020-09-23T07:00:00+07:00","url":"https://susilolab.github.io/rust/2020/09/23/perulangan-terbalik-pada-rust.html","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://susilolab.github.io/rust/2020/09/23/perulangan-terbalik-pada-rust.html"},"author":{"@type":"Person","name":"Agus Susilo"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
-<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4040/feed.xml" title="susilolab" /><!-- Begin Jekyll SEO tag v2.6.1 -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://susilolab.github.io/feed.xml" title="susilolab" /><script>
+if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1")) {
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-173956394-1', 'auto');
+  ga('send', 'pageview');
+}
+</script>
+  
+<!-- Begin Jekyll SEO tag v2.6.1 -->
 <title>Perulangan terbalik pada rust | susilolab</title>
 <meta name="generator" content="Jekyll v3.8.6" />
 <meta property="og:title" content="Perulangan terbalik pada rust" />
@@ -26,13 +38,13 @@
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="Kali ini saya ingin berbagi sedikit tip bagaimana melakukan loop secara terbalik pada Rust. Biasanya kita akan melakukan loop seperti ini: ... for i in 0..5 { println!(&quot;{}&quot;, i); } ... Bagaimana jika ingin loop dari 5 s/d 0 ?. Mungkin kita akan berpikiran seperti ini ... for i in 5..0 { println!(&quot;{}&quot;, i); } ... Jika dijalankan kode di atas tidak akan jalan. Lalu bagaimana cara yang benar jika ingin perulangannya terbalik ?. Kita bisa menggunakan unit jangkuan dan fungsi rev(). ... for i in (0..5).rev() { println!(&quot;{}&quot;, i); } ... Kode di atas akan jalan dengan sukses dan menghasilkan keluaran seperti berikut ini: 4 3 2 1 0 Demikian tips singkat kali ini semoga bermanfaat." />
 <meta property="og:description" content="Kali ini saya ingin berbagi sedikit tip bagaimana melakukan loop secara terbalik pada Rust. Biasanya kita akan melakukan loop seperti ini: ... for i in 0..5 { println!(&quot;{}&quot;, i); } ... Bagaimana jika ingin loop dari 5 s/d 0 ?. Mungkin kita akan berpikiran seperti ini ... for i in 5..0 { println!(&quot;{}&quot;, i); } ... Jika dijalankan kode di atas tidak akan jalan. Lalu bagaimana cara yang benar jika ingin perulangannya terbalik ?. Kita bisa menggunakan unit jangkuan dan fungsi rev(). ... for i in (0..5).rev() { println!(&quot;{}&quot;, i); } ... Kode di atas akan jalan dengan sukses dan menghasilkan keluaran seperti berikut ini: 4 3 2 1 0 Demikian tips singkat kali ini semoga bermanfaat." />
-<link rel="canonical" href="http://localhost:4040/rust/2020/09/23/perulangan-terbalik-pada-rust.html" />
-<meta property="og:url" content="http://localhost:4040/rust/2020/09/23/perulangan-terbalik-pada-rust.html" />
+<link rel="canonical" href="https://susilolab.github.io/rust/2020/09/23/perulangan-terbalik-pada-rust.html" />
+<meta property="og:url" content="https://susilolab.github.io/rust/2020/09/23/perulangan-terbalik-pada-rust.html" />
 <meta property="og:site_name" content="susilolab" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2020-09-23T07:00:00+07:00" />
 <script type="application/ld+json">
-{"headline":"Perulangan terbalik pada rust","dateModified":"2020-09-23T07:00:00+07:00","description":"Kali ini saya ingin berbagi sedikit tip bagaimana melakukan loop secara terbalik pada Rust. Biasanya kita akan melakukan loop seperti ini: ... for i in 0..5 { println!(&quot;{}&quot;, i); } ... Bagaimana jika ingin loop dari 5 s/d 0 ?. Mungkin kita akan berpikiran seperti ini ... for i in 5..0 { println!(&quot;{}&quot;, i); } ... Jika dijalankan kode di atas tidak akan jalan. Lalu bagaimana cara yang benar jika ingin perulangannya terbalik ?. Kita bisa menggunakan unit jangkuan dan fungsi rev(). ... for i in (0..5).rev() { println!(&quot;{}&quot;, i); } ... Kode di atas akan jalan dengan sukses dan menghasilkan keluaran seperti berikut ini: 4 3 2 1 0 Demikian tips singkat kali ini semoga bermanfaat.","datePublished":"2020-09-23T07:00:00+07:00","url":"http://localhost:4040/rust/2020/09/23/perulangan-terbalik-pada-rust.html","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4040/rust/2020/09/23/perulangan-terbalik-pada-rust.html"},"author":{"@type":"Person","name":"Agus Susilo"},"@context":"https://schema.org"}</script>
+{"headline":"Perulangan terbalik pada rust","dateModified":"2020-09-23T07:00:00+07:00","description":"Kali ini saya ingin berbagi sedikit tip bagaimana melakukan loop secara terbalik pada Rust. Biasanya kita akan melakukan loop seperti ini: ... for i in 0..5 { println!(&quot;{}&quot;, i); } ... Bagaimana jika ingin loop dari 5 s/d 0 ?. Mungkin kita akan berpikiran seperti ini ... for i in 5..0 { println!(&quot;{}&quot;, i); } ... Jika dijalankan kode di atas tidak akan jalan. Lalu bagaimana cara yang benar jika ingin perulangannya terbalik ?. Kita bisa menggunakan unit jangkuan dan fungsi rev(). ... for i in (0..5).rev() { println!(&quot;{}&quot;, i); } ... Kode di atas akan jalan dengan sukses dan menghasilkan keluaran seperti berikut ini: 4 3 2 1 0 Demikian tips singkat kali ini semoga bermanfaat.","datePublished":"2020-09-23T07:00:00+07:00","url":"https://susilolab.github.io/rust/2020/09/23/perulangan-terbalik-pada-rust.html","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://susilolab.github.io/rust/2020/09/23/perulangan-terbalik-pada-rust.html"},"author":{"@type":"Person","name":"Agus Susilo"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 </head>
@@ -111,7 +123,7 @@ Kita bisa menggunakan unit jangkuan dan fungsi <code class="highlighter-rouge">r
 </div>
 
       <div class="footer-col footer-col-3">
-        <p>“Sebaik-baik manusia adalah yang paling bermanfaat bagi manusia” (HR. Ahmad, ath-Thabrani, ad-Daruqutni)</p>
+        <p>&quot;Sebaik-baik manusia adalah yang paling bermanfaat bagi manusia&quot; (HR. Ahmad, ath-Thabrani, ad-Daruqutni)</p>
         <p>&copy;2020&nbsp;Agus Susilo</p>
       </div>
     </div>
