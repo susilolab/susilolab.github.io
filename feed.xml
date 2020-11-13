@@ -1,4 +1,80 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://susilolab.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://susilolab.github.io/" rel="alternate" type="text/html" /><updated>2020-11-12T10:44:18+07:00</updated><id>https://susilolab.github.io/feed.xml</id><title type="html">susilolab</title><subtitle>&quot;Sebaik-baik manusia adalah yang paling bermanfaat bagi manusia&quot; (HR. Ahmad, ath-Thabrani, ad-Daruqutni)</subtitle><author><name>Agus Susilo</name></author><entry><title type="html">Menutup branch pada Mercurial</title><link href="https://susilolab.github.io/hg/mercurial/2020/11/12/menutup-branch-pada-mercurial.html" rel="alternate" type="text/html" title="Menutup branch pada Mercurial" /><published>2020-11-12T06:00:00+07:00</published><updated>2020-11-12T06:00:00+07:00</updated><id>https://susilolab.github.io/hg/mercurial/2020/11/12/menutup-branch-pada-mercurial</id><content type="html" xml:base="https://susilolab.github.io/hg/mercurial/2020/11/12/menutup-branch-pada-mercurial.html">&lt;p&gt;Pada mercurial jika kita membuat cabang kemudian mem-merge cabang baru dengan cabang default, kita akan tetap mendapat cabang dari revisi yang di push oleh rekan satu tim 
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://susilolab.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://susilolab.github.io/" rel="alternate" type="text/html" /><updated>2020-11-13T17:52:00+07:00</updated><id>https://susilolab.github.io/feed.xml</id><title type="html">susilolab</title><subtitle>&quot;Sebaik-baik manusia adalah yang paling bermanfaat bagi manusia&quot; (HR. Ahmad, ath-Thabrani, ad-Daruqutni)</subtitle><author><name>Agus Susilo</name></author><entry><title type="html">JSON encode dan decode pada Rust</title><link href="https://susilolab.github.io/rust/2020/11/13/json-encode-dan-decode-pada-rust.html" rel="alternate" type="text/html" title="JSON encode dan decode pada Rust" /><published>2020-11-13T06:00:00+07:00</published><updated>2020-11-13T06:00:00+07:00</updated><id>https://susilolab.github.io/rust/2020/11/13/json-encode-dan-decode-pada-rust</id><content type="html" xml:base="https://susilolab.github.io/rust/2020/11/13/json-encode-dan-decode-pada-rust.html">&lt;p&gt;Hari ini saya ingin berbagi sedikit ilmu tentang bagaimana encode dan decode json objek di bahasa pemgrograman Rust. Karena saya masih newbie di Rust mohon dikoreksi jika terdapat 
+kesalahan pada artikel ini. Ok, langsung saja pertama-tama kita buat project baru dengan nama &lt;code class=&quot;highlighter-rouge&quot;&gt;demo-json&lt;/code&gt;. Silahkan ketikan perintah berikut untuk membuat project baru&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;cargo new demo-json &lt;span class=&quot;nt&quot;&gt;--bin&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Kemudian tambahkan pustaka serde dengan fitur derive dan serde_json pada dependencies&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-toml&quot; data-lang=&quot;toml&quot;&gt;&lt;span class=&quot;nn&quot;&gt;[dependencies]&lt;/span&gt;
+&lt;span class=&quot;nn&quot;&gt;serde&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;version&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;1.0&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;features&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;[&quot;derive&quot;]&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;py&quot;&gt;serde_json&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;1.0&quot;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Setelah selesai menambah dependencies buka file &lt;code class=&quot;highlighter-rouge&quot;&gt;main.rs&lt;/code&gt; kemudian import struk Serialize dan Deserialize.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;serde&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;::{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Serialize&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Deserialize&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+
+&lt;span class=&quot;nd&quot;&gt;#[derive(Serialize,&lt;/span&gt; &lt;span class=&quot;nd&quot;&gt;Deserialize,&lt;/span&gt; &lt;span class=&quot;nd&quot;&gt;Debug)]&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Todo&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;i32&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;String&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;fn&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;obj&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Todo&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Todo&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Belajar Rust&quot;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;.to_string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+
+  &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;enc&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;serde_json&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;to_string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;obj&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;.unwrap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+  &lt;span class=&quot;nd&quot;&gt;println!&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;{}&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;enc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+  &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Todo&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;serde_json&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;from_str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;enc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;.unwrap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+  &lt;span class=&quot;nd&quot;&gt;println!&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;{:?}&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Jalankan kode di atas dengan mengetik &lt;code class=&quot;highlighter-rouge&quot;&gt;cargo run&lt;/code&gt; pada terminal dan terminal akan mencetak string dan struk todo.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;   Compiling demo-json v0.1.0
+    Finished dev [unoptimized + debuginfo] target(s) in 0.74s
+     Running `target/debug/demo-json`
+{&quot;id&quot;:1,&quot;title&quot;:&quot;Create web&quot;}
+Todo { id: 1, title: &quot;Create web&quot; }
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Bagaimana cara kerjanya, mari kita telusuri satu persatu. Pertama kali mengimport trait &lt;code class=&quot;highlighter-rouge&quot;&gt;Serialize&lt;/code&gt; dan &lt;code class=&quot;highlighter-rouge&quot;&gt;Deserialize&lt;/code&gt; menggunakan keyword &lt;code class=&quot;highlighter-rouge&quot;&gt;use&lt;/code&gt;.
+Trait ini akan digunakan pada struk &lt;code class=&quot;highlighter-rouge&quot;&gt;Todo&lt;/code&gt; yang akan otomatis mengimplementasi fungsi-fungsi yang ada pada trait &lt;code class=&quot;highlighter-rouge&quot;&gt;Serialize&lt;/code&gt; dan &lt;code class=&quot;highlighter-rouge&quot;&gt;Deserialize&lt;/code&gt;.
+Sehingga kita tidak perlu secara manual mengetikkan script seperti ini &lt;code class=&quot;highlighter-rouge&quot;&gt;impl Serialize for Todo {}&lt;/code&gt; dan seperti ini &lt;code class=&quot;highlighter-rouge&quot;&gt;impl Deserialize for Todo&lt;/code&gt;.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;serde&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;::{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Serialize&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Deserialize&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Kemudian kode berikutnya&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span class=&quot;nd&quot;&gt;#[derive(Serialize,&lt;/span&gt; &lt;span class=&quot;nd&quot;&gt;Deserialize,&lt;/span&gt; &lt;span class=&quot;nd&quot;&gt;Debug)]&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Todo&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;i32&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;String&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Kode di atas akan membuat struk &lt;code class=&quot;highlighter-rouge&quot;&gt;Todo&lt;/code&gt;, perhatikan syntax &lt;code class=&quot;highlighter-rouge&quot;&gt;#[derive()]&lt;/code&gt;. syntax ini akan secara otomatis mengimplementasi trait yang ada pada antara 
+tanda kurung buka dan tutup (&lt;code class=&quot;highlighter-rouge&quot;&gt;()&lt;/code&gt;) untuk struk &lt;code class=&quot;highlighter-rouge&quot;&gt;Todo&lt;/code&gt;. Struk &lt;code class=&quot;highlighter-rouge&quot;&gt;Todo&lt;/code&gt; berisi 2 field yaitu &lt;code class=&quot;highlighter-rouge&quot;&gt;id&lt;/code&gt; yang bertipe integer 32 dan &lt;code class=&quot;highlighter-rouge&quot;&gt;title&lt;/code&gt; yang bertipe string.&lt;/p&gt;
+
+&lt;p&gt;Lalu pada fungsi main, kita membuat variabel &lt;code class=&quot;highlighter-rouge&quot;&gt;obj&lt;/code&gt; yang bertipe &lt;code class=&quot;highlighter-rouge&quot;&gt;Todo&lt;/code&gt; dan memberikan nilai pada field id dan title.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;obj&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Todo&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Todo&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Belajar Rust&quot;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;.to_string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Kode berikutnya kita membuat 2 variabel yaitu &lt;code class=&quot;highlighter-rouge&quot;&gt;enc&lt;/code&gt; yang berisi hasil encode struk ke json dan variabel &lt;code class=&quot;highlighter-rouge&quot;&gt;dec&lt;/code&gt; menyimpan hasil decode dari string ke 
+struk &lt;code class=&quot;highlighter-rouge&quot;&gt;Todo&lt;/code&gt;. Disini penulis menggunakan fungsi &lt;code class=&quot;highlighter-rouge&quot;&gt;to_string&lt;/code&gt; dan &lt;code class=&quot;highlighter-rouge&quot;&gt;from_str&lt;/code&gt; dari pustaka &lt;code class=&quot;highlighter-rouge&quot;&gt;serde_json&lt;/code&gt;.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;enc&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;serde_json&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;to_string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;obj&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;.unwrap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;println!&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;{}&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;enc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Todo&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;serde_json&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;from_str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;enc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;.unwrap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;println!&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;{:?}&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Demikian semoga yang sedikit ini bermanfaat&lt;/p&gt;</content><author><name>Agus Susilo</name></author><summary type="html">Hari ini saya ingin berbagi sedikit ilmu tentang bagaimana encode dan decode json objek di bahasa pemgrograman Rust. Karena saya masih newbie di Rust mohon dikoreksi jika terdapat kesalahan pada artikel ini. Ok, langsung saja pertama-tama kita buat project baru dengan nama demo-json. Silahkan ketikan perintah berikut untuk membuat project baru $ cargo new demo-json --bin Kemudian tambahkan pustaka serde dengan fitur derive dan serde_json pada dependencies [dependencies] serde = { version = &quot;1.0&quot;, features = [&quot;derive&quot;] } serde_json = &quot;1.0&quot; Setelah selesai menambah dependencies buka file main.rs kemudian import struk Serialize dan Deserialize. use serde::{Serialize, Deserialize}; #[derive(Serialize, Deserialize, Debug)] struct Todo { id: i32, title: String } fn main() { let obj: Todo = Todo { id: 1, title: &quot;Belajar Rust&quot;.to_string(), }; let enc = serde_json::to_string(&amp;amp;obj).unwrap(); println!(&quot;{}&quot;, enc); let dec: Todo = serde_json::from_str(&amp;amp;enc).unwrap(); println!(&quot;{:?}&quot;, dec); } Jalankan kode di atas dengan mengetik cargo run pada terminal dan terminal akan mencetak string dan struk todo. Compiling demo-json v0.1.0 Finished dev [unoptimized + debuginfo] target(s) in 0.74s Running `target/debug/demo-json` {&quot;id&quot;:1,&quot;title&quot;:&quot;Create web&quot;} Todo { id: 1, title: &quot;Create web&quot; } Bagaimana cara kerjanya, mari kita telusuri satu persatu. Pertama kali mengimport trait Serialize dan Deserialize menggunakan keyword use. Trait ini akan digunakan pada struk Todo yang akan otomatis mengimplementasi fungsi-fungsi yang ada pada trait Serialize dan Deserialize. Sehingga kita tidak perlu secara manual mengetikkan script seperti ini impl Serialize for Todo {} dan seperti ini impl Deserialize for Todo. use serde::{Serialize, Deserialize}; Kemudian kode berikutnya #[derive(Serialize, Deserialize, Debug)] struct Todo { id: i32, title: String } Kode di atas akan membuat struk Todo, perhatikan syntax #[derive()]. syntax ini akan secara otomatis mengimplementasi trait yang ada pada antara tanda kurung buka dan tutup (()) untuk struk Todo. Struk Todo berisi 2 field yaitu id yang bertipe integer 32 dan title yang bertipe string. Lalu pada fungsi main, kita membuat variabel obj yang bertipe Todo dan memberikan nilai pada field id dan title. let obj: Todo = Todo { id: 1, title: &quot;Belajar Rust&quot;.to_string(), }; Kode berikutnya kita membuat 2 variabel yaitu enc yang berisi hasil encode struk ke json dan variabel dec menyimpan hasil decode dari string ke struk Todo. Disini penulis menggunakan fungsi to_string dan from_str dari pustaka serde_json. let enc = serde_json::to_string(&amp;amp;obj).unwrap(); println!(&quot;{}&quot;, enc); let dec: Todo = serde_json::from_str(&amp;amp;enc).unwrap(); println!(&quot;{:?}&quot;, dec); Demikian semoga yang sedikit ini bermanfaat</summary></entry><entry><title type="html">Menutup branch pada Mercurial</title><link href="https://susilolab.github.io/hg/mercurial/2020/11/12/menutup-branch-pada-mercurial.html" rel="alternate" type="text/html" title="Menutup branch pada Mercurial" /><published>2020-11-12T06:00:00+07:00</published><updated>2020-11-12T06:00:00+07:00</updated><id>https://susilolab.github.io/hg/mercurial/2020/11/12/menutup-branch-pada-mercurial</id><content type="html" xml:base="https://susilolab.github.io/hg/mercurial/2020/11/12/menutup-branch-pada-mercurial.html">&lt;p&gt;Pada mercurial jika kita membuat cabang kemudian mem-merge cabang baru dengan cabang default, kita akan tetap mendapat cabang dari revisi yang di push oleh rekan satu tim 
 jika kita tidak menutup cabang tersebut. Untuk menutup cabang kita harus menyertakan opsi &lt;code class=&quot;highlighter-rouge&quot;&gt;--close-branch&lt;/code&gt; pada saat commit setelah merge cabang. Setelah kita tutup, cabang 
 tersebut akan hilang dari repo master sesudah kita push&lt;/p&gt;
 
@@ -270,368 +346,4 @@ Shell script berikut ini akan dijalankan menggunakan &lt;code class=&quot;highli
 
 &lt;p&gt;Contoh outputnya bisa dilihat pada postingan saya berikut &lt;a href=&quot;/ruby/2020/05/21/link-internal-post-pada-artikel-di-jekyll.html&quot;&gt;Link Internal Post pada Artikel di Jekyll&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;Sekian semoga bermanfaat.&lt;/p&gt;</content><author><name>Agus Susilo</name></author><summary type="html">Buat temen-temen yang pake jekyll untuk menulis blognya pasti tahu syntax dari template jekyll. Nah pernahkah temen-temen ingin men-share kode dari template jekyll?. Sudah mencari-cari digoogle tapi belum ketemu?. Kali saya ingin berbagi bagaimana men-share kode dari syntax template jekyll ke blog. Untuk bisa menuliskan kode dari jekyll kita bisa memakai syntax raw dan endraw, karena saya belum menemukan bagaimana men-share kode raw di dalam raw maka saya pake screenshot saja. Jadi setelah syntax kode highlight kita bisa tambahkan raw kemudian baru menulis kode template. raw akan memproses apa yang ada di dalamnya sesuai format, tanpa merubah isinya. Contoh outputnya bisa dilihat pada postingan saya berikut Link Internal Post pada Artikel di Jekyll Sekian semoga bermanfaat.</summary></entry><entry><title type="html">Mengenal Trait di PHP</title><link href="https://susilolab.github.io/php/2020/05/23/mengenal-trait-php.html" rel="alternate" type="text/html" title="Mengenal Trait di PHP" /><published>2020-05-23T00:00:00+07:00</published><updated>2020-05-23T00:00:00+07:00</updated><id>https://susilolab.github.io/php/2020/05/23/mengenal-trait-php</id><content type="html" xml:base="https://susilolab.github.io/php/2020/05/23/mengenal-trait-php.html">&lt;p&gt;Trait adalah mekanisme untuk penggunaan kembali kode dalam single inheritance. Trait dimaksudkan untuk mengurangi beberapa keterbatasan dari turunan tunggal dengan memungkinkan pengembang untuk menggunakan kembali serangkain fungsi-fungsi secara bebas pada beberapa klas yang independen yang hidup dalam hirarki klas yang berbeda.&lt;/p&gt;
-
-&lt;p&gt;Trait mirip dengan klas, hanya saja trait dimaksudkan untuk mengelompokan fungsi menjadi kecil dan konsisten. Kita tidak bisa meng-instansi trait pada dirinya sendiri tetapi kita bisa menggunakannya tanpa harus menurukannya(inheritance).&lt;/p&gt;
-
-&lt;p&gt;Daftar Isi:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;#precedence&quot;&gt;Precedence&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;#trait-multiple&quot;&gt;Trait Multiple&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;#conflict-resolution&quot;&gt;Resolusi Konflik&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;#visibility&quot;&gt;Merubah visibility metode&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;#composed&quot;&gt;Trait disusun dari Trait&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;#abstract-trait&quot;&gt;Anggota Trait Abstract&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;#static-trait&quot;&gt;Anggota Static Trait&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;#property&quot;&gt;Property&lt;/a&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;Contoh trait:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;namespace&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;app\traits&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;trait&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Foo&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;hello&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'Hello'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Untuk menggunakan trait pada klas kita cukup gunakan keyword &lt;code class=&quot;highlighter-rouge&quot;&gt;use&lt;/code&gt; didalam definisi klas.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;User&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;\app\traits\Foo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-    &lt;span class=&quot;c1&quot;&gt;// kita dapat menggunakan fungsi dari trait Foo &lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;// secara langsung menggunakan $this&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;world&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;hello&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;' world!'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;h4 id=&quot;hal-mendahului-precedence&quot;&gt;&lt;a name=&quot;precedence&quot;&gt;&lt;/a&gt;Hal mendahului/ Precedence&lt;/h4&gt;
-
-&lt;p&gt;Anggota turunan dari klas dasar ditumpuki oleh anggota yang disisipi oleh Trait. Urutan precedence adalah bahwa member dari klas saat ini ditumpuk oleh trait yang disisipkan.&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;Contoh&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;Fungsi turunan dari klas dasar (&lt;code class=&quot;highlighter-rouge&quot;&gt;Base&lt;/code&gt;) ditumpuk oleh fungsi yang disisipkan pada klas &lt;code class=&quot;highlighter-rouge&quot;&gt;MyHelloWorld&lt;/code&gt; yaitu dari trait &lt;code class=&quot;highlighter-rouge&quot;&gt;SayWorld&lt;/code&gt;. Aturan ini akan sama untuk fungsi yang didefinisikan di dalam klas &lt;code class=&quot;highlighter-rouge&quot;&gt;MyHelloWorld&lt;/code&gt;.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Base&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;sayHello&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'Hello '&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;trait&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;SayWorld&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;sayHello&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'World!'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;MyHelloWorld&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Base&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kn&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;SayWorld&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;nv&quot;&gt;$o&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;MyHelloWorld&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;$o&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;sayHello&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;// output:&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;// World&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Contoh lain dari urutan precedence&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;trait&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;HelloWorld&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;sayHello&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'Hello World!'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;DuniaTidakCukup&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kn&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;HelloWorld&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;sayHello&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'Halo Dunia!'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;nv&quot;&gt;$o&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;DuniaTidakCukup&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;$o&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;sayHello&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Contoh di atas akan menghasilkan keluaran:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;Halo Dunia!&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;h4 id=&quot;trait-multiple&quot;&gt;&lt;a name=&quot;trait-multiple&quot;&gt;&lt;/a&gt;Trait Multiple&lt;/h4&gt;
-
-&lt;p&gt;Multiple trait dapat disisipkan ke dalam klas dengan mendaftarkannya pada statemen &lt;code class=&quot;highlighter-rouge&quot;&gt;use&lt;/code&gt;, dipisahkan dengan koma.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;trait&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Hello&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;sayHello&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'Hello '&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;trait&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;World&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;sayWorld&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'World'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;MyHelloWorld&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kn&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;Hello&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;, World&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;sayExclamationMark&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'!'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;nv&quot;&gt;$o&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;MyHelloWorld&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;$o&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;sayHello&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;$o&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;sayWorld&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;$o&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;sayExclamationMark&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;h4 id=&quot;resolusi-konflik&quot;&gt;&lt;a name=&quot;conflict-resolution&quot;&gt;&lt;/a&gt;Resolusi Konflik&lt;/h4&gt;
-
-&lt;p&gt;Jika dua Trait disisipkan dengan nama yang sama maka akan terjadi kesalahan fatal, jika masalah tidak dipecahkan secara eksplisit. Untuk memecahkan konflik penamaan antara Trait pada klas yang sama, operator &lt;code class=&quot;highlighter-rouge&quot;&gt;insteadof&lt;/code&gt; diperlukan untuk memilih tepat satu dari method yang konflik. Karena hal ini hanya boleh membuat satu pengecualian, operator &lt;code class=&quot;highlighter-rouge&quot;&gt;as&lt;/code&gt; dapat digunakan untuk menambah alias ke suatu method. Perlu dicatat bahwa operator &lt;code class=&quot;highlighter-rouge&quot;&gt;as&lt;/code&gt; tidak merubah nama method dan tidak mempengaruhi method lain.&lt;/p&gt;
-
-&lt;p&gt;Contoh&lt;/p&gt;
-
-&lt;p&gt;Pada contoh ini, klas &lt;code class=&quot;highlighter-rouge&quot;&gt;Talker&lt;/code&gt; menggunakan trait &lt;code class=&quot;highlighter-rouge&quot;&gt;A&lt;/code&gt; dan &lt;code class=&quot;highlighter-rouge&quot;&gt;B&lt;/code&gt;. Karena trait &lt;code class=&quot;highlighter-rouge&quot;&gt;A&lt;/code&gt; dan &lt;code class=&quot;highlighter-rouge&quot;&gt;B&lt;/code&gt; memiliki konflik, maka klas ini akan perlu mendefinisikan penggunaan method &lt;code class=&quot;highlighter-rouge&quot;&gt;smallTalk&lt;/code&gt; dari trait &lt;code class=&quot;highlighter-rouge&quot;&gt;B&lt;/code&gt; dan method &lt;code class=&quot;highlighter-rouge&quot;&gt;bigTalk&lt;/code&gt; dari trait &lt;code class=&quot;highlighter-rouge&quot;&gt;A&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;Klas &lt;code class=&quot;highlighter-rouge&quot;&gt;Alias_Talker&lt;/code&gt; menggunakan operator &lt;code class=&quot;highlighter-rouge&quot;&gt;as&lt;/code&gt; untuk dapat menggunakan method &lt;code class=&quot;highlighter-rouge&quot;&gt;bigTalk&lt;/code&gt; dari trait &lt;code class=&quot;highlighter-rouge&quot;&gt;B&lt;/code&gt; dengan nama alias &lt;code class=&quot;highlighter-rouge&quot;&gt;talk&lt;/code&gt;.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;trait&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;A&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;smallTalk&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'a'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;bigTalk&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'A'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;trait&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;B&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;smallTalk&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'b'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;bigTalk&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'B'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Talker&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kn&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;A&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;, B {
-        B::smallTalk insteadof A&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;nx&quot;&gt;A&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;bigTalk&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;insteadof&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;B&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Aliased_Talker&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kn&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;A&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;, B {
-        B::smallTalk insteadof A&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;nx&quot;&gt;A&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;bigTalk&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;insteadof&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;B&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;nx&quot;&gt;B&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;bigTalk&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;talk&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;h4 id=&quot;merubah-visibility-metode&quot;&gt;&lt;a name=&quot;visibility&quot;&gt;&lt;/a&gt;Merubah visibility metode&lt;/h4&gt;
-
-&lt;p&gt;Dengan menggunakan syntax &lt;code class=&quot;highlighter-rouge&quot;&gt;as&lt;/code&gt; method pada trait dapat dirubah visibilitynya pada klas yang menggunakan trait.&lt;/p&gt;
-
-&lt;p&gt;Contoh&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;trait&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;HelloWorld&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;sayHello&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'Hello world!'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;// Merubah visibility fungsi sayHello&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;MyClass1&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kn&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;HelloWorld&lt;/span&gt;&lt;span class=&quot;err&quot;&gt; { sayHello&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;protected&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;// Alias method dengan perubahan visibility&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;// Visibility sayHello tetap tidak berubah&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;MyClass2&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kn&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;HelloWorld&lt;/span&gt;&lt;span class=&quot;err&quot;&gt; { sayHello&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;private&lt;/span&gt;&lt;span class=&quot;err&quot;&gt; myPrivateHello&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;h4 id=&quot;trait-disusun-dari-trait&quot;&gt;&lt;a name=&quot;composed&quot;&gt;&lt;/a&gt;Trait disusun dari Trait&lt;/h4&gt;
-
-&lt;p&gt;Seperti pada klas yang dapat menggunakan trait, jadi trait juga dapat menggunakan trait lain. Dengan menggunakan satu atau lebih trait di dalam definisi trait, trait ini dapat disusun sebagian atau semuanya dari anggota yang mendefinisikan pada trait lain.&lt;/p&gt;
-
-&lt;p&gt;Contoh&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;trait&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Hello&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;sayHello&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'Hello'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;trait&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;World&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;sayWorld&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'World'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;trait&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;HelloWorld&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kn&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;Hello&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;, World&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;MyHelloWorld&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kn&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;HelloWorld&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;nv&quot;&gt;$o&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;MyHelloWorld&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;$o&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;sayHello&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;$o&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;sayWorld&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;h4 id=&quot;anggota-trait-abstract&quot;&gt;&lt;a name=&quot;abstract-trait&quot;&gt;&lt;/a&gt;Anggota Trait Abstract&lt;/h4&gt;
-
-&lt;p&gt;Trait mendukung penggunaan abstract method untuk memaksa kebutuhan pada class yang menggunakan trait.&lt;/p&gt;
-
-&lt;p&gt;Contoh abstract method&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;trait&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Hello&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;sayHelloWorld&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'Hello'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getWorld&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;k&quot;&gt;abstract&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getWorld&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;MyHelloWorld&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$world&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;kn&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;Hello&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getWorld&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;world&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;setWorld&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$val&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;world&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$val&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;h4 id=&quot;anggota-static-trait&quot;&gt;&lt;a name=&quot;static-trait&quot;&gt;&lt;/a&gt;Anggota Static Trait&lt;/h4&gt;
-
-&lt;p&gt;Trait dapat mendefinisikan static property dan static method&lt;/p&gt;
-
-&lt;p&gt;Contoh static variabel&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;trait&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Counter&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;inc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$c&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;nv&quot;&gt;$c&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$c&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$c&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;C1&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kn&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;Counter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;C2&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kn&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;Counter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;nv&quot;&gt;$o&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;C1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;$o&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;inc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// echo 1&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;$p&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;C2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;$p&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;inc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// echo 1&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Contoh static method&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;trait&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;StaticExample&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;doSomething&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'Doing Something'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Example&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kn&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;StaticExample&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;nx&quot;&gt;Example&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;doSomething&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;h4 id=&quot;property&quot;&gt;&lt;a name=&quot;property&quot;&gt;&lt;/a&gt;Property&lt;/h4&gt;
-
-&lt;p&gt;Di dalam Trait kita juga dapat mendefinisikan &lt;code class=&quot;highlighter-rouge&quot;&gt;property&lt;/code&gt; sama seperti pada klas.&lt;/p&gt;
-
-&lt;p&gt;Contoh&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;kd&quot;&gt;trait&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;PropertiesTrait&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;PropertiesExample&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kn&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;PropertiesTrait&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;nv&quot;&gt;$ex&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;PropertiesExample&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;$ex&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;sekian.&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;sumber: php.net&lt;/em&gt;&lt;/p&gt;</content><author><name>Agus Susilo</name></author><summary type="html">Trait adalah mekanisme untuk penggunaan kembali kode dalam single inheritance. Trait dimaksudkan untuk mengurangi beberapa keterbatasan dari turunan tunggal dengan memungkinkan pengembang untuk menggunakan kembali serangkain fungsi-fungsi secara bebas pada beberapa klas yang independen yang hidup dalam hirarki klas yang berbeda. Trait mirip dengan klas, hanya saja trait dimaksudkan untuk mengelompokan fungsi menjadi kecil dan konsisten. Kita tidak bisa meng-instansi trait pada dirinya sendiri tetapi kita bisa menggunakannya tanpa harus menurukannya(inheritance). Daftar Isi: Precedence Trait Multiple Resolusi Konflik Merubah visibility metode Trait disusun dari Trait Anggota Trait Abstract Anggota Static Trait Property Contoh trait: &amp;lt;?php namespace app\traits; trait Foo { public function hello() { return 'Hello'; } } Untuk menggunakan trait pada klas kita cukup gunakan keyword use didalam definisi klas. &amp;lt;?php class User { use \app\traits\Foo; // kita dapat menggunakan fungsi dari trait Foo // secara langsung menggunakan $this public function world() { echo $this-&amp;gt;hello() . ' world!'; } } Hal mendahului/ Precedence Anggota turunan dari klas dasar ditumpuki oleh anggota yang disisipi oleh Trait. Urutan precedence adalah bahwa member dari klas saat ini ditumpuk oleh trait yang disisipkan. Contoh Fungsi turunan dari klas dasar (Base) ditumpuk oleh fungsi yang disisipkan pada klas MyHelloWorld yaitu dari trait SayWorld. Aturan ini akan sama untuk fungsi yang didefinisikan di dalam klas MyHelloWorld. &amp;lt;?php class Base { public function sayHello() { echo 'Hello '; } } trait SayWorld { public function sayHello() { echo 'World!'; } } class MyHelloWorld extends Base { use SayWorld; } $o = new MyHelloWorld(); $o-&amp;gt;sayHello(); // output: // World Contoh lain dari urutan precedence &amp;lt;?php trait HelloWorld { public function sayHello() { echo 'Hello World!'; } } class DuniaTidakCukup { use HelloWorld; public function sayHello() { echo 'Halo Dunia!'; } } $o = new DuniaTidakCukup(); $o-&amp;gt;sayHello(); Contoh di atas akan menghasilkan keluaran: Halo Dunia! Trait Multiple Multiple trait dapat disisipkan ke dalam klas dengan mendaftarkannya pada statemen use, dipisahkan dengan koma. &amp;lt;?php trait Hello { public function sayHello() { echo 'Hello '; } } trait World { public function sayWorld() { echo 'World'; } } class MyHelloWorld { use Hello, World; public function sayExclamationMark() { echo '!'; } } $o = new MyHelloWorld(); $o-&amp;gt;sayHello(); $o-&amp;gt;sayWorld(); $o-&amp;gt;sayExclamationMark(); Resolusi Konflik Jika dua Trait disisipkan dengan nama yang sama maka akan terjadi kesalahan fatal, jika masalah tidak dipecahkan secara eksplisit. Untuk memecahkan konflik penamaan antara Trait pada klas yang sama, operator insteadof diperlukan untuk memilih tepat satu dari method yang konflik. Karena hal ini hanya boleh membuat satu pengecualian, operator as dapat digunakan untuk menambah alias ke suatu method. Perlu dicatat bahwa operator as tidak merubah nama method dan tidak mempengaruhi method lain. Contoh Pada contoh ini, klas Talker menggunakan trait A dan B. Karena trait A dan B memiliki konflik, maka klas ini akan perlu mendefinisikan penggunaan method smallTalk dari trait B dan method bigTalk dari trait A. Klas Alias_Talker menggunakan operator as untuk dapat menggunakan method bigTalk dari trait B dengan nama alias talk. &amp;lt;?php trait A { public function smallTalk() { echo 'a'; } public function bigTalk() { echo 'A'; } } trait B { public function smallTalk() { echo 'b'; } public function bigTalk() { echo 'B'; } } class Talker { use A, B { B::smallTalk insteadof A; A::bigTalk insteadof B; } } class Aliased_Talker { use A, B { B::smallTalk insteadof A; A::bigTalk insteadof B; B::bigTalk as talk; } } Merubah visibility metode Dengan menggunakan syntax as method pada trait dapat dirubah visibilitynya pada klas yang menggunakan trait. Contoh &amp;lt;?php trait HelloWorld { public function sayHello() { echo 'Hello world!'; } } // Merubah visibility fungsi sayHello class MyClass1 { use HelloWorld { sayHello as protected; } } // Alias method dengan perubahan visibility // Visibility sayHello tetap tidak berubah class MyClass2 { use HelloWorld { sayHello as private myPrivateHello; } } Trait disusun dari Trait Seperti pada klas yang dapat menggunakan trait, jadi trait juga dapat menggunakan trait lain. Dengan menggunakan satu atau lebih trait di dalam definisi trait, trait ini dapat disusun sebagian atau semuanya dari anggota yang mendefinisikan pada trait lain. Contoh &amp;lt;?php trait Hello { public function sayHello() { echo 'Hello'; } } trait World { public function sayWorld() { echo 'World'; } } trait HelloWorld { use Hello, World; } class MyHelloWorld { use HelloWorld; } $o = new MyHelloWorld(); $o-&amp;gt;sayHello(); $o-&amp;gt;sayWorld(); Anggota Trait Abstract Trait mendukung penggunaan abstract method untuk memaksa kebutuhan pada class yang menggunakan trait. Contoh abstract method &amp;lt;?php trait Hello { public function sayHelloWorld() { echo 'Hello' . $this-&amp;gt;getWorld(); } abstract public function getWorld(); } class MyHelloWorld { private $world; use Hello; public function getWorld() { return $this-&amp;gt;world; } public function setWorld($val) { $this-&amp;gt;world = $val; } } Anggota Static Trait Trait dapat mendefinisikan static property dan static method Contoh static variabel &amp;lt;?php trait Counter { public function inc() { static $c = 0; $c = $c + 1; echo &quot;$c\n&quot;; } } class C1 { use Counter; } class C2 { use Counter; } $o = new C1(); $o-&amp;gt;inc(); // echo 1 $p = new C2(); $p-&amp;gt;inc(); // echo 1 Contoh static method &amp;lt;?php trait StaticExample { public static function doSomething() { return 'Doing Something'; } } class Example { use StaticExample; } Example::doSomething(); Property Di dalam Trait kita juga dapat mendefinisikan property sama seperti pada klas. Contoh trait PropertiesTrait { public $x = 1; } class PropertiesExample { use PropertiesTrait; } $ex = new PropertiesExample(); $ex-&amp;gt;x; sekian. sumber: php.net</summary></entry></feed>
+&lt;p&gt;Sekian semoga bermanfaat.&lt;/p&gt;</content><author><name>Agus Susilo</name></author><summary type="html">Buat temen-temen yang pake jekyll untuk menulis blognya pasti tahu syntax dari template jekyll. Nah pernahkah temen-temen ingin men-share kode dari template jekyll?. Sudah mencari-cari digoogle tapi belum ketemu?. Kali saya ingin berbagi bagaimana men-share kode dari syntax template jekyll ke blog. Untuk bisa menuliskan kode dari jekyll kita bisa memakai syntax raw dan endraw, karena saya belum menemukan bagaimana men-share kode raw di dalam raw maka saya pake screenshot saja. Jadi setelah syntax kode highlight kita bisa tambahkan raw kemudian baru menulis kode template. raw akan memproses apa yang ada di dalamnya sesuai format, tanpa merubah isinya. Contoh outputnya bisa dilihat pada postingan saya berikut Link Internal Post pada Artikel di Jekyll Sekian semoga bermanfaat.</summary></entry></feed>
