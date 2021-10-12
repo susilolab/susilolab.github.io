@@ -2,21 +2,23 @@
 <html lang="en"><head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
 <title>Membuat custom Mix Task di Phoenix | susilolab</title>
-<meta name="generator" content="Jekyll v3.8.6" />
+<meta name="generator" content="Jekyll v4.2.0" />
 <meta property="og:title" content="Membuat custom Mix Task di Phoenix" />
 <meta name="author" content="Agus Susilo" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Kadang kita butuh membuat task versi kita sendiri untuk mempermudah dalam pengembangan web. Bawaan phoenix mendukung pembuatan custom mix task dan gunakan modul OptionParser untuk mengolah argumennya. Untuk membuat custom mix task bikin folder app_name/lib/mix/tasks dan buat file baru misalnya hello.ex kemudian ikuti kode berikut: defmodule Mix.Tasks.Hello do use Mix.Task def run(_) do Mix.Task.run(&quot;app.start&quot;) Mix.shell.info(&quot;Hello world!&quot;) end end Mix.Task.run memastikan bahwa saat mix dijalankan aplikasi juga dijalankan. Setelah itu compile dengan perintah mix compile dan jalankan dengan perintah mix hello." />
-<meta property="og:description" content="Kadang kita butuh membuat task versi kita sendiri untuk mempermudah dalam pengembangan web. Bawaan phoenix mendukung pembuatan custom mix task dan gunakan modul OptionParser untuk mengolah argumennya. Untuk membuat custom mix task bikin folder app_name/lib/mix/tasks dan buat file baru misalnya hello.ex kemudian ikuti kode berikut: defmodule Mix.Tasks.Hello do use Mix.Task def run(_) do Mix.Task.run(&quot;app.start&quot;) Mix.shell.info(&quot;Hello world!&quot;) end end Mix.Task.run memastikan bahwa saat mix dijalankan aplikasi juga dijalankan. Setelah itu compile dengan perintah mix compile dan jalankan dengan perintah mix hello." />
+<meta name="description" content="Kadang kita butuh membuat task versi kita sendiri untuk mempermudah dalam pengembangan web. Bawaan phoenix mendukung pembuatan custom mix task dan gunakan modul OptionParser untuk mengolah argumennya. Untuk membuat custom mix task bikin folder app_name/lib/mix/tasks dan buat file baru misalnya hello.ex kemudian ikuti kode berikut:" />
+<meta property="og:description" content="Kadang kita butuh membuat task versi kita sendiri untuk mempermudah dalam pengembangan web. Bawaan phoenix mendukung pembuatan custom mix task dan gunakan modul OptionParser untuk mengolah argumennya. Untuk membuat custom mix task bikin folder app_name/lib/mix/tasks dan buat file baru misalnya hello.ex kemudian ikuti kode berikut:" />
 <link rel="canonical" href="https://susilolab.github.io/elixir/2019/09/07/membuat-custom-mix-task-di-phoenix.html" />
 <meta property="og:url" content="https://susilolab.github.io/elixir/2019/09/07/membuat-custom-mix-task-di-phoenix.html" />
 <meta property="og:site_name" content="susilolab" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2019-09-07T08:00:00+07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Membuat custom Mix Task di Phoenix" />
 <script type="application/ld+json">
-{"headline":"Membuat custom Mix Task di Phoenix","dateModified":"2019-09-07T08:00:00+07:00","description":"Kadang kita butuh membuat task versi kita sendiri untuk mempermudah dalam pengembangan web. Bawaan phoenix mendukung pembuatan custom mix task dan gunakan modul OptionParser untuk mengolah argumennya. Untuk membuat custom mix task bikin folder app_name/lib/mix/tasks dan buat file baru misalnya hello.ex kemudian ikuti kode berikut: defmodule Mix.Tasks.Hello do use Mix.Task def run(_) do Mix.Task.run(&quot;app.start&quot;) Mix.shell.info(&quot;Hello world!&quot;) end end Mix.Task.run memastikan bahwa saat mix dijalankan aplikasi juga dijalankan. Setelah itu compile dengan perintah mix compile dan jalankan dengan perintah mix hello.","datePublished":"2019-09-07T08:00:00+07:00","url":"https://susilolab.github.io/elixir/2019/09/07/membuat-custom-mix-task-di-phoenix.html","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://susilolab.github.io/elixir/2019/09/07/membuat-custom-mix-task-di-phoenix.html"},"author":{"@type":"Person","name":"Agus Susilo"},"@context":"https://schema.org"}</script>
+{"@type":"BlogPosting","description":"Kadang kita butuh membuat task versi kita sendiri untuk mempermudah dalam pengembangan web. Bawaan phoenix mendukung pembuatan custom mix task dan gunakan modul OptionParser untuk mengolah argumennya. Untuk membuat custom mix task bikin folder app_name/lib/mix/tasks dan buat file baru misalnya hello.ex kemudian ikuti kode berikut:","headline":"Membuat custom Mix Task di Phoenix","dateModified":"2019-09-07T08:00:00+07:00","datePublished":"2019-09-07T08:00:00+07:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://susilolab.github.io/elixir/2019/09/07/membuat-custom-mix-task-di-phoenix.html"},"url":"https://susilolab.github.io/elixir/2019/09/07/membuat-custom-mix-task-di-phoenix.html","author":{"@type":"Person","name":"Agus Susilo"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://susilolab.github.io/feed.xml" title="susilolab" /><script>
 if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1")) {
@@ -30,22 +32,34 @@ if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNo
 }
 </script>
   
-<!-- Begin Jekyll SEO tag v2.6.1 -->
+<!-- Begin Jekyll SEO tag v2.7.1 -->
 <title>Membuat custom Mix Task di Phoenix | susilolab</title>
-<meta name="generator" content="Jekyll v3.8.6" />
+<meta name="generator" content="Jekyll v4.2.0" />
 <meta property="og:title" content="Membuat custom Mix Task di Phoenix" />
 <meta name="author" content="Agus Susilo" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Kadang kita butuh membuat task versi kita sendiri untuk mempermudah dalam pengembangan web. Bawaan phoenix mendukung pembuatan custom mix task dan gunakan modul OptionParser untuk mengolah argumennya. Untuk membuat custom mix task bikin folder app_name/lib/mix/tasks dan buat file baru misalnya hello.ex kemudian ikuti kode berikut: defmodule Mix.Tasks.Hello do use Mix.Task def run(_) do Mix.Task.run(&quot;app.start&quot;) Mix.shell.info(&quot;Hello world!&quot;) end end Mix.Task.run memastikan bahwa saat mix dijalankan aplikasi juga dijalankan. Setelah itu compile dengan perintah mix compile dan jalankan dengan perintah mix hello." />
-<meta property="og:description" content="Kadang kita butuh membuat task versi kita sendiri untuk mempermudah dalam pengembangan web. Bawaan phoenix mendukung pembuatan custom mix task dan gunakan modul OptionParser untuk mengolah argumennya. Untuk membuat custom mix task bikin folder app_name/lib/mix/tasks dan buat file baru misalnya hello.ex kemudian ikuti kode berikut: defmodule Mix.Tasks.Hello do use Mix.Task def run(_) do Mix.Task.run(&quot;app.start&quot;) Mix.shell.info(&quot;Hello world!&quot;) end end Mix.Task.run memastikan bahwa saat mix dijalankan aplikasi juga dijalankan. Setelah itu compile dengan perintah mix compile dan jalankan dengan perintah mix hello." />
+<meta name="description" content="Kadang kita butuh membuat task versi kita sendiri untuk mempermudah dalam pengembangan web. Bawaan phoenix mendukung pembuatan custom mix task dan gunakan modul OptionParser untuk mengolah argumennya. Untuk membuat custom mix task bikin folder app_name/lib/mix/tasks dan buat file baru misalnya hello.ex kemudian ikuti kode berikut:" />
+<meta property="og:description" content="Kadang kita butuh membuat task versi kita sendiri untuk mempermudah dalam pengembangan web. Bawaan phoenix mendukung pembuatan custom mix task dan gunakan modul OptionParser untuk mengolah argumennya. Untuk membuat custom mix task bikin folder app_name/lib/mix/tasks dan buat file baru misalnya hello.ex kemudian ikuti kode berikut:" />
 <link rel="canonical" href="https://susilolab.github.io/elixir/2019/09/07/membuat-custom-mix-task-di-phoenix.html" />
 <meta property="og:url" content="https://susilolab.github.io/elixir/2019/09/07/membuat-custom-mix-task-di-phoenix.html" />
 <meta property="og:site_name" content="susilolab" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2019-09-07T08:00:00+07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Membuat custom Mix Task di Phoenix" />
 <script type="application/ld+json">
-{"headline":"Membuat custom Mix Task di Phoenix","dateModified":"2019-09-07T08:00:00+07:00","description":"Kadang kita butuh membuat task versi kita sendiri untuk mempermudah dalam pengembangan web. Bawaan phoenix mendukung pembuatan custom mix task dan gunakan modul OptionParser untuk mengolah argumennya. Untuk membuat custom mix task bikin folder app_name/lib/mix/tasks dan buat file baru misalnya hello.ex kemudian ikuti kode berikut: defmodule Mix.Tasks.Hello do use Mix.Task def run(_) do Mix.Task.run(&quot;app.start&quot;) Mix.shell.info(&quot;Hello world!&quot;) end end Mix.Task.run memastikan bahwa saat mix dijalankan aplikasi juga dijalankan. Setelah itu compile dengan perintah mix compile dan jalankan dengan perintah mix hello.","datePublished":"2019-09-07T08:00:00+07:00","url":"https://susilolab.github.io/elixir/2019/09/07/membuat-custom-mix-task-di-phoenix.html","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://susilolab.github.io/elixir/2019/09/07/membuat-custom-mix-task-di-phoenix.html"},"author":{"@type":"Person","name":"Agus Susilo"},"@context":"https://schema.org"}</script>
+{"@type":"BlogPosting","description":"Kadang kita butuh membuat task versi kita sendiri untuk mempermudah dalam pengembangan web. Bawaan phoenix mendukung pembuatan custom mix task dan gunakan modul OptionParser untuk mengolah argumennya. Untuk membuat custom mix task bikin folder app_name/lib/mix/tasks dan buat file baru misalnya hello.ex kemudian ikuti kode berikut:","headline":"Membuat custom Mix Task di Phoenix","dateModified":"2019-09-07T08:00:00+07:00","datePublished":"2019-09-07T08:00:00+07:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://susilolab.github.io/elixir/2019/09/07/membuat-custom-mix-task-di-phoenix.html"},"url":"https://susilolab.github.io/elixir/2019/09/07/membuat-custom-mix-task-di-phoenix.html","author":{"@type":"Person","name":"Agus Susilo"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
+
+
+  
+  
+
+
+
+
+
+
 
 </head>
 <body><header class="site-header" role="banner">
@@ -71,11 +85,14 @@ if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNo
     <h1 class="post-title p-name" itemprop="name headline">Membuat custom Mix Task di Phoenix</h1>
     <p class="post-meta">
       <time class="dt-published" datetime="2019-09-07T08:00:00+07:00" itemprop="datePublished">Sep 7, 2019
-      </time></p>
+      </time>
+      
+      </p>
   </header>
 
   <div class="post-content e-content" itemprop="articleBody">
-    <p>Kadang kita butuh membuat task versi kita sendiri untuk mempermudah dalam pengembangan web. Bawaan phoenix mendukung pembuatan custom mix task dan gunakan modul <code class="highlighter-rouge">OptionParser</code> untuk mengolah argumennya. Untuk membuat custom mix task bikin folder <code class="highlighter-rouge">app_name/lib/mix/tasks</code> dan buat file baru misalnya <code class="highlighter-rouge">hello.ex</code> kemudian ikuti kode berikut:</p>
+    <p>Kadang kita butuh membuat task versi kita sendiri untuk mempermudah dalam pengembangan web. Bawaan phoenix mendukung pembuatan custom mix task dan gunakan modul <code class="language-plaintext highlighter-rouge">OptionParser</code> untuk mengolah argumennya. Untuk membuat custom mix task bikin folder <code class="language-plaintext highlighter-rouge">app_name/lib/mix/tasks</code> dan buat file baru misalnya <code class="language-plaintext highlighter-rouge">hello.ex</code> kemudian ikuti kode berikut:
+<!--more--></p>
 
 <figure class="highlight"><pre><code class="language-elixir" data-lang="elixir"><span class="k">defmodule</span> <span class="no">Mix</span><span class="o">.</span><span class="no">Tasks</span><span class="o">.</span><span class="no">Hello</span> <span class="k">do</span>
     <span class="kn">use</span> <span class="no">Mix</span><span class="o">.</span><span class="no">Task</span>
@@ -86,7 +103,7 @@ if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNo
     <span class="k">end</span>
 <span class="k">end</span></code></pre></figure>
 
-<p><code class="highlighter-rouge">Mix.Task.run</code> memastikan bahwa saat mix dijalankan aplikasi juga dijalankan. Setelah itu compile dengan perintah <code class="highlighter-rouge">mix compile</code> dan jalankan dengan perintah <code class="highlighter-rouge">mix hello</code>.</p>
+<p><code class="language-plaintext highlighter-rouge">Mix.Task.run</code> memastikan bahwa saat mix dijalankan aplikasi juga dijalankan. Setelah itu compile dengan perintah <code class="language-plaintext highlighter-rouge">mix compile</code> dan jalankan dengan perintah <code class="language-plaintext highlighter-rouge">mix hello</code>.</p>
 
   </div><a class="u-url" href="/elixir/2019/09/07/membuat-custom-mix-task-di-phoenix.html" hidden></a>
 </article>
@@ -101,7 +118,7 @@ if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNo
 
       <div class="footer-col footer-col-3">
         <p>&quot;Sebaik-baik manusia adalah yang paling bermanfaat bagi manusia&quot; (HR. Ahmad, ath-Thabrani, ad-Daruqutni)</p>
-        <p>&copy;2020&nbsp;Agus Susilo</p>
+        <p>&copy;2021&nbsp;Agus Susilo</p>
       </div>
     </div>
 

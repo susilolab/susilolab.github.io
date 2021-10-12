@@ -2,21 +2,23 @@
 <html lang="en"><head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
 <title>Menggunakan Gnome Terminal sebagai default shell pada Tortoisehg | susilolab</title>
-<meta name="generator" content="Jekyll v3.8.6" />
+<meta name="generator" content="Jekyll v4.2.0" />
 <meta property="og:title" content="Menggunakan Gnome Terminal sebagai default shell pada Tortoisehg" />
 <meta name="author" content="Agus Susilo" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Tortoisehg merupakan front-end GUI untuk mercurial dan disini saya ingin berbagi bagaimana cara menseting gnome-terminal sebagai default shell yang sebelumnya menggunakan default xterm. Caranya cukup mudah, buka Tortoisehg kemudian klik menu File -&gt; Settings kemudian klik ListBox TortoiseHg lalu pada inputbox berlabel Shell ketikan gnome-terminal %(root)s. %(reponame)s kemudian klik Ok. tutup tortoisehg Anda dan buka lagi. Untuk mencobanya klik kanan pada salah satu repo di Repostory Registry kemudian klik terminal, jika tidak ada kendala gnome-terminal akan muncul. Sekian" />
-<meta property="og:description" content="Tortoisehg merupakan front-end GUI untuk mercurial dan disini saya ingin berbagi bagaimana cara menseting gnome-terminal sebagai default shell yang sebelumnya menggunakan default xterm. Caranya cukup mudah, buka Tortoisehg kemudian klik menu File -&gt; Settings kemudian klik ListBox TortoiseHg lalu pada inputbox berlabel Shell ketikan gnome-terminal %(root)s. %(reponame)s kemudian klik Ok. tutup tortoisehg Anda dan buka lagi. Untuk mencobanya klik kanan pada salah satu repo di Repostory Registry kemudian klik terminal, jika tidak ada kendala gnome-terminal akan muncul. Sekian" />
+<meta name="description" content="Tortoisehg merupakan front-end GUI untuk mercurial dan disini saya ingin berbagi bagaimana cara menseting gnome-terminal sebagai default shell yang sebelumnya menggunakan default xterm." />
+<meta property="og:description" content="Tortoisehg merupakan front-end GUI untuk mercurial dan disini saya ingin berbagi bagaimana cara menseting gnome-terminal sebagai default shell yang sebelumnya menggunakan default xterm." />
 <link rel="canonical" href="https://susilolab.github.io/linux/2020/03/23/menggunakan-gnome-terminal-pada-tortoisehg.html" />
 <meta property="og:url" content="https://susilolab.github.io/linux/2020/03/23/menggunakan-gnome-terminal-pada-tortoisehg.html" />
 <meta property="og:site_name" content="susilolab" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2020-03-23T08:00:00+07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Menggunakan Gnome Terminal sebagai default shell pada Tortoisehg" />
 <script type="application/ld+json">
-{"headline":"Menggunakan Gnome Terminal sebagai default shell pada Tortoisehg","dateModified":"2020-03-23T08:00:00+07:00","description":"Tortoisehg merupakan front-end GUI untuk mercurial dan disini saya ingin berbagi bagaimana cara menseting gnome-terminal sebagai default shell yang sebelumnya menggunakan default xterm. Caranya cukup mudah, buka Tortoisehg kemudian klik menu File -&gt; Settings kemudian klik ListBox TortoiseHg lalu pada inputbox berlabel Shell ketikan gnome-terminal %(root)s. %(reponame)s kemudian klik Ok. tutup tortoisehg Anda dan buka lagi. Untuk mencobanya klik kanan pada salah satu repo di Repostory Registry kemudian klik terminal, jika tidak ada kendala gnome-terminal akan muncul. Sekian","datePublished":"2020-03-23T08:00:00+07:00","url":"https://susilolab.github.io/linux/2020/03/23/menggunakan-gnome-terminal-pada-tortoisehg.html","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://susilolab.github.io/linux/2020/03/23/menggunakan-gnome-terminal-pada-tortoisehg.html"},"author":{"@type":"Person","name":"Agus Susilo"},"@context":"https://schema.org"}</script>
+{"@type":"BlogPosting","description":"Tortoisehg merupakan front-end GUI untuk mercurial dan disini saya ingin berbagi bagaimana cara menseting gnome-terminal sebagai default shell yang sebelumnya menggunakan default xterm.","headline":"Menggunakan Gnome Terminal sebagai default shell pada Tortoisehg","dateModified":"2020-03-23T08:00:00+07:00","datePublished":"2020-03-23T08:00:00+07:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://susilolab.github.io/linux/2020/03/23/menggunakan-gnome-terminal-pada-tortoisehg.html"},"url":"https://susilolab.github.io/linux/2020/03/23/menggunakan-gnome-terminal-pada-tortoisehg.html","author":{"@type":"Person","name":"Agus Susilo"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://susilolab.github.io/feed.xml" title="susilolab" /><script>
 if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1")) {
@@ -30,22 +32,34 @@ if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNo
 }
 </script>
   
-<!-- Begin Jekyll SEO tag v2.6.1 -->
+<!-- Begin Jekyll SEO tag v2.7.1 -->
 <title>Menggunakan Gnome Terminal sebagai default shell pada Tortoisehg | susilolab</title>
-<meta name="generator" content="Jekyll v3.8.6" />
+<meta name="generator" content="Jekyll v4.2.0" />
 <meta property="og:title" content="Menggunakan Gnome Terminal sebagai default shell pada Tortoisehg" />
 <meta name="author" content="Agus Susilo" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Tortoisehg merupakan front-end GUI untuk mercurial dan disini saya ingin berbagi bagaimana cara menseting gnome-terminal sebagai default shell yang sebelumnya menggunakan default xterm. Caranya cukup mudah, buka Tortoisehg kemudian klik menu File -&gt; Settings kemudian klik ListBox TortoiseHg lalu pada inputbox berlabel Shell ketikan gnome-terminal %(root)s. %(reponame)s kemudian klik Ok. tutup tortoisehg Anda dan buka lagi. Untuk mencobanya klik kanan pada salah satu repo di Repostory Registry kemudian klik terminal, jika tidak ada kendala gnome-terminal akan muncul. Sekian" />
-<meta property="og:description" content="Tortoisehg merupakan front-end GUI untuk mercurial dan disini saya ingin berbagi bagaimana cara menseting gnome-terminal sebagai default shell yang sebelumnya menggunakan default xterm. Caranya cukup mudah, buka Tortoisehg kemudian klik menu File -&gt; Settings kemudian klik ListBox TortoiseHg lalu pada inputbox berlabel Shell ketikan gnome-terminal %(root)s. %(reponame)s kemudian klik Ok. tutup tortoisehg Anda dan buka lagi. Untuk mencobanya klik kanan pada salah satu repo di Repostory Registry kemudian klik terminal, jika tidak ada kendala gnome-terminal akan muncul. Sekian" />
+<meta name="description" content="Tortoisehg merupakan front-end GUI untuk mercurial dan disini saya ingin berbagi bagaimana cara menseting gnome-terminal sebagai default shell yang sebelumnya menggunakan default xterm." />
+<meta property="og:description" content="Tortoisehg merupakan front-end GUI untuk mercurial dan disini saya ingin berbagi bagaimana cara menseting gnome-terminal sebagai default shell yang sebelumnya menggunakan default xterm." />
 <link rel="canonical" href="https://susilolab.github.io/linux/2020/03/23/menggunakan-gnome-terminal-pada-tortoisehg.html" />
 <meta property="og:url" content="https://susilolab.github.io/linux/2020/03/23/menggunakan-gnome-terminal-pada-tortoisehg.html" />
 <meta property="og:site_name" content="susilolab" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2020-03-23T08:00:00+07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Menggunakan Gnome Terminal sebagai default shell pada Tortoisehg" />
 <script type="application/ld+json">
-{"headline":"Menggunakan Gnome Terminal sebagai default shell pada Tortoisehg","dateModified":"2020-03-23T08:00:00+07:00","description":"Tortoisehg merupakan front-end GUI untuk mercurial dan disini saya ingin berbagi bagaimana cara menseting gnome-terminal sebagai default shell yang sebelumnya menggunakan default xterm. Caranya cukup mudah, buka Tortoisehg kemudian klik menu File -&gt; Settings kemudian klik ListBox TortoiseHg lalu pada inputbox berlabel Shell ketikan gnome-terminal %(root)s. %(reponame)s kemudian klik Ok. tutup tortoisehg Anda dan buka lagi. Untuk mencobanya klik kanan pada salah satu repo di Repostory Registry kemudian klik terminal, jika tidak ada kendala gnome-terminal akan muncul. Sekian","datePublished":"2020-03-23T08:00:00+07:00","url":"https://susilolab.github.io/linux/2020/03/23/menggunakan-gnome-terminal-pada-tortoisehg.html","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://susilolab.github.io/linux/2020/03/23/menggunakan-gnome-terminal-pada-tortoisehg.html"},"author":{"@type":"Person","name":"Agus Susilo"},"@context":"https://schema.org"}</script>
+{"@type":"BlogPosting","description":"Tortoisehg merupakan front-end GUI untuk mercurial dan disini saya ingin berbagi bagaimana cara menseting gnome-terminal sebagai default shell yang sebelumnya menggunakan default xterm.","headline":"Menggunakan Gnome Terminal sebagai default shell pada Tortoisehg","dateModified":"2020-03-23T08:00:00+07:00","datePublished":"2020-03-23T08:00:00+07:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://susilolab.github.io/linux/2020/03/23/menggunakan-gnome-terminal-pada-tortoisehg.html"},"url":"https://susilolab.github.io/linux/2020/03/23/menggunakan-gnome-terminal-pada-tortoisehg.html","author":{"@type":"Person","name":"Agus Susilo"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
+
+
+  
+  
+
+
+
+
+
+
 
 </head>
 <body><header class="site-header" role="banner">
@@ -71,16 +85,19 @@ if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNo
     <h1 class="post-title p-name" itemprop="name headline">Menggunakan Gnome Terminal sebagai default shell pada Tortoisehg</h1>
     <p class="post-meta">
       <time class="dt-published" datetime="2020-03-23T08:00:00+07:00" itemprop="datePublished">Mar 23, 2020
-      </time></p>
+      </time>
+      
+      </p>
   </header>
 
   <div class="post-content e-content" itemprop="articleBody">
-    <p>Tortoisehg merupakan front-end GUI untuk <em>mercurial</em> dan disini saya ingin berbagi bagaimana cara menseting <code class="highlighter-rouge">gnome-terminal</code> sebagai default shell yang sebelumnya menggunakan default <code class="highlighter-rouge">xterm</code>.</p>
+    <p>Tortoisehg merupakan front-end GUI untuk <em>mercurial</em> dan disini saya ingin berbagi bagaimana cara menseting <code class="language-plaintext highlighter-rouge">gnome-terminal</code> sebagai default shell yang sebelumnya menggunakan default <code class="language-plaintext highlighter-rouge">xterm</code>.
+<!--more--></p>
 
-<p>Caranya cukup mudah, buka Tortoisehg kemudian klik menu <code class="highlighter-rouge">File -&gt; Settings</code> kemudian klik ListBox <code class="highlighter-rouge">TortoiseHg</code> lalu pada inputbox berlabel <code class="highlighter-rouge">Shell</code> ketikan <code class="highlighter-rouge">gnome-terminal %(root)s. %(reponame)s</code> kemudian klik Ok. tutup tortoisehg Anda dan buka lagi.
+<p>Caranya cukup mudah, buka Tortoisehg kemudian klik menu <code class="language-plaintext highlighter-rouge">File -&gt; Settings</code> kemudian klik ListBox <code class="language-plaintext highlighter-rouge">TortoiseHg</code> lalu pada inputbox berlabel <code class="language-plaintext highlighter-rouge">Shell</code> ketikan <code class="language-plaintext highlighter-rouge">gnome-terminal %(root)s. %(reponame)s</code> kemudian klik Ok. tutup tortoisehg Anda dan buka lagi.
 <img src="/assets/img/02-20200325-gnome-shell-tortoisehg.png" alt="mencoba-setingan-baru" /></p>
 
-<p>Untuk mencobanya klik kanan pada salah satu repo di <code class="highlighter-rouge">Repostory Registry</code> kemudian klik terminal, jika tidak ada kendala gnome-terminal akan muncul.
+<p>Untuk mencobanya klik kanan pada salah satu repo di <code class="language-plaintext highlighter-rouge">Repostory Registry</code> kemudian klik terminal, jika tidak ada kendala gnome-terminal akan muncul.
 <img src="/assets/img/01-20200325-gnome-shell-tortoisehg.png" alt="mencoba-setingan-baru" /></p>
 
 <p>Sekian</p>
@@ -98,7 +115,7 @@ if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNo
 
       <div class="footer-col footer-col-3">
         <p>&quot;Sebaik-baik manusia adalah yang paling bermanfaat bagi manusia&quot; (HR. Ahmad, ath-Thabrani, ad-Daruqutni)</p>
-        <p>&copy;2020&nbsp;Agus Susilo</p>
+        <p>&copy;2021&nbsp;Agus Susilo</p>
       </div>
     </div>
 

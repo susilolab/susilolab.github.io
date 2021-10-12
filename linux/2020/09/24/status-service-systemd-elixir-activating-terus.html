@@ -2,21 +2,23 @@
 <html lang="en"><head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
 <title>Status service systemd Elixir activating terus | susilolab</title>
-<meta name="generator" content="Jekyll v3.8.6" />
+<meta name="generator" content="Jekyll v4.2.0" />
 <meta property="og:title" content="Status service systemd Elixir activating terus" />
 <meta name="author" content="Agus Susilo" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Jadi ini ceritanya saya ada pekerjaan untuk merubah salah satu fungsi pada aplikasi di kantor ke bahasa Elixir, pada saat aplikasi sudah siap dideploy ke server production status servisnya tidak normal, selalu activating terus. Sebelumnya saya mencoba mengirim data ke servis untuk memastikan apakah aplikasinya jalan apa tidak. Ternyata aplikasinya jalan, itu artinya tidak ada masalah diaplikasi. Kemudian saya coba otak-atik service di systemdnya, setelah beberapa lama baru ketahuan setelah tak coba didatacenter. Penyebabnya ada pada type service pada file konfigurasinya. Awalnya saya pakai type forking dan setelah ganti ke type simple, Alhamdulillah normal. [Unit] ... [Service] Type=simple ... [Install] WantedBy = multi-user.target Alasan kenapa setelah saya ganti typenya ke simple menjadi normal karena type simple cocok jika aplikasi yang akan dijadikan service memiliki karakteristik aplikasinya jalan dan prompt tidak mengembalikan apa-apa sampai kita tekan Ctrl+C atau menghentikan servisnya. Type forking cocok jika karakteristik aplikasi pada saat jalan langsung mengembalikan sesuatu dan servis tetep jalan. Sekian, semoga bermanfaat." />
-<meta property="og:description" content="Jadi ini ceritanya saya ada pekerjaan untuk merubah salah satu fungsi pada aplikasi di kantor ke bahasa Elixir, pada saat aplikasi sudah siap dideploy ke server production status servisnya tidak normal, selalu activating terus. Sebelumnya saya mencoba mengirim data ke servis untuk memastikan apakah aplikasinya jalan apa tidak. Ternyata aplikasinya jalan, itu artinya tidak ada masalah diaplikasi. Kemudian saya coba otak-atik service di systemdnya, setelah beberapa lama baru ketahuan setelah tak coba didatacenter. Penyebabnya ada pada type service pada file konfigurasinya. Awalnya saya pakai type forking dan setelah ganti ke type simple, Alhamdulillah normal. [Unit] ... [Service] Type=simple ... [Install] WantedBy = multi-user.target Alasan kenapa setelah saya ganti typenya ke simple menjadi normal karena type simple cocok jika aplikasi yang akan dijadikan service memiliki karakteristik aplikasinya jalan dan prompt tidak mengembalikan apa-apa sampai kita tekan Ctrl+C atau menghentikan servisnya. Type forking cocok jika karakteristik aplikasi pada saat jalan langsung mengembalikan sesuatu dan servis tetep jalan. Sekian, semoga bermanfaat." />
+<meta name="description" content="Jadi ini ceritanya saya ada pekerjaan untuk merubah salah satu fungsi pada aplikasi di kantor ke bahasa Elixir, pada saat aplikasi sudah siap dideploy ke server production status servisnya tidak normal, selalu activating terus. Sebelumnya saya mencoba mengirim data ke servis untuk memastikan apakah aplikasinya jalan apa tidak. Ternyata aplikasinya jalan, itu artinya tidak ada masalah diaplikasi." />
+<meta property="og:description" content="Jadi ini ceritanya saya ada pekerjaan untuk merubah salah satu fungsi pada aplikasi di kantor ke bahasa Elixir, pada saat aplikasi sudah siap dideploy ke server production status servisnya tidak normal, selalu activating terus. Sebelumnya saya mencoba mengirim data ke servis untuk memastikan apakah aplikasinya jalan apa tidak. Ternyata aplikasinya jalan, itu artinya tidak ada masalah diaplikasi." />
 <link rel="canonical" href="https://susilolab.github.io/linux/2020/09/24/status-service-systemd-elixir-activating-terus.html" />
 <meta property="og:url" content="https://susilolab.github.io/linux/2020/09/24/status-service-systemd-elixir-activating-terus.html" />
 <meta property="og:site_name" content="susilolab" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2020-09-24T07:00:00+07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Status service systemd Elixir activating terus" />
 <script type="application/ld+json">
-{"headline":"Status service systemd Elixir activating terus","dateModified":"2020-09-24T07:00:00+07:00","description":"Jadi ini ceritanya saya ada pekerjaan untuk merubah salah satu fungsi pada aplikasi di kantor ke bahasa Elixir, pada saat aplikasi sudah siap dideploy ke server production status servisnya tidak normal, selalu activating terus. Sebelumnya saya mencoba mengirim data ke servis untuk memastikan apakah aplikasinya jalan apa tidak. Ternyata aplikasinya jalan, itu artinya tidak ada masalah diaplikasi. Kemudian saya coba otak-atik service di systemdnya, setelah beberapa lama baru ketahuan setelah tak coba didatacenter. Penyebabnya ada pada type service pada file konfigurasinya. Awalnya saya pakai type forking dan setelah ganti ke type simple, Alhamdulillah normal. [Unit] ... [Service] Type=simple ... [Install] WantedBy = multi-user.target Alasan kenapa setelah saya ganti typenya ke simple menjadi normal karena type simple cocok jika aplikasi yang akan dijadikan service memiliki karakteristik aplikasinya jalan dan prompt tidak mengembalikan apa-apa sampai kita tekan Ctrl+C atau menghentikan servisnya. Type forking cocok jika karakteristik aplikasi pada saat jalan langsung mengembalikan sesuatu dan servis tetep jalan. Sekian, semoga bermanfaat.","datePublished":"2020-09-24T07:00:00+07:00","url":"https://susilolab.github.io/linux/2020/09/24/status-service-systemd-elixir-activating-terus.html","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://susilolab.github.io/linux/2020/09/24/status-service-systemd-elixir-activating-terus.html"},"author":{"@type":"Person","name":"Agus Susilo"},"@context":"https://schema.org"}</script>
+{"@type":"BlogPosting","description":"Jadi ini ceritanya saya ada pekerjaan untuk merubah salah satu fungsi pada aplikasi di kantor ke bahasa Elixir, pada saat aplikasi sudah siap dideploy ke server production status servisnya tidak normal, selalu activating terus. Sebelumnya saya mencoba mengirim data ke servis untuk memastikan apakah aplikasinya jalan apa tidak. Ternyata aplikasinya jalan, itu artinya tidak ada masalah diaplikasi.","headline":"Status service systemd Elixir activating terus","dateModified":"2020-09-24T07:00:00+07:00","datePublished":"2020-09-24T07:00:00+07:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://susilolab.github.io/linux/2020/09/24/status-service-systemd-elixir-activating-terus.html"},"url":"https://susilolab.github.io/linux/2020/09/24/status-service-systemd-elixir-activating-terus.html","author":{"@type":"Person","name":"Agus Susilo"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://susilolab.github.io/feed.xml" title="susilolab" /><script>
 if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1")) {
@@ -30,22 +32,34 @@ if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNo
 }
 </script>
   
-<!-- Begin Jekyll SEO tag v2.6.1 -->
+<!-- Begin Jekyll SEO tag v2.7.1 -->
 <title>Status service systemd Elixir activating terus | susilolab</title>
-<meta name="generator" content="Jekyll v3.8.6" />
+<meta name="generator" content="Jekyll v4.2.0" />
 <meta property="og:title" content="Status service systemd Elixir activating terus" />
 <meta name="author" content="Agus Susilo" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Jadi ini ceritanya saya ada pekerjaan untuk merubah salah satu fungsi pada aplikasi di kantor ke bahasa Elixir, pada saat aplikasi sudah siap dideploy ke server production status servisnya tidak normal, selalu activating terus. Sebelumnya saya mencoba mengirim data ke servis untuk memastikan apakah aplikasinya jalan apa tidak. Ternyata aplikasinya jalan, itu artinya tidak ada masalah diaplikasi. Kemudian saya coba otak-atik service di systemdnya, setelah beberapa lama baru ketahuan setelah tak coba didatacenter. Penyebabnya ada pada type service pada file konfigurasinya. Awalnya saya pakai type forking dan setelah ganti ke type simple, Alhamdulillah normal. [Unit] ... [Service] Type=simple ... [Install] WantedBy = multi-user.target Alasan kenapa setelah saya ganti typenya ke simple menjadi normal karena type simple cocok jika aplikasi yang akan dijadikan service memiliki karakteristik aplikasinya jalan dan prompt tidak mengembalikan apa-apa sampai kita tekan Ctrl+C atau menghentikan servisnya. Type forking cocok jika karakteristik aplikasi pada saat jalan langsung mengembalikan sesuatu dan servis tetep jalan. Sekian, semoga bermanfaat." />
-<meta property="og:description" content="Jadi ini ceritanya saya ada pekerjaan untuk merubah salah satu fungsi pada aplikasi di kantor ke bahasa Elixir, pada saat aplikasi sudah siap dideploy ke server production status servisnya tidak normal, selalu activating terus. Sebelumnya saya mencoba mengirim data ke servis untuk memastikan apakah aplikasinya jalan apa tidak. Ternyata aplikasinya jalan, itu artinya tidak ada masalah diaplikasi. Kemudian saya coba otak-atik service di systemdnya, setelah beberapa lama baru ketahuan setelah tak coba didatacenter. Penyebabnya ada pada type service pada file konfigurasinya. Awalnya saya pakai type forking dan setelah ganti ke type simple, Alhamdulillah normal. [Unit] ... [Service] Type=simple ... [Install] WantedBy = multi-user.target Alasan kenapa setelah saya ganti typenya ke simple menjadi normal karena type simple cocok jika aplikasi yang akan dijadikan service memiliki karakteristik aplikasinya jalan dan prompt tidak mengembalikan apa-apa sampai kita tekan Ctrl+C atau menghentikan servisnya. Type forking cocok jika karakteristik aplikasi pada saat jalan langsung mengembalikan sesuatu dan servis tetep jalan. Sekian, semoga bermanfaat." />
+<meta name="description" content="Jadi ini ceritanya saya ada pekerjaan untuk merubah salah satu fungsi pada aplikasi di kantor ke bahasa Elixir, pada saat aplikasi sudah siap dideploy ke server production status servisnya tidak normal, selalu activating terus. Sebelumnya saya mencoba mengirim data ke servis untuk memastikan apakah aplikasinya jalan apa tidak. Ternyata aplikasinya jalan, itu artinya tidak ada masalah diaplikasi." />
+<meta property="og:description" content="Jadi ini ceritanya saya ada pekerjaan untuk merubah salah satu fungsi pada aplikasi di kantor ke bahasa Elixir, pada saat aplikasi sudah siap dideploy ke server production status servisnya tidak normal, selalu activating terus. Sebelumnya saya mencoba mengirim data ke servis untuk memastikan apakah aplikasinya jalan apa tidak. Ternyata aplikasinya jalan, itu artinya tidak ada masalah diaplikasi." />
 <link rel="canonical" href="https://susilolab.github.io/linux/2020/09/24/status-service-systemd-elixir-activating-terus.html" />
 <meta property="og:url" content="https://susilolab.github.io/linux/2020/09/24/status-service-systemd-elixir-activating-terus.html" />
 <meta property="og:site_name" content="susilolab" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2020-09-24T07:00:00+07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Status service systemd Elixir activating terus" />
 <script type="application/ld+json">
-{"headline":"Status service systemd Elixir activating terus","dateModified":"2020-09-24T07:00:00+07:00","description":"Jadi ini ceritanya saya ada pekerjaan untuk merubah salah satu fungsi pada aplikasi di kantor ke bahasa Elixir, pada saat aplikasi sudah siap dideploy ke server production status servisnya tidak normal, selalu activating terus. Sebelumnya saya mencoba mengirim data ke servis untuk memastikan apakah aplikasinya jalan apa tidak. Ternyata aplikasinya jalan, itu artinya tidak ada masalah diaplikasi. Kemudian saya coba otak-atik service di systemdnya, setelah beberapa lama baru ketahuan setelah tak coba didatacenter. Penyebabnya ada pada type service pada file konfigurasinya. Awalnya saya pakai type forking dan setelah ganti ke type simple, Alhamdulillah normal. [Unit] ... [Service] Type=simple ... [Install] WantedBy = multi-user.target Alasan kenapa setelah saya ganti typenya ke simple menjadi normal karena type simple cocok jika aplikasi yang akan dijadikan service memiliki karakteristik aplikasinya jalan dan prompt tidak mengembalikan apa-apa sampai kita tekan Ctrl+C atau menghentikan servisnya. Type forking cocok jika karakteristik aplikasi pada saat jalan langsung mengembalikan sesuatu dan servis tetep jalan. Sekian, semoga bermanfaat.","datePublished":"2020-09-24T07:00:00+07:00","url":"https://susilolab.github.io/linux/2020/09/24/status-service-systemd-elixir-activating-terus.html","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://susilolab.github.io/linux/2020/09/24/status-service-systemd-elixir-activating-terus.html"},"author":{"@type":"Person","name":"Agus Susilo"},"@context":"https://schema.org"}</script>
+{"@type":"BlogPosting","description":"Jadi ini ceritanya saya ada pekerjaan untuk merubah salah satu fungsi pada aplikasi di kantor ke bahasa Elixir, pada saat aplikasi sudah siap dideploy ke server production status servisnya tidak normal, selalu activating terus. Sebelumnya saya mencoba mengirim data ke servis untuk memastikan apakah aplikasinya jalan apa tidak. Ternyata aplikasinya jalan, itu artinya tidak ada masalah diaplikasi.","headline":"Status service systemd Elixir activating terus","dateModified":"2020-09-24T07:00:00+07:00","datePublished":"2020-09-24T07:00:00+07:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://susilolab.github.io/linux/2020/09/24/status-service-systemd-elixir-activating-terus.html"},"url":"https://susilolab.github.io/linux/2020/09/24/status-service-systemd-elixir-activating-terus.html","author":{"@type":"Person","name":"Agus Susilo"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
+
+
+  
+  
+
+
+
+
+
+
 
 </head>
 <body><header class="site-header" role="banner">
@@ -71,19 +85,22 @@ if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNo
     <h1 class="post-title p-name" itemprop="name headline">Status service systemd Elixir activating terus</h1>
     <p class="post-meta">
       <time class="dt-published" datetime="2020-09-24T07:00:00+07:00" itemprop="datePublished">Sep 24, 2020
-      </time></p>
+      </time>
+      
+      </p>
   </header>
 
   <div class="post-content e-content" itemprop="articleBody">
     <p><img src="/assets/img/20200806-elixir-systemd.png" alt="elixir-systemd" /></p>
 
 <p>Jadi ini ceritanya saya ada pekerjaan untuk merubah salah satu fungsi pada aplikasi di kantor ke bahasa Elixir,
-pada saat aplikasi sudah siap dideploy ke server production status servisnya tidak normal, selalu <code class="highlighter-rouge">activating</code> terus.
+pada saat aplikasi sudah siap dideploy ke server production status servisnya tidak normal, selalu <code class="language-plaintext highlighter-rouge">activating</code> terus.
 Sebelumnya saya mencoba mengirim data ke servis untuk memastikan apakah aplikasinya jalan apa tidak. Ternyata aplikasinya jalan,
-itu artinya tidak ada masalah diaplikasi.</p>
+itu artinya tidak ada masalah diaplikasi.
+<!--more--></p>
 
 <p>Kemudian saya coba otak-atik service di systemdnya, setelah beberapa lama baru ketahuan setelah tak coba didatacenter.
-Penyebabnya ada pada <code class="highlighter-rouge">type</code> service pada file konfigurasinya. Awalnya saya pakai type <code class="highlighter-rouge">forking</code> dan setelah ganti ke type <code class="highlighter-rouge">simple</code>,
+Penyebabnya ada pada <code class="language-plaintext highlighter-rouge">type</code> service pada file konfigurasinya. Awalnya saya pakai type <code class="language-plaintext highlighter-rouge">forking</code> dan setelah ganti ke type <code class="language-plaintext highlighter-rouge">simple</code>,
 Alhamdulillah normal.</p>
 
 <figure class="highlight"><pre><code class="language-conf" data-lang="conf">[<span class="n">Unit</span>]
@@ -98,10 +115,10 @@ Alhamdulillah normal.</p>
 
 <p><img src="/assets/img/20200924-elixir-systemd.png" alt="elixir-systemd" /></p>
 
-<p>Alasan kenapa setelah saya ganti typenya ke <code class="highlighter-rouge">simple</code> menjadi normal karena type simple cocok jika aplikasi yang akan dijadikan
-service memiliki karakteristik aplikasinya jalan dan prompt tidak mengembalikan apa-apa sampai kita tekan <code class="highlighter-rouge">Ctrl+C</code> atau menghentikan servisnya.</p>
+<p>Alasan kenapa setelah saya ganti typenya ke <code class="language-plaintext highlighter-rouge">simple</code> menjadi normal karena type simple cocok jika aplikasi yang akan dijadikan
+service memiliki karakteristik aplikasinya jalan dan prompt tidak mengembalikan apa-apa sampai kita tekan <code class="language-plaintext highlighter-rouge">Ctrl+C</code> atau menghentikan servisnya.</p>
 
-<p>Type <code class="highlighter-rouge">forking</code> cocok jika karakteristik aplikasi pada saat jalan langsung mengembalikan sesuatu dan servis tetep jalan.</p>
+<p>Type <code class="language-plaintext highlighter-rouge">forking</code> cocok jika karakteristik aplikasi pada saat jalan langsung mengembalikan sesuatu dan servis tetep jalan.</p>
 
 <p>Sekian, semoga bermanfaat.</p>
 
@@ -118,7 +135,7 @@ service memiliki karakteristik aplikasinya jalan dan prompt tidak mengembalikan 
 
       <div class="footer-col footer-col-3">
         <p>&quot;Sebaik-baik manusia adalah yang paling bermanfaat bagi manusia&quot; (HR. Ahmad, ath-Thabrani, ad-Daruqutni)</p>
-        <p>&copy;2020&nbsp;Agus Susilo</p>
+        <p>&copy;2021&nbsp;Agus Susilo</p>
       </div>
     </div>
 

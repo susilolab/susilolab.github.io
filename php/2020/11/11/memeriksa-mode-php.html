@@ -2,21 +2,23 @@
 <html lang="en"><head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
 <title>Memeriksa mode PHP | susilolab</title>
-<meta name="generator" content="Jekyll v3.8.6" />
+<meta name="generator" content="Jekyll v4.2.0" />
 <meta property="og:title" content="Memeriksa mode PHP" />
 <meta name="author" content="Agus Susilo" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Kali ini saya ingin berbagi sedikit tip bagaimana cara mengetahui apakah php sedang berjalan di commandline atau web. Kita dapat menggunakan fungsi php_sapi_name, fungsi ini akan mengembalikan string mode yang sedang berjalan. Nilai kembaliannya bisa berupa cli, cli-server, cgi-fcgi, embed, fpm-fcgi, litespeed, nsapi dan phpdbg. Coba salin kode berikut dan jalankan dengan mengetikan pada terminal php cli.php &lt;?php echo php_sapi_name(), &quot;\n&quot;; Maka akan menghasilkan output cli. Jika php dijalankan dari nginx dengan mode fpm maka akan menghasilkan output fpm-fcgi. Fungsi php_sapi_name ini dapat berguna pada saat kita mengembangkan aplikasi berbasis web dan menambahkan sistem queue yang berbasis cli. Karena pada saat php berjalan di command line beberapa fungsi tidak dapat berjalan seperti session. Sekian, semoga bermanfaat" />
-<meta property="og:description" content="Kali ini saya ingin berbagi sedikit tip bagaimana cara mengetahui apakah php sedang berjalan di commandline atau web. Kita dapat menggunakan fungsi php_sapi_name, fungsi ini akan mengembalikan string mode yang sedang berjalan. Nilai kembaliannya bisa berupa cli, cli-server, cgi-fcgi, embed, fpm-fcgi, litespeed, nsapi dan phpdbg. Coba salin kode berikut dan jalankan dengan mengetikan pada terminal php cli.php &lt;?php echo php_sapi_name(), &quot;\n&quot;; Maka akan menghasilkan output cli. Jika php dijalankan dari nginx dengan mode fpm maka akan menghasilkan output fpm-fcgi. Fungsi php_sapi_name ini dapat berguna pada saat kita mengembangkan aplikasi berbasis web dan menambahkan sistem queue yang berbasis cli. Karena pada saat php berjalan di command line beberapa fungsi tidak dapat berjalan seperti session. Sekian, semoga bermanfaat" />
+<meta name="description" content="Kali ini saya ingin berbagi sedikit tip bagaimana cara mengetahui apakah php sedang berjalan di commandline atau web. Kita dapat menggunakan fungsi php_sapi_name, fungsi ini akan mengembalikan string mode yang sedang berjalan. Nilai kembaliannya bisa berupa cli, cli-server, cgi-fcgi, embed, fpm-fcgi, litespeed, nsapi dan phpdbg." />
+<meta property="og:description" content="Kali ini saya ingin berbagi sedikit tip bagaimana cara mengetahui apakah php sedang berjalan di commandline atau web. Kita dapat menggunakan fungsi php_sapi_name, fungsi ini akan mengembalikan string mode yang sedang berjalan. Nilai kembaliannya bisa berupa cli, cli-server, cgi-fcgi, embed, fpm-fcgi, litespeed, nsapi dan phpdbg." />
 <link rel="canonical" href="https://susilolab.github.io/php/2020/11/11/memeriksa-mode-php.html" />
 <meta property="og:url" content="https://susilolab.github.io/php/2020/11/11/memeriksa-mode-php.html" />
 <meta property="og:site_name" content="susilolab" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2020-11-11T06:00:00+07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Memeriksa mode PHP" />
 <script type="application/ld+json">
-{"headline":"Memeriksa mode PHP","dateModified":"2020-11-11T06:00:00+07:00","description":"Kali ini saya ingin berbagi sedikit tip bagaimana cara mengetahui apakah php sedang berjalan di commandline atau web. Kita dapat menggunakan fungsi php_sapi_name, fungsi ini akan mengembalikan string mode yang sedang berjalan. Nilai kembaliannya bisa berupa cli, cli-server, cgi-fcgi, embed, fpm-fcgi, litespeed, nsapi dan phpdbg. Coba salin kode berikut dan jalankan dengan mengetikan pada terminal php cli.php &lt;?php echo php_sapi_name(), &quot;\\n&quot;; Maka akan menghasilkan output cli. Jika php dijalankan dari nginx dengan mode fpm maka akan menghasilkan output fpm-fcgi. Fungsi php_sapi_name ini dapat berguna pada saat kita mengembangkan aplikasi berbasis web dan menambahkan sistem queue yang berbasis cli. Karena pada saat php berjalan di command line beberapa fungsi tidak dapat berjalan seperti session. Sekian, semoga bermanfaat","datePublished":"2020-11-11T06:00:00+07:00","url":"https://susilolab.github.io/php/2020/11/11/memeriksa-mode-php.html","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://susilolab.github.io/php/2020/11/11/memeriksa-mode-php.html"},"author":{"@type":"Person","name":"Agus Susilo"},"@context":"https://schema.org"}</script>
+{"@type":"BlogPosting","description":"Kali ini saya ingin berbagi sedikit tip bagaimana cara mengetahui apakah php sedang berjalan di commandline atau web. Kita dapat menggunakan fungsi php_sapi_name, fungsi ini akan mengembalikan string mode yang sedang berjalan. Nilai kembaliannya bisa berupa cli, cli-server, cgi-fcgi, embed, fpm-fcgi, litespeed, nsapi dan phpdbg.","headline":"Memeriksa mode PHP","dateModified":"2020-11-11T06:00:00+07:00","datePublished":"2020-11-11T06:00:00+07:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://susilolab.github.io/php/2020/11/11/memeriksa-mode-php.html"},"url":"https://susilolab.github.io/php/2020/11/11/memeriksa-mode-php.html","author":{"@type":"Person","name":"Agus Susilo"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://susilolab.github.io/feed.xml" title="susilolab" /><script>
 if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1")) {
@@ -30,22 +32,34 @@ if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNo
 }
 </script>
   
-<!-- Begin Jekyll SEO tag v2.6.1 -->
+<!-- Begin Jekyll SEO tag v2.7.1 -->
 <title>Memeriksa mode PHP | susilolab</title>
-<meta name="generator" content="Jekyll v3.8.6" />
+<meta name="generator" content="Jekyll v4.2.0" />
 <meta property="og:title" content="Memeriksa mode PHP" />
 <meta name="author" content="Agus Susilo" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Kali ini saya ingin berbagi sedikit tip bagaimana cara mengetahui apakah php sedang berjalan di commandline atau web. Kita dapat menggunakan fungsi php_sapi_name, fungsi ini akan mengembalikan string mode yang sedang berjalan. Nilai kembaliannya bisa berupa cli, cli-server, cgi-fcgi, embed, fpm-fcgi, litespeed, nsapi dan phpdbg. Coba salin kode berikut dan jalankan dengan mengetikan pada terminal php cli.php &lt;?php echo php_sapi_name(), &quot;\n&quot;; Maka akan menghasilkan output cli. Jika php dijalankan dari nginx dengan mode fpm maka akan menghasilkan output fpm-fcgi. Fungsi php_sapi_name ini dapat berguna pada saat kita mengembangkan aplikasi berbasis web dan menambahkan sistem queue yang berbasis cli. Karena pada saat php berjalan di command line beberapa fungsi tidak dapat berjalan seperti session. Sekian, semoga bermanfaat" />
-<meta property="og:description" content="Kali ini saya ingin berbagi sedikit tip bagaimana cara mengetahui apakah php sedang berjalan di commandline atau web. Kita dapat menggunakan fungsi php_sapi_name, fungsi ini akan mengembalikan string mode yang sedang berjalan. Nilai kembaliannya bisa berupa cli, cli-server, cgi-fcgi, embed, fpm-fcgi, litespeed, nsapi dan phpdbg. Coba salin kode berikut dan jalankan dengan mengetikan pada terminal php cli.php &lt;?php echo php_sapi_name(), &quot;\n&quot;; Maka akan menghasilkan output cli. Jika php dijalankan dari nginx dengan mode fpm maka akan menghasilkan output fpm-fcgi. Fungsi php_sapi_name ini dapat berguna pada saat kita mengembangkan aplikasi berbasis web dan menambahkan sistem queue yang berbasis cli. Karena pada saat php berjalan di command line beberapa fungsi tidak dapat berjalan seperti session. Sekian, semoga bermanfaat" />
+<meta name="description" content="Kali ini saya ingin berbagi sedikit tip bagaimana cara mengetahui apakah php sedang berjalan di commandline atau web. Kita dapat menggunakan fungsi php_sapi_name, fungsi ini akan mengembalikan string mode yang sedang berjalan. Nilai kembaliannya bisa berupa cli, cli-server, cgi-fcgi, embed, fpm-fcgi, litespeed, nsapi dan phpdbg." />
+<meta property="og:description" content="Kali ini saya ingin berbagi sedikit tip bagaimana cara mengetahui apakah php sedang berjalan di commandline atau web. Kita dapat menggunakan fungsi php_sapi_name, fungsi ini akan mengembalikan string mode yang sedang berjalan. Nilai kembaliannya bisa berupa cli, cli-server, cgi-fcgi, embed, fpm-fcgi, litespeed, nsapi dan phpdbg." />
 <link rel="canonical" href="https://susilolab.github.io/php/2020/11/11/memeriksa-mode-php.html" />
 <meta property="og:url" content="https://susilolab.github.io/php/2020/11/11/memeriksa-mode-php.html" />
 <meta property="og:site_name" content="susilolab" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2020-11-11T06:00:00+07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Memeriksa mode PHP" />
 <script type="application/ld+json">
-{"headline":"Memeriksa mode PHP","dateModified":"2020-11-11T06:00:00+07:00","description":"Kali ini saya ingin berbagi sedikit tip bagaimana cara mengetahui apakah php sedang berjalan di commandline atau web. Kita dapat menggunakan fungsi php_sapi_name, fungsi ini akan mengembalikan string mode yang sedang berjalan. Nilai kembaliannya bisa berupa cli, cli-server, cgi-fcgi, embed, fpm-fcgi, litespeed, nsapi dan phpdbg. Coba salin kode berikut dan jalankan dengan mengetikan pada terminal php cli.php &lt;?php echo php_sapi_name(), &quot;\\n&quot;; Maka akan menghasilkan output cli. Jika php dijalankan dari nginx dengan mode fpm maka akan menghasilkan output fpm-fcgi. Fungsi php_sapi_name ini dapat berguna pada saat kita mengembangkan aplikasi berbasis web dan menambahkan sistem queue yang berbasis cli. Karena pada saat php berjalan di command line beberapa fungsi tidak dapat berjalan seperti session. Sekian, semoga bermanfaat","datePublished":"2020-11-11T06:00:00+07:00","url":"https://susilolab.github.io/php/2020/11/11/memeriksa-mode-php.html","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://susilolab.github.io/php/2020/11/11/memeriksa-mode-php.html"},"author":{"@type":"Person","name":"Agus Susilo"},"@context":"https://schema.org"}</script>
+{"@type":"BlogPosting","description":"Kali ini saya ingin berbagi sedikit tip bagaimana cara mengetahui apakah php sedang berjalan di commandline atau web. Kita dapat menggunakan fungsi php_sapi_name, fungsi ini akan mengembalikan string mode yang sedang berjalan. Nilai kembaliannya bisa berupa cli, cli-server, cgi-fcgi, embed, fpm-fcgi, litespeed, nsapi dan phpdbg.","headline":"Memeriksa mode PHP","dateModified":"2020-11-11T06:00:00+07:00","datePublished":"2020-11-11T06:00:00+07:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://susilolab.github.io/php/2020/11/11/memeriksa-mode-php.html"},"url":"https://susilolab.github.io/php/2020/11/11/memeriksa-mode-php.html","author":{"@type":"Person","name":"Agus Susilo"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
+
+
+  
+  
+
+
+
+
+
+
 
 </head>
 <body><header class="site-header" role="banner">
@@ -71,22 +85,25 @@ if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNo
     <h1 class="post-title p-name" itemprop="name headline">Memeriksa mode PHP</h1>
     <p class="post-meta">
       <time class="dt-published" datetime="2020-11-11T06:00:00+07:00" itemprop="datePublished">Nov 11, 2020
-      </time></p>
+      </time>
+      
+      </p>
   </header>
 
   <div class="post-content e-content" itemprop="articleBody">
-    <p>Kali ini saya ingin berbagi sedikit tip bagaimana cara mengetahui apakah php sedang berjalan di <code class="highlighter-rouge">commandline</code> atau web. Kita dapat menggunakan fungsi
-<code class="highlighter-rouge">php_sapi_name</code>, fungsi ini akan mengembalikan string mode yang sedang berjalan. Nilai kembaliannya bisa berupa <code class="highlighter-rouge">cli</code>, <code class="highlighter-rouge">cli-server</code>, <code class="highlighter-rouge">cgi-fcgi</code>, <code class="highlighter-rouge">embed</code>, <code class="highlighter-rouge">fpm-fcgi</code>,
-<code class="highlighter-rouge">litespeed</code>, <code class="highlighter-rouge">nsapi</code> dan <code class="highlighter-rouge">phpdbg</code>.</p>
+    <p>Kali ini saya ingin berbagi sedikit tip bagaimana cara mengetahui apakah php sedang berjalan di <code class="language-plaintext highlighter-rouge">commandline</code> atau web. Kita dapat menggunakan fungsi
+<code class="language-plaintext highlighter-rouge">php_sapi_name</code>, fungsi ini akan mengembalikan string mode yang sedang berjalan. Nilai kembaliannya bisa berupa <code class="language-plaintext highlighter-rouge">cli</code>, <code class="language-plaintext highlighter-rouge">cli-server</code>, <code class="language-plaintext highlighter-rouge">cgi-fcgi</code>, <code class="language-plaintext highlighter-rouge">embed</code>, <code class="language-plaintext highlighter-rouge">fpm-fcgi</code>,
+<code class="language-plaintext highlighter-rouge">litespeed</code>, <code class="language-plaintext highlighter-rouge">nsapi</code> dan <code class="language-plaintext highlighter-rouge">phpdbg</code>.
+<!--more--></p>
 
-<p>Coba salin kode berikut dan jalankan dengan mengetikan pada terminal <code class="highlighter-rouge">php cli.php</code></p>
+<p>Coba salin kode berikut dan jalankan dengan mengetikan pada terminal <code class="language-plaintext highlighter-rouge">php cli.php</code></p>
 
 <figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
 <span class="k">echo</span> <span class="nb">php_sapi_name</span><span class="p">(),</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">;</span></code></pre></figure>
 
-<p>Maka akan menghasilkan output <code class="highlighter-rouge">cli</code>. Jika php dijalankan dari nginx dengan mode fpm maka akan menghasilkan output <code class="highlighter-rouge">fpm-fcgi</code>.
-Fungsi <code class="highlighter-rouge">php_sapi_name</code> ini dapat berguna pada saat kita mengembangkan aplikasi berbasis web dan menambahkan sistem queue yang berbasis cli. Karena pada saat 
-php berjalan di command line beberapa fungsi tidak dapat berjalan seperti <code class="highlighter-rouge">session</code>.</p>
+<p>Maka akan menghasilkan output <code class="language-plaintext highlighter-rouge">cli</code>. Jika php dijalankan dari nginx dengan mode fpm maka akan menghasilkan output <code class="language-plaintext highlighter-rouge">fpm-fcgi</code>.
+Fungsi <code class="language-plaintext highlighter-rouge">php_sapi_name</code> ini dapat berguna pada saat kita mengembangkan aplikasi berbasis web dan menambahkan sistem queue yang berbasis cli. Karena pada saat 
+php berjalan di command line beberapa fungsi tidak dapat berjalan seperti <code class="language-plaintext highlighter-rouge">session</code>.</p>
 
 <p>Sekian, semoga bermanfaat</p>
 
@@ -103,7 +120,7 @@ php berjalan di command line beberapa fungsi tidak dapat berjalan seperti <code 
 
       <div class="footer-col footer-col-3">
         <p>&quot;Sebaik-baik manusia adalah yang paling bermanfaat bagi manusia&quot; (HR. Ahmad, ath-Thabrani, ad-Daruqutni)</p>
-        <p>&copy;2020&nbsp;Agus Susilo</p>
+        <p>&copy;2021&nbsp;Agus Susilo</p>
       </div>
     </div>
 

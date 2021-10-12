@@ -2,21 +2,23 @@
 <html lang="en"><head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
 <title>Mengenal Trait di PHP | susilolab</title>
-<meta name="generator" content="Jekyll v3.8.6" />
+<meta name="generator" content="Jekyll v4.2.0" />
 <meta property="og:title" content="Mengenal Trait di PHP" />
 <meta name="author" content="Agus Susilo" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Trait adalah mekanisme untuk penggunaan kembali kode dalam single inheritance. Trait dimaksudkan untuk mengurangi beberapa keterbatasan dari turunan tunggal dengan memungkinkan pengembang untuk menggunakan kembali serangkain fungsi-fungsi secara bebas pada beberapa klas yang independen yang hidup dalam hirarki klas yang berbeda. Trait mirip dengan klas, hanya saja trait dimaksudkan untuk mengelompokan fungsi menjadi kecil dan konsisten. Kita tidak bisa meng-instansi trait pada dirinya sendiri tetapi kita bisa menggunakannya tanpa harus menurukannya(inheritance). Daftar Isi: Precedence Trait Multiple Resolusi Konflik Merubah visibility metode Trait disusun dari Trait Anggota Trait Abstract Anggota Static Trait Property Contoh trait: &lt;?php namespace app\traits; trait Foo { public function hello() { return &#39;Hello&#39;; } } Untuk menggunakan trait pada klas kita cukup gunakan keyword use didalam definisi klas. &lt;?php class User { use \app\traits\Foo; // kita dapat menggunakan fungsi dari trait Foo // secara langsung menggunakan $this public function world() { echo $this-&gt;hello() . &#39; world!&#39;; } } Hal mendahului/ Precedence Anggota turunan dari klas dasar ditumpuki oleh anggota yang disisipi oleh Trait. Urutan precedence adalah bahwa member dari klas saat ini ditumpuk oleh trait yang disisipkan. Contoh Fungsi turunan dari klas dasar (Base) ditumpuk oleh fungsi yang disisipkan pada klas MyHelloWorld yaitu dari trait SayWorld. Aturan ini akan sama untuk fungsi yang didefinisikan di dalam klas MyHelloWorld. &lt;?php class Base { public function sayHello() { echo &#39;Hello &#39;; } } trait SayWorld { public function sayHello() { echo &#39;World!&#39;; } } class MyHelloWorld extends Base { use SayWorld; } $o = new MyHelloWorld(); $o-&gt;sayHello(); // output: // World Contoh lain dari urutan precedence &lt;?php trait HelloWorld { public function sayHello() { echo &#39;Hello World!&#39;; } } class DuniaTidakCukup { use HelloWorld; public function sayHello() { echo &#39;Halo Dunia!&#39;; } } $o = new DuniaTidakCukup(); $o-&gt;sayHello(); Contoh di atas akan menghasilkan keluaran: Halo Dunia! Trait Multiple Multiple trait dapat disisipkan ke dalam klas dengan mendaftarkannya pada statemen use, dipisahkan dengan koma. &lt;?php trait Hello { public function sayHello() { echo &#39;Hello &#39;; } } trait World { public function sayWorld() { echo &#39;World&#39;; } } class MyHelloWorld { use Hello, World; public function sayExclamationMark() { echo &#39;!&#39;; } } $o = new MyHelloWorld(); $o-&gt;sayHello(); $o-&gt;sayWorld(); $o-&gt;sayExclamationMark(); Resolusi Konflik Jika dua Trait disisipkan dengan nama yang sama maka akan terjadi kesalahan fatal, jika masalah tidak dipecahkan secara eksplisit. Untuk memecahkan konflik penamaan antara Trait pada klas yang sama, operator insteadof diperlukan untuk memilih tepat satu dari method yang konflik. Karena hal ini hanya boleh membuat satu pengecualian, operator as dapat digunakan untuk menambah alias ke suatu method. Perlu dicatat bahwa operator as tidak merubah nama method dan tidak mempengaruhi method lain. Contoh Pada contoh ini, klas Talker menggunakan trait A dan B. Karena trait A dan B memiliki konflik, maka klas ini akan perlu mendefinisikan penggunaan method smallTalk dari trait B dan method bigTalk dari trait A. Klas Alias_Talker menggunakan operator as untuk dapat menggunakan method bigTalk dari trait B dengan nama alias talk. &lt;?php trait A { public function smallTalk() { echo &#39;a&#39;; } public function bigTalk() { echo &#39;A&#39;; } } trait B { public function smallTalk() { echo &#39;b&#39;; } public function bigTalk() { echo &#39;B&#39;; } } class Talker { use A, B { B::smallTalk insteadof A; A::bigTalk insteadof B; } } class Aliased_Talker { use A, B { B::smallTalk insteadof A; A::bigTalk insteadof B; B::bigTalk as talk; } } Merubah visibility metode Dengan menggunakan syntax as method pada trait dapat dirubah visibilitynya pada klas yang menggunakan trait. Contoh &lt;?php trait HelloWorld { public function sayHello() { echo &#39;Hello world!&#39;; } } // Merubah visibility fungsi sayHello class MyClass1 { use HelloWorld { sayHello as protected; } } // Alias method dengan perubahan visibility // Visibility sayHello tetap tidak berubah class MyClass2 { use HelloWorld { sayHello as private myPrivateHello; } } Trait disusun dari Trait Seperti pada klas yang dapat menggunakan trait, jadi trait juga dapat menggunakan trait lain. Dengan menggunakan satu atau lebih trait di dalam definisi trait, trait ini dapat disusun sebagian atau semuanya dari anggota yang mendefinisikan pada trait lain. Contoh &lt;?php trait Hello { public function sayHello() { echo &#39;Hello&#39;; } } trait World { public function sayWorld() { echo &#39;World&#39;; } } trait HelloWorld { use Hello, World; } class MyHelloWorld { use HelloWorld; } $o = new MyHelloWorld(); $o-&gt;sayHello(); $o-&gt;sayWorld(); Anggota Trait Abstract Trait mendukung penggunaan abstract method untuk memaksa kebutuhan pada class yang menggunakan trait. Contoh abstract method &lt;?php trait Hello { public function sayHelloWorld() { echo &#39;Hello&#39; . $this-&gt;getWorld(); } abstract public function getWorld(); } class MyHelloWorld { private $world; use Hello; public function getWorld() { return $this-&gt;world; } public function setWorld($val) { $this-&gt;world = $val; } } Anggota Static Trait Trait dapat mendefinisikan static property dan static method Contoh static variabel &lt;?php trait Counter { public function inc() { static $c = 0; $c = $c + 1; echo &quot;$c\n&quot;; } } class C1 { use Counter; } class C2 { use Counter; } $o = new C1(); $o-&gt;inc(); // echo 1 $p = new C2(); $p-&gt;inc(); // echo 1 Contoh static method &lt;?php trait StaticExample { public static function doSomething() { return &#39;Doing Something&#39;; } } class Example { use StaticExample; } Example::doSomething(); Property Di dalam Trait kita juga dapat mendefinisikan property sama seperti pada klas. Contoh trait PropertiesTrait { public $x = 1; } class PropertiesExample { use PropertiesTrait; } $ex = new PropertiesExample(); $ex-&gt;x; sekian. sumber: php.net" />
-<meta property="og:description" content="Trait adalah mekanisme untuk penggunaan kembali kode dalam single inheritance. Trait dimaksudkan untuk mengurangi beberapa keterbatasan dari turunan tunggal dengan memungkinkan pengembang untuk menggunakan kembali serangkain fungsi-fungsi secara bebas pada beberapa klas yang independen yang hidup dalam hirarki klas yang berbeda. Trait mirip dengan klas, hanya saja trait dimaksudkan untuk mengelompokan fungsi menjadi kecil dan konsisten. Kita tidak bisa meng-instansi trait pada dirinya sendiri tetapi kita bisa menggunakannya tanpa harus menurukannya(inheritance). Daftar Isi: Precedence Trait Multiple Resolusi Konflik Merubah visibility metode Trait disusun dari Trait Anggota Trait Abstract Anggota Static Trait Property Contoh trait: &lt;?php namespace app\traits; trait Foo { public function hello() { return &#39;Hello&#39;; } } Untuk menggunakan trait pada klas kita cukup gunakan keyword use didalam definisi klas. &lt;?php class User { use \app\traits\Foo; // kita dapat menggunakan fungsi dari trait Foo // secara langsung menggunakan $this public function world() { echo $this-&gt;hello() . &#39; world!&#39;; } } Hal mendahului/ Precedence Anggota turunan dari klas dasar ditumpuki oleh anggota yang disisipi oleh Trait. Urutan precedence adalah bahwa member dari klas saat ini ditumpuk oleh trait yang disisipkan. Contoh Fungsi turunan dari klas dasar (Base) ditumpuk oleh fungsi yang disisipkan pada klas MyHelloWorld yaitu dari trait SayWorld. Aturan ini akan sama untuk fungsi yang didefinisikan di dalam klas MyHelloWorld. &lt;?php class Base { public function sayHello() { echo &#39;Hello &#39;; } } trait SayWorld { public function sayHello() { echo &#39;World!&#39;; } } class MyHelloWorld extends Base { use SayWorld; } $o = new MyHelloWorld(); $o-&gt;sayHello(); // output: // World Contoh lain dari urutan precedence &lt;?php trait HelloWorld { public function sayHello() { echo &#39;Hello World!&#39;; } } class DuniaTidakCukup { use HelloWorld; public function sayHello() { echo &#39;Halo Dunia!&#39;; } } $o = new DuniaTidakCukup(); $o-&gt;sayHello(); Contoh di atas akan menghasilkan keluaran: Halo Dunia! Trait Multiple Multiple trait dapat disisipkan ke dalam klas dengan mendaftarkannya pada statemen use, dipisahkan dengan koma. &lt;?php trait Hello { public function sayHello() { echo &#39;Hello &#39;; } } trait World { public function sayWorld() { echo &#39;World&#39;; } } class MyHelloWorld { use Hello, World; public function sayExclamationMark() { echo &#39;!&#39;; } } $o = new MyHelloWorld(); $o-&gt;sayHello(); $o-&gt;sayWorld(); $o-&gt;sayExclamationMark(); Resolusi Konflik Jika dua Trait disisipkan dengan nama yang sama maka akan terjadi kesalahan fatal, jika masalah tidak dipecahkan secara eksplisit. Untuk memecahkan konflik penamaan antara Trait pada klas yang sama, operator insteadof diperlukan untuk memilih tepat satu dari method yang konflik. Karena hal ini hanya boleh membuat satu pengecualian, operator as dapat digunakan untuk menambah alias ke suatu method. Perlu dicatat bahwa operator as tidak merubah nama method dan tidak mempengaruhi method lain. Contoh Pada contoh ini, klas Talker menggunakan trait A dan B. Karena trait A dan B memiliki konflik, maka klas ini akan perlu mendefinisikan penggunaan method smallTalk dari trait B dan method bigTalk dari trait A. Klas Alias_Talker menggunakan operator as untuk dapat menggunakan method bigTalk dari trait B dengan nama alias talk. &lt;?php trait A { public function smallTalk() { echo &#39;a&#39;; } public function bigTalk() { echo &#39;A&#39;; } } trait B { public function smallTalk() { echo &#39;b&#39;; } public function bigTalk() { echo &#39;B&#39;; } } class Talker { use A, B { B::smallTalk insteadof A; A::bigTalk insteadof B; } } class Aliased_Talker { use A, B { B::smallTalk insteadof A; A::bigTalk insteadof B; B::bigTalk as talk; } } Merubah visibility metode Dengan menggunakan syntax as method pada trait dapat dirubah visibilitynya pada klas yang menggunakan trait. Contoh &lt;?php trait HelloWorld { public function sayHello() { echo &#39;Hello world!&#39;; } } // Merubah visibility fungsi sayHello class MyClass1 { use HelloWorld { sayHello as protected; } } // Alias method dengan perubahan visibility // Visibility sayHello tetap tidak berubah class MyClass2 { use HelloWorld { sayHello as private myPrivateHello; } } Trait disusun dari Trait Seperti pada klas yang dapat menggunakan trait, jadi trait juga dapat menggunakan trait lain. Dengan menggunakan satu atau lebih trait di dalam definisi trait, trait ini dapat disusun sebagian atau semuanya dari anggota yang mendefinisikan pada trait lain. Contoh &lt;?php trait Hello { public function sayHello() { echo &#39;Hello&#39;; } } trait World { public function sayWorld() { echo &#39;World&#39;; } } trait HelloWorld { use Hello, World; } class MyHelloWorld { use HelloWorld; } $o = new MyHelloWorld(); $o-&gt;sayHello(); $o-&gt;sayWorld(); Anggota Trait Abstract Trait mendukung penggunaan abstract method untuk memaksa kebutuhan pada class yang menggunakan trait. Contoh abstract method &lt;?php trait Hello { public function sayHelloWorld() { echo &#39;Hello&#39; . $this-&gt;getWorld(); } abstract public function getWorld(); } class MyHelloWorld { private $world; use Hello; public function getWorld() { return $this-&gt;world; } public function setWorld($val) { $this-&gt;world = $val; } } Anggota Static Trait Trait dapat mendefinisikan static property dan static method Contoh static variabel &lt;?php trait Counter { public function inc() { static $c = 0; $c = $c + 1; echo &quot;$c\n&quot;; } } class C1 { use Counter; } class C2 { use Counter; } $o = new C1(); $o-&gt;inc(); // echo 1 $p = new C2(); $p-&gt;inc(); // echo 1 Contoh static method &lt;?php trait StaticExample { public static function doSomething() { return &#39;Doing Something&#39;; } } class Example { use StaticExample; } Example::doSomething(); Property Di dalam Trait kita juga dapat mendefinisikan property sama seperti pada klas. Contoh trait PropertiesTrait { public $x = 1; } class PropertiesExample { use PropertiesTrait; } $ex = new PropertiesExample(); $ex-&gt;x; sekian. sumber: php.net" />
+<meta name="description" content="Trait adalah mekanisme untuk penggunaan kembali kode dalam single inheritance. Trait dimaksudkan untuk mengurangi beberapa keterbatasan dari turunan tunggal dengan memungkinkan pengembang untuk menggunakan kembali serangkain fungsi-fungsi secara bebas pada beberapa klas yang independen yang hidup dalam hirarki klas yang berbeda. Trait mirip dengan klas, hanya saja trait dimaksudkan untuk mengelompokan fungsi menjadi kecil dan konsisten. Kita tidak bisa meng-instansi trait pada dirinya sendiri tetapi kita bisa menggunakannya tanpa harus menurukannya(inheritance)." />
+<meta property="og:description" content="Trait adalah mekanisme untuk penggunaan kembali kode dalam single inheritance. Trait dimaksudkan untuk mengurangi beberapa keterbatasan dari turunan tunggal dengan memungkinkan pengembang untuk menggunakan kembali serangkain fungsi-fungsi secara bebas pada beberapa klas yang independen yang hidup dalam hirarki klas yang berbeda. Trait mirip dengan klas, hanya saja trait dimaksudkan untuk mengelompokan fungsi menjadi kecil dan konsisten. Kita tidak bisa meng-instansi trait pada dirinya sendiri tetapi kita bisa menggunakannya tanpa harus menurukannya(inheritance)." />
 <link rel="canonical" href="https://susilolab.github.io/php/2020/05/23/mengenal-trait-php.html" />
 <meta property="og:url" content="https://susilolab.github.io/php/2020/05/23/mengenal-trait-php.html" />
 <meta property="og:site_name" content="susilolab" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2020-05-23T00:00:00+07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Mengenal Trait di PHP" />
 <script type="application/ld+json">
-{"headline":"Mengenal Trait di PHP","dateModified":"2020-05-23T00:00:00+07:00","description":"Trait adalah mekanisme untuk penggunaan kembali kode dalam single inheritance. Trait dimaksudkan untuk mengurangi beberapa keterbatasan dari turunan tunggal dengan memungkinkan pengembang untuk menggunakan kembali serangkain fungsi-fungsi secara bebas pada beberapa klas yang independen yang hidup dalam hirarki klas yang berbeda. Trait mirip dengan klas, hanya saja trait dimaksudkan untuk mengelompokan fungsi menjadi kecil dan konsisten. Kita tidak bisa meng-instansi trait pada dirinya sendiri tetapi kita bisa menggunakannya tanpa harus menurukannya(inheritance). Daftar Isi: Precedence Trait Multiple Resolusi Konflik Merubah visibility metode Trait disusun dari Trait Anggota Trait Abstract Anggota Static Trait Property Contoh trait: &lt;?php namespace app\\traits; trait Foo { public function hello() { return &#39;Hello&#39;; } } Untuk menggunakan trait pada klas kita cukup gunakan keyword use didalam definisi klas. &lt;?php class User { use \\app\\traits\\Foo; // kita dapat menggunakan fungsi dari trait Foo // secara langsung menggunakan $this public function world() { echo $this-&gt;hello() . &#39; world!&#39;; } } Hal mendahului/ Precedence Anggota turunan dari klas dasar ditumpuki oleh anggota yang disisipi oleh Trait. Urutan precedence adalah bahwa member dari klas saat ini ditumpuk oleh trait yang disisipkan. Contoh Fungsi turunan dari klas dasar (Base) ditumpuk oleh fungsi yang disisipkan pada klas MyHelloWorld yaitu dari trait SayWorld. Aturan ini akan sama untuk fungsi yang didefinisikan di dalam klas MyHelloWorld. &lt;?php class Base { public function sayHello() { echo &#39;Hello &#39;; } } trait SayWorld { public function sayHello() { echo &#39;World!&#39;; } } class MyHelloWorld extends Base { use SayWorld; } $o = new MyHelloWorld(); $o-&gt;sayHello(); // output: // World Contoh lain dari urutan precedence &lt;?php trait HelloWorld { public function sayHello() { echo &#39;Hello World!&#39;; } } class DuniaTidakCukup { use HelloWorld; public function sayHello() { echo &#39;Halo Dunia!&#39;; } } $o = new DuniaTidakCukup(); $o-&gt;sayHello(); Contoh di atas akan menghasilkan keluaran: Halo Dunia! Trait Multiple Multiple trait dapat disisipkan ke dalam klas dengan mendaftarkannya pada statemen use, dipisahkan dengan koma. &lt;?php trait Hello { public function sayHello() { echo &#39;Hello &#39;; } } trait World { public function sayWorld() { echo &#39;World&#39;; } } class MyHelloWorld { use Hello, World; public function sayExclamationMark() { echo &#39;!&#39;; } } $o = new MyHelloWorld(); $o-&gt;sayHello(); $o-&gt;sayWorld(); $o-&gt;sayExclamationMark(); Resolusi Konflik Jika dua Trait disisipkan dengan nama yang sama maka akan terjadi kesalahan fatal, jika masalah tidak dipecahkan secara eksplisit. Untuk memecahkan konflik penamaan antara Trait pada klas yang sama, operator insteadof diperlukan untuk memilih tepat satu dari method yang konflik. Karena hal ini hanya boleh membuat satu pengecualian, operator as dapat digunakan untuk menambah alias ke suatu method. Perlu dicatat bahwa operator as tidak merubah nama method dan tidak mempengaruhi method lain. Contoh Pada contoh ini, klas Talker menggunakan trait A dan B. Karena trait A dan B memiliki konflik, maka klas ini akan perlu mendefinisikan penggunaan method smallTalk dari trait B dan method bigTalk dari trait A. Klas Alias_Talker menggunakan operator as untuk dapat menggunakan method bigTalk dari trait B dengan nama alias talk. &lt;?php trait A { public function smallTalk() { echo &#39;a&#39;; } public function bigTalk() { echo &#39;A&#39;; } } trait B { public function smallTalk() { echo &#39;b&#39;; } public function bigTalk() { echo &#39;B&#39;; } } class Talker { use A, B { B::smallTalk insteadof A; A::bigTalk insteadof B; } } class Aliased_Talker { use A, B { B::smallTalk insteadof A; A::bigTalk insteadof B; B::bigTalk as talk; } } Merubah visibility metode Dengan menggunakan syntax as method pada trait dapat dirubah visibilitynya pada klas yang menggunakan trait. Contoh &lt;?php trait HelloWorld { public function sayHello() { echo &#39;Hello world!&#39;; } } // Merubah visibility fungsi sayHello class MyClass1 { use HelloWorld { sayHello as protected; } } // Alias method dengan perubahan visibility // Visibility sayHello tetap tidak berubah class MyClass2 { use HelloWorld { sayHello as private myPrivateHello; } } Trait disusun dari Trait Seperti pada klas yang dapat menggunakan trait, jadi trait juga dapat menggunakan trait lain. Dengan menggunakan satu atau lebih trait di dalam definisi trait, trait ini dapat disusun sebagian atau semuanya dari anggota yang mendefinisikan pada trait lain. Contoh &lt;?php trait Hello { public function sayHello() { echo &#39;Hello&#39;; } } trait World { public function sayWorld() { echo &#39;World&#39;; } } trait HelloWorld { use Hello, World; } class MyHelloWorld { use HelloWorld; } $o = new MyHelloWorld(); $o-&gt;sayHello(); $o-&gt;sayWorld(); Anggota Trait Abstract Trait mendukung penggunaan abstract method untuk memaksa kebutuhan pada class yang menggunakan trait. Contoh abstract method &lt;?php trait Hello { public function sayHelloWorld() { echo &#39;Hello&#39; . $this-&gt;getWorld(); } abstract public function getWorld(); } class MyHelloWorld { private $world; use Hello; public function getWorld() { return $this-&gt;world; } public function setWorld($val) { $this-&gt;world = $val; } } Anggota Static Trait Trait dapat mendefinisikan static property dan static method Contoh static variabel &lt;?php trait Counter { public function inc() { static $c = 0; $c = $c + 1; echo &quot;$c\\n&quot;; } } class C1 { use Counter; } class C2 { use Counter; } $o = new C1(); $o-&gt;inc(); // echo 1 $p = new C2(); $p-&gt;inc(); // echo 1 Contoh static method &lt;?php trait StaticExample { public static function doSomething() { return &#39;Doing Something&#39;; } } class Example { use StaticExample; } Example::doSomething(); Property Di dalam Trait kita juga dapat mendefinisikan property sama seperti pada klas. Contoh trait PropertiesTrait { public $x = 1; } class PropertiesExample { use PropertiesTrait; } $ex = new PropertiesExample(); $ex-&gt;x; sekian. sumber: php.net","datePublished":"2020-05-23T00:00:00+07:00","url":"https://susilolab.github.io/php/2020/05/23/mengenal-trait-php.html","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://susilolab.github.io/php/2020/05/23/mengenal-trait-php.html"},"author":{"@type":"Person","name":"Agus Susilo"},"@context":"https://schema.org"}</script>
+{"@type":"BlogPosting","description":"Trait adalah mekanisme untuk penggunaan kembali kode dalam single inheritance. Trait dimaksudkan untuk mengurangi beberapa keterbatasan dari turunan tunggal dengan memungkinkan pengembang untuk menggunakan kembali serangkain fungsi-fungsi secara bebas pada beberapa klas yang independen yang hidup dalam hirarki klas yang berbeda. Trait mirip dengan klas, hanya saja trait dimaksudkan untuk mengelompokan fungsi menjadi kecil dan konsisten. Kita tidak bisa meng-instansi trait pada dirinya sendiri tetapi kita bisa menggunakannya tanpa harus menurukannya(inheritance).","headline":"Mengenal Trait di PHP","dateModified":"2020-05-23T00:00:00+07:00","datePublished":"2020-05-23T00:00:00+07:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://susilolab.github.io/php/2020/05/23/mengenal-trait-php.html"},"url":"https://susilolab.github.io/php/2020/05/23/mengenal-trait-php.html","author":{"@type":"Person","name":"Agus Susilo"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://susilolab.github.io/feed.xml" title="susilolab" /><script>
 if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1")) {
@@ -30,22 +32,34 @@ if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNo
 }
 </script>
   
-<!-- Begin Jekyll SEO tag v2.6.1 -->
+<!-- Begin Jekyll SEO tag v2.7.1 -->
 <title>Mengenal Trait di PHP | susilolab</title>
-<meta name="generator" content="Jekyll v3.8.6" />
+<meta name="generator" content="Jekyll v4.2.0" />
 <meta property="og:title" content="Mengenal Trait di PHP" />
 <meta name="author" content="Agus Susilo" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Trait adalah mekanisme untuk penggunaan kembali kode dalam single inheritance. Trait dimaksudkan untuk mengurangi beberapa keterbatasan dari turunan tunggal dengan memungkinkan pengembang untuk menggunakan kembali serangkain fungsi-fungsi secara bebas pada beberapa klas yang independen yang hidup dalam hirarki klas yang berbeda. Trait mirip dengan klas, hanya saja trait dimaksudkan untuk mengelompokan fungsi menjadi kecil dan konsisten. Kita tidak bisa meng-instansi trait pada dirinya sendiri tetapi kita bisa menggunakannya tanpa harus menurukannya(inheritance). Daftar Isi: Precedence Trait Multiple Resolusi Konflik Merubah visibility metode Trait disusun dari Trait Anggota Trait Abstract Anggota Static Trait Property Contoh trait: &lt;?php namespace app\traits; trait Foo { public function hello() { return &#39;Hello&#39;; } } Untuk menggunakan trait pada klas kita cukup gunakan keyword use didalam definisi klas. &lt;?php class User { use \app\traits\Foo; // kita dapat menggunakan fungsi dari trait Foo // secara langsung menggunakan $this public function world() { echo $this-&gt;hello() . &#39; world!&#39;; } } Hal mendahului/ Precedence Anggota turunan dari klas dasar ditumpuki oleh anggota yang disisipi oleh Trait. Urutan precedence adalah bahwa member dari klas saat ini ditumpuk oleh trait yang disisipkan. Contoh Fungsi turunan dari klas dasar (Base) ditumpuk oleh fungsi yang disisipkan pada klas MyHelloWorld yaitu dari trait SayWorld. Aturan ini akan sama untuk fungsi yang didefinisikan di dalam klas MyHelloWorld. &lt;?php class Base { public function sayHello() { echo &#39;Hello &#39;; } } trait SayWorld { public function sayHello() { echo &#39;World!&#39;; } } class MyHelloWorld extends Base { use SayWorld; } $o = new MyHelloWorld(); $o-&gt;sayHello(); // output: // World Contoh lain dari urutan precedence &lt;?php trait HelloWorld { public function sayHello() { echo &#39;Hello World!&#39;; } } class DuniaTidakCukup { use HelloWorld; public function sayHello() { echo &#39;Halo Dunia!&#39;; } } $o = new DuniaTidakCukup(); $o-&gt;sayHello(); Contoh di atas akan menghasilkan keluaran: Halo Dunia! Trait Multiple Multiple trait dapat disisipkan ke dalam klas dengan mendaftarkannya pada statemen use, dipisahkan dengan koma. &lt;?php trait Hello { public function sayHello() { echo &#39;Hello &#39;; } } trait World { public function sayWorld() { echo &#39;World&#39;; } } class MyHelloWorld { use Hello, World; public function sayExclamationMark() { echo &#39;!&#39;; } } $o = new MyHelloWorld(); $o-&gt;sayHello(); $o-&gt;sayWorld(); $o-&gt;sayExclamationMark(); Resolusi Konflik Jika dua Trait disisipkan dengan nama yang sama maka akan terjadi kesalahan fatal, jika masalah tidak dipecahkan secara eksplisit. Untuk memecahkan konflik penamaan antara Trait pada klas yang sama, operator insteadof diperlukan untuk memilih tepat satu dari method yang konflik. Karena hal ini hanya boleh membuat satu pengecualian, operator as dapat digunakan untuk menambah alias ke suatu method. Perlu dicatat bahwa operator as tidak merubah nama method dan tidak mempengaruhi method lain. Contoh Pada contoh ini, klas Talker menggunakan trait A dan B. Karena trait A dan B memiliki konflik, maka klas ini akan perlu mendefinisikan penggunaan method smallTalk dari trait B dan method bigTalk dari trait A. Klas Alias_Talker menggunakan operator as untuk dapat menggunakan method bigTalk dari trait B dengan nama alias talk. &lt;?php trait A { public function smallTalk() { echo &#39;a&#39;; } public function bigTalk() { echo &#39;A&#39;; } } trait B { public function smallTalk() { echo &#39;b&#39;; } public function bigTalk() { echo &#39;B&#39;; } } class Talker { use A, B { B::smallTalk insteadof A; A::bigTalk insteadof B; } } class Aliased_Talker { use A, B { B::smallTalk insteadof A; A::bigTalk insteadof B; B::bigTalk as talk; } } Merubah visibility metode Dengan menggunakan syntax as method pada trait dapat dirubah visibilitynya pada klas yang menggunakan trait. Contoh &lt;?php trait HelloWorld { public function sayHello() { echo &#39;Hello world!&#39;; } } // Merubah visibility fungsi sayHello class MyClass1 { use HelloWorld { sayHello as protected; } } // Alias method dengan perubahan visibility // Visibility sayHello tetap tidak berubah class MyClass2 { use HelloWorld { sayHello as private myPrivateHello; } } Trait disusun dari Trait Seperti pada klas yang dapat menggunakan trait, jadi trait juga dapat menggunakan trait lain. Dengan menggunakan satu atau lebih trait di dalam definisi trait, trait ini dapat disusun sebagian atau semuanya dari anggota yang mendefinisikan pada trait lain. Contoh &lt;?php trait Hello { public function sayHello() { echo &#39;Hello&#39;; } } trait World { public function sayWorld() { echo &#39;World&#39;; } } trait HelloWorld { use Hello, World; } class MyHelloWorld { use HelloWorld; } $o = new MyHelloWorld(); $o-&gt;sayHello(); $o-&gt;sayWorld(); Anggota Trait Abstract Trait mendukung penggunaan abstract method untuk memaksa kebutuhan pada class yang menggunakan trait. Contoh abstract method &lt;?php trait Hello { public function sayHelloWorld() { echo &#39;Hello&#39; . $this-&gt;getWorld(); } abstract public function getWorld(); } class MyHelloWorld { private $world; use Hello; public function getWorld() { return $this-&gt;world; } public function setWorld($val) { $this-&gt;world = $val; } } Anggota Static Trait Trait dapat mendefinisikan static property dan static method Contoh static variabel &lt;?php trait Counter { public function inc() { static $c = 0; $c = $c + 1; echo &quot;$c\n&quot;; } } class C1 { use Counter; } class C2 { use Counter; } $o = new C1(); $o-&gt;inc(); // echo 1 $p = new C2(); $p-&gt;inc(); // echo 1 Contoh static method &lt;?php trait StaticExample { public static function doSomething() { return &#39;Doing Something&#39;; } } class Example { use StaticExample; } Example::doSomething(); Property Di dalam Trait kita juga dapat mendefinisikan property sama seperti pada klas. Contoh trait PropertiesTrait { public $x = 1; } class PropertiesExample { use PropertiesTrait; } $ex = new PropertiesExample(); $ex-&gt;x; sekian. sumber: php.net" />
-<meta property="og:description" content="Trait adalah mekanisme untuk penggunaan kembali kode dalam single inheritance. Trait dimaksudkan untuk mengurangi beberapa keterbatasan dari turunan tunggal dengan memungkinkan pengembang untuk menggunakan kembali serangkain fungsi-fungsi secara bebas pada beberapa klas yang independen yang hidup dalam hirarki klas yang berbeda. Trait mirip dengan klas, hanya saja trait dimaksudkan untuk mengelompokan fungsi menjadi kecil dan konsisten. Kita tidak bisa meng-instansi trait pada dirinya sendiri tetapi kita bisa menggunakannya tanpa harus menurukannya(inheritance). Daftar Isi: Precedence Trait Multiple Resolusi Konflik Merubah visibility metode Trait disusun dari Trait Anggota Trait Abstract Anggota Static Trait Property Contoh trait: &lt;?php namespace app\traits; trait Foo { public function hello() { return &#39;Hello&#39;; } } Untuk menggunakan trait pada klas kita cukup gunakan keyword use didalam definisi klas. &lt;?php class User { use \app\traits\Foo; // kita dapat menggunakan fungsi dari trait Foo // secara langsung menggunakan $this public function world() { echo $this-&gt;hello() . &#39; world!&#39;; } } Hal mendahului/ Precedence Anggota turunan dari klas dasar ditumpuki oleh anggota yang disisipi oleh Trait. Urutan precedence adalah bahwa member dari klas saat ini ditumpuk oleh trait yang disisipkan. Contoh Fungsi turunan dari klas dasar (Base) ditumpuk oleh fungsi yang disisipkan pada klas MyHelloWorld yaitu dari trait SayWorld. Aturan ini akan sama untuk fungsi yang didefinisikan di dalam klas MyHelloWorld. &lt;?php class Base { public function sayHello() { echo &#39;Hello &#39;; } } trait SayWorld { public function sayHello() { echo &#39;World!&#39;; } } class MyHelloWorld extends Base { use SayWorld; } $o = new MyHelloWorld(); $o-&gt;sayHello(); // output: // World Contoh lain dari urutan precedence &lt;?php trait HelloWorld { public function sayHello() { echo &#39;Hello World!&#39;; } } class DuniaTidakCukup { use HelloWorld; public function sayHello() { echo &#39;Halo Dunia!&#39;; } } $o = new DuniaTidakCukup(); $o-&gt;sayHello(); Contoh di atas akan menghasilkan keluaran: Halo Dunia! Trait Multiple Multiple trait dapat disisipkan ke dalam klas dengan mendaftarkannya pada statemen use, dipisahkan dengan koma. &lt;?php trait Hello { public function sayHello() { echo &#39;Hello &#39;; } } trait World { public function sayWorld() { echo &#39;World&#39;; } } class MyHelloWorld { use Hello, World; public function sayExclamationMark() { echo &#39;!&#39;; } } $o = new MyHelloWorld(); $o-&gt;sayHello(); $o-&gt;sayWorld(); $o-&gt;sayExclamationMark(); Resolusi Konflik Jika dua Trait disisipkan dengan nama yang sama maka akan terjadi kesalahan fatal, jika masalah tidak dipecahkan secara eksplisit. Untuk memecahkan konflik penamaan antara Trait pada klas yang sama, operator insteadof diperlukan untuk memilih tepat satu dari method yang konflik. Karena hal ini hanya boleh membuat satu pengecualian, operator as dapat digunakan untuk menambah alias ke suatu method. Perlu dicatat bahwa operator as tidak merubah nama method dan tidak mempengaruhi method lain. Contoh Pada contoh ini, klas Talker menggunakan trait A dan B. Karena trait A dan B memiliki konflik, maka klas ini akan perlu mendefinisikan penggunaan method smallTalk dari trait B dan method bigTalk dari trait A. Klas Alias_Talker menggunakan operator as untuk dapat menggunakan method bigTalk dari trait B dengan nama alias talk. &lt;?php trait A { public function smallTalk() { echo &#39;a&#39;; } public function bigTalk() { echo &#39;A&#39;; } } trait B { public function smallTalk() { echo &#39;b&#39;; } public function bigTalk() { echo &#39;B&#39;; } } class Talker { use A, B { B::smallTalk insteadof A; A::bigTalk insteadof B; } } class Aliased_Talker { use A, B { B::smallTalk insteadof A; A::bigTalk insteadof B; B::bigTalk as talk; } } Merubah visibility metode Dengan menggunakan syntax as method pada trait dapat dirubah visibilitynya pada klas yang menggunakan trait. Contoh &lt;?php trait HelloWorld { public function sayHello() { echo &#39;Hello world!&#39;; } } // Merubah visibility fungsi sayHello class MyClass1 { use HelloWorld { sayHello as protected; } } // Alias method dengan perubahan visibility // Visibility sayHello tetap tidak berubah class MyClass2 { use HelloWorld { sayHello as private myPrivateHello; } } Trait disusun dari Trait Seperti pada klas yang dapat menggunakan trait, jadi trait juga dapat menggunakan trait lain. Dengan menggunakan satu atau lebih trait di dalam definisi trait, trait ini dapat disusun sebagian atau semuanya dari anggota yang mendefinisikan pada trait lain. Contoh &lt;?php trait Hello { public function sayHello() { echo &#39;Hello&#39;; } } trait World { public function sayWorld() { echo &#39;World&#39;; } } trait HelloWorld { use Hello, World; } class MyHelloWorld { use HelloWorld; } $o = new MyHelloWorld(); $o-&gt;sayHello(); $o-&gt;sayWorld(); Anggota Trait Abstract Trait mendukung penggunaan abstract method untuk memaksa kebutuhan pada class yang menggunakan trait. Contoh abstract method &lt;?php trait Hello { public function sayHelloWorld() { echo &#39;Hello&#39; . $this-&gt;getWorld(); } abstract public function getWorld(); } class MyHelloWorld { private $world; use Hello; public function getWorld() { return $this-&gt;world; } public function setWorld($val) { $this-&gt;world = $val; } } Anggota Static Trait Trait dapat mendefinisikan static property dan static method Contoh static variabel &lt;?php trait Counter { public function inc() { static $c = 0; $c = $c + 1; echo &quot;$c\n&quot;; } } class C1 { use Counter; } class C2 { use Counter; } $o = new C1(); $o-&gt;inc(); // echo 1 $p = new C2(); $p-&gt;inc(); // echo 1 Contoh static method &lt;?php trait StaticExample { public static function doSomething() { return &#39;Doing Something&#39;; } } class Example { use StaticExample; } Example::doSomething(); Property Di dalam Trait kita juga dapat mendefinisikan property sama seperti pada klas. Contoh trait PropertiesTrait { public $x = 1; } class PropertiesExample { use PropertiesTrait; } $ex = new PropertiesExample(); $ex-&gt;x; sekian. sumber: php.net" />
+<meta name="description" content="Trait adalah mekanisme untuk penggunaan kembali kode dalam single inheritance. Trait dimaksudkan untuk mengurangi beberapa keterbatasan dari turunan tunggal dengan memungkinkan pengembang untuk menggunakan kembali serangkain fungsi-fungsi secara bebas pada beberapa klas yang independen yang hidup dalam hirarki klas yang berbeda. Trait mirip dengan klas, hanya saja trait dimaksudkan untuk mengelompokan fungsi menjadi kecil dan konsisten. Kita tidak bisa meng-instansi trait pada dirinya sendiri tetapi kita bisa menggunakannya tanpa harus menurukannya(inheritance)." />
+<meta property="og:description" content="Trait adalah mekanisme untuk penggunaan kembali kode dalam single inheritance. Trait dimaksudkan untuk mengurangi beberapa keterbatasan dari turunan tunggal dengan memungkinkan pengembang untuk menggunakan kembali serangkain fungsi-fungsi secara bebas pada beberapa klas yang independen yang hidup dalam hirarki klas yang berbeda. Trait mirip dengan klas, hanya saja trait dimaksudkan untuk mengelompokan fungsi menjadi kecil dan konsisten. Kita tidak bisa meng-instansi trait pada dirinya sendiri tetapi kita bisa menggunakannya tanpa harus menurukannya(inheritance)." />
 <link rel="canonical" href="https://susilolab.github.io/php/2020/05/23/mengenal-trait-php.html" />
 <meta property="og:url" content="https://susilolab.github.io/php/2020/05/23/mengenal-trait-php.html" />
 <meta property="og:site_name" content="susilolab" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2020-05-23T00:00:00+07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Mengenal Trait di PHP" />
 <script type="application/ld+json">
-{"headline":"Mengenal Trait di PHP","dateModified":"2020-05-23T00:00:00+07:00","description":"Trait adalah mekanisme untuk penggunaan kembali kode dalam single inheritance. Trait dimaksudkan untuk mengurangi beberapa keterbatasan dari turunan tunggal dengan memungkinkan pengembang untuk menggunakan kembali serangkain fungsi-fungsi secara bebas pada beberapa klas yang independen yang hidup dalam hirarki klas yang berbeda. Trait mirip dengan klas, hanya saja trait dimaksudkan untuk mengelompokan fungsi menjadi kecil dan konsisten. Kita tidak bisa meng-instansi trait pada dirinya sendiri tetapi kita bisa menggunakannya tanpa harus menurukannya(inheritance). Daftar Isi: Precedence Trait Multiple Resolusi Konflik Merubah visibility metode Trait disusun dari Trait Anggota Trait Abstract Anggota Static Trait Property Contoh trait: &lt;?php namespace app\\traits; trait Foo { public function hello() { return &#39;Hello&#39;; } } Untuk menggunakan trait pada klas kita cukup gunakan keyword use didalam definisi klas. &lt;?php class User { use \\app\\traits\\Foo; // kita dapat menggunakan fungsi dari trait Foo // secara langsung menggunakan $this public function world() { echo $this-&gt;hello() . &#39; world!&#39;; } } Hal mendahului/ Precedence Anggota turunan dari klas dasar ditumpuki oleh anggota yang disisipi oleh Trait. Urutan precedence adalah bahwa member dari klas saat ini ditumpuk oleh trait yang disisipkan. Contoh Fungsi turunan dari klas dasar (Base) ditumpuk oleh fungsi yang disisipkan pada klas MyHelloWorld yaitu dari trait SayWorld. Aturan ini akan sama untuk fungsi yang didefinisikan di dalam klas MyHelloWorld. &lt;?php class Base { public function sayHello() { echo &#39;Hello &#39;; } } trait SayWorld { public function sayHello() { echo &#39;World!&#39;; } } class MyHelloWorld extends Base { use SayWorld; } $o = new MyHelloWorld(); $o-&gt;sayHello(); // output: // World Contoh lain dari urutan precedence &lt;?php trait HelloWorld { public function sayHello() { echo &#39;Hello World!&#39;; } } class DuniaTidakCukup { use HelloWorld; public function sayHello() { echo &#39;Halo Dunia!&#39;; } } $o = new DuniaTidakCukup(); $o-&gt;sayHello(); Contoh di atas akan menghasilkan keluaran: Halo Dunia! Trait Multiple Multiple trait dapat disisipkan ke dalam klas dengan mendaftarkannya pada statemen use, dipisahkan dengan koma. &lt;?php trait Hello { public function sayHello() { echo &#39;Hello &#39;; } } trait World { public function sayWorld() { echo &#39;World&#39;; } } class MyHelloWorld { use Hello, World; public function sayExclamationMark() { echo &#39;!&#39;; } } $o = new MyHelloWorld(); $o-&gt;sayHello(); $o-&gt;sayWorld(); $o-&gt;sayExclamationMark(); Resolusi Konflik Jika dua Trait disisipkan dengan nama yang sama maka akan terjadi kesalahan fatal, jika masalah tidak dipecahkan secara eksplisit. Untuk memecahkan konflik penamaan antara Trait pada klas yang sama, operator insteadof diperlukan untuk memilih tepat satu dari method yang konflik. Karena hal ini hanya boleh membuat satu pengecualian, operator as dapat digunakan untuk menambah alias ke suatu method. Perlu dicatat bahwa operator as tidak merubah nama method dan tidak mempengaruhi method lain. Contoh Pada contoh ini, klas Talker menggunakan trait A dan B. Karena trait A dan B memiliki konflik, maka klas ini akan perlu mendefinisikan penggunaan method smallTalk dari trait B dan method bigTalk dari trait A. Klas Alias_Talker menggunakan operator as untuk dapat menggunakan method bigTalk dari trait B dengan nama alias talk. &lt;?php trait A { public function smallTalk() { echo &#39;a&#39;; } public function bigTalk() { echo &#39;A&#39;; } } trait B { public function smallTalk() { echo &#39;b&#39;; } public function bigTalk() { echo &#39;B&#39;; } } class Talker { use A, B { B::smallTalk insteadof A; A::bigTalk insteadof B; } } class Aliased_Talker { use A, B { B::smallTalk insteadof A; A::bigTalk insteadof B; B::bigTalk as talk; } } Merubah visibility metode Dengan menggunakan syntax as method pada trait dapat dirubah visibilitynya pada klas yang menggunakan trait. Contoh &lt;?php trait HelloWorld { public function sayHello() { echo &#39;Hello world!&#39;; } } // Merubah visibility fungsi sayHello class MyClass1 { use HelloWorld { sayHello as protected; } } // Alias method dengan perubahan visibility // Visibility sayHello tetap tidak berubah class MyClass2 { use HelloWorld { sayHello as private myPrivateHello; } } Trait disusun dari Trait Seperti pada klas yang dapat menggunakan trait, jadi trait juga dapat menggunakan trait lain. Dengan menggunakan satu atau lebih trait di dalam definisi trait, trait ini dapat disusun sebagian atau semuanya dari anggota yang mendefinisikan pada trait lain. Contoh &lt;?php trait Hello { public function sayHello() { echo &#39;Hello&#39;; } } trait World { public function sayWorld() { echo &#39;World&#39;; } } trait HelloWorld { use Hello, World; } class MyHelloWorld { use HelloWorld; } $o = new MyHelloWorld(); $o-&gt;sayHello(); $o-&gt;sayWorld(); Anggota Trait Abstract Trait mendukung penggunaan abstract method untuk memaksa kebutuhan pada class yang menggunakan trait. Contoh abstract method &lt;?php trait Hello { public function sayHelloWorld() { echo &#39;Hello&#39; . $this-&gt;getWorld(); } abstract public function getWorld(); } class MyHelloWorld { private $world; use Hello; public function getWorld() { return $this-&gt;world; } public function setWorld($val) { $this-&gt;world = $val; } } Anggota Static Trait Trait dapat mendefinisikan static property dan static method Contoh static variabel &lt;?php trait Counter { public function inc() { static $c = 0; $c = $c + 1; echo &quot;$c\\n&quot;; } } class C1 { use Counter; } class C2 { use Counter; } $o = new C1(); $o-&gt;inc(); // echo 1 $p = new C2(); $p-&gt;inc(); // echo 1 Contoh static method &lt;?php trait StaticExample { public static function doSomething() { return &#39;Doing Something&#39;; } } class Example { use StaticExample; } Example::doSomething(); Property Di dalam Trait kita juga dapat mendefinisikan property sama seperti pada klas. Contoh trait PropertiesTrait { public $x = 1; } class PropertiesExample { use PropertiesTrait; } $ex = new PropertiesExample(); $ex-&gt;x; sekian. sumber: php.net","datePublished":"2020-05-23T00:00:00+07:00","url":"https://susilolab.github.io/php/2020/05/23/mengenal-trait-php.html","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://susilolab.github.io/php/2020/05/23/mengenal-trait-php.html"},"author":{"@type":"Person","name":"Agus Susilo"},"@context":"https://schema.org"}</script>
+{"@type":"BlogPosting","description":"Trait adalah mekanisme untuk penggunaan kembali kode dalam single inheritance. Trait dimaksudkan untuk mengurangi beberapa keterbatasan dari turunan tunggal dengan memungkinkan pengembang untuk menggunakan kembali serangkain fungsi-fungsi secara bebas pada beberapa klas yang independen yang hidup dalam hirarki klas yang berbeda. Trait mirip dengan klas, hanya saja trait dimaksudkan untuk mengelompokan fungsi menjadi kecil dan konsisten. Kita tidak bisa meng-instansi trait pada dirinya sendiri tetapi kita bisa menggunakannya tanpa harus menurukannya(inheritance).","headline":"Mengenal Trait di PHP","dateModified":"2020-05-23T00:00:00+07:00","datePublished":"2020-05-23T00:00:00+07:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://susilolab.github.io/php/2020/05/23/mengenal-trait-php.html"},"url":"https://susilolab.github.io/php/2020/05/23/mengenal-trait-php.html","author":{"@type":"Person","name":"Agus Susilo"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
+
+
+  
+  
+
+
+
+
+
+
 
 </head>
 <body><header class="site-header" role="banner">
@@ -71,13 +85,16 @@ if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNo
     <h1 class="post-title p-name" itemprop="name headline">Mengenal Trait di PHP</h1>
     <p class="post-meta">
       <time class="dt-published" datetime="2020-05-23T00:00:00+07:00" itemprop="datePublished">May 23, 2020
-      </time></p>
+      </time>
+      
+      </p>
   </header>
 
   <div class="post-content e-content" itemprop="articleBody">
     <p>Trait adalah mekanisme untuk penggunaan kembali kode dalam single inheritance. Trait dimaksudkan untuk mengurangi beberapa keterbatasan dari turunan tunggal dengan memungkinkan pengembang untuk menggunakan kembali serangkain fungsi-fungsi secara bebas pada beberapa klas yang independen yang hidup dalam hirarki klas yang berbeda.</p>
 
-<p>Trait mirip dengan klas, hanya saja trait dimaksudkan untuk mengelompokan fungsi menjadi kecil dan konsisten. Kita tidak bisa meng-instansi trait pada dirinya sendiri tetapi kita bisa menggunakannya tanpa harus menurukannya(inheritance).</p>
+<p>Trait mirip dengan klas, hanya saja trait dimaksudkan untuk mengelompokan fungsi menjadi kecil dan konsisten. Kita tidak bisa meng-instansi trait pada dirinya sendiri tetapi kita bisa menggunakannya tanpa harus menurukannya(inheritance).
+<!--more--></p>
 
 <p>Daftar Isi:</p>
 
@@ -97,24 +114,24 @@ if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNo
 
 <span class="kd">trait</span> <span class="nc">Foo</span>
 <span class="p">{</span>
-    <span class="k">public</span> <span class="k">function</span> <span class="nf">hello</span><span class="p">()</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">hello</span><span class="p">()</span>
     <span class="p">{</span>
         <span class="k">return</span> <span class="s1">'Hello'</span><span class="p">;</span>
     <span class="p">}</span>
 <span class="p">}</span></code></pre></figure>
 
-<p>Untuk menggunakan trait pada klas kita cukup gunakan keyword <code class="highlighter-rouge">use</code> didalam definisi klas.</p>
+<p>Untuk menggunakan trait pada klas kita cukup gunakan keyword <code class="language-plaintext highlighter-rouge">use</code> didalam definisi klas.</p>
 
 <figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
 <span class="kd">class</span> <span class="nc">User</span>
 <span class="p">{</span>
-    <span class="nx">use</span> <span class="nx">\app\traits\Foo</span><span class="p">;</span>
+    <span class="kn">use</span> <span class="err">\</span><span class="nc">app\traits\Foo</span><span class="p">;</span>
 
     <span class="c1">// kita dapat menggunakan fungsi dari trait Foo </span>
     <span class="c1">// secara langsung menggunakan $this</span>
-    <span class="k">public</span> <span class="k">function</span> <span class="nf">world</span><span class="p">()</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">world</span><span class="p">()</span>
     <span class="p">{</span>
-        <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">hello</span><span class="p">()</span> <span class="o">.</span> <span class="s1">' world!'</span><span class="p">;</span>
+        <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">hello</span><span class="p">()</span> <span class="mf">.</span> <span class="s1">' world!'</span><span class="p">;</span>
     <span class="p">}</span>
 <span class="p">}</span></code></pre></figure>
 
@@ -124,12 +141,12 @@ if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNo
 
 <p><em>Contoh</em></p>
 
-<p>Fungsi turunan dari klas dasar (<code class="highlighter-rouge">Base</code>) ditumpuk oleh fungsi yang disisipkan pada klas <code class="highlighter-rouge">MyHelloWorld</code> yaitu dari trait <code class="highlighter-rouge">SayWorld</code>. Aturan ini akan sama untuk fungsi yang didefinisikan di dalam klas <code class="highlighter-rouge">MyHelloWorld</code>.</p>
+<p>Fungsi turunan dari klas dasar (<code class="language-plaintext highlighter-rouge">Base</code>) ditumpuk oleh fungsi yang disisipkan pada klas <code class="language-plaintext highlighter-rouge">MyHelloWorld</code> yaitu dari trait <code class="language-plaintext highlighter-rouge">SayWorld</code>. Aturan ini akan sama untuk fungsi yang didefinisikan di dalam klas <code class="language-plaintext highlighter-rouge">MyHelloWorld</code>.</p>
 
 <figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
 <span class="kd">class</span> <span class="nc">Base</span>
 <span class="p">{</span>
-    <span class="k">public</span> <span class="k">function</span> <span class="nf">sayHello</span><span class="p">()</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">sayHello</span><span class="p">()</span>
     <span class="p">{</span>
         <span class="k">echo</span> <span class="s1">'Hello '</span><span class="p">;</span>
     <span class="p">}</span>
@@ -137,19 +154,19 @@ if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNo
 
 <span class="kd">trait</span> <span class="nc">SayWorld</span>
 <span class="p">{</span>
-    <span class="k">public</span> <span class="k">function</span> <span class="nf">sayHello</span><span class="p">()</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">sayHello</span><span class="p">()</span>
     <span class="p">{</span>
         <span class="k">echo</span> <span class="s1">'World!'</span><span class="p">;</span>
     <span class="p">}</span>
 <span class="p">}</span>
 
-<span class="kd">class</span> <span class="nc">MyHelloWorld</span> <span class="k">extends</span> <span class="nx">Base</span>
+<span class="kd">class</span> <span class="nc">MyHelloWorld</span> <span class="kd">extends</span> <span class="nc">Base</span>
 <span class="p">{</span>
-    <span class="kn">use</span> <span class="nn">SayWorld</span><span class="p">;</span>
+    <span class="kn">use</span> <span class="nc">SayWorld</span><span class="p">;</span>
 <span class="p">}</span>
 
-<span class="nv">$o</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyHelloWorld</span><span class="p">();</span>
-<span class="nv">$o</span><span class="o">-&gt;</span><span class="na">sayHello</span><span class="p">();</span>
+<span class="nv">$o</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">MyHelloWorld</span><span class="p">();</span>
+<span class="nv">$o</span><span class="o">-&gt;</span><span class="nf">sayHello</span><span class="p">();</span>
 <span class="c1">// output:</span>
 <span class="c1">// World</span></code></pre></figure>
 
@@ -158,7 +175,7 @@ if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNo
 <figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
 <span class="kd">trait</span> <span class="nc">HelloWorld</span>
 <span class="p">{</span>
-    <span class="k">public</span> <span class="k">function</span> <span class="nf">sayHello</span><span class="p">()</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">sayHello</span><span class="p">()</span>
     <span class="p">{</span>
         <span class="k">echo</span> <span class="s1">'Hello World!'</span><span class="p">;</span>
     <span class="p">}</span>
@@ -166,15 +183,15 @@ if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNo
 
 <span class="kd">class</span> <span class="nc">DuniaTidakCukup</span>
 <span class="p">{</span>
-    <span class="kn">use</span> <span class="nn">HelloWorld</span><span class="p">;</span>
-    <span class="k">public</span> <span class="k">function</span> <span class="nf">sayHello</span><span class="p">()</span>
+    <span class="kn">use</span> <span class="nc">HelloWorld</span><span class="p">;</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">sayHello</span><span class="p">()</span>
     <span class="p">{</span>
         <span class="k">echo</span> <span class="s1">'Halo Dunia!'</span><span class="p">;</span>
     <span class="p">}</span>
 <span class="p">}</span>
 
-<span class="nv">$o</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DuniaTidakCukup</span><span class="p">();</span>
-<span class="nv">$o</span><span class="o">-&gt;</span><span class="na">sayHello</span><span class="p">();</span></code></pre></figure>
+<span class="nv">$o</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">DuniaTidakCukup</span><span class="p">();</span>
+<span class="nv">$o</span><span class="o">-&gt;</span><span class="nf">sayHello</span><span class="p">();</span></code></pre></figure>
 
 <p>Contoh di atas akan menghasilkan keluaran:</p>
 
@@ -182,12 +199,12 @@ if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNo
 
 <h4 id="trait-multiple"><a name="trait-multiple"></a>Trait Multiple</h4>
 
-<p>Multiple trait dapat disisipkan ke dalam klas dengan mendaftarkannya pada statemen <code class="highlighter-rouge">use</code>, dipisahkan dengan koma.</p>
+<p>Multiple trait dapat disisipkan ke dalam klas dengan mendaftarkannya pada statemen <code class="language-plaintext highlighter-rouge">use</code>, dipisahkan dengan koma.</p>
 
 <figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
 <span class="kd">trait</span> <span class="nc">Hello</span>
 <span class="p">{</span>
-    <span class="k">public</span> <span class="k">function</span> <span class="nf">sayHello</span><span class="p">()</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">sayHello</span><span class="p">()</span>
     <span class="p">{</span>
         <span class="k">echo</span> <span class="s1">'Hello '</span><span class="p">;</span>
     <span class="p">}</span>
@@ -195,7 +212,7 @@ if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNo
 
 <span class="kd">trait</span> <span class="nc">World</span>
 <span class="p">{</span>
-    <span class="k">public</span> <span class="k">function</span> <span class="nf">sayWorld</span><span class="p">()</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">sayWorld</span><span class="p">()</span>
     <span class="p">{</span>
         <span class="k">echo</span> <span class="s1">'World'</span><span class="p">;</span>
     <span class="p">}</span>
@@ -203,38 +220,38 @@ if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNo
 
 <span class="kd">class</span> <span class="nc">MyHelloWorld</span>
 <span class="p">{</span>
-    <span class="kn">use</span> <span class="nn">Hello</span><span class="err">, World</span><span class="p">;</span>
+    <span class="kn">use</span> <span class="nc">Hello</span><span class="p">,</span> <span class="nc">World</span><span class="p">;</span>
 
-    <span class="k">public</span> <span class="k">function</span> <span class="nf">sayExclamationMark</span><span class="p">()</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">sayExclamationMark</span><span class="p">()</span>
     <span class="p">{</span>
         <span class="k">echo</span> <span class="s1">'!'</span><span class="p">;</span>
     <span class="p">}</span>
 <span class="p">}</span>
 
-<span class="nv">$o</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyHelloWorld</span><span class="p">();</span>
-<span class="nv">$o</span><span class="o">-&gt;</span><span class="na">sayHello</span><span class="p">();</span>
-<span class="nv">$o</span><span class="o">-&gt;</span><span class="na">sayWorld</span><span class="p">();</span>
-<span class="nv">$o</span><span class="o">-&gt;</span><span class="na">sayExclamationMark</span><span class="p">();</span></code></pre></figure>
+<span class="nv">$o</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">MyHelloWorld</span><span class="p">();</span>
+<span class="nv">$o</span><span class="o">-&gt;</span><span class="nf">sayHello</span><span class="p">();</span>
+<span class="nv">$o</span><span class="o">-&gt;</span><span class="nf">sayWorld</span><span class="p">();</span>
+<span class="nv">$o</span><span class="o">-&gt;</span><span class="nf">sayExclamationMark</span><span class="p">();</span></code></pre></figure>
 
 <h4 id="resolusi-konflik"><a name="conflict-resolution"></a>Resolusi Konflik</h4>
 
-<p>Jika dua Trait disisipkan dengan nama yang sama maka akan terjadi kesalahan fatal, jika masalah tidak dipecahkan secara eksplisit. Untuk memecahkan konflik penamaan antara Trait pada klas yang sama, operator <code class="highlighter-rouge">insteadof</code> diperlukan untuk memilih tepat satu dari method yang konflik. Karena hal ini hanya boleh membuat satu pengecualian, operator <code class="highlighter-rouge">as</code> dapat digunakan untuk menambah alias ke suatu method. Perlu dicatat bahwa operator <code class="highlighter-rouge">as</code> tidak merubah nama method dan tidak mempengaruhi method lain.</p>
+<p>Jika dua Trait disisipkan dengan nama yang sama maka akan terjadi kesalahan fatal, jika masalah tidak dipecahkan secara eksplisit. Untuk memecahkan konflik penamaan antara Trait pada klas yang sama, operator <code class="language-plaintext highlighter-rouge">insteadof</code> diperlukan untuk memilih tepat satu dari method yang konflik. Karena hal ini hanya boleh membuat satu pengecualian, operator <code class="language-plaintext highlighter-rouge">as</code> dapat digunakan untuk menambah alias ke suatu method. Perlu dicatat bahwa operator <code class="language-plaintext highlighter-rouge">as</code> tidak merubah nama method dan tidak mempengaruhi method lain.</p>
 
 <p>Contoh</p>
 
-<p>Pada contoh ini, klas <code class="highlighter-rouge">Talker</code> menggunakan trait <code class="highlighter-rouge">A</code> dan <code class="highlighter-rouge">B</code>. Karena trait <code class="highlighter-rouge">A</code> dan <code class="highlighter-rouge">B</code> memiliki konflik, maka klas ini akan perlu mendefinisikan penggunaan method <code class="highlighter-rouge">smallTalk</code> dari trait <code class="highlighter-rouge">B</code> dan method <code class="highlighter-rouge">bigTalk</code> dari trait <code class="highlighter-rouge">A</code>.</p>
+<p>Pada contoh ini, klas <code class="language-plaintext highlighter-rouge">Talker</code> menggunakan trait <code class="language-plaintext highlighter-rouge">A</code> dan <code class="language-plaintext highlighter-rouge">B</code>. Karena trait <code class="language-plaintext highlighter-rouge">A</code> dan <code class="language-plaintext highlighter-rouge">B</code> memiliki konflik, maka klas ini akan perlu mendefinisikan penggunaan method <code class="language-plaintext highlighter-rouge">smallTalk</code> dari trait <code class="language-plaintext highlighter-rouge">B</code> dan method <code class="language-plaintext highlighter-rouge">bigTalk</code> dari trait <code class="language-plaintext highlighter-rouge">A</code>.</p>
 
-<p>Klas <code class="highlighter-rouge">Alias_Talker</code> menggunakan operator <code class="highlighter-rouge">as</code> untuk dapat menggunakan method <code class="highlighter-rouge">bigTalk</code> dari trait <code class="highlighter-rouge">B</code> dengan nama alias <code class="highlighter-rouge">talk</code>.</p>
+<p>Klas <code class="language-plaintext highlighter-rouge">Alias_Talker</code> menggunakan operator <code class="language-plaintext highlighter-rouge">as</code> untuk dapat menggunakan method <code class="language-plaintext highlighter-rouge">bigTalk</code> dari trait <code class="language-plaintext highlighter-rouge">B</code> dengan nama alias <code class="language-plaintext highlighter-rouge">talk</code>.</p>
 
 <figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
 <span class="kd">trait</span> <span class="nc">A</span>
 <span class="p">{</span>
-    <span class="k">public</span> <span class="k">function</span> <span class="nf">smallTalk</span><span class="p">()</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">smallTalk</span><span class="p">()</span>
     <span class="p">{</span>
         <span class="k">echo</span> <span class="s1">'a'</span><span class="p">;</span>
     <span class="p">}</span>
 
-    <span class="k">public</span> <span class="k">function</span> <span class="nf">bigTalk</span><span class="p">()</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">bigTalk</span><span class="p">()</span>
     <span class="p">{</span>
         <span class="k">echo</span> <span class="s1">'A'</span><span class="p">;</span>
     <span class="p">}</span>
@@ -242,12 +259,12 @@ if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNo
 
 <span class="kd">trait</span> <span class="nc">B</span>
 <span class="p">{</span>
-    <span class="k">public</span> <span class="k">function</span> <span class="nf">smallTalk</span><span class="p">()</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">smallTalk</span><span class="p">()</span>
     <span class="p">{</span>
         <span class="k">echo</span> <span class="s1">'b'</span><span class="p">;</span>
     <span class="p">}</span>
 
-    <span class="k">public</span> <span class="k">function</span> <span class="nf">bigTalk</span><span class="p">()</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">bigTalk</span><span class="p">()</span>
     <span class="p">{</span>
         <span class="k">echo</span> <span class="s1">'B'</span><span class="p">;</span>
     <span class="p">}</span>
@@ -255,31 +272,31 @@ if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNo
 
 <span class="kd">class</span> <span class="nc">Talker</span>
 <span class="p">{</span>
-    <span class="kn">use</span> <span class="nn">A</span><span class="err">, B {
-        B::smallTalk insteadof A</span><span class="p">;</span>
-        <span class="nx">A</span><span class="o">::</span><span class="na">bigTalk</span> <span class="k">insteadof</span> <span class="nx">B</span><span class="p">;</span>
+    <span class="kn">use</span> <span class="nc">A</span><span class="p">,</span> <span class="nc">B</span> <span class="p">{</span>
+        <span class="nc">B</span><span class="o">::</span><span class="n">smallTalk</span> <span class="k">insteadof</span> <span class="nc">A</span><span class="p">;</span>
+        <span class="nc">A</span><span class="o">::</span><span class="n">bigTalk</span> <span class="k">insteadof</span> <span class="nc">B</span><span class="p">;</span>
     <span class="p">}</span>
 <span class="p">}</span>
 
 <span class="kd">class</span> <span class="nc">Aliased_Talker</span>
 <span class="p">{</span>
-    <span class="kn">use</span> <span class="nn">A</span><span class="err">, B {
-        B::smallTalk insteadof A</span><span class="p">;</span>
-        <span class="nx">A</span><span class="o">::</span><span class="na">bigTalk</span> <span class="k">insteadof</span> <span class="nx">B</span><span class="p">;</span>
-        <span class="nx">B</span><span class="o">::</span><span class="na">bigTalk</span> <span class="k">as</span> <span class="nx">talk</span><span class="p">;</span>
+    <span class="kn">use</span> <span class="nc">A</span><span class="p">,</span> <span class="nc">B</span> <span class="p">{</span>
+        <span class="nc">B</span><span class="o">::</span><span class="n">smallTalk</span> <span class="k">insteadof</span> <span class="nc">A</span><span class="p">;</span>
+        <span class="nc">A</span><span class="o">::</span><span class="n">bigTalk</span> <span class="k">insteadof</span> <span class="nc">B</span><span class="p">;</span>
+        <span class="nc">B</span><span class="o">::</span><span class="n">bigTalk</span> <span class="k">as</span> <span class="n">talk</span><span class="p">;</span>
     <span class="p">}</span>
 <span class="p">}</span></code></pre></figure>
 
 <h4 id="merubah-visibility-metode"><a name="visibility"></a>Merubah visibility metode</h4>
 
-<p>Dengan menggunakan syntax <code class="highlighter-rouge">as</code> method pada trait dapat dirubah visibilitynya pada klas yang menggunakan trait.</p>
+<p>Dengan menggunakan syntax <code class="language-plaintext highlighter-rouge">as</code> method pada trait dapat dirubah visibilitynya pada klas yang menggunakan trait.</p>
 
 <p>Contoh</p>
 
 <figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
 <span class="kd">trait</span> <span class="nc">HelloWorld</span>
 <span class="p">{</span>
-    <span class="k">public</span> <span class="k">function</span> <span class="nf">sayHello</span><span class="p">()</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">sayHello</span><span class="p">()</span>
     <span class="p">{</span>
         <span class="k">echo</span> <span class="s1">'Hello world!'</span><span class="p">;</span>
     <span class="p">}</span>
@@ -288,14 +305,14 @@ if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNo
 <span class="c1">// Merubah visibility fungsi sayHello</span>
 <span class="kd">class</span> <span class="nc">MyClass1</span>
 <span class="p">{</span>
-    <span class="kn">use</span> <span class="nn">HelloWorld</span><span class="err"> { sayHello</span> <span class="k">as</span> <span class="n">protected</span><span class="p">;</span> <span class="p">}</span>
+    <span class="kn">use</span> <span class="nc">HelloWorld</span> <span class="p">{</span> <span class="n">sayHello</span> <span class="k">as</span> <span class="k">protected</span><span class="p">;</span> <span class="p">}</span>
 <span class="p">}</span>
 
 <span class="c1">// Alias method dengan perubahan visibility</span>
 <span class="c1">// Visibility sayHello tetap tidak berubah</span>
 <span class="kd">class</span> <span class="nc">MyClass2</span>
 <span class="p">{</span>
-    <span class="kn">use</span> <span class="nn">HelloWorld</span><span class="err"> { sayHello</span> <span class="k">as</span> <span class="n">private</span><span class="err"> myPrivateHello</span><span class="p">;</span> <span class="p">}</span>
+    <span class="kn">use</span> <span class="nc">HelloWorld</span> <span class="p">{</span> <span class="n">sayHello</span> <span class="k">as</span> <span class="k">private</span> <span class="kt">myPrivateHello</span><span class="p">;</span> <span class="p">}</span>
 <span class="p">}</span></code></pre></figure>
 
 <h4 id="trait-disusun-dari-trait"><a name="composed"></a>Trait disusun dari Trait</h4>
@@ -307,7 +324,7 @@ if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNo
 <figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
 <span class="kd">trait</span> <span class="nc">Hello</span>
 <span class="p">{</span>
-    <span class="k">public</span> <span class="k">function</span> <span class="nf">sayHello</span><span class="p">()</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">sayHello</span><span class="p">()</span>
     <span class="p">{</span>
         <span class="k">echo</span> <span class="s1">'Hello'</span><span class="p">;</span>
     <span class="p">}</span>
@@ -315,7 +332,7 @@ if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNo
 
 <span class="kd">trait</span> <span class="nc">World</span>
 <span class="p">{</span>
-    <span class="k">public</span> <span class="k">function</span> <span class="nf">sayWorld</span><span class="p">()</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">sayWorld</span><span class="p">()</span>
     <span class="p">{</span>
         <span class="k">echo</span> <span class="s1">'World'</span><span class="p">;</span>
     <span class="p">}</span>
@@ -323,17 +340,17 @@ if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNo
 
 <span class="kd">trait</span> <span class="nc">HelloWorld</span>
 <span class="p">{</span>
-    <span class="kn">use</span> <span class="nn">Hello</span><span class="err">, World</span><span class="p">;</span>
+    <span class="kn">use</span> <span class="nc">Hello</span><span class="p">,</span> <span class="nc">World</span><span class="p">;</span>
 <span class="p">}</span>
 
 <span class="kd">class</span> <span class="nc">MyHelloWorld</span>
 <span class="p">{</span>
-    <span class="kn">use</span> <span class="nn">HelloWorld</span><span class="p">;</span>
+    <span class="kn">use</span> <span class="nc">HelloWorld</span><span class="p">;</span>
 <span class="p">}</span>
 
-<span class="nv">$o</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyHelloWorld</span><span class="p">();</span>
-<span class="nv">$o</span><span class="o">-&gt;</span><span class="na">sayHello</span><span class="p">();</span>
-<span class="nv">$o</span><span class="o">-&gt;</span><span class="na">sayWorld</span><span class="p">();</span></code></pre></figure>
+<span class="nv">$o</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">MyHelloWorld</span><span class="p">();</span>
+<span class="nv">$o</span><span class="o">-&gt;</span><span class="nf">sayHello</span><span class="p">();</span>
+<span class="nv">$o</span><span class="o">-&gt;</span><span class="nf">sayWorld</span><span class="p">();</span></code></pre></figure>
 
 <h4 id="anggota-trait-abstract"><a name="abstract-trait"></a>Anggota Trait Abstract</h4>
 
@@ -344,27 +361,27 @@ if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNo
 <figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
 <span class="kd">trait</span> <span class="nc">Hello</span>
 <span class="p">{</span>
-    <span class="k">public</span> <span class="k">function</span> <span class="nf">sayHelloWorld</span><span class="p">()</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">sayHelloWorld</span><span class="p">()</span>
     <span class="p">{</span>
-        <span class="k">echo</span> <span class="s1">'Hello'</span> <span class="o">.</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getWorld</span><span class="p">();</span>
+        <span class="k">echo</span> <span class="s1">'Hello'</span> <span class="mf">.</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">getWorld</span><span class="p">();</span>
     <span class="p">}</span>
 
-    <span class="k">abstract</span> <span class="k">public</span> <span class="k">function</span> <span class="nf">getWorld</span><span class="p">();</span>
+    <span class="k">abstract</span> <span class="k">public</span> <span class="k">function</span> <span class="n">getWorld</span><span class="p">();</span>
 <span class="p">}</span>
 
 <span class="kd">class</span> <span class="nc">MyHelloWorld</span>
 <span class="p">{</span>
     <span class="k">private</span> <span class="nv">$world</span><span class="p">;</span>
-    <span class="kn">use</span> <span class="nn">Hello</span><span class="p">;</span>
+    <span class="kn">use</span> <span class="nc">Hello</span><span class="p">;</span>
 
-    <span class="k">public</span> <span class="k">function</span> <span class="nf">getWorld</span><span class="p">()</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">getWorld</span><span class="p">()</span>
     <span class="p">{</span>
-        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">world</span><span class="p">;</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">world</span><span class="p">;</span>
     <span class="p">}</span>
 
-    <span class="k">public</span> <span class="k">function</span> <span class="nf">setWorld</span><span class="p">(</span><span class="nv">$val</span><span class="p">)</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">setWorld</span><span class="p">(</span><span class="nv">$val</span><span class="p">)</span>
     <span class="p">{</span>
-        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">world</span> <span class="o">=</span> <span class="nv">$val</span><span class="p">;</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">world</span> <span class="o">=</span> <span class="nv">$val</span><span class="p">;</span>
     <span class="p">}</span>
 <span class="p">}</span></code></pre></figure>
 
@@ -377,7 +394,7 @@ if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNo
 <figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
 <span class="kd">trait</span> <span class="nc">Counter</span>
 <span class="p">{</span>
-    <span class="k">public</span> <span class="k">function</span> <span class="nf">inc</span><span class="p">()</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">inc</span><span class="p">()</span>
     <span class="p">{</span>
         <span class="k">static</span> <span class="nv">$c</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
         <span class="nv">$c</span> <span class="o">=</span> <span class="nv">$c</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
@@ -387,25 +404,25 @@ if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNo
 
 <span class="kd">class</span> <span class="nc">C1</span>
 <span class="p">{</span>
-    <span class="kn">use</span> <span class="nn">Counter</span><span class="p">;</span>
+    <span class="kn">use</span> <span class="nc">Counter</span><span class="p">;</span>
 <span class="p">}</span>
 
 <span class="kd">class</span> <span class="nc">C2</span>
 <span class="p">{</span>
-    <span class="kn">use</span> <span class="nn">Counter</span><span class="p">;</span>
+    <span class="kn">use</span> <span class="nc">Counter</span><span class="p">;</span>
 <span class="p">}</span>
 
-<span class="nv">$o</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">C1</span><span class="p">();</span>
-<span class="nv">$o</span><span class="o">-&gt;</span><span class="na">inc</span><span class="p">();</span> <span class="c1">// echo 1</span>
-<span class="nv">$p</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">C2</span><span class="p">();</span>
-<span class="nv">$p</span><span class="o">-&gt;</span><span class="na">inc</span><span class="p">();</span> <span class="c1">// echo 1</span></code></pre></figure>
+<span class="nv">$o</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">C1</span><span class="p">();</span>
+<span class="nv">$o</span><span class="o">-&gt;</span><span class="nf">inc</span><span class="p">();</span> <span class="c1">// echo 1</span>
+<span class="nv">$p</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">C2</span><span class="p">();</span>
+<span class="nv">$p</span><span class="o">-&gt;</span><span class="nf">inc</span><span class="p">();</span> <span class="c1">// echo 1</span></code></pre></figure>
 
 <p>Contoh static method</p>
 
 <figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
 <span class="kd">trait</span> <span class="nc">StaticExample</span>
 <span class="p">{</span>
-    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">doSomething</span><span class="p">()</span>
+    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="n">doSomething</span><span class="p">()</span>
     <span class="p">{</span>
         <span class="k">return</span> <span class="s1">'Doing Something'</span><span class="p">;</span>
     <span class="p">}</span>
@@ -413,14 +430,14 @@ if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNo
 
 <span class="kd">class</span> <span class="nc">Example</span>
 <span class="p">{</span>
-    <span class="kn">use</span> <span class="nn">StaticExample</span><span class="p">;</span>
+    <span class="kn">use</span> <span class="nc">StaticExample</span><span class="p">;</span>
 <span class="p">}</span>
 
-<span class="nx">Example</span><span class="o">::</span><span class="na">doSomething</span><span class="p">();</span></code></pre></figure>
+<span class="nc">Example</span><span class="o">::</span><span class="nf">doSomething</span><span class="p">();</span></code></pre></figure>
 
 <h4 id="property"><a name="property"></a>Property</h4>
 
-<p>Di dalam Trait kita juga dapat mendefinisikan <code class="highlighter-rouge">property</code> sama seperti pada klas.</p>
+<p>Di dalam Trait kita juga dapat mendefinisikan <code class="language-plaintext highlighter-rouge">property</code> sama seperti pada klas.</p>
 
 <p>Contoh</p>
 
@@ -431,11 +448,11 @@ if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNo
 
 <span class="kd">class</span> <span class="nc">PropertiesExample</span>
 <span class="p">{</span>
-    <span class="kn">use</span> <span class="nn">PropertiesTrait</span><span class="p">;</span>
+    <span class="kn">use</span> <span class="nc">PropertiesTrait</span><span class="p">;</span>
 <span class="p">}</span>
 
-<span class="nv">$ex</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PropertiesExample</span><span class="p">();</span>
-<span class="nv">$ex</span><span class="o">-&gt;</span><span class="na">x</span><span class="p">;</span></code></pre></figure>
+<span class="nv">$ex</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">PropertiesExample</span><span class="p">();</span>
+<span class="nv">$ex</span><span class="o">-&gt;</span><span class="n">x</span><span class="p">;</span></code></pre></figure>
 
 <p>sekian.</p>
 
@@ -454,7 +471,7 @@ if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNo
 
       <div class="footer-col footer-col-3">
         <p>&quot;Sebaik-baik manusia adalah yang paling bermanfaat bagi manusia&quot; (HR. Ahmad, ath-Thabrani, ad-Daruqutni)</p>
-        <p>&copy;2020&nbsp;Agus Susilo</p>
+        <p>&copy;2021&nbsp;Agus Susilo</p>
       </div>
     </div>
 

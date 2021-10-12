@@ -2,21 +2,23 @@
 <html lang="en"><head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
 <title>Mengganti gambar latar pada grub2 | susilolab</title>
-<meta name="generator" content="Jekyll v3.8.6" />
+<meta name="generator" content="Jekyll v4.2.0" />
 <meta property="og:title" content="Mengganti gambar latar pada grub2" />
 <meta name="author" content="Agus Susilo" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Beberapa hari yang lalu saya pernah menulis bagaimana cara mengganti gambar latar/background pada grub2 di linux mint 10. Ternyata cara tersebut tidak efektif, setelah saya baca-baca di internet cara meng-customize grub2 akhirnya menemukan cara yang lebih mudah dan aman. Perhatian: Backup terlebih file /etc/grub.d/06_mint_theme sebelum Anda rubah. Hal ini untuk menghindari sesuatu yang tidak kita inginkan, sehingga mempermudah dalam proses restore. Berikut ini langkah-langkah mengganti gambar latar pada grub2 di linux mint 10: Siapkan gambar berukuran 640×480 pixel, tipe gambar boleh png atau jpeg. Dalam hal ini saya menggunakan gambar latar dengan nama latar_ungu.jpg. Buat folder images dan desktop-base di /usr/share $ sudo mkdir /usr/share/images $ sudo mkdir /usr/share/images/desktop-base Salin file gambar tersebut ke folder desktop-base $ sudo cp latar_ungu.jpg /usr/share/images/desktop-base Kemudian edit file 06_mint_theme di folder /etc/grub.d. Cari baris kode berikut dan ganti nama gambar linuxmint dengan latar_ungu dan jangan lupa untu menambahkan ektensi jpg pada script {png,tga}. #sebelum diedit. for i in {/boot/grub,/usr/share/images/desktop-base}/linuxmint.{png,tga} ; do #setelah diedit for i in {/boot/grub,/usr/share/images/desktop-base}/latar_ungu.{png,tga,jpg} ; do Setelah itu jalankan perintah berikut untuk mengupdate grub. $ sudo update-grub Kemudian restart komputer Anda. Pada langkah kedua Anda juga bisa menggunakan nautilus(file explorer) untuk membuat folder. Caranya tekan tombol keyboard Alt dan F2. Kemudian ketik perintah gksu nautilus, Ketikan password Anda apabila system memintanya. Selamat mencoba 🙂" />
-<meta property="og:description" content="Beberapa hari yang lalu saya pernah menulis bagaimana cara mengganti gambar latar/background pada grub2 di linux mint 10. Ternyata cara tersebut tidak efektif, setelah saya baca-baca di internet cara meng-customize grub2 akhirnya menemukan cara yang lebih mudah dan aman. Perhatian: Backup terlebih file /etc/grub.d/06_mint_theme sebelum Anda rubah. Hal ini untuk menghindari sesuatu yang tidak kita inginkan, sehingga mempermudah dalam proses restore. Berikut ini langkah-langkah mengganti gambar latar pada grub2 di linux mint 10: Siapkan gambar berukuran 640×480 pixel, tipe gambar boleh png atau jpeg. Dalam hal ini saya menggunakan gambar latar dengan nama latar_ungu.jpg. Buat folder images dan desktop-base di /usr/share $ sudo mkdir /usr/share/images $ sudo mkdir /usr/share/images/desktop-base Salin file gambar tersebut ke folder desktop-base $ sudo cp latar_ungu.jpg /usr/share/images/desktop-base Kemudian edit file 06_mint_theme di folder /etc/grub.d. Cari baris kode berikut dan ganti nama gambar linuxmint dengan latar_ungu dan jangan lupa untu menambahkan ektensi jpg pada script {png,tga}. #sebelum diedit. for i in {/boot/grub,/usr/share/images/desktop-base}/linuxmint.{png,tga} ; do #setelah diedit for i in {/boot/grub,/usr/share/images/desktop-base}/latar_ungu.{png,tga,jpg} ; do Setelah itu jalankan perintah berikut untuk mengupdate grub. $ sudo update-grub Kemudian restart komputer Anda. Pada langkah kedua Anda juga bisa menggunakan nautilus(file explorer) untuk membuat folder. Caranya tekan tombol keyboard Alt dan F2. Kemudian ketik perintah gksu nautilus, Ketikan password Anda apabila system memintanya. Selamat mencoba 🙂" />
+<meta name="description" content="Beberapa hari yang lalu saya pernah menulis bagaimana cara mengganti gambar latar/background pada grub2 di linux mint 10." />
+<meta property="og:description" content="Beberapa hari yang lalu saya pernah menulis bagaimana cara mengganti gambar latar/background pada grub2 di linux mint 10." />
 <link rel="canonical" href="https://susilolab.github.io/linux/2011/05/03/mengganti-gambar-latar-pada-grub2.html" />
 <meta property="og:url" content="https://susilolab.github.io/linux/2011/05/03/mengganti-gambar-latar-pada-grub2.html" />
 <meta property="og:site_name" content="susilolab" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2011-05-03T08:00:00+07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Mengganti gambar latar pada grub2" />
 <script type="application/ld+json">
-{"headline":"Mengganti gambar latar pada grub2","dateModified":"2011-05-03T08:00:00+07:00","description":"Beberapa hari yang lalu saya pernah menulis bagaimana cara mengganti gambar latar/background pada grub2 di linux mint 10. Ternyata cara tersebut tidak efektif, setelah saya baca-baca di internet cara meng-customize grub2 akhirnya menemukan cara yang lebih mudah dan aman. Perhatian: Backup terlebih file /etc/grub.d/06_mint_theme sebelum Anda rubah. Hal ini untuk menghindari sesuatu yang tidak kita inginkan, sehingga mempermudah dalam proses restore. Berikut ini langkah-langkah mengganti gambar latar pada grub2 di linux mint 10: Siapkan gambar berukuran 640×480 pixel, tipe gambar boleh png atau jpeg. Dalam hal ini saya menggunakan gambar latar dengan nama latar_ungu.jpg. Buat folder images dan desktop-base di /usr/share $ sudo mkdir /usr/share/images $ sudo mkdir /usr/share/images/desktop-base Salin file gambar tersebut ke folder desktop-base $ sudo cp latar_ungu.jpg /usr/share/images/desktop-base Kemudian edit file 06_mint_theme di folder /etc/grub.d. Cari baris kode berikut dan ganti nama gambar linuxmint dengan latar_ungu dan jangan lupa untu menambahkan ektensi jpg pada script {png,tga}. #sebelum diedit. for i in {/boot/grub,/usr/share/images/desktop-base}/linuxmint.{png,tga} ; do #setelah diedit for i in {/boot/grub,/usr/share/images/desktop-base}/latar_ungu.{png,tga,jpg} ; do Setelah itu jalankan perintah berikut untuk mengupdate grub. $ sudo update-grub Kemudian restart komputer Anda. Pada langkah kedua Anda juga bisa menggunakan nautilus(file explorer) untuk membuat folder. Caranya tekan tombol keyboard Alt dan F2. Kemudian ketik perintah gksu nautilus, Ketikan password Anda apabila system memintanya. Selamat mencoba 🙂","datePublished":"2011-05-03T08:00:00+07:00","url":"https://susilolab.github.io/linux/2011/05/03/mengganti-gambar-latar-pada-grub2.html","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://susilolab.github.io/linux/2011/05/03/mengganti-gambar-latar-pada-grub2.html"},"author":{"@type":"Person","name":"Agus Susilo"},"@context":"https://schema.org"}</script>
+{"@type":"BlogPosting","description":"Beberapa hari yang lalu saya pernah menulis bagaimana cara mengganti gambar latar/background pada grub2 di linux mint 10.","headline":"Mengganti gambar latar pada grub2","dateModified":"2011-05-03T08:00:00+07:00","datePublished":"2011-05-03T08:00:00+07:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://susilolab.github.io/linux/2011/05/03/mengganti-gambar-latar-pada-grub2.html"},"url":"https://susilolab.github.io/linux/2011/05/03/mengganti-gambar-latar-pada-grub2.html","author":{"@type":"Person","name":"Agus Susilo"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://susilolab.github.io/feed.xml" title="susilolab" /><script>
 if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1")) {
@@ -30,22 +32,34 @@ if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNo
 }
 </script>
   
-<!-- Begin Jekyll SEO tag v2.6.1 -->
+<!-- Begin Jekyll SEO tag v2.7.1 -->
 <title>Mengganti gambar latar pada grub2 | susilolab</title>
-<meta name="generator" content="Jekyll v3.8.6" />
+<meta name="generator" content="Jekyll v4.2.0" />
 <meta property="og:title" content="Mengganti gambar latar pada grub2" />
 <meta name="author" content="Agus Susilo" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Beberapa hari yang lalu saya pernah menulis bagaimana cara mengganti gambar latar/background pada grub2 di linux mint 10. Ternyata cara tersebut tidak efektif, setelah saya baca-baca di internet cara meng-customize grub2 akhirnya menemukan cara yang lebih mudah dan aman. Perhatian: Backup terlebih file /etc/grub.d/06_mint_theme sebelum Anda rubah. Hal ini untuk menghindari sesuatu yang tidak kita inginkan, sehingga mempermudah dalam proses restore. Berikut ini langkah-langkah mengganti gambar latar pada grub2 di linux mint 10: Siapkan gambar berukuran 640×480 pixel, tipe gambar boleh png atau jpeg. Dalam hal ini saya menggunakan gambar latar dengan nama latar_ungu.jpg. Buat folder images dan desktop-base di /usr/share $ sudo mkdir /usr/share/images $ sudo mkdir /usr/share/images/desktop-base Salin file gambar tersebut ke folder desktop-base $ sudo cp latar_ungu.jpg /usr/share/images/desktop-base Kemudian edit file 06_mint_theme di folder /etc/grub.d. Cari baris kode berikut dan ganti nama gambar linuxmint dengan latar_ungu dan jangan lupa untu menambahkan ektensi jpg pada script {png,tga}. #sebelum diedit. for i in {/boot/grub,/usr/share/images/desktop-base}/linuxmint.{png,tga} ; do #setelah diedit for i in {/boot/grub,/usr/share/images/desktop-base}/latar_ungu.{png,tga,jpg} ; do Setelah itu jalankan perintah berikut untuk mengupdate grub. $ sudo update-grub Kemudian restart komputer Anda. Pada langkah kedua Anda juga bisa menggunakan nautilus(file explorer) untuk membuat folder. Caranya tekan tombol keyboard Alt dan F2. Kemudian ketik perintah gksu nautilus, Ketikan password Anda apabila system memintanya. Selamat mencoba 🙂" />
-<meta property="og:description" content="Beberapa hari yang lalu saya pernah menulis bagaimana cara mengganti gambar latar/background pada grub2 di linux mint 10. Ternyata cara tersebut tidak efektif, setelah saya baca-baca di internet cara meng-customize grub2 akhirnya menemukan cara yang lebih mudah dan aman. Perhatian: Backup terlebih file /etc/grub.d/06_mint_theme sebelum Anda rubah. Hal ini untuk menghindari sesuatu yang tidak kita inginkan, sehingga mempermudah dalam proses restore. Berikut ini langkah-langkah mengganti gambar latar pada grub2 di linux mint 10: Siapkan gambar berukuran 640×480 pixel, tipe gambar boleh png atau jpeg. Dalam hal ini saya menggunakan gambar latar dengan nama latar_ungu.jpg. Buat folder images dan desktop-base di /usr/share $ sudo mkdir /usr/share/images $ sudo mkdir /usr/share/images/desktop-base Salin file gambar tersebut ke folder desktop-base $ sudo cp latar_ungu.jpg /usr/share/images/desktop-base Kemudian edit file 06_mint_theme di folder /etc/grub.d. Cari baris kode berikut dan ganti nama gambar linuxmint dengan latar_ungu dan jangan lupa untu menambahkan ektensi jpg pada script {png,tga}. #sebelum diedit. for i in {/boot/grub,/usr/share/images/desktop-base}/linuxmint.{png,tga} ; do #setelah diedit for i in {/boot/grub,/usr/share/images/desktop-base}/latar_ungu.{png,tga,jpg} ; do Setelah itu jalankan perintah berikut untuk mengupdate grub. $ sudo update-grub Kemudian restart komputer Anda. Pada langkah kedua Anda juga bisa menggunakan nautilus(file explorer) untuk membuat folder. Caranya tekan tombol keyboard Alt dan F2. Kemudian ketik perintah gksu nautilus, Ketikan password Anda apabila system memintanya. Selamat mencoba 🙂" />
+<meta name="description" content="Beberapa hari yang lalu saya pernah menulis bagaimana cara mengganti gambar latar/background pada grub2 di linux mint 10." />
+<meta property="og:description" content="Beberapa hari yang lalu saya pernah menulis bagaimana cara mengganti gambar latar/background pada grub2 di linux mint 10." />
 <link rel="canonical" href="https://susilolab.github.io/linux/2011/05/03/mengganti-gambar-latar-pada-grub2.html" />
 <meta property="og:url" content="https://susilolab.github.io/linux/2011/05/03/mengganti-gambar-latar-pada-grub2.html" />
 <meta property="og:site_name" content="susilolab" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2011-05-03T08:00:00+07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Mengganti gambar latar pada grub2" />
 <script type="application/ld+json">
-{"headline":"Mengganti gambar latar pada grub2","dateModified":"2011-05-03T08:00:00+07:00","description":"Beberapa hari yang lalu saya pernah menulis bagaimana cara mengganti gambar latar/background pada grub2 di linux mint 10. Ternyata cara tersebut tidak efektif, setelah saya baca-baca di internet cara meng-customize grub2 akhirnya menemukan cara yang lebih mudah dan aman. Perhatian: Backup terlebih file /etc/grub.d/06_mint_theme sebelum Anda rubah. Hal ini untuk menghindari sesuatu yang tidak kita inginkan, sehingga mempermudah dalam proses restore. Berikut ini langkah-langkah mengganti gambar latar pada grub2 di linux mint 10: Siapkan gambar berukuran 640×480 pixel, tipe gambar boleh png atau jpeg. Dalam hal ini saya menggunakan gambar latar dengan nama latar_ungu.jpg. Buat folder images dan desktop-base di /usr/share $ sudo mkdir /usr/share/images $ sudo mkdir /usr/share/images/desktop-base Salin file gambar tersebut ke folder desktop-base $ sudo cp latar_ungu.jpg /usr/share/images/desktop-base Kemudian edit file 06_mint_theme di folder /etc/grub.d. Cari baris kode berikut dan ganti nama gambar linuxmint dengan latar_ungu dan jangan lupa untu menambahkan ektensi jpg pada script {png,tga}. #sebelum diedit. for i in {/boot/grub,/usr/share/images/desktop-base}/linuxmint.{png,tga} ; do #setelah diedit for i in {/boot/grub,/usr/share/images/desktop-base}/latar_ungu.{png,tga,jpg} ; do Setelah itu jalankan perintah berikut untuk mengupdate grub. $ sudo update-grub Kemudian restart komputer Anda. Pada langkah kedua Anda juga bisa menggunakan nautilus(file explorer) untuk membuat folder. Caranya tekan tombol keyboard Alt dan F2. Kemudian ketik perintah gksu nautilus, Ketikan password Anda apabila system memintanya. Selamat mencoba 🙂","datePublished":"2011-05-03T08:00:00+07:00","url":"https://susilolab.github.io/linux/2011/05/03/mengganti-gambar-latar-pada-grub2.html","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://susilolab.github.io/linux/2011/05/03/mengganti-gambar-latar-pada-grub2.html"},"author":{"@type":"Person","name":"Agus Susilo"},"@context":"https://schema.org"}</script>
+{"@type":"BlogPosting","description":"Beberapa hari yang lalu saya pernah menulis bagaimana cara mengganti gambar latar/background pada grub2 di linux mint 10.","headline":"Mengganti gambar latar pada grub2","dateModified":"2011-05-03T08:00:00+07:00","datePublished":"2011-05-03T08:00:00+07:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://susilolab.github.io/linux/2011/05/03/mengganti-gambar-latar-pada-grub2.html"},"url":"https://susilolab.github.io/linux/2011/05/03/mengganti-gambar-latar-pada-grub2.html","author":{"@type":"Person","name":"Agus Susilo"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
+
+
+  
+  
+
+
+
+
+
+
 
 </head>
 <body><header class="site-header" role="banner">
@@ -71,24 +85,27 @@ if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNo
     <h1 class="post-title p-name" itemprop="name headline">Mengganti gambar latar pada grub2</h1>
     <p class="post-meta">
       <time class="dt-published" datetime="2011-05-03T08:00:00+07:00" itemprop="datePublished">May 3, 2011
-      </time></p>
+      </time>
+      
+      </p>
   </header>
 
   <div class="post-content e-content" itemprop="articleBody">
     <p><img src="/assets/img/grub2.jpg" alt="grub2" /></p>
 
-<p>Beberapa hari yang lalu saya pernah menulis bagaimana cara mengganti gambar latar/background pada grub2 di linux mint 10.</p>
+<p>Beberapa hari yang lalu saya pernah menulis bagaimana cara mengganti gambar latar/background pada grub2 di linux mint 10.
+<!--more--></p>
 
 <p>Ternyata cara tersebut tidak efektif, setelah saya baca-baca di internet cara meng-customize grub2 akhirnya menemukan cara yang lebih mudah dan aman.</p>
 
 <p>Perhatian:
-Backup terlebih file <code class="highlighter-rouge">/etc/grub.d/06_mint_theme</code> sebelum Anda rubah. Hal ini untuk menghindari sesuatu yang tidak kita inginkan, sehingga mempermudah dalam proses restore.</p>
+Backup terlebih file <code class="language-plaintext highlighter-rouge">/etc/grub.d/06_mint_theme</code> sebelum Anda rubah. Hal ini untuk menghindari sesuatu yang tidak kita inginkan, sehingga mempermudah dalam proses restore.</p>
 
 <p>Berikut ini langkah-langkah mengganti gambar latar pada grub2 di linux mint 10:</p>
 
-<p>Siapkan gambar berukuran 640×480 pixel, tipe gambar boleh png atau jpeg. Dalam hal ini saya menggunakan gambar latar dengan nama <code class="highlighter-rouge">latar_ungu.jpg</code>.</p>
+<p>Siapkan gambar berukuran 640×480 pixel, tipe gambar boleh png atau jpeg. Dalam hal ini saya menggunakan gambar latar dengan nama <code class="language-plaintext highlighter-rouge">latar_ungu.jpg</code>.</p>
 
-<p>Buat folder images dan desktop-base di <code class="highlighter-rouge">/usr/share</code></p>
+<p>Buat folder images dan desktop-base di <code class="language-plaintext highlighter-rouge">/usr/share</code></p>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">sudo mkdir</span> /usr/share/images
 <span class="nv">$ </span><span class="nb">sudo mkdir</span> /usr/share/images/desktop-base </code></pre></figure>
@@ -97,7 +114,7 @@ Backup terlebih file <code class="highlighter-rouge">/etc/grub.d/06_mint_theme</
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">sudo cp </span>latar_ungu.jpg /usr/share/images/desktop-base</code></pre></figure>
 
-<p>Kemudian edit file <code class="highlighter-rouge">06_mint_theme</code> di folder <code class="highlighter-rouge">/etc/grub.d</code>. Cari baris kode berikut dan ganti nama gambar linuxmint dengan latar_ungu dan jangan lupa untu menambahkan ektensi jpg pada script <code class="highlighter-rouge">{png,tga}</code>.</p>
+<p>Kemudian edit file <code class="language-plaintext highlighter-rouge">06_mint_theme</code> di folder <code class="language-plaintext highlighter-rouge">/etc/grub.d</code>. Cari baris kode berikut dan ganti nama gambar linuxmint dengan latar_ungu dan jangan lupa untu menambahkan ektensi jpg pada script <code class="language-plaintext highlighter-rouge">{png,tga}</code>.</p>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c">#sebelum diedit.</span>
 <span class="k">for </span>i <span class="k">in</span> <span class="o">{</span>/boot/grub,/usr/share/images/desktop-base<span class="o">}</span>/linuxmint.<span class="o">{</span>png,tga<span class="o">}</span> <span class="p">;</span> <span class="k">do</span>
@@ -108,7 +125,7 @@ Backup terlebih file <code class="highlighter-rouge">/etc/grub.d/06_mint_theme</
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">sudo </span>update-grub</code></pre></figure>
 
-<p>Kemudian restart komputer Anda. Pada langkah kedua Anda juga bisa menggunakan nautilus(file explorer) untuk membuat folder. Caranya tekan tombol keyboard <strong>Alt</strong> dan <strong>F2</strong>. Kemudian ketik perintah <code class="highlighter-rouge">gksu nautilus</code>, Ketikan password Anda apabila system memintanya.</p>
+<p>Kemudian restart komputer Anda. Pada langkah kedua Anda juga bisa menggunakan nautilus(file explorer) untuk membuat folder. Caranya tekan tombol keyboard <strong>Alt</strong> dan <strong>F2</strong>. Kemudian ketik perintah <code class="language-plaintext highlighter-rouge">gksu nautilus</code>, Ketikan password Anda apabila system memintanya.</p>
 
 <p>Selamat mencoba 🙂</p>
 
@@ -125,7 +142,7 @@ Backup terlebih file <code class="highlighter-rouge">/etc/grub.d/06_mint_theme</
 
       <div class="footer-col footer-col-3">
         <p>&quot;Sebaik-baik manusia adalah yang paling bermanfaat bagi manusia&quot; (HR. Ahmad, ath-Thabrani, ad-Daruqutni)</p>
-        <p>&copy;2020&nbsp;Agus Susilo</p>
+        <p>&copy;2021&nbsp;Agus Susilo</p>
       </div>
     </div>
 

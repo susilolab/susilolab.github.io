@@ -2,21 +2,23 @@
 <html lang="en"><head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
 <title>Mengkompress file dengan tar di linux | susilolab</title>
-<meta name="generator" content="Jekyll v3.8.6" />
+<meta name="generator" content="Jekyll v4.2.0" />
 <meta property="og:title" content="Mengkompress file dengan tar di linux" />
 <meta name="author" content="Agus Susilo" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Bismillah, Pernahkah temen-temen semua ingin mengkompress file di server linux tapi ndak tahu perintahnya apa?. Nah disini saya ingin berbagi tips bagaimana caranya mengkompres file/folder kedalam format tertentu dengan perintah tar, berikut ini cara mengkompres file/folder dengan format mulai dari .tar, tar.bz2, tar.gz dan tar.xz. tar.bz2 $ tar cjf nama_file.tar.bz2 nama_folder/ ekstrak file tar.bz2 $ tar -jxvf nama_file.tar.bz2 tar.gz $ tar czf nama_file.tar.gz nama_folder/ ekstrak file tar.gz tar -zxvf nama_file.tar.gz .tar $ tar cf nama_file.tar nama_folder/ ekstrak file .tar $ tar -xvf nama_file.tar tar.xz $ tar cfJ nama_file.tar.xz folders/ $ tar -cvJf nama_file.tar.xz folders/ ekstrak file tar.xz $ tar -xJf p.tar.xz Dari ke-4 format di atas yang paling kecil rasio kompresnya yaitu tar.xz tetapi tidak didukung oleh windows. Jika kamu memilih kecepatan namun tidak terlalu memikirkan masalah ukuran file maka tar.gz paling pas karena selain cepat juga hasil kompresnya lumayan kecil. Tips menghafal perintah di atas Coba perhatikan perintah di atas semuanya menggunakan parameter cf tinggal kita menghafalkan huruf selain c dan f yaitu: j Untuk format .tar.bz2 z Untuk format .tar.gz J Untuk format .tar.xz _ Cuma c dan f, untuk format .tar Semoga bermanfaat, sekian." />
-<meta property="og:description" content="Bismillah, Pernahkah temen-temen semua ingin mengkompress file di server linux tapi ndak tahu perintahnya apa?. Nah disini saya ingin berbagi tips bagaimana caranya mengkompres file/folder kedalam format tertentu dengan perintah tar, berikut ini cara mengkompres file/folder dengan format mulai dari .tar, tar.bz2, tar.gz dan tar.xz. tar.bz2 $ tar cjf nama_file.tar.bz2 nama_folder/ ekstrak file tar.bz2 $ tar -jxvf nama_file.tar.bz2 tar.gz $ tar czf nama_file.tar.gz nama_folder/ ekstrak file tar.gz tar -zxvf nama_file.tar.gz .tar $ tar cf nama_file.tar nama_folder/ ekstrak file .tar $ tar -xvf nama_file.tar tar.xz $ tar cfJ nama_file.tar.xz folders/ $ tar -cvJf nama_file.tar.xz folders/ ekstrak file tar.xz $ tar -xJf p.tar.xz Dari ke-4 format di atas yang paling kecil rasio kompresnya yaitu tar.xz tetapi tidak didukung oleh windows. Jika kamu memilih kecepatan namun tidak terlalu memikirkan masalah ukuran file maka tar.gz paling pas karena selain cepat juga hasil kompresnya lumayan kecil. Tips menghafal perintah di atas Coba perhatikan perintah di atas semuanya menggunakan parameter cf tinggal kita menghafalkan huruf selain c dan f yaitu: j Untuk format .tar.bz2 z Untuk format .tar.gz J Untuk format .tar.xz _ Cuma c dan f, untuk format .tar Semoga bermanfaat, sekian." />
+<meta name="description" content="Bismillah, Pernahkah temen-temen semua ingin mengkompress file di server linux tapi ndak tahu perintahnya apa?. Nah disini saya ingin berbagi tips bagaimana caranya mengkompres file/folder kedalam format tertentu dengan perintah tar, berikut ini cara mengkompres file/folder dengan format mulai dari .tar, tar.bz2, tar.gz dan tar.xz." />
+<meta property="og:description" content="Bismillah, Pernahkah temen-temen semua ingin mengkompress file di server linux tapi ndak tahu perintahnya apa?. Nah disini saya ingin berbagi tips bagaimana caranya mengkompres file/folder kedalam format tertentu dengan perintah tar, berikut ini cara mengkompres file/folder dengan format mulai dari .tar, tar.bz2, tar.gz dan tar.xz." />
 <link rel="canonical" href="https://susilolab.github.io/bash/cli/2020/03/31/mengkompress-file-dengan-tar-di-linux.html" />
 <meta property="og:url" content="https://susilolab.github.io/bash/cli/2020/03/31/mengkompress-file-dengan-tar-di-linux.html" />
 <meta property="og:site_name" content="susilolab" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2020-03-31T08:00:00+07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Mengkompress file dengan tar di linux" />
 <script type="application/ld+json">
-{"headline":"Mengkompress file dengan tar di linux","dateModified":"2020-03-31T08:00:00+07:00","description":"Bismillah, Pernahkah temen-temen semua ingin mengkompress file di server linux tapi ndak tahu perintahnya apa?. Nah disini saya ingin berbagi tips bagaimana caranya mengkompres file/folder kedalam format tertentu dengan perintah tar, berikut ini cara mengkompres file/folder dengan format mulai dari .tar, tar.bz2, tar.gz dan tar.xz. tar.bz2 $ tar cjf nama_file.tar.bz2 nama_folder/ ekstrak file tar.bz2 $ tar -jxvf nama_file.tar.bz2 tar.gz $ tar czf nama_file.tar.gz nama_folder/ ekstrak file tar.gz tar -zxvf nama_file.tar.gz .tar $ tar cf nama_file.tar nama_folder/ ekstrak file .tar $ tar -xvf nama_file.tar tar.xz $ tar cfJ nama_file.tar.xz folders/ $ tar -cvJf nama_file.tar.xz folders/ ekstrak file tar.xz $ tar -xJf p.tar.xz Dari ke-4 format di atas yang paling kecil rasio kompresnya yaitu tar.xz tetapi tidak didukung oleh windows. Jika kamu memilih kecepatan namun tidak terlalu memikirkan masalah ukuran file maka tar.gz paling pas karena selain cepat juga hasil kompresnya lumayan kecil. Tips menghafal perintah di atas Coba perhatikan perintah di atas semuanya menggunakan parameter cf tinggal kita menghafalkan huruf selain c dan f yaitu: j Untuk format .tar.bz2 z Untuk format .tar.gz J Untuk format .tar.xz _ Cuma c dan f, untuk format .tar Semoga bermanfaat, sekian.","datePublished":"2020-03-31T08:00:00+07:00","url":"https://susilolab.github.io/bash/cli/2020/03/31/mengkompress-file-dengan-tar-di-linux.html","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://susilolab.github.io/bash/cli/2020/03/31/mengkompress-file-dengan-tar-di-linux.html"},"author":{"@type":"Person","name":"Agus Susilo"},"@context":"https://schema.org"}</script>
+{"@type":"BlogPosting","description":"Bismillah, Pernahkah temen-temen semua ingin mengkompress file di server linux tapi ndak tahu perintahnya apa?. Nah disini saya ingin berbagi tips bagaimana caranya mengkompres file/folder kedalam format tertentu dengan perintah tar, berikut ini cara mengkompres file/folder dengan format mulai dari .tar, tar.bz2, tar.gz dan tar.xz.","headline":"Mengkompress file dengan tar di linux","dateModified":"2020-03-31T08:00:00+07:00","datePublished":"2020-03-31T08:00:00+07:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://susilolab.github.io/bash/cli/2020/03/31/mengkompress-file-dengan-tar-di-linux.html"},"url":"https://susilolab.github.io/bash/cli/2020/03/31/mengkompress-file-dengan-tar-di-linux.html","author":{"@type":"Person","name":"Agus Susilo"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://susilolab.github.io/feed.xml" title="susilolab" /><script>
 if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1")) {
@@ -30,22 +32,34 @@ if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNo
 }
 </script>
   
-<!-- Begin Jekyll SEO tag v2.6.1 -->
+<!-- Begin Jekyll SEO tag v2.7.1 -->
 <title>Mengkompress file dengan tar di linux | susilolab</title>
-<meta name="generator" content="Jekyll v3.8.6" />
+<meta name="generator" content="Jekyll v4.2.0" />
 <meta property="og:title" content="Mengkompress file dengan tar di linux" />
 <meta name="author" content="Agus Susilo" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Bismillah, Pernahkah temen-temen semua ingin mengkompress file di server linux tapi ndak tahu perintahnya apa?. Nah disini saya ingin berbagi tips bagaimana caranya mengkompres file/folder kedalam format tertentu dengan perintah tar, berikut ini cara mengkompres file/folder dengan format mulai dari .tar, tar.bz2, tar.gz dan tar.xz. tar.bz2 $ tar cjf nama_file.tar.bz2 nama_folder/ ekstrak file tar.bz2 $ tar -jxvf nama_file.tar.bz2 tar.gz $ tar czf nama_file.tar.gz nama_folder/ ekstrak file tar.gz tar -zxvf nama_file.tar.gz .tar $ tar cf nama_file.tar nama_folder/ ekstrak file .tar $ tar -xvf nama_file.tar tar.xz $ tar cfJ nama_file.tar.xz folders/ $ tar -cvJf nama_file.tar.xz folders/ ekstrak file tar.xz $ tar -xJf p.tar.xz Dari ke-4 format di atas yang paling kecil rasio kompresnya yaitu tar.xz tetapi tidak didukung oleh windows. Jika kamu memilih kecepatan namun tidak terlalu memikirkan masalah ukuran file maka tar.gz paling pas karena selain cepat juga hasil kompresnya lumayan kecil. Tips menghafal perintah di atas Coba perhatikan perintah di atas semuanya menggunakan parameter cf tinggal kita menghafalkan huruf selain c dan f yaitu: j Untuk format .tar.bz2 z Untuk format .tar.gz J Untuk format .tar.xz _ Cuma c dan f, untuk format .tar Semoga bermanfaat, sekian." />
-<meta property="og:description" content="Bismillah, Pernahkah temen-temen semua ingin mengkompress file di server linux tapi ndak tahu perintahnya apa?. Nah disini saya ingin berbagi tips bagaimana caranya mengkompres file/folder kedalam format tertentu dengan perintah tar, berikut ini cara mengkompres file/folder dengan format mulai dari .tar, tar.bz2, tar.gz dan tar.xz. tar.bz2 $ tar cjf nama_file.tar.bz2 nama_folder/ ekstrak file tar.bz2 $ tar -jxvf nama_file.tar.bz2 tar.gz $ tar czf nama_file.tar.gz nama_folder/ ekstrak file tar.gz tar -zxvf nama_file.tar.gz .tar $ tar cf nama_file.tar nama_folder/ ekstrak file .tar $ tar -xvf nama_file.tar tar.xz $ tar cfJ nama_file.tar.xz folders/ $ tar -cvJf nama_file.tar.xz folders/ ekstrak file tar.xz $ tar -xJf p.tar.xz Dari ke-4 format di atas yang paling kecil rasio kompresnya yaitu tar.xz tetapi tidak didukung oleh windows. Jika kamu memilih kecepatan namun tidak terlalu memikirkan masalah ukuran file maka tar.gz paling pas karena selain cepat juga hasil kompresnya lumayan kecil. Tips menghafal perintah di atas Coba perhatikan perintah di atas semuanya menggunakan parameter cf tinggal kita menghafalkan huruf selain c dan f yaitu: j Untuk format .tar.bz2 z Untuk format .tar.gz J Untuk format .tar.xz _ Cuma c dan f, untuk format .tar Semoga bermanfaat, sekian." />
+<meta name="description" content="Bismillah, Pernahkah temen-temen semua ingin mengkompress file di server linux tapi ndak tahu perintahnya apa?. Nah disini saya ingin berbagi tips bagaimana caranya mengkompres file/folder kedalam format tertentu dengan perintah tar, berikut ini cara mengkompres file/folder dengan format mulai dari .tar, tar.bz2, tar.gz dan tar.xz." />
+<meta property="og:description" content="Bismillah, Pernahkah temen-temen semua ingin mengkompress file di server linux tapi ndak tahu perintahnya apa?. Nah disini saya ingin berbagi tips bagaimana caranya mengkompres file/folder kedalam format tertentu dengan perintah tar, berikut ini cara mengkompres file/folder dengan format mulai dari .tar, tar.bz2, tar.gz dan tar.xz." />
 <link rel="canonical" href="https://susilolab.github.io/bash/cli/2020/03/31/mengkompress-file-dengan-tar-di-linux.html" />
 <meta property="og:url" content="https://susilolab.github.io/bash/cli/2020/03/31/mengkompress-file-dengan-tar-di-linux.html" />
 <meta property="og:site_name" content="susilolab" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2020-03-31T08:00:00+07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Mengkompress file dengan tar di linux" />
 <script type="application/ld+json">
-{"headline":"Mengkompress file dengan tar di linux","dateModified":"2020-03-31T08:00:00+07:00","description":"Bismillah, Pernahkah temen-temen semua ingin mengkompress file di server linux tapi ndak tahu perintahnya apa?. Nah disini saya ingin berbagi tips bagaimana caranya mengkompres file/folder kedalam format tertentu dengan perintah tar, berikut ini cara mengkompres file/folder dengan format mulai dari .tar, tar.bz2, tar.gz dan tar.xz. tar.bz2 $ tar cjf nama_file.tar.bz2 nama_folder/ ekstrak file tar.bz2 $ tar -jxvf nama_file.tar.bz2 tar.gz $ tar czf nama_file.tar.gz nama_folder/ ekstrak file tar.gz tar -zxvf nama_file.tar.gz .tar $ tar cf nama_file.tar nama_folder/ ekstrak file .tar $ tar -xvf nama_file.tar tar.xz $ tar cfJ nama_file.tar.xz folders/ $ tar -cvJf nama_file.tar.xz folders/ ekstrak file tar.xz $ tar -xJf p.tar.xz Dari ke-4 format di atas yang paling kecil rasio kompresnya yaitu tar.xz tetapi tidak didukung oleh windows. Jika kamu memilih kecepatan namun tidak terlalu memikirkan masalah ukuran file maka tar.gz paling pas karena selain cepat juga hasil kompresnya lumayan kecil. Tips menghafal perintah di atas Coba perhatikan perintah di atas semuanya menggunakan parameter cf tinggal kita menghafalkan huruf selain c dan f yaitu: j Untuk format .tar.bz2 z Untuk format .tar.gz J Untuk format .tar.xz _ Cuma c dan f, untuk format .tar Semoga bermanfaat, sekian.","datePublished":"2020-03-31T08:00:00+07:00","url":"https://susilolab.github.io/bash/cli/2020/03/31/mengkompress-file-dengan-tar-di-linux.html","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://susilolab.github.io/bash/cli/2020/03/31/mengkompress-file-dengan-tar-di-linux.html"},"author":{"@type":"Person","name":"Agus Susilo"},"@context":"https://schema.org"}</script>
+{"@type":"BlogPosting","description":"Bismillah, Pernahkah temen-temen semua ingin mengkompress file di server linux tapi ndak tahu perintahnya apa?. Nah disini saya ingin berbagi tips bagaimana caranya mengkompres file/folder kedalam format tertentu dengan perintah tar, berikut ini cara mengkompres file/folder dengan format mulai dari .tar, tar.bz2, tar.gz dan tar.xz.","headline":"Mengkompress file dengan tar di linux","dateModified":"2020-03-31T08:00:00+07:00","datePublished":"2020-03-31T08:00:00+07:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://susilolab.github.io/bash/cli/2020/03/31/mengkompress-file-dengan-tar-di-linux.html"},"url":"https://susilolab.github.io/bash/cli/2020/03/31/mengkompress-file-dengan-tar-di-linux.html","author":{"@type":"Person","name":"Agus Susilo"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
+
+
+  
+  
+
+
+
+
+
+
 
 </head>
 <body><header class="site-header" role="banner">
@@ -71,12 +85,15 @@ if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNo
     <h1 class="post-title p-name" itemprop="name headline">Mengkompress file dengan tar di linux</h1>
     <p class="post-meta">
       <time class="dt-published" datetime="2020-03-31T08:00:00+07:00" itemprop="datePublished">Mar 31, 2020
-      </time></p>
+      </time>
+      
+      </p>
   </header>
 
   <div class="post-content e-content" itemprop="articleBody">
     <p>Bismillah,
-Pernahkah temen-temen semua ingin mengkompress file di server linux tapi ndak tahu perintahnya apa?. Nah disini saya ingin berbagi tips bagaimana caranya mengkompres file/folder kedalam format tertentu dengan perintah <code class="highlighter-rouge">tar</code>, berikut ini cara mengkompres file/folder dengan format mulai dari <code class="highlighter-rouge">.tar</code>, <code class="highlighter-rouge">tar.bz2</code>, <code class="highlighter-rouge">tar.gz</code> dan <code class="highlighter-rouge">tar.xz</code>.</p>
+Pernahkah temen-temen semua ingin mengkompress file di server linux tapi ndak tahu perintahnya apa?. Nah disini saya ingin berbagi tips bagaimana caranya mengkompres file/folder kedalam format tertentu dengan perintah <code class="language-plaintext highlighter-rouge">tar</code>, berikut ini cara mengkompres file/folder dengan format mulai dari <code class="language-plaintext highlighter-rouge">.tar</code>, <code class="language-plaintext highlighter-rouge">tar.bz2</code>, <code class="language-plaintext highlighter-rouge">tar.gz</code> dan <code class="language-plaintext highlighter-rouge">tar.xz</code>.
+<!--more--></p>
 
 <h4 id="tarbz2">tar.bz2</h4>
 
@@ -111,10 +128,10 @@ Pernahkah temen-temen semua ingin mengkompress file di server linux tapi ndak ta
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">tar</span> <span class="nt">-xJf</span> p.tar.xz</code></pre></figure>
 
-<p>Dari ke-4 format di atas yang paling kecil rasio kompresnya yaitu <code class="highlighter-rouge">tar.xz</code> tetapi tidak didukung oleh windows. Jika kamu memilih kecepatan namun tidak terlalu memikirkan masalah ukuran file maka <code class="highlighter-rouge">tar.gz</code> paling pas karena selain cepat juga hasil kompresnya lumayan kecil.</p>
+<p>Dari ke-4 format di atas yang paling kecil rasio kompresnya yaitu <code class="language-plaintext highlighter-rouge">tar.xz</code> tetapi tidak didukung oleh windows. Jika kamu memilih kecepatan namun tidak terlalu memikirkan masalah ukuran file maka <code class="language-plaintext highlighter-rouge">tar.gz</code> paling pas karena selain cepat juga hasil kompresnya lumayan kecil.</p>
 
 <h4 id="tips-menghafal-perintah-di-atas">Tips menghafal perintah di atas</h4>
-<p>Coba perhatikan perintah di atas semuanya menggunakan parameter <code class="highlighter-rouge">cf</code> tinggal kita menghafalkan huruf selain <code class="highlighter-rouge">c</code> dan <code class="highlighter-rouge">f</code> yaitu:</p>
+<p>Coba perhatikan perintah di atas semuanya menggunakan parameter <code class="language-plaintext highlighter-rouge">cf</code> tinggal kita menghafalkan huruf selain <code class="language-plaintext highlighter-rouge">c</code> dan <code class="language-plaintext highlighter-rouge">f</code> yaitu:</p>
 
 <table>
   <tbody>
@@ -152,7 +169,7 @@ Pernahkah temen-temen semua ingin mengkompress file di server linux tapi ndak ta
 
       <div class="footer-col footer-col-3">
         <p>&quot;Sebaik-baik manusia adalah yang paling bermanfaat bagi manusia&quot; (HR. Ahmad, ath-Thabrani, ad-Daruqutni)</p>
-        <p>&copy;2020&nbsp;Agus Susilo</p>
+        <p>&copy;2021&nbsp;Agus Susilo</p>
       </div>
     </div>
 

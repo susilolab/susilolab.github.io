@@ -2,21 +2,23 @@
 <html lang="en"><head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
 <title>Cara Aman Mendapatkan data dari POST/GET pada Yii2 | susilolab</title>
-<meta name="generator" content="Jekyll v3.8.6" />
+<meta name="generator" content="Jekyll v4.2.0" />
 <meta property="og:title" content="Cara Aman Mendapatkan data dari POST/GET pada Yii2" />
 <meta name="author" content="Agus Susilo" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Yii2 menyertakan fungsi-fungsi yang biasa sering kita gunakan secara lengkap dan aman, biasanya kita sering menggunakan fungsi $_GET[&#39;nama_var&#39;] dan $_POST[&#39;nama_var&#39;] untuk mendapatkan data dari user yang dikirim melalui post/get. namun cara tersebut kurang aman karena tidak adanya nilai default jika variabelnya kosong. Contoh: $id = $_GET[&#39;id&#39;]; $query = &quot;SELECT * FROM user WHERE id = $id&quot;; Agar variabel $id lebih aman maka gunakan fungsi get atau post yang terdapat pada class yii\web\Request yang secara global terdapat pada Yii::$app-&gt;request. $id = Yii::$app-&gt;request-&gt;get(&#39;id&#39;, 0); // Atau bisa ditambahkan kondisi untuk memeriksa variabel id // if ((int)$id &lt; 1) { // throw new \yii\web\HttpException(403, &#39;ID tidak benar&#39;); // } $query = &quot;SELECT * FROM user WHERE id = $id&quot;; Untuk query-nya agar lebih aman biasakan pakai punyanya Yii2 yaitu class yii\db\Command atau yii\db\Query karena minim kemungkinan terkena SQLInjection. $id = Yii::$app-&gt;request-&gt;get(&#39;id&#39;, 0); $result = Yii::$app-&gt;db -&gt;createCommand(&#39;SELECT * FROM user WHERE id = :id&#39;, [&#39;:id&#39; =&gt; $id]) -&gt;queryOne(); Untuk variabel $_POST juga sama dengan get, tinggal ganti fungsi get dengan post. $id = Yii::$app-&gt;request-&gt;post(&#39;id&#39;, 0); Demikian semoga dapat bermanfaat dan terima kasih sudah mampir ke blog saya ini. Sekian." />
-<meta property="og:description" content="Yii2 menyertakan fungsi-fungsi yang biasa sering kita gunakan secara lengkap dan aman, biasanya kita sering menggunakan fungsi $_GET[&#39;nama_var&#39;] dan $_POST[&#39;nama_var&#39;] untuk mendapatkan data dari user yang dikirim melalui post/get. namun cara tersebut kurang aman karena tidak adanya nilai default jika variabelnya kosong. Contoh: $id = $_GET[&#39;id&#39;]; $query = &quot;SELECT * FROM user WHERE id = $id&quot;; Agar variabel $id lebih aman maka gunakan fungsi get atau post yang terdapat pada class yii\web\Request yang secara global terdapat pada Yii::$app-&gt;request. $id = Yii::$app-&gt;request-&gt;get(&#39;id&#39;, 0); // Atau bisa ditambahkan kondisi untuk memeriksa variabel id // if ((int)$id &lt; 1) { // throw new \yii\web\HttpException(403, &#39;ID tidak benar&#39;); // } $query = &quot;SELECT * FROM user WHERE id = $id&quot;; Untuk query-nya agar lebih aman biasakan pakai punyanya Yii2 yaitu class yii\db\Command atau yii\db\Query karena minim kemungkinan terkena SQLInjection. $id = Yii::$app-&gt;request-&gt;get(&#39;id&#39;, 0); $result = Yii::$app-&gt;db -&gt;createCommand(&#39;SELECT * FROM user WHERE id = :id&#39;, [&#39;:id&#39; =&gt; $id]) -&gt;queryOne(); Untuk variabel $_POST juga sama dengan get, tinggal ganti fungsi get dengan post. $id = Yii::$app-&gt;request-&gt;post(&#39;id&#39;, 0); Demikian semoga dapat bermanfaat dan terima kasih sudah mampir ke blog saya ini. Sekian." />
+<meta name="description" content="Yii2 menyertakan fungsi-fungsi yang biasa sering kita gunakan secara lengkap dan aman, biasanya kita sering menggunakan fungsi $_GET[&#39;nama_var&#39;] dan $_POST[&#39;nama_var&#39;] untuk mendapatkan data dari user yang dikirim melalui post/get. namun cara tersebut kurang aman karena tidak adanya nilai default jika variabelnya kosong." />
+<meta property="og:description" content="Yii2 menyertakan fungsi-fungsi yang biasa sering kita gunakan secara lengkap dan aman, biasanya kita sering menggunakan fungsi $_GET[&#39;nama_var&#39;] dan $_POST[&#39;nama_var&#39;] untuk mendapatkan data dari user yang dikirim melalui post/get. namun cara tersebut kurang aman karena tidak adanya nilai default jika variabelnya kosong." />
 <link rel="canonical" href="https://susilolab.github.io/yii2/2020/05/15/cara-aman-mendapatkan-data-dari-post-get-pada-yii2.html" />
 <meta property="og:url" content="https://susilolab.github.io/yii2/2020/05/15/cara-aman-mendapatkan-data-dari-post-get-pada-yii2.html" />
 <meta property="og:site_name" content="susilolab" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2020-05-15T04:00:00+07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Cara Aman Mendapatkan data dari POST/GET pada Yii2" />
 <script type="application/ld+json">
-{"headline":"Cara Aman Mendapatkan data dari POST/GET pada Yii2","dateModified":"2020-05-15T04:00:00+07:00","description":"Yii2 menyertakan fungsi-fungsi yang biasa sering kita gunakan secara lengkap dan aman, biasanya kita sering menggunakan fungsi $_GET[&#39;nama_var&#39;] dan $_POST[&#39;nama_var&#39;] untuk mendapatkan data dari user yang dikirim melalui post/get. namun cara tersebut kurang aman karena tidak adanya nilai default jika variabelnya kosong. Contoh: $id = $_GET[&#39;id&#39;]; $query = &quot;SELECT * FROM user WHERE id = $id&quot;; Agar variabel $id lebih aman maka gunakan fungsi get atau post yang terdapat pada class yii\\web\\Request yang secara global terdapat pada Yii::$app-&gt;request. $id = Yii::$app-&gt;request-&gt;get(&#39;id&#39;, 0); // Atau bisa ditambahkan kondisi untuk memeriksa variabel id // if ((int)$id &lt; 1) { // throw new \\yii\\web\\HttpException(403, &#39;ID tidak benar&#39;); // } $query = &quot;SELECT * FROM user WHERE id = $id&quot;; Untuk query-nya agar lebih aman biasakan pakai punyanya Yii2 yaitu class yii\\db\\Command atau yii\\db\\Query karena minim kemungkinan terkena SQLInjection. $id = Yii::$app-&gt;request-&gt;get(&#39;id&#39;, 0); $result = Yii::$app-&gt;db -&gt;createCommand(&#39;SELECT * FROM user WHERE id = :id&#39;, [&#39;:id&#39; =&gt; $id]) -&gt;queryOne(); Untuk variabel $_POST juga sama dengan get, tinggal ganti fungsi get dengan post. $id = Yii::$app-&gt;request-&gt;post(&#39;id&#39;, 0); Demikian semoga dapat bermanfaat dan terima kasih sudah mampir ke blog saya ini. Sekian.","datePublished":"2020-05-15T04:00:00+07:00","url":"https://susilolab.github.io/yii2/2020/05/15/cara-aman-mendapatkan-data-dari-post-get-pada-yii2.html","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://susilolab.github.io/yii2/2020/05/15/cara-aman-mendapatkan-data-dari-post-get-pada-yii2.html"},"author":{"@type":"Person","name":"Agus Susilo"},"@context":"https://schema.org"}</script>
+{"@type":"BlogPosting","description":"Yii2 menyertakan fungsi-fungsi yang biasa sering kita gunakan secara lengkap dan aman, biasanya kita sering menggunakan fungsi $_GET[&#39;nama_var&#39;] dan $_POST[&#39;nama_var&#39;] untuk mendapatkan data dari user yang dikirim melalui post/get. namun cara tersebut kurang aman karena tidak adanya nilai default jika variabelnya kosong.","headline":"Cara Aman Mendapatkan data dari POST/GET pada Yii2","dateModified":"2020-05-15T04:00:00+07:00","datePublished":"2020-05-15T04:00:00+07:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://susilolab.github.io/yii2/2020/05/15/cara-aman-mendapatkan-data-dari-post-get-pada-yii2.html"},"url":"https://susilolab.github.io/yii2/2020/05/15/cara-aman-mendapatkan-data-dari-post-get-pada-yii2.html","author":{"@type":"Person","name":"Agus Susilo"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://susilolab.github.io/feed.xml" title="susilolab" /><script>
 if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1")) {
@@ -30,22 +32,34 @@ if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNo
 }
 </script>
   
-<!-- Begin Jekyll SEO tag v2.6.1 -->
+<!-- Begin Jekyll SEO tag v2.7.1 -->
 <title>Cara Aman Mendapatkan data dari POST/GET pada Yii2 | susilolab</title>
-<meta name="generator" content="Jekyll v3.8.6" />
+<meta name="generator" content="Jekyll v4.2.0" />
 <meta property="og:title" content="Cara Aman Mendapatkan data dari POST/GET pada Yii2" />
 <meta name="author" content="Agus Susilo" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Yii2 menyertakan fungsi-fungsi yang biasa sering kita gunakan secara lengkap dan aman, biasanya kita sering menggunakan fungsi $_GET[&#39;nama_var&#39;] dan $_POST[&#39;nama_var&#39;] untuk mendapatkan data dari user yang dikirim melalui post/get. namun cara tersebut kurang aman karena tidak adanya nilai default jika variabelnya kosong. Contoh: $id = $_GET[&#39;id&#39;]; $query = &quot;SELECT * FROM user WHERE id = $id&quot;; Agar variabel $id lebih aman maka gunakan fungsi get atau post yang terdapat pada class yii\web\Request yang secara global terdapat pada Yii::$app-&gt;request. $id = Yii::$app-&gt;request-&gt;get(&#39;id&#39;, 0); // Atau bisa ditambahkan kondisi untuk memeriksa variabel id // if ((int)$id &lt; 1) { // throw new \yii\web\HttpException(403, &#39;ID tidak benar&#39;); // } $query = &quot;SELECT * FROM user WHERE id = $id&quot;; Untuk query-nya agar lebih aman biasakan pakai punyanya Yii2 yaitu class yii\db\Command atau yii\db\Query karena minim kemungkinan terkena SQLInjection. $id = Yii::$app-&gt;request-&gt;get(&#39;id&#39;, 0); $result = Yii::$app-&gt;db -&gt;createCommand(&#39;SELECT * FROM user WHERE id = :id&#39;, [&#39;:id&#39; =&gt; $id]) -&gt;queryOne(); Untuk variabel $_POST juga sama dengan get, tinggal ganti fungsi get dengan post. $id = Yii::$app-&gt;request-&gt;post(&#39;id&#39;, 0); Demikian semoga dapat bermanfaat dan terima kasih sudah mampir ke blog saya ini. Sekian." />
-<meta property="og:description" content="Yii2 menyertakan fungsi-fungsi yang biasa sering kita gunakan secara lengkap dan aman, biasanya kita sering menggunakan fungsi $_GET[&#39;nama_var&#39;] dan $_POST[&#39;nama_var&#39;] untuk mendapatkan data dari user yang dikirim melalui post/get. namun cara tersebut kurang aman karena tidak adanya nilai default jika variabelnya kosong. Contoh: $id = $_GET[&#39;id&#39;]; $query = &quot;SELECT * FROM user WHERE id = $id&quot;; Agar variabel $id lebih aman maka gunakan fungsi get atau post yang terdapat pada class yii\web\Request yang secara global terdapat pada Yii::$app-&gt;request. $id = Yii::$app-&gt;request-&gt;get(&#39;id&#39;, 0); // Atau bisa ditambahkan kondisi untuk memeriksa variabel id // if ((int)$id &lt; 1) { // throw new \yii\web\HttpException(403, &#39;ID tidak benar&#39;); // } $query = &quot;SELECT * FROM user WHERE id = $id&quot;; Untuk query-nya agar lebih aman biasakan pakai punyanya Yii2 yaitu class yii\db\Command atau yii\db\Query karena minim kemungkinan terkena SQLInjection. $id = Yii::$app-&gt;request-&gt;get(&#39;id&#39;, 0); $result = Yii::$app-&gt;db -&gt;createCommand(&#39;SELECT * FROM user WHERE id = :id&#39;, [&#39;:id&#39; =&gt; $id]) -&gt;queryOne(); Untuk variabel $_POST juga sama dengan get, tinggal ganti fungsi get dengan post. $id = Yii::$app-&gt;request-&gt;post(&#39;id&#39;, 0); Demikian semoga dapat bermanfaat dan terima kasih sudah mampir ke blog saya ini. Sekian." />
+<meta name="description" content="Yii2 menyertakan fungsi-fungsi yang biasa sering kita gunakan secara lengkap dan aman, biasanya kita sering menggunakan fungsi $_GET[&#39;nama_var&#39;] dan $_POST[&#39;nama_var&#39;] untuk mendapatkan data dari user yang dikirim melalui post/get. namun cara tersebut kurang aman karena tidak adanya nilai default jika variabelnya kosong." />
+<meta property="og:description" content="Yii2 menyertakan fungsi-fungsi yang biasa sering kita gunakan secara lengkap dan aman, biasanya kita sering menggunakan fungsi $_GET[&#39;nama_var&#39;] dan $_POST[&#39;nama_var&#39;] untuk mendapatkan data dari user yang dikirim melalui post/get. namun cara tersebut kurang aman karena tidak adanya nilai default jika variabelnya kosong." />
 <link rel="canonical" href="https://susilolab.github.io/yii2/2020/05/15/cara-aman-mendapatkan-data-dari-post-get-pada-yii2.html" />
 <meta property="og:url" content="https://susilolab.github.io/yii2/2020/05/15/cara-aman-mendapatkan-data-dari-post-get-pada-yii2.html" />
 <meta property="og:site_name" content="susilolab" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2020-05-15T04:00:00+07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Cara Aman Mendapatkan data dari POST/GET pada Yii2" />
 <script type="application/ld+json">
-{"headline":"Cara Aman Mendapatkan data dari POST/GET pada Yii2","dateModified":"2020-05-15T04:00:00+07:00","description":"Yii2 menyertakan fungsi-fungsi yang biasa sering kita gunakan secara lengkap dan aman, biasanya kita sering menggunakan fungsi $_GET[&#39;nama_var&#39;] dan $_POST[&#39;nama_var&#39;] untuk mendapatkan data dari user yang dikirim melalui post/get. namun cara tersebut kurang aman karena tidak adanya nilai default jika variabelnya kosong. Contoh: $id = $_GET[&#39;id&#39;]; $query = &quot;SELECT * FROM user WHERE id = $id&quot;; Agar variabel $id lebih aman maka gunakan fungsi get atau post yang terdapat pada class yii\\web\\Request yang secara global terdapat pada Yii::$app-&gt;request. $id = Yii::$app-&gt;request-&gt;get(&#39;id&#39;, 0); // Atau bisa ditambahkan kondisi untuk memeriksa variabel id // if ((int)$id &lt; 1) { // throw new \\yii\\web\\HttpException(403, &#39;ID tidak benar&#39;); // } $query = &quot;SELECT * FROM user WHERE id = $id&quot;; Untuk query-nya agar lebih aman biasakan pakai punyanya Yii2 yaitu class yii\\db\\Command atau yii\\db\\Query karena minim kemungkinan terkena SQLInjection. $id = Yii::$app-&gt;request-&gt;get(&#39;id&#39;, 0); $result = Yii::$app-&gt;db -&gt;createCommand(&#39;SELECT * FROM user WHERE id = :id&#39;, [&#39;:id&#39; =&gt; $id]) -&gt;queryOne(); Untuk variabel $_POST juga sama dengan get, tinggal ganti fungsi get dengan post. $id = Yii::$app-&gt;request-&gt;post(&#39;id&#39;, 0); Demikian semoga dapat bermanfaat dan terima kasih sudah mampir ke blog saya ini. Sekian.","datePublished":"2020-05-15T04:00:00+07:00","url":"https://susilolab.github.io/yii2/2020/05/15/cara-aman-mendapatkan-data-dari-post-get-pada-yii2.html","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://susilolab.github.io/yii2/2020/05/15/cara-aman-mendapatkan-data-dari-post-get-pada-yii2.html"},"author":{"@type":"Person","name":"Agus Susilo"},"@context":"https://schema.org"}</script>
+{"@type":"BlogPosting","description":"Yii2 menyertakan fungsi-fungsi yang biasa sering kita gunakan secara lengkap dan aman, biasanya kita sering menggunakan fungsi $_GET[&#39;nama_var&#39;] dan $_POST[&#39;nama_var&#39;] untuk mendapatkan data dari user yang dikirim melalui post/get. namun cara tersebut kurang aman karena tidak adanya nilai default jika variabelnya kosong.","headline":"Cara Aman Mendapatkan data dari POST/GET pada Yii2","dateModified":"2020-05-15T04:00:00+07:00","datePublished":"2020-05-15T04:00:00+07:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://susilolab.github.io/yii2/2020/05/15/cara-aman-mendapatkan-data-dari-post-get-pada-yii2.html"},"url":"https://susilolab.github.io/yii2/2020/05/15/cara-aman-mendapatkan-data-dari-post-get-pada-yii2.html","author":{"@type":"Person","name":"Agus Susilo"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
+
+
+  
+  
+
+
+
+
+
+
 
 </head>
 <body><header class="site-header" role="banner">
@@ -71,36 +85,39 @@ if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNo
     <h1 class="post-title p-name" itemprop="name headline">Cara Aman Mendapatkan data dari POST/GET pada Yii2</h1>
     <p class="post-meta">
       <time class="dt-published" datetime="2020-05-15T04:00:00+07:00" itemprop="datePublished">May 15, 2020
-      </time></p>
+      </time>
+      
+      </p>
   </header>
 
   <div class="post-content e-content" itemprop="articleBody">
-    <p>Yii2 menyertakan fungsi-fungsi yang biasa sering kita gunakan secara lengkap dan aman, biasanya kita sering menggunakan fungsi <code class="highlighter-rouge">$_GET['nama_var']</code> dan <code class="highlighter-rouge">$_POST['nama_var']</code> untuk mendapatkan data dari user yang dikirim melalui post/get. namun cara tersebut kurang aman karena tidak adanya nilai default jika variabelnya kosong.</p>
+    <p>Yii2 menyertakan fungsi-fungsi yang biasa sering kita gunakan secara lengkap dan aman, biasanya kita sering menggunakan fungsi <code class="language-plaintext highlighter-rouge">$_GET['nama_var']</code> dan <code class="language-plaintext highlighter-rouge">$_POST['nama_var']</code> untuk mendapatkan data dari user yang dikirim melalui post/get. namun cara tersebut kurang aman karena tidak adanya nilai default jika variabelnya kosong.
+<!--more--></p>
 
 <p>Contoh:</p>
 
 <figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="nv">$id</span> <span class="o">=</span> <span class="nv">$_GET</span><span class="p">[</span><span class="s1">'id'</span><span class="p">];</span>
 <span class="nv">$query</span> <span class="o">=</span> <span class="s2">"SELECT * FROM user WHERE id = </span><span class="nv">$id</span><span class="s2">"</span><span class="p">;</span></code></pre></figure>
 
-<p>Agar variabel <code class="highlighter-rouge">$id</code> lebih aman maka gunakan fungsi <code class="highlighter-rouge">get</code> atau <code class="highlighter-rouge">post</code> yang terdapat pada class <code class="highlighter-rouge">yii\web\Request</code> yang secara global terdapat pada <code class="highlighter-rouge">Yii::$app-&gt;request</code>.</p>
+<p>Agar variabel <code class="language-plaintext highlighter-rouge">$id</code> lebih aman maka gunakan fungsi <code class="language-plaintext highlighter-rouge">get</code> atau <code class="language-plaintext highlighter-rouge">post</code> yang terdapat pada class <code class="language-plaintext highlighter-rouge">yii\web\Request</code> yang secara global terdapat pada <code class="language-plaintext highlighter-rouge">Yii::$app-&gt;request</code>.</p>
 
-<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="nv">$id</span> <span class="o">=</span> <span class="nx">Yii</span><span class="o">::</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'id'</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="nv">$id</span> <span class="o">=</span> <span class="nc">Yii</span><span class="o">::</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="n">request</span><span class="o">-&gt;</span><span class="nf">get</span><span class="p">(</span><span class="s1">'id'</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
 <span class="c1">// Atau bisa ditambahkan kondisi untuk memeriksa variabel id</span>
 <span class="c1">// if ((int)$id &lt; 1) {</span>
 <span class="c1">//     throw new \yii\web\HttpException(403, 'ID tidak benar');</span>
 <span class="c1">// }</span>
 <span class="nv">$query</span> <span class="o">=</span> <span class="s2">"SELECT * FROM user WHERE id = </span><span class="nv">$id</span><span class="s2">"</span><span class="p">;</span></code></pre></figure>
 
-<p>Untuk query-nya agar lebih aman biasakan pakai punyanya Yii2 yaitu class <code class="highlighter-rouge">yii\db\Command</code> atau <code class="highlighter-rouge">yii\db\Query</code> karena minim kemungkinan terkena SQLInjection.</p>
+<p>Untuk query-nya agar lebih aman biasakan pakai punyanya Yii2 yaitu class <code class="language-plaintext highlighter-rouge">yii\db\Command</code> atau <code class="language-plaintext highlighter-rouge">yii\db\Query</code> karena minim kemungkinan terkena SQLInjection.</p>
 
-<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="nv">$id</span> <span class="o">=</span> <span class="nx">Yii</span><span class="o">::</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'id'</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
-<span class="nv">$result</span> <span class="o">=</span> <span class="nx">Yii</span><span class="o">::</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">db</span>
-    <span class="o">-&gt;</span><span class="na">createCommand</span><span class="p">(</span><span class="s1">'SELECT * FROM user WHERE id = :id'</span><span class="p">,</span> <span class="p">[</span><span class="s1">':id'</span> <span class="o">=&gt;</span> <span class="nv">$id</span><span class="p">])</span>
-    <span class="o">-&gt;</span><span class="na">queryOne</span><span class="p">();</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="nv">$id</span> <span class="o">=</span> <span class="nc">Yii</span><span class="o">::</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="n">request</span><span class="o">-&gt;</span><span class="nf">get</span><span class="p">(</span><span class="s1">'id'</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="nv">$result</span> <span class="o">=</span> <span class="nc">Yii</span><span class="o">::</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="n">db</span>
+    <span class="o">-&gt;</span><span class="nf">createCommand</span><span class="p">(</span><span class="s1">'SELECT * FROM user WHERE id = :id'</span><span class="p">,</span> <span class="p">[</span><span class="s1">':id'</span> <span class="o">=&gt;</span> <span class="nv">$id</span><span class="p">])</span>
+    <span class="o">-&gt;</span><span class="nf">queryOne</span><span class="p">();</span></code></pre></figure>
 
-<p>Untuk variabel <code class="highlighter-rouge">$_POST</code> juga sama dengan get, tinggal ganti fungsi get dengan post.</p>
+<p>Untuk variabel <code class="language-plaintext highlighter-rouge">$_POST</code> juga sama dengan get, tinggal ganti fungsi get dengan post.</p>
 
-<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="nv">$id</span> <span class="o">=</span> <span class="nx">Yii</span><span class="o">::</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">post</span><span class="p">(</span><span class="s1">'id'</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="nv">$id</span> <span class="o">=</span> <span class="nc">Yii</span><span class="o">::</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="n">request</span><span class="o">-&gt;</span><span class="nf">post</span><span class="p">(</span><span class="s1">'id'</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span></code></pre></figure>
 
 <p>Demikian semoga dapat bermanfaat dan terima kasih sudah mampir ke blog saya ini.</p>
 
@@ -119,7 +136,7 @@ if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNo
 
       <div class="footer-col footer-col-3">
         <p>&quot;Sebaik-baik manusia adalah yang paling bermanfaat bagi manusia&quot; (HR. Ahmad, ath-Thabrani, ad-Daruqutni)</p>
-        <p>&copy;2020&nbsp;Agus Susilo</p>
+        <p>&copy;2021&nbsp;Agus Susilo</p>
       </div>
     </div>
 

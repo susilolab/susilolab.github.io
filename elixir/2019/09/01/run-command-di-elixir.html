@@ -2,21 +2,23 @@
 <html lang="en"><head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
 <title>Run command di Elixir | susilolab</title>
-<meta name="generator" content="Jekyll v3.8.6" />
+<meta name="generator" content="Jekyll v4.2.0" />
 <meta property="og:title" content="Run command di Elixir" />
 <meta name="author" content="Agus Susilo" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Cara menjalankan command cli di elixir bisa langsung dicoba diiex atau buat file elixir script(.exs) iex(1)&gt; System.cmd(&quot;ls&quot;, [&quot;/home/agus&quot;]) {&quot;Desktop\nDocuments\nDownloads\nMusic\nPictures\nPublic\nTemplates\nVideos\n&quot;, 0} Perintah cmd ini akan mengembalikan koleksi tuple hasil dan kode exit. Jika command yang dijalankan tidak ada didalam var PATH maka elixir akan menampilkan error seperti ini: ** (ErlangError) Erlang error: :enoent (elixir) lib/system.ex:791: System.cmd(&quot;ls1&quot;, [&quot;/home/agus&quot;], []) Untuk mengolah hasil dari cmd bisa menggunakan patter matching elixir, kemudian split file menggunakan fungsi String.split iex(1)&gt; {res, exit_code} = System.cmd(&quot;ls&quot;, [&quot;/home/agus&quot;]) iex(2)&gt; res |&gt; String.split [&quot;Desktop&quot;, &quot;Documents&quot;, &quot;Downloads&quot;, &quot;Music&quot;, &quot;Pictures&quot;, &quot;Public&quot;, &quot;Templates&quot;, &quot;Videos&quot;] Nah setelah displit maka hasilnya sudah berupa list dan dapat diproses oleh fungsi lain dengan mudah. sekian." />
-<meta property="og:description" content="Cara menjalankan command cli di elixir bisa langsung dicoba diiex atau buat file elixir script(.exs) iex(1)&gt; System.cmd(&quot;ls&quot;, [&quot;/home/agus&quot;]) {&quot;Desktop\nDocuments\nDownloads\nMusic\nPictures\nPublic\nTemplates\nVideos\n&quot;, 0} Perintah cmd ini akan mengembalikan koleksi tuple hasil dan kode exit. Jika command yang dijalankan tidak ada didalam var PATH maka elixir akan menampilkan error seperti ini: ** (ErlangError) Erlang error: :enoent (elixir) lib/system.ex:791: System.cmd(&quot;ls1&quot;, [&quot;/home/agus&quot;], []) Untuk mengolah hasil dari cmd bisa menggunakan patter matching elixir, kemudian split file menggunakan fungsi String.split iex(1)&gt; {res, exit_code} = System.cmd(&quot;ls&quot;, [&quot;/home/agus&quot;]) iex(2)&gt; res |&gt; String.split [&quot;Desktop&quot;, &quot;Documents&quot;, &quot;Downloads&quot;, &quot;Music&quot;, &quot;Pictures&quot;, &quot;Public&quot;, &quot;Templates&quot;, &quot;Videos&quot;] Nah setelah displit maka hasilnya sudah berupa list dan dapat diproses oleh fungsi lain dengan mudah. sekian." />
+<meta name="description" content="Cara menjalankan command cli di elixir bisa langsung dicoba diiex atau buat file elixir script(.exs)" />
+<meta property="og:description" content="Cara menjalankan command cli di elixir bisa langsung dicoba diiex atau buat file elixir script(.exs)" />
 <link rel="canonical" href="https://susilolab.github.io/elixir/2019/09/01/run-command-di-elixir.html" />
 <meta property="og:url" content="https://susilolab.github.io/elixir/2019/09/01/run-command-di-elixir.html" />
 <meta property="og:site_name" content="susilolab" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2019-09-01T15:00:00+07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Run command di Elixir" />
 <script type="application/ld+json">
-{"headline":"Run command di Elixir","dateModified":"2019-09-01T15:00:00+07:00","description":"Cara menjalankan command cli di elixir bisa langsung dicoba diiex atau buat file elixir script(.exs) iex(1)&gt; System.cmd(&quot;ls&quot;, [&quot;/home/agus&quot;]) {&quot;Desktop\\nDocuments\\nDownloads\\nMusic\\nPictures\\nPublic\\nTemplates\\nVideos\\n&quot;, 0} Perintah cmd ini akan mengembalikan koleksi tuple hasil dan kode exit. Jika command yang dijalankan tidak ada didalam var PATH maka elixir akan menampilkan error seperti ini: ** (ErlangError) Erlang error: :enoent (elixir) lib/system.ex:791: System.cmd(&quot;ls1&quot;, [&quot;/home/agus&quot;], []) Untuk mengolah hasil dari cmd bisa menggunakan patter matching elixir, kemudian split file menggunakan fungsi String.split iex(1)&gt; {res, exit_code} = System.cmd(&quot;ls&quot;, [&quot;/home/agus&quot;]) iex(2)&gt; res |&gt; String.split [&quot;Desktop&quot;, &quot;Documents&quot;, &quot;Downloads&quot;, &quot;Music&quot;, &quot;Pictures&quot;, &quot;Public&quot;, &quot;Templates&quot;, &quot;Videos&quot;] Nah setelah displit maka hasilnya sudah berupa list dan dapat diproses oleh fungsi lain dengan mudah. sekian.","datePublished":"2019-09-01T15:00:00+07:00","url":"https://susilolab.github.io/elixir/2019/09/01/run-command-di-elixir.html","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://susilolab.github.io/elixir/2019/09/01/run-command-di-elixir.html"},"author":{"@type":"Person","name":"Agus Susilo"},"@context":"https://schema.org"}</script>
+{"@type":"BlogPosting","description":"Cara menjalankan command cli di elixir bisa langsung dicoba diiex atau buat file elixir script(.exs)","headline":"Run command di Elixir","dateModified":"2019-09-01T15:00:00+07:00","datePublished":"2019-09-01T15:00:00+07:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://susilolab.github.io/elixir/2019/09/01/run-command-di-elixir.html"},"url":"https://susilolab.github.io/elixir/2019/09/01/run-command-di-elixir.html","author":{"@type":"Person","name":"Agus Susilo"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://susilolab.github.io/feed.xml" title="susilolab" /><script>
 if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1")) {
@@ -30,22 +32,34 @@ if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNo
 }
 </script>
   
-<!-- Begin Jekyll SEO tag v2.6.1 -->
+<!-- Begin Jekyll SEO tag v2.7.1 -->
 <title>Run command di Elixir | susilolab</title>
-<meta name="generator" content="Jekyll v3.8.6" />
+<meta name="generator" content="Jekyll v4.2.0" />
 <meta property="og:title" content="Run command di Elixir" />
 <meta name="author" content="Agus Susilo" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Cara menjalankan command cli di elixir bisa langsung dicoba diiex atau buat file elixir script(.exs) iex(1)&gt; System.cmd(&quot;ls&quot;, [&quot;/home/agus&quot;]) {&quot;Desktop\nDocuments\nDownloads\nMusic\nPictures\nPublic\nTemplates\nVideos\n&quot;, 0} Perintah cmd ini akan mengembalikan koleksi tuple hasil dan kode exit. Jika command yang dijalankan tidak ada didalam var PATH maka elixir akan menampilkan error seperti ini: ** (ErlangError) Erlang error: :enoent (elixir) lib/system.ex:791: System.cmd(&quot;ls1&quot;, [&quot;/home/agus&quot;], []) Untuk mengolah hasil dari cmd bisa menggunakan patter matching elixir, kemudian split file menggunakan fungsi String.split iex(1)&gt; {res, exit_code} = System.cmd(&quot;ls&quot;, [&quot;/home/agus&quot;]) iex(2)&gt; res |&gt; String.split [&quot;Desktop&quot;, &quot;Documents&quot;, &quot;Downloads&quot;, &quot;Music&quot;, &quot;Pictures&quot;, &quot;Public&quot;, &quot;Templates&quot;, &quot;Videos&quot;] Nah setelah displit maka hasilnya sudah berupa list dan dapat diproses oleh fungsi lain dengan mudah. sekian." />
-<meta property="og:description" content="Cara menjalankan command cli di elixir bisa langsung dicoba diiex atau buat file elixir script(.exs) iex(1)&gt; System.cmd(&quot;ls&quot;, [&quot;/home/agus&quot;]) {&quot;Desktop\nDocuments\nDownloads\nMusic\nPictures\nPublic\nTemplates\nVideos\n&quot;, 0} Perintah cmd ini akan mengembalikan koleksi tuple hasil dan kode exit. Jika command yang dijalankan tidak ada didalam var PATH maka elixir akan menampilkan error seperti ini: ** (ErlangError) Erlang error: :enoent (elixir) lib/system.ex:791: System.cmd(&quot;ls1&quot;, [&quot;/home/agus&quot;], []) Untuk mengolah hasil dari cmd bisa menggunakan patter matching elixir, kemudian split file menggunakan fungsi String.split iex(1)&gt; {res, exit_code} = System.cmd(&quot;ls&quot;, [&quot;/home/agus&quot;]) iex(2)&gt; res |&gt; String.split [&quot;Desktop&quot;, &quot;Documents&quot;, &quot;Downloads&quot;, &quot;Music&quot;, &quot;Pictures&quot;, &quot;Public&quot;, &quot;Templates&quot;, &quot;Videos&quot;] Nah setelah displit maka hasilnya sudah berupa list dan dapat diproses oleh fungsi lain dengan mudah. sekian." />
+<meta name="description" content="Cara menjalankan command cli di elixir bisa langsung dicoba diiex atau buat file elixir script(.exs)" />
+<meta property="og:description" content="Cara menjalankan command cli di elixir bisa langsung dicoba diiex atau buat file elixir script(.exs)" />
 <link rel="canonical" href="https://susilolab.github.io/elixir/2019/09/01/run-command-di-elixir.html" />
 <meta property="og:url" content="https://susilolab.github.io/elixir/2019/09/01/run-command-di-elixir.html" />
 <meta property="og:site_name" content="susilolab" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2019-09-01T15:00:00+07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Run command di Elixir" />
 <script type="application/ld+json">
-{"headline":"Run command di Elixir","dateModified":"2019-09-01T15:00:00+07:00","description":"Cara menjalankan command cli di elixir bisa langsung dicoba diiex atau buat file elixir script(.exs) iex(1)&gt; System.cmd(&quot;ls&quot;, [&quot;/home/agus&quot;]) {&quot;Desktop\\nDocuments\\nDownloads\\nMusic\\nPictures\\nPublic\\nTemplates\\nVideos\\n&quot;, 0} Perintah cmd ini akan mengembalikan koleksi tuple hasil dan kode exit. Jika command yang dijalankan tidak ada didalam var PATH maka elixir akan menampilkan error seperti ini: ** (ErlangError) Erlang error: :enoent (elixir) lib/system.ex:791: System.cmd(&quot;ls1&quot;, [&quot;/home/agus&quot;], []) Untuk mengolah hasil dari cmd bisa menggunakan patter matching elixir, kemudian split file menggunakan fungsi String.split iex(1)&gt; {res, exit_code} = System.cmd(&quot;ls&quot;, [&quot;/home/agus&quot;]) iex(2)&gt; res |&gt; String.split [&quot;Desktop&quot;, &quot;Documents&quot;, &quot;Downloads&quot;, &quot;Music&quot;, &quot;Pictures&quot;, &quot;Public&quot;, &quot;Templates&quot;, &quot;Videos&quot;] Nah setelah displit maka hasilnya sudah berupa list dan dapat diproses oleh fungsi lain dengan mudah. sekian.","datePublished":"2019-09-01T15:00:00+07:00","url":"https://susilolab.github.io/elixir/2019/09/01/run-command-di-elixir.html","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://susilolab.github.io/elixir/2019/09/01/run-command-di-elixir.html"},"author":{"@type":"Person","name":"Agus Susilo"},"@context":"https://schema.org"}</script>
+{"@type":"BlogPosting","description":"Cara menjalankan command cli di elixir bisa langsung dicoba diiex atau buat file elixir script(.exs)","headline":"Run command di Elixir","dateModified":"2019-09-01T15:00:00+07:00","datePublished":"2019-09-01T15:00:00+07:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://susilolab.github.io/elixir/2019/09/01/run-command-di-elixir.html"},"url":"https://susilolab.github.io/elixir/2019/09/01/run-command-di-elixir.html","author":{"@type":"Person","name":"Agus Susilo"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
+
+
+  
+  
+
+
+
+
+
+
 
 </head>
 <body><header class="site-header" role="banner">
@@ -71,29 +85,32 @@ if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNo
     <h1 class="post-title p-name" itemprop="name headline">Run command di Elixir</h1>
     <p class="post-meta">
       <time class="dt-published" datetime="2019-09-01T15:00:00+07:00" itemprop="datePublished">Sep 1, 2019
-      </time></p>
+      </time>
+      
+      </p>
   </header>
 
   <div class="post-content e-content" itemprop="articleBody">
-    <p>Cara menjalankan command cli di elixir bisa langsung dicoba di<code class="highlighter-rouge">iex</code> atau buat file elixir script(<code class="highlighter-rouge">.exs</code>)</p>
+    <p>Cara menjalankan command cli di elixir bisa langsung dicoba di<code class="language-plaintext highlighter-rouge">iex</code> atau buat file elixir script(<code class="language-plaintext highlighter-rouge">.exs</code>)
+<!--more--></p>
 
 <figure class="highlight"><pre><code class="language-elixir" data-lang="elixir"><span class="n">iex</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">&gt;</span> <span class="no">System</span><span class="o">.</span><span class="n">cmd</span><span class="p">(</span><span class="s2">"ls"</span><span class="p">,</span> <span class="p">[</span><span class="s2">"/home/agus"</span><span class="p">])</span>
 <span class="p">{</span><span class="s2">"Desktop</span><span class="se">\n</span><span class="s2">Documents</span><span class="se">\n</span><span class="s2">Downloads</span><span class="se">\n</span><span class="s2">Music</span><span class="se">\n</span><span class="s2">Pictures</span><span class="se">\n</span><span class="s2">Public</span><span class="se">\n</span><span class="s2">Templates</span><span class="se">\n</span><span class="s2">Videos</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span>
  <span class="mi">0</span><span class="p">}</span></code></pre></figure>
 
-<p>Perintah <code class="highlighter-rouge">cmd</code> ini akan mengembalikan koleksi <code class="highlighter-rouge">tuple hasil</code> dan <code class="highlighter-rouge">kode exit</code>. Jika command yang dijalankan tidak ada didalam var <strong>PATH</strong> maka elixir akan menampilkan error seperti ini:</p>
+<p>Perintah <code class="language-plaintext highlighter-rouge">cmd</code> ini akan mengembalikan koleksi <code class="language-plaintext highlighter-rouge">tuple hasil</code> dan <code class="language-plaintext highlighter-rouge">kode exit</code>. Jika command yang dijalankan tidak ada didalam var <strong>PATH</strong> maka elixir akan menampilkan error seperti ini:</p>
 
 <figure class="highlight"><pre><code class="language-elixir" data-lang="elixir"><span class="o">**</span> <span class="p">(</span><span class="no">ErlangError</span><span class="p">)</span> <span class="no">Erlang</span> <span class="ss">error:</span> <span class="ss">:enoent</span>
     <span class="p">(</span><span class="n">elixir</span><span class="p">)</span> <span class="n">lib</span><span class="o">/</span><span class="n">system</span><span class="o">.</span><span class="ss">ex:</span><span class="mi">791</span><span class="p">:</span> <span class="no">System</span><span class="o">.</span><span class="n">cmd</span><span class="p">(</span><span class="s2">"ls1"</span><span class="p">,</span> <span class="p">[</span><span class="s2">"/home/agus"</span><span class="p">],</span> <span class="p">[])</span></code></pre></figure>
 
-<p>Untuk mengolah hasil dari <code class="highlighter-rouge">cmd</code> bisa menggunakan patter matching elixir, kemudian split file menggunakan fungsi <code class="highlighter-rouge">String.split</code></p>
+<p>Untuk mengolah hasil dari <code class="language-plaintext highlighter-rouge">cmd</code> bisa menggunakan patter matching elixir, kemudian split file menggunakan fungsi <code class="language-plaintext highlighter-rouge">String.split</code></p>
 
 <figure class="highlight"><pre><code class="language-elixir" data-lang="elixir"><span class="n">iex</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">&gt;</span> <span class="p">{</span><span class="n">res</span><span class="p">,</span> <span class="n">exit_code</span><span class="p">}</span> <span class="o">=</span> <span class="no">System</span><span class="o">.</span><span class="n">cmd</span><span class="p">(</span><span class="s2">"ls"</span><span class="p">,</span> <span class="p">[</span><span class="s2">"/home/agus"</span><span class="p">])</span>
 <span class="n">iex</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">res</span> <span class="o">|&gt;</span> <span class="no">String</span><span class="o">.</span><span class="n">split</span>
 <span class="p">[</span><span class="s2">"Desktop"</span><span class="p">,</span> <span class="s2">"Documents"</span><span class="p">,</span> <span class="s2">"Downloads"</span><span class="p">,</span> <span class="s2">"Music"</span><span class="p">,</span> <span class="s2">"Pictures"</span><span class="p">,</span> <span class="s2">"Public"</span><span class="p">,</span>
  <span class="s2">"Templates"</span><span class="p">,</span> <span class="s2">"Videos"</span><span class="p">]</span></code></pre></figure>
 
-<p>Nah setelah displit maka hasilnya sudah berupa <code class="highlighter-rouge">list</code> dan dapat diproses oleh fungsi lain dengan mudah.</p>
+<p>Nah setelah displit maka hasilnya sudah berupa <code class="language-plaintext highlighter-rouge">list</code> dan dapat diproses oleh fungsi lain dengan mudah.</p>
 
 <p>sekian.</p>
 
@@ -110,7 +127,7 @@ if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNo
 
       <div class="footer-col footer-col-3">
         <p>&quot;Sebaik-baik manusia adalah yang paling bermanfaat bagi manusia&quot; (HR. Ahmad, ath-Thabrani, ad-Daruqutni)</p>
-        <p>&copy;2020&nbsp;Agus Susilo</p>
+        <p>&copy;2021&nbsp;Agus Susilo</p>
       </div>
     </div>
 
