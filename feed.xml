@@ -1,4 +1,24 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="https://susilolab.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://susilolab.github.io/" rel="alternate" type="text/html" /><updated>2021-10-13T06:49:22+07:00</updated><id>https://susilolab.github.io/feed.xml</id><title type="html">susilolab</title><subtitle>&quot;Sebaik-baik manusia adalah yang paling bermanfaat bagi manusia&quot; (HR. Ahmad, ath-Thabrani, ad-Daruqutni)</subtitle><author><name>Agus Susilo</name></author><entry><title type="html">Mengekstrak file dari mercurial hg</title><link href="https://susilolab.github.io/hg/2021/10/13/mengekstrak-file-dari-mercurial.html" rel="alternate" type="text/html" title="Mengekstrak file dari mercurial hg" /><published>2021-10-13T06:00:00+07:00</published><updated>2021-10-13T06:00:00+07:00</updated><id>https://susilolab.github.io/hg/2021/10/13/mengekstrak-file-dari-mercurial</id><content type="html" xml:base="https://susilolab.github.io/hg/2021/10/13/mengekstrak-file-dari-mercurial.html">&lt;p&gt;Sebagai seorang software engineer tentu tak lepas dari git/hg (mercurial) dan tentu saja tak lepas dari kesalahan.
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="https://susilolab.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://susilolab.github.io/" rel="alternate" type="text/html" /><updated>2021-10-14T07:41:42+07:00</updated><id>https://susilolab.github.io/feed.xml</id><title type="html">susilolab</title><subtitle>&quot;Sebaik-baik manusia adalah yang paling bermanfaat bagi manusia&quot; (HR. Ahmad, ath-Thabrani, ad-Daruqutni)</subtitle><author><name>Agus Susilo</name></author><entry><title type="html">Contoh Penggunaan Embed Template pada Ecto</title><link href="https://susilolab.github.io/elixir/2021/10/14/contoh-penggunaan-embed-template-pada-elixir.html" rel="alternate" type="text/html" title="Contoh Penggunaan Embed Template pada Ecto" /><published>2021-10-14T07:00:00+07:00</published><updated>2021-10-14T07:00:00+07:00</updated><id>https://susilolab.github.io/elixir/2021/10/14/contoh-penggunaan-embed-template-pada-elixir</id><content type="html" xml:base="https://susilolab.github.io/elixir/2021/10/14/contoh-penggunaan-embed-template-pada-elixir.html">&lt;p&gt;Jika ingin membuat generator untuk Ecto versimu sendiri, templatenya bisa menggunakan fungsi dari 
+modul &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Mix.Generator&lt;/code&gt;.&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-elixir&quot; data-lang=&quot;elixir&quot;&gt;&lt;span class=&quot;k&quot;&gt;defmodule&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;MyApp&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+  &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Mix&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Generator&lt;/span&gt;
+
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;hello&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;sample_template&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;log_msg:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Pesan untuk log&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&amp;gt;&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;IO&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;inspect&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+  &lt;span class=&quot;n&quot;&gt;embed_template&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:sample&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;sd&quot;&gt;&quot;&quot;&quot;
+  Log: &amp;lt;%= @log_msg %&amp;gt;
+  &quot;&quot;&quot;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+&lt;span class=&quot;no&quot;&gt;MyApp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;hello&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;embed_template&lt;/code&gt; akan menghasilkan fungsi private sesuai dengan namanya. Misal parameter nama diisi 
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;:sample&lt;/code&gt; maka nama fungsinya akan menjadi &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sample_template&lt;/code&gt; dan hanya bisa diakses didalam modul itu sendiri.&lt;/p&gt;</content><author><name>Agus Susilo</name></author><category term="elixir" /><summary type="html">Jika ingin membuat generator untuk Ecto versimu sendiri, templatenya bisa menggunakan fungsi dari modul Mix.Generator.</summary></entry><entry><title type="html">Mengekstrak file dari mercurial hg</title><link href="https://susilolab.github.io/hg/2021/10/13/mengekstrak-file-dari-mercurial.html" rel="alternate" type="text/html" title="Mengekstrak file dari mercurial hg" /><published>2021-10-13T06:00:00+07:00</published><updated>2021-10-13T06:00:00+07:00</updated><id>https://susilolab.github.io/hg/2021/10/13/mengekstrak-file-dari-mercurial</id><content type="html" xml:base="https://susilolab.github.io/hg/2021/10/13/mengekstrak-file-dari-mercurial.html">&lt;p&gt;Sebagai seorang software engineer tentu tak lepas dari git/hg (mercurial) dan tentu saja tak lepas dari kesalahan.
 Pernah mem-merge 2 perubahan kode yang berbeda ? dan tak sengaja menghapus perubahan rekan setim ?. Kalau Anda pernah mengalaminya
 berarti kita sama, saya juga pernah mengalaminya. 
 &lt;!--more--&gt;&lt;/p&gt;
@@ -318,39 +338,4 @@ service memiliki karakteristik aplikasinya jalan dan prompt tidak mengembalikan 
 
 &lt;p&gt;Type &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;forking&lt;/code&gt; cocok jika karakteristik aplikasi pada saat jalan langsung mengembalikan sesuatu dan servis tetep jalan.&lt;/p&gt;
 
-&lt;p&gt;Sekian, semoga bermanfaat.&lt;/p&gt;</content><author><name>Agus Susilo</name></author><category term="linux" /><summary type="html">Jadi ini ceritanya saya ada pekerjaan untuk merubah salah satu fungsi pada aplikasi di kantor ke bahasa Elixir, pada saat aplikasi sudah siap dideploy ke server production status servisnya tidak normal, selalu activating terus. Sebelumnya saya mencoba mengirim data ke servis untuk memastikan apakah aplikasinya jalan apa tidak. Ternyata aplikasinya jalan, itu artinya tidak ada masalah diaplikasi.</summary></entry><entry><title type="html">Perulangan terbalik pada rust</title><link href="https://susilolab.github.io/rust/2020/09/23/perulangan-terbalik-pada-rust.html" rel="alternate" type="text/html" title="Perulangan terbalik pada rust" /><published>2020-09-23T07:00:00+07:00</published><updated>2020-09-23T07:00:00+07:00</updated><id>https://susilolab.github.io/rust/2020/09/23/perulangan-terbalik-pada-rust</id><content type="html" xml:base="https://susilolab.github.io/rust/2020/09/23/perulangan-terbalik-pada-rust.html">&lt;p&gt;Kali ini saya ingin berbagi sedikit tip bagaimana melakukan loop secara terbalik pada Rust.
-Biasanya kita akan melakukan loop seperti ini:
-&lt;!--more--&gt;&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;..&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nd&quot;&gt;println!&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;{}&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Bagaimana jika ingin loop dari 5 s/d 0 ?. Mungkin kita akan berpikiran seperti ini&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;..&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nd&quot;&gt;println!&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;{}&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Jika dijalankan kode di atas tidak akan jalan. Lalu bagaimana cara yang benar jika ingin perulangannya terbalik ?. 
-Kita bisa menggunakan unit jangkuan dan fungsi &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rev()&lt;/code&gt;.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;..&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;.rev&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nd&quot;&gt;println!&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;{}&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Kode di atas akan jalan dengan sukses dan menghasilkan keluaran seperti berikut ini:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;4
-3
-2
-1
-0&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Demikian tips singkat kali ini semoga bermanfaat.&lt;/p&gt;</content><author><name>Agus Susilo</name></author><category term="rust" /><summary type="html">Kali ini saya ingin berbagi sedikit tip bagaimana melakukan loop secara terbalik pada Rust. Biasanya kita akan melakukan loop seperti ini:</summary></entry></feed>
+&lt;p&gt;Sekian, semoga bermanfaat.&lt;/p&gt;</content><author><name>Agus Susilo</name></author><category term="linux" /><summary type="html">Jadi ini ceritanya saya ada pekerjaan untuk merubah salah satu fungsi pada aplikasi di kantor ke bahasa Elixir, pada saat aplikasi sudah siap dideploy ke server production status servisnya tidak normal, selalu activating terus. Sebelumnya saya mencoba mengirim data ke servis untuk memastikan apakah aplikasinya jalan apa tidak. Ternyata aplikasinya jalan, itu artinya tidak ada masalah diaplikasi.</summary></entry></feed>
