@@ -80,7 +80,26 @@ if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNo
 <main class="page-content" aria-label="Content">
       <div class="wrapper">
         <div class="home"><h2 class="post-list-heading">Posts</h2>
-    <ul class="post-list"><li><span class="post-meta">May 14, 2020</span>
+    <ul class="post-list"><li><span class="post-meta">May 15, 2020</span>
+        <h3>
+          <a class="post-link" href="/rust/2020/05/15/mengenal-tipe-data-dasar-pada-rust.html">
+            Mengenal Tipe Data Dasar pada Rust
+          </a>
+        </h3>
+        <p>Rust memiliki beberapa tipe data dasar antara lain</p>
+
+<ul>
+  <li>booleans - <code class="language-plaintext highlighter-rouge">bool</code> untuk data berupa benar/salah true dan false</li>
+  <li>integer tak bertanda - <code class="language-plaintext highlighter-rouge">u8</code>, <code class="language-plaintext highlighter-rouge">u32</code>, <code class="language-plaintext highlighter-rouge">u64</code>, <code class="language-plaintext highlighter-rouge">u128</code> untuk mewakili bilangan bulat positif</li>
+  <li>integer bertanda - <code class="language-plaintext highlighter-rouge">i8</code>, <code class="language-plaintext highlighter-rouge">i32</code>, <code class="language-plaintext highlighter-rouge">i64</code>, <code class="language-plaintext highlighter-rouge">i128</code> untuk mewakili bilangan bulat positif dan negatif</li>
+  <li>pointer sized integer - <code class="language-plaintext highlighter-rouge">usize</code>, <code class="language-plaintext highlighter-rouge">isize</code> untuk mewakili data yang berindex dan memiliki ukuran dimemori</li>
+  <li>bilangan pecah - <code class="language-plaintext highlighter-rouge">f32</code>, <code class="language-plaintext highlighter-rouge">f64</code></li>
+  <li>terkait text - <code class="language-plaintext highlighter-rouge">str</code>, <code class="language-plaintext highlighter-rouge">chr</code></li>
+  <li>tuple - <code class="language-plaintext highlighter-rouge">(value, value, ...)</code> untuk data berurutan dengan ukuran tetap</li>
+  <li>slices - <code class="language-plaintext highlighter-rouge">&amp;[T]</code> untuk mewakili data berurutan pada memori atau biasa dikenal dengan nama array/larik</li>
+</ul>
+
+      </li><li><span class="post-meta">May 14, 2020</span>
         <h3>
           <a class="post-link" href="/rust/2020/05/14/mengenal-bahasa-pemrograman-rust.html">
             Mengenal Bahasa Pemrograman Rust
@@ -153,14 +172,6 @@ Pernahkah temen-temen semua ingin mengkompress file di server linux tapi ndak ta
           </a>
         </h3>
         <p>Kali ini saya ingin berbagi tips bagaimana menjumlahkan total array angka di Elixir dengan fungsi <code class="language-plaintext highlighter-rouge">Enum.reduce/3</code>. Bagi yang pernah mengenal bahasa pemrograman seperti C, C++, Java atau PHP tentunya hal ini akan sangat-sangat mudah, saya beri contoh kodenya dalam bahasa PHP.</p>
-
-      </li><li><span class="post-meta">Sep 7, 2019</span>
-        <h3>
-          <a class="post-link" href="/elixir/2019/09/07/membuat-custom-mix-task-di-phoenix.html">
-            Membuat custom Mix Task di Phoenix
-          </a>
-        </h3>
-        <p>Kadang kita butuh membuat task versi kita sendiri untuk mempermudah dalam pengembangan web. Bawaan phoenix mendukung pembuatan custom mix task dan gunakan modul <code class="language-plaintext highlighter-rouge">OptionParser</code> untuk mengolah argumennya. Untuk membuat custom mix task bikin folder <code class="language-plaintext highlighter-rouge">app_name/lib/mix/tasks</code> dan buat file baru misalnya <code class="language-plaintext highlighter-rouge">hello.ex</code> kemudian ikuti kode berikut:</p>
 
       </li></ul>
     
