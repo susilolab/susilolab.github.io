@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Mengenal Gorm | susilolab</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="Mengenal Gorm" />
+<meta name="author" content="Agus Susilo" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Gorm adalah pustaka ORM untuk golang, ORM itu singkatan dari object-relational mapping walaupun sebenarnya golang bukan bahasa OOP seperti pada umumnya. Alasan kenapa saya menggunakan gorm adalah karena kita tidak perlu merubah tipe data dari mysql ke struk, apalagi jika field struk tersebut ada yang null maka kita harus menggunakan tipe data yang nullable." />
+<meta property="og:description" content="Gorm adalah pustaka ORM untuk golang, ORM itu singkatan dari object-relational mapping walaupun sebenarnya golang bukan bahasa OOP seperti pada umumnya. Alasan kenapa saya menggunakan gorm adalah karena kita tidak perlu merubah tipe data dari mysql ke struk, apalagi jika field struk tersebut ada yang null maka kita harus menggunakan tipe data yang nullable." />
+<link rel="canonical" href="https://susilolab.github.io/go/2019/03/06/mengenal-gorm.html" />
+<meta property="og:url" content="https://susilolab.github.io/go/2019/03/06/mengenal-gorm.html" />
+<meta property="og:site_name" content="susilolab" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-03-06T08:00:00+07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Mengenal Gorm" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","description":"Gorm adalah pustaka ORM untuk golang, ORM itu singkatan dari object-relational mapping walaupun sebenarnya golang bukan bahasa OOP seperti pada umumnya. Alasan kenapa saya menggunakan gorm adalah karena kita tidak perlu merubah tipe data dari mysql ke struk, apalagi jika field struk tersebut ada yang null maka kita harus menggunakan tipe data yang nullable.","mainEntityOfPage":{"@type":"WebPage","@id":"https://susilolab.github.io/go/2019/03/06/mengenal-gorm.html"},"headline":"Mengenal Gorm","dateModified":"2019-03-06T08:00:00+07:00","datePublished":"2019-03-06T08:00:00+07:00","url":"https://susilolab.github.io/go/2019/03/06/mengenal-gorm.html","author":{"@type":"Person","name":"Agus Susilo"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://susilolab.github.io/feed.xml" title="susilolab" /><script>
+if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1")) {
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-173956394-1', 'auto');
+  ga('send', 'pageview');
+}
+</script>
+  
+<!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Mengenal Gorm | susilolab</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="Mengenal Gorm" />
+<meta name="author" content="Agus Susilo" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Gorm adalah pustaka ORM untuk golang, ORM itu singkatan dari object-relational mapping walaupun sebenarnya golang bukan bahasa OOP seperti pada umumnya. Alasan kenapa saya menggunakan gorm adalah karena kita tidak perlu merubah tipe data dari mysql ke struk, apalagi jika field struk tersebut ada yang null maka kita harus menggunakan tipe data yang nullable." />
+<meta property="og:description" content="Gorm adalah pustaka ORM untuk golang, ORM itu singkatan dari object-relational mapping walaupun sebenarnya golang bukan bahasa OOP seperti pada umumnya. Alasan kenapa saya menggunakan gorm adalah karena kita tidak perlu merubah tipe data dari mysql ke struk, apalagi jika field struk tersebut ada yang null maka kita harus menggunakan tipe data yang nullable." />
+<link rel="canonical" href="https://susilolab.github.io/go/2019/03/06/mengenal-gorm.html" />
+<meta property="og:url" content="https://susilolab.github.io/go/2019/03/06/mengenal-gorm.html" />
+<meta property="og:site_name" content="susilolab" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-03-06T08:00:00+07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Mengenal Gorm" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","description":"Gorm adalah pustaka ORM untuk golang, ORM itu singkatan dari object-relational mapping walaupun sebenarnya golang bukan bahasa OOP seperti pada umumnya. Alasan kenapa saya menggunakan gorm adalah karena kita tidak perlu merubah tipe data dari mysql ke struk, apalagi jika field struk tersebut ada yang null maka kita harus menggunakan tipe data yang nullable.","mainEntityOfPage":{"@type":"WebPage","@id":"https://susilolab.github.io/go/2019/03/06/mengenal-gorm.html"},"headline":"Mengenal Gorm","dateModified":"2019-03-06T08:00:00+07:00","datePublished":"2019-03-06T08:00:00+07:00","url":"https://susilolab.github.io/go/2019/03/06/mengenal-gorm.html","author":{"@type":"Person","name":"Agus Susilo"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  
+  
+
+
+
+
+
+
+
+</head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">susilolab</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a><a class="page-link" href="/categories/">Categories</a><a class="page-link" href="/portfolio/">My Portfolio</a><a class="page-link" href="/rust-book/">Rust Book</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Mengenal Gorm</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2019-03-06T08:00:00+07:00" itemprop="datePublished">Mar 6, 2019
+      </time>
+      
+      
+      • categories:  
+      
+      <a href="/categories/#go">go</a>
+      
+      
+      </p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>Gorm adalah pustaka ORM untuk golang, ORM itu singkatan dari object-relational mapping walaupun sebenarnya golang bukan bahasa OOP seperti pada umumnya. Alasan kenapa saya menggunakan gorm adalah karena kita tidak perlu merubah tipe data dari mysql ke struk, apalagi jika field struk tersebut ada yang null maka kita harus menggunakan tipe data yang nullable.
+<!--more--></p>
+
+<p>Contohnya string nullable, int nullable dll. Akan sangat repot sekali jika kolomnya banyak, oleh karena itu saya memakai gorm untuk memudahkan hal tersebut.</p>
+
+<h4 id="install">Install</h4>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>go get github.com/jinzhu/gorm</code></pre></figure>
+
+<p>Untuk contoh saya akan membuat tabel <code class="language-plaintext highlighter-rouge">posts</code>, silahkan buat tabel posts dengan aplikasi favorit Anda.</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">create</span> <span class="k">table</span> <span class="n">posts</span><span class="p">(</span>
+  <span class="n">id</span> <span class="nb">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span> <span class="k">not</span> <span class="k">null</span> <span class="k">primary</span> <span class="k">key</span> <span class="n">auto_increment</span><span class="p">,</span>
+  <span class="n">title</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span> <span class="k">not</span> <span class="k">null</span><span class="p">,</span>
+  <span class="n">body</span> <span class="nb">text</span><span class="p">,</span>
+  <span class="n">published</span> <span class="nb">tinyint</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="nb">unsigned</span> <span class="k">default</span> <span class="mi">0</span>
+<span class="p">);</span></code></pre></figure>
+
+<p>Setelah kita selesai membuat tabel posts, maka kita akan membuat folder gorm. Karena akun github saya adalah susilolab maka saya akan membuat folder di <code class="language-plaintext highlighter-rouge">github.com/susilolab/blog/gorm</code> dan kita membuat file <code class="language-plaintext highlighter-rouge">main.go</code>.</p>
+
+<h4 id="koneksi-ke-database-mysql">Koneksi ke database mysql</h4>
+
+<p>kita akan mencoba menghubungkan ke database mysql. Kita juga membutuhkan pustaka driver mysql selain gorm untuk menghubungkan ke database. Ok, pertama kita bikin paket main dan import paket <code class="language-plaintext highlighter-rouge">fmt</code>, <code class="language-plaintext highlighter-rouge">log</code>, driver <code class="language-plaintext highlighter-rouge">mysql</code> dan <code class="language-plaintext highlighter-rouge">gorm</code>.</p>
+
+<p>Dan buat struk <code class="language-plaintext highlighter-rouge">Post</code>, struk ini untuk mewakili dari table <code class="language-plaintext highlighter-rouge">posts</code>. Struk pada Go konsepnya mirip klas pada PHP. Berikut potongan kodenya:</p>
+
+<figure class="highlight"><pre><code class="language-go" data-lang="go"><span class="k">package</span> <span class="n">main</span>
+
+<span class="k">import</span> <span class="p">(</span>
+    <span class="s">"fmt"</span>
+    <span class="s">"log"</span>
+
+    <span class="n">_</span> <span class="s">"github.com/go-sql-driver/mysql"</span>
+    <span class="s">"github.com/jinzhu/gorm"</span>
+<span class="p">)</span>
+
+<span class="k">type</span> <span class="n">Post</span> <span class="k">struct</span> <span class="p">{</span>
+    <span class="n">ID</span>        <span class="kt">int</span>
+    <span class="n">Title</span>     <span class="kt">string</span>
+    <span class="n">Body</span>      <span class="kt">string</span>
+    <span class="n">Published</span> <span class="kt">int</span>
+<span class="p">}</span></code></pre></figure>
+
+<h4 id="koneksi-database">Koneksi database</h4>
+
+<p>Kemudian pada fungsi main kita buat koneksi ke database dengan memanggil fungsi <code class="language-plaintext highlighter-rouge">gorm.Open</code>, fungsi <code class="language-plaintext highlighter-rouge">Open</code> akan mengembalikan struk <code class="language-plaintext highlighter-rouge">gorm.DB</code> dan <code class="language-plaintext highlighter-rouge">err</code>. Jika err tidak sama dengan nil munculkan pesan error dan exit, cukup tuliskan <code class="language-plaintext highlighter-rouge">log.Fatalln</code>. <code class="language-plaintext highlighter-rouge">Defer.Close()</code> setelah error handling berguna untuk menutup koneksi mysql.</p>
+
+<figure class="highlight"><pre><code class="language-go" data-lang="go"><span class="k">func</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">conn</span> <span class="o">:=</span> <span class="s">"root:password@tcp(127.0.0.1:3306)/blog?charset=utf8&amp;parseTime=True"</span>
+    <span class="n">db</span><span class="p">,</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">gorm</span><span class="o">.</span><span class="n">Open</span><span class="p">(</span><span class="s">"mysql"</span><span class="p">,</span> <span class="n">conn</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">err</span> <span class="o">!=</span> <span class="no">nil</span> <span class="p">{</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">Fatalln</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="k">defer</span> <span class="n">db</span><span class="o">.</span><span class="n">Close</span><span class="p">()</span>
+<span class="p">}</span></code></pre></figure>
+
+<h4 id="query-data">Query Data</h4>
+
+<p>Kemudian kita bisa memulai query data, kita akan mencoba mengambil semua data yang ada pada tabel <code class="language-plaintext highlighter-rouge">posts</code>, perlu di ingat bahwa gorm akan menggangap nama tabel semua dalam bentuk jamak kecuali kita mengaktifkan mode singular atau menyebutkan nama tabel dengan fungsi Table. Misalnya struk <code class="language-plaintext highlighter-rouge">User</code> maka nama tabelnya akan dianggap <code class="language-plaintext highlighter-rouge">users</code>, struk <code class="language-plaintext highlighter-rouge">UserGroup</code> namanya tabelnya akan dianggap <code class="language-plaintext highlighter-rouge">user_groups</code> dll. Pertama kita bikin slice <code class="language-plaintext highlighter-rouge">Post</code> dengan nama <code class="language-plaintext highlighter-rouge">posts</code> untuk menampung datanya.</p>
+
+<figure class="highlight"><pre><code class="language-go" data-lang="go"><span class="n">posts</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">([]</span><span class="n">Post</span><span class="p">,</span> <span class="m">0</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">db</span><span class="o">.</span><span class="n">Find</span><span class="p">(</span><span class="o">&amp;</span><span class="n">posts</span><span class="p">)</span><span class="o">.</span><span class="n">RecordNotFound</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">log</span><span class="o">.</span><span class="n">Fatalln</span><span class="p">(</span><span class="s">"record tidak ada"</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">val</span> <span class="o">:=</span> <span class="k">range</span> <span class="n">posts</span> <span class="p">{</span>
+    <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">val</span><span class="o">.</span><span class="n">Title</span><span class="p">)</span>
+<span class="p">}</span></code></pre></figure>
+
+<h4 id="mendapat-data-pertama-dan-terakhir">Mendapat data pertama dan terakhir</h4>
+
+<p>Untuk mendapatkan record pertama kita bisa menggunakan fungsi First dan untuk data terakhir menggunakan fungsi Last</p>
+
+<figure class="highlight"><pre><code class="language-go" data-lang="go"><span class="k">var</span> <span class="n">post</span> <span class="n">Post</span>
+<span class="n">db</span><span class="o">.</span><span class="n">First</span><span class="p">(</span><span class="o">&amp;</span><span class="n">post</span><span class="p">)</span>
+<span class="n">db</span><span class="o">.</span><span class="n">First</span><span class="p">(</span><span class="o">&amp;</span><span class="n">post</span><span class="p">,</span> <span class="m">10</span><span class="p">)</span>
+
+<span class="k">var</span> <span class="n">lastPost</span> <span class="n">Post</span>
+<span class="n">db</span><span class="o">.</span><span class="n">Last</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lastPost</span><span class="p">)</span></code></pre></figure>
+
+<h4 id="insert-data-ke-tabel">Insert data ke tabel</h4>
+
+<p>Untuk insert data ke tabel ada 2 cara, pertama menggunakan fungsi <code class="language-plaintext highlighter-rouge">Create</code> dan yang kedua dengan fungsi <code class="language-plaintext highlighter-rouge">NewRecord</code>. Fungsi <code class="language-plaintext highlighter-rouge">Create</code> akan mengembalikan struk <code class="language-plaintext highlighter-rouge">gorm.DB</code>, untuk melihat errornya bisa melalui property <code class="language-plaintext highlighter-rouge">Error</code>. Sedangkan <code class="language-plaintext highlighter-rouge">NewRecord</code> akan mengembalikan nilai true jika sukses dan false jika gagal.</p>
+
+<p>Pertama buat struk Post dan isi field-fieldnya.</p>
+
+<figure class="highlight"><pre><code class="language-go" data-lang="go"><span class="n">Post</span> <span class="o">:=</span> <span class="n">Post</span><span class="p">{</span><span class="n">ID</span><span class="o">:</span> <span class="m">2</span><span class="p">,</span> <span class="n">Title</span><span class="o">:</span> <span class="s">"belajar gorm"</span><span class="p">,</span> <span class="n">Body</span><span class="o">:</span> <span class="s">"awesome"</span><span class="p">,</span> <span class="n">Published</span><span class="o">:</span> <span class="m">1</span><span class="p">}</span>
+<span class="k">if</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">db</span><span class="o">.</span><span class="n">Create</span><span class="p">()</span><span class="o">.</span><span class="n">Error</span><span class="p">;</span> <span class="n">err</span> <span class="o">==</span> <span class="no">nil</span> <span class="p">{</span>
+    <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"data sukses disimpan."</span><span class="p">);</span>
+<span class="p">}</span></code></pre></figure>
+
+<h4 id="update">Update</h4>
+
+<p>Update dapat dilakukan dengan memanggil fungsi <code class="language-plaintext highlighter-rouge">Save</code>, setelah kita mencari recordnya terlebih dahulu.</p>
+
+<figure class="highlight"><pre><code class="language-go" data-lang="go"><span class="n">post</span> <span class="o">:=</span> <span class="n">Post</span><span class="p">{}</span>
+<span class="k">if</span> <span class="n">db</span><span class="o">.</span><span class="n">First</span><span class="p">(</span><span class="o">&amp;</span><span class="n">post</span><span class="p">,</span> <span class="m">1</span><span class="p">)</span><span class="o">.</span><span class="n">RecordNotFound</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">log</span><span class="o">.</span><span class="n">Fatalln</span><span class="p">(</span><span class="s">"Record not found."</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="n">post</span><span class="o">.</span><span class="n">Title</span> <span class="o">=</span> <span class="s">"Belajar ORM dengan Gorm"</span>
+<span class="n">db</span><span class="o">.</span><span class="n">Save</span><span class="p">(</span><span class="o">&amp;</span><span class="n">post</span><span class="p">)</span></code></pre></figure>
+
+<p>Sekian dari saya dan semoga bermanfaat. Untuk dokumentasi lengkapnya dapat Anda baca disini <a href="https://gorm.io">gorm.io</a>.</p>
+
+  </div><a class="u-url" href="/go/2019/03/06/mengenal-gorm.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper"><div class="footer-col-wrapper">
+      <div class="footer-col footer-col-3"><ul class="social-media-list"><li><a href="https://github.com/susilolab"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">susilolab</span></a></li><li><a href="https://instagram.com/mas.agus"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#instagram"></use></svg> <span class="username">mas.agus</span></a></li><li><a href="https://www.twitter.com/susil0"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">susil0</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>&quot;Sebaik-baik manusia adalah yang paling bermanfaat bagi manusia&quot; (HR. Ahmad, ath-Thabrani, ad-Daruqutni)</p>
+        <p>&copy;2021&nbsp;Agus Susilo</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Deno File System | susilolab</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="Deno File System" />
+<meta name="author" content="Agus Susilo" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Deno adalah secure runtime untuk Javascript dan Typescript menggunakan javascript engine v8 buatan Google dan juga dibangun dengan bahasa pemrograman Rust. Pembuatnya adalah orang yang sama yang membuat Nodejs. Versi stabilnya dirilis pada tanggal 13 Mei 2020. Pada kesempatan kali sesuai dengan judul artikel yaitu tentang file sistem di Deno, kita akan mengulik sedikit tentang file system di Deno seperti membaca dan menulis file, membuat dan menghapus folder, menyalin file/folder dll." />
+<meta property="og:description" content="Deno adalah secure runtime untuk Javascript dan Typescript menggunakan javascript engine v8 buatan Google dan juga dibangun dengan bahasa pemrograman Rust. Pembuatnya adalah orang yang sama yang membuat Nodejs. Versi stabilnya dirilis pada tanggal 13 Mei 2020. Pada kesempatan kali sesuai dengan judul artikel yaitu tentang file sistem di Deno, kita akan mengulik sedikit tentang file system di Deno seperti membaca dan menulis file, membuat dan menghapus folder, menyalin file/folder dll." />
+<link rel="canonical" href="https://susilolab.github.io/deno/2021/10/24/deno-filesystem.html" />
+<meta property="og:url" content="https://susilolab.github.io/deno/2021/10/24/deno-filesystem.html" />
+<meta property="og:site_name" content="susilolab" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-10-24T07:00:00+07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Deno File System" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","description":"Deno adalah secure runtime untuk Javascript dan Typescript menggunakan javascript engine v8 buatan Google dan juga dibangun dengan bahasa pemrograman Rust. Pembuatnya adalah orang yang sama yang membuat Nodejs. Versi stabilnya dirilis pada tanggal 13 Mei 2020. Pada kesempatan kali sesuai dengan judul artikel yaitu tentang file sistem di Deno, kita akan mengulik sedikit tentang file system di Deno seperti membaca dan menulis file, membuat dan menghapus folder, menyalin file/folder dll.","mainEntityOfPage":{"@type":"WebPage","@id":"https://susilolab.github.io/deno/2021/10/24/deno-filesystem.html"},"headline":"Deno File System","dateModified":"2021-10-24T07:00:00+07:00","datePublished":"2021-10-24T07:00:00+07:00","url":"https://susilolab.github.io/deno/2021/10/24/deno-filesystem.html","author":{"@type":"Person","name":"Agus Susilo"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://susilolab.github.io/feed.xml" title="susilolab" /><script>
+if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1")) {
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-173956394-1', 'auto');
+  ga('send', 'pageview');
+}
+</script>
+  
+<!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Deno File System | susilolab</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="Deno File System" />
+<meta name="author" content="Agus Susilo" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Deno adalah secure runtime untuk Javascript dan Typescript menggunakan javascript engine v8 buatan Google dan juga dibangun dengan bahasa pemrograman Rust. Pembuatnya adalah orang yang sama yang membuat Nodejs. Versi stabilnya dirilis pada tanggal 13 Mei 2020. Pada kesempatan kali sesuai dengan judul artikel yaitu tentang file sistem di Deno, kita akan mengulik sedikit tentang file system di Deno seperti membaca dan menulis file, membuat dan menghapus folder, menyalin file/folder dll." />
+<meta property="og:description" content="Deno adalah secure runtime untuk Javascript dan Typescript menggunakan javascript engine v8 buatan Google dan juga dibangun dengan bahasa pemrograman Rust. Pembuatnya adalah orang yang sama yang membuat Nodejs. Versi stabilnya dirilis pada tanggal 13 Mei 2020. Pada kesempatan kali sesuai dengan judul artikel yaitu tentang file sistem di Deno, kita akan mengulik sedikit tentang file system di Deno seperti membaca dan menulis file, membuat dan menghapus folder, menyalin file/folder dll." />
+<link rel="canonical" href="https://susilolab.github.io/deno/2021/10/24/deno-filesystem.html" />
+<meta property="og:url" content="https://susilolab.github.io/deno/2021/10/24/deno-filesystem.html" />
+<meta property="og:site_name" content="susilolab" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-10-24T07:00:00+07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Deno File System" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","description":"Deno adalah secure runtime untuk Javascript dan Typescript menggunakan javascript engine v8 buatan Google dan juga dibangun dengan bahasa pemrograman Rust. Pembuatnya adalah orang yang sama yang membuat Nodejs. Versi stabilnya dirilis pada tanggal 13 Mei 2020. Pada kesempatan kali sesuai dengan judul artikel yaitu tentang file sistem di Deno, kita akan mengulik sedikit tentang file system di Deno seperti membaca dan menulis file, membuat dan menghapus folder, menyalin file/folder dll.","mainEntityOfPage":{"@type":"WebPage","@id":"https://susilolab.github.io/deno/2021/10/24/deno-filesystem.html"},"headline":"Deno File System","dateModified":"2021-10-24T07:00:00+07:00","datePublished":"2021-10-24T07:00:00+07:00","url":"https://susilolab.github.io/deno/2021/10/24/deno-filesystem.html","author":{"@type":"Person","name":"Agus Susilo"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  
+  
+
+
+
+
+
+
+
+</head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">susilolab</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a><a class="page-link" href="/categories/">Categories</a><a class="page-link" href="/portfolio/">My Portfolio</a><a class="page-link" href="/rust-book/">Rust Book</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Deno File System</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2021-10-24T07:00:00+07:00" itemprop="datePublished">Oct 24, 2021
+      </time>
+      
+      
+        
+        <a hrf="/tag/ deno "> deno </a>
+      
+        
+        <a hrf="/tag/ typescript "> typescript </a>
+      
+      • categories:  
+      
+      <a href="/categories/#deno">deno</a>
+      
+      
+      </p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>Deno adalah secure runtime untuk Javascript dan Typescript menggunakan javascript engine v8 buatan Google dan juga
+dibangun dengan bahasa pemrograman Rust. Pembuatnya adalah orang yang sama yang membuat Nodejs. 
+Versi stabilnya dirilis pada tanggal 13 Mei 2020.</p>
+
+<p>Pada kesempatan kali sesuai dengan judul artikel yaitu tentang file sistem di Deno, kita akan mengulik sedikit tentang 
+file system di Deno seperti membaca dan menulis file, membuat dan menghapus folder, menyalin file/folder dll.
+<!--more--></p>
+
+<p>Sebelum masuk ke bahasan utama alangkah lebih baiknya jika mengenal cara menjalankan deno dulu, jadi untuk menjalankan typescript dengan 
+deno gunakan command <code class="language-plaintext highlighter-rouge">deno run &lt;nama-script&gt;</code>. Mungkin agak sedikit asing dan berbeda dengan <code class="language-plaintext highlighter-rouge">nodejs</code> yang tidak memerlukan perintah kedua 
+yaitu <code class="language-plaintext highlighter-rouge">run</code>.</p>
+
+<p>Namun bagiku hal itu akan mempermudah dan membedakan dengan command lain mengingat deno menyertakan banyak command dalam satu binary.
+Seperti <code class="language-plaintext highlighter-rouge">deno fmt</code>, <code class="language-plaintext highlighter-rouge">deno doc</code>, <code class="language-plaintext highlighter-rouge">deno lint</code>, <code class="language-plaintext highlighter-rouge">deno info</code> dan lain-lain. Berikut daftar lengkapnya</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>deno run nama-script.ts/nama-script.js</code></pre></figure>
+
+<p>Deno juga mengharuskan kita untuk menyebut permisi apa saja pada saat menjalankan script seperti <code class="language-plaintext highlighter-rouge">--allow-read</code> jika didalam 
+script terdapat pembacaan file, <code class="language-plaintext highlighter-rouge">--allow-write</code> jika terjadi penulisan ke file dll.</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>-A, –allow-all</td>
+      <td>Mengizinkan semua permisi. Ini menonaktifkan permisi</td>
+    </tr>
+    <tr>
+      <td>–allow-env</td>
+      <td>Mengizinkan akses environment</td>
+    </tr>
+    <tr>
+      <td>–allow-hrtime</td>
+      <td>Mengizinkan pengukuran waktu resolusi-tinggi</td>
+    </tr>
+    <tr>
+      <td>–allow-net</td>
+      <td>Mengizinkan akses jaringan</td>
+    </tr>
+    <tr>
+      <td>–allow-plugin</td>
+      <td>Mengizinkan plugin. Catat bahwa <code class="language-plaintext highlighter-rouge">--allow-plugin</code> fitur tidak stabil</td>
+    </tr>
+    <tr>
+      <td>–allow-read</td>
+      <td>Mengizinkan akses pembacaan ke sistem file</td>
+    </tr>
+    <tr>
+      <td>–allow-write</td>
+      <td>Mengizinkan akses ke penulisan sistem file. kamu juga dapat menyebutkan nama file/folder yang diakses</td>
+    </tr>
+    <tr>
+      <td>–allow-run</td>
+      <td>Mengizinkan menjalankan subprocess</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Contoh penggunaan opsi permisi</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>deno run <span class="nt">--allow-read</span> read_file.ts
+<span class="nv">$ </span>deno run <span class="nt">--allow-write</span> write_file.ts</code></pre></figure>
+
+<p class="note-tip"><strong>Catatan:</strong> Deno memerlukan tambahan opsi pada saat menjalankannya sebagai contoh <code class="language-plaintext highlighter-rouge">--allow-read</code> untuk mengijinkan 
+deno untuk membaca file/ menyalin file/folder.</p>
+
+<h3 id="baca-file">Baca File</h3>
+
+<p>Untuk membaca file Deno menyediakan fungsi <code class="language-plaintext highlighter-rouge">readFile</code> pada namespace Deno. Buat file dengan nama <code class="language-plaintext highlighter-rouge">read_file.ts</code> 
+kemudian salin kode berikut ini:</p>
+
+<figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="kd">const</span> <span class="nx">decoder</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">TextDecoder</span><span class="p">(</span><span class="dl">'</span><span class="s1">utf-8</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">data</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">Deno</span><span class="p">.</span><span class="nx">readFile</span><span class="p">(</span><span class="dl">'</span><span class="s1">copy_file.ts</span><span class="dl">'</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">decoder</span><span class="p">.</span><span class="nx">decode</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span></code></pre></figure>
+
+<p>Karena fungsi <code class="language-plaintext highlighter-rouge">Deno.readFile</code> menghasilkan data array byte maka perlu didecode menggunakan klas <code class="language-plaintext highlighter-rouge">TextDecoder</code>.</p>
+
+<p class="note-tip">perlu tambahan opsi <code class="language-plaintext highlighter-rouge">--allow-read</code></p>
+
+<h3 id="menulis-file">Menulis File</h3>
+
+<p>Untuk menulis file kita dapat menggunakan fungsi <code class="language-plaintext highlighter-rouge">Deno.writeFile</code> dimana argumen pertama adalah nama file, kedua data yang bertype
+Uint8Array sehingga harus diencode menggunakan klas <code class="language-plaintext highlighter-rouge">TextEncoder</code> dan argumen terakhir adalah opsi lain seperti mode permisi,
+append yang berguna untuk menambahkan data jika file sudah ada.</p>
+
+<figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="kd">const</span> <span class="nx">encoder</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">TextEncoder</span><span class="p">();</span>
+<span class="kd">const</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">encoder</span><span class="p">.</span><span class="nx">encode</span><span class="p">(</span><span class="dl">'</span><span class="s1">Hello world!</span><span class="dl">'</span><span class="p">);</span>
+<span class="k">await</span> <span class="nx">Deno</span><span class="p">.</span><span class="nx">writeFile</span><span class="p">(</span><span class="dl">'</span><span class="s1">/tmp/hello.txt</span><span class="dl">'</span><span class="p">,</span> <span class="nx">data</span><span class="p">);</span>
+<span class="k">await</span> <span class="nx">Deno</span><span class="p">.</span><span class="nx">writeFile</span><span class="p">(</span><span class="dl">'</span><span class="s1">/tmp/hello.txt</span><span class="dl">'</span><span class="p">,</span> <span class="nx">data</span><span class="p">,</span> <span class="p">{</span> <span class="na">mode</span><span class="p">:</span> <span class="mo">0o777</span> <span class="p">});</span>
+<span class="k">await</span> <span class="nx">Deno</span><span class="p">.</span><span class="nx">writeFile</span><span class="p">(</span><span class="dl">'</span><span class="s1">/tmp/hello.txt</span><span class="dl">'</span><span class="p">,</span> <span class="nx">data</span><span class="p">,</span> <span class="p">{</span> <span class="na">append</span><span class="p">:</span> <span class="kc">true</span> <span class="p">});</span></code></pre></figure>
+
+<p class="note-tip">memerlukan ijin <code class="language-plaintext highlighter-rouge">--allow-write</code>, dan <code class="language-plaintext highlighter-rouge">--allow-read</code> jika opsi <code class="language-plaintext highlighter-rouge">create</code> bernilai false</p>
+
+<h3 id="membuat-folder">Membuat Folder</h3>
+
+<p>Untuk membuat folder kita bisa menggunakan fungsi <code class="language-plaintext highlighter-rouge">Deno.mkdir</code>, argumen yang wajib disediakan adalah nama folder sedangkan
+opsi yang bisa ditambahkan adalah mode permisi dan recursive yang bernilai boolean.</p>
+
+<figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="k">await</span> <span class="nx">Deno</span><span class="p">.</span><span class="nx">mkdir</span><span class="p">(</span><span class="dl">'</span><span class="s1">/tmp/hello</span><span class="dl">'</span><span class="p">);</span>
+<span class="k">await</span> <span class="nx">Deno</span><span class="p">.</span><span class="nx">mkdir</span><span class="p">(</span><span class="dl">'</span><span class="s1">/tmp/hello</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span> <span class="na">recursive</span><span class="p">:</span> <span class="kc">true</span> <span class="p">});</span>
+<span class="k">await</span> <span class="nx">Deno</span><span class="p">.</span><span class="nx">mkdir</span><span class="p">(</span><span class="dl">'</span><span class="s1">/tmp/hello</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span> <span class="na">mode</span><span class="p">:</span> <span class="mo">0o777</span> <span class="p">});</span></code></pre></figure>
+
+<p class="note-tip">memerlukan ijin <code class="language-plaintext highlighter-rouge">--allow-write</code></p>
+
+<h3 id="menghapus-filefolder">Menghapus File/Folder</h3>
+
+<p>Untuk menghapus file/folder kita bisa menggunakan fungsi <code class="language-plaintext highlighter-rouge">Deno.remove</code> dimana kita bisa menambahkan opsi recursive atau tidak pada
+saat menghapus folder.</p>
+
+<figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="k">await</span> <span class="nx">Deno</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="dl">'</span><span class="s1">/tmp/hello.txt</span><span class="dl">'</span><span class="p">);</span>
+<span class="k">await</span> <span class="nx">Deno</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="dl">'</span><span class="s1">/tmp/nama_folder</span><span class="dl">'</span><span class="p">);</span>
+<span class="k">await</span> <span class="nx">Deno</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="dl">'</span><span class="s1">/tmp/nama_folder</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span> <span class="na">recursive</span><span class="p">:</span> <span class="kc">true</span> <span class="p">});</span></code></pre></figure>
+
+<p class="note-tip">memerlukan ijin <code class="language-plaintext highlighter-rouge">--allow-write</code></p>
+
+<h3 id="menyalin-file">Menyalin File</h3>
+
+<p>Untuk menyalin file kita bisa menggunakan fungsi <code class="language-plaintext highlighter-rouge">Deno.copyFile</code> dengan argumen pertama berupa sumber file dan argumen kedua berupa
+tujuan file.</p>
+
+<figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="k">await</span> <span class="nx">Deno</span><span class="p">.</span><span class="nx">copyFile</span><span class="p">(</span><span class="dl">'</span><span class="s1">/tmp/hello.txt</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">/tmp/world.txt</span><span class="dl">'</span><span class="p">);</span></code></pre></figure>
+
+<p class="note-tip">memerlukan ijin <code class="language-plaintext highlighter-rouge">--allow-write</code> dan <code class="language-plaintext highlighter-rouge">--allow-read</code></p>
+
+<h3 id="menyalin-folder">Menyalin Folder</h3>
+
+<p>Untuk menyalin folder namespace Deno tidak menyediakannya untuk itu kita menggunakan fungsi dari standard
+library yaitu <code class="language-plaintext highlighter-rouge">copy</code> dan menambahkan opsi <code class="language-plaintext highlighter-rouge">--unstable</code> pada saat menjalankan karena memang library belum stabil.</p>
+
+<figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="k">import</span> <span class="p">{</span> <span class="nx">copy</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">https://deno.land/std@0.54.0/fs/mod.ts</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="nx">copy</span><span class="p">(</span><span class="dl">"</span><span class="s2">/home/user/big-project</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">/tmp/big-project</span><span class="dl">"</span><span class="p">);</span></code></pre></figure>
+
+<p class="note-tip">memerlukan ijin <code class="language-plaintext highlighter-rouge">--allow-read</code> dan <code class="language-plaintext highlighter-rouge">--allow-write</code> dan juga opsi <code class="language-plaintext highlighter-rouge">--unstable</code></p>
+
+<p>sekian.</p>
+
+  </div><a class="u-url" href="/deno/2021/10/24/deno-filesystem.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper"><div class="footer-col-wrapper">
+      <div class="footer-col footer-col-3"><ul class="social-media-list"><li><a href="https://github.com/susilolab"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">susilolab</span></a></li><li><a href="https://instagram.com/mas.agus"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#instagram"></use></svg> <span class="username">mas.agus</span></a></li><li><a href="https://www.twitter.com/susil0"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">susil0</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>&quot;Sebaik-baik manusia adalah yang paling bermanfaat bagi manusia&quot; (HR. Ahmad, ath-Thabrani, ad-Daruqutni)</p>
+        <p>&copy;2021&nbsp;Agus Susilo</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
