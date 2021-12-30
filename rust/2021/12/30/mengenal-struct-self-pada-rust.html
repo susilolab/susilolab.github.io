@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Mengenal Struct, self dan Self pada Rust | susilolab</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="Mengenal Struct, self dan Self pada Rust" />
+<meta name="author" content="Agus Susilo" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Rust merupakan bahasa pemrograman sistem yang tidak berbasis objek namun penggunaan struct dan trait konsepnya mirip pada bahasa pemgrograman oop(berbasis objek). Rust tidak menggunakan klas untuk mengatur struktur kode, melainkan menggunakan struk untuk mewakili object/klas dan trait untuk mewakili behaviornya atau dalam bahasa lain disebut dengan interface." />
+<meta property="og:description" content="Rust merupakan bahasa pemrograman sistem yang tidak berbasis objek namun penggunaan struct dan trait konsepnya mirip pada bahasa pemgrograman oop(berbasis objek). Rust tidak menggunakan klas untuk mengatur struktur kode, melainkan menggunakan struk untuk mewakili object/klas dan trait untuk mewakili behaviornya atau dalam bahasa lain disebut dengan interface." />
+<link rel="canonical" href="https://susilolab.github.io/rust/2021/12/30/mengenal-struct-self-pada-rust.html" />
+<meta property="og:url" content="https://susilolab.github.io/rust/2021/12/30/mengenal-struct-self-pada-rust.html" />
+<meta property="og:site_name" content="susilolab" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-12-30T05:00:00+07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Mengenal Struct, self dan Self pada Rust" />
+<script type="application/ld+json">
+{"description":"Rust merupakan bahasa pemrograman sistem yang tidak berbasis objek namun penggunaan struct dan trait konsepnya mirip pada bahasa pemgrograman oop(berbasis objek). Rust tidak menggunakan klas untuk mengatur struktur kode, melainkan menggunakan struk untuk mewakili object/klas dan trait untuk mewakili behaviornya atau dalam bahasa lain disebut dengan interface.","mainEntityOfPage":{"@type":"WebPage","@id":"https://susilolab.github.io/rust/2021/12/30/mengenal-struct-self-pada-rust.html"},"headline":"Mengenal Struct, self dan Self pada Rust","dateModified":"2021-12-30T05:00:00+07:00","datePublished":"2021-12-30T05:00:00+07:00","author":{"@type":"Person","name":"Agus Susilo"},"@type":"BlogPosting","url":"https://susilolab.github.io/rust/2021/12/30/mengenal-struct-self-pada-rust.html","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://susilolab.github.io/feed.xml" title="susilolab" /><script>
+if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1")) {
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-173956394-1', 'auto');
+  ga('send', 'pageview');
+}
+</script>
+  
+<!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Mengenal Struct, self dan Self pada Rust | susilolab</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="Mengenal Struct, self dan Self pada Rust" />
+<meta name="author" content="Agus Susilo" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Rust merupakan bahasa pemrograman sistem yang tidak berbasis objek namun penggunaan struct dan trait konsepnya mirip pada bahasa pemgrograman oop(berbasis objek). Rust tidak menggunakan klas untuk mengatur struktur kode, melainkan menggunakan struk untuk mewakili object/klas dan trait untuk mewakili behaviornya atau dalam bahasa lain disebut dengan interface." />
+<meta property="og:description" content="Rust merupakan bahasa pemrograman sistem yang tidak berbasis objek namun penggunaan struct dan trait konsepnya mirip pada bahasa pemgrograman oop(berbasis objek). Rust tidak menggunakan klas untuk mengatur struktur kode, melainkan menggunakan struk untuk mewakili object/klas dan trait untuk mewakili behaviornya atau dalam bahasa lain disebut dengan interface." />
+<link rel="canonical" href="https://susilolab.github.io/rust/2021/12/30/mengenal-struct-self-pada-rust.html" />
+<meta property="og:url" content="https://susilolab.github.io/rust/2021/12/30/mengenal-struct-self-pada-rust.html" />
+<meta property="og:site_name" content="susilolab" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-12-30T05:00:00+07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Mengenal Struct, self dan Self pada Rust" />
+<script type="application/ld+json">
+{"description":"Rust merupakan bahasa pemrograman sistem yang tidak berbasis objek namun penggunaan struct dan trait konsepnya mirip pada bahasa pemgrograman oop(berbasis objek). Rust tidak menggunakan klas untuk mengatur struktur kode, melainkan menggunakan struk untuk mewakili object/klas dan trait untuk mewakili behaviornya atau dalam bahasa lain disebut dengan interface.","mainEntityOfPage":{"@type":"WebPage","@id":"https://susilolab.github.io/rust/2021/12/30/mengenal-struct-self-pada-rust.html"},"headline":"Mengenal Struct, self dan Self pada Rust","dateModified":"2021-12-30T05:00:00+07:00","datePublished":"2021-12-30T05:00:00+07:00","author":{"@type":"Person","name":"Agus Susilo"},"@type":"BlogPosting","url":"https://susilolab.github.io/rust/2021/12/30/mengenal-struct-self-pada-rust.html","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  
+  
+
+
+
+
+
+
+
+</head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">susilolab</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a><a class="page-link" href="/categories/">Categories</a><a class="page-link" href="/portfolio/">My Portfolio</a><a class="page-link" href="/rust-book/">Rust Book</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Mengenal Struct, self dan Self pada Rust</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2021-12-30T05:00:00+07:00" itemprop="datePublished">Dec 30, 2021
+      </time>
+      
+      
+      • categories:  
+      
+      <a href="/categories/#rust">rust</a>
+      
+      
+      </p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>Rust merupakan bahasa pemrograman sistem yang tidak berbasis objek namun penggunaan <code class="language-plaintext highlighter-rouge">struct</code> dan <code class="language-plaintext highlighter-rouge">trait</code> konsepnya mirip<br />
+pada bahasa pemgrograman oop(berbasis objek). 
+Rust tidak menggunakan klas untuk mengatur struktur kode, melainkan menggunakan struk untuk mewakili object/klas 
+dan <code class="language-plaintext highlighter-rouge">trait</code> untuk mewakili behaviornya atau dalam bahasa lain disebut dengan <code class="language-plaintext highlighter-rouge">interface</code>.
+<!--more--></p>
+
+<p>Kali ini saya ingin mengenalkan sedikit tentang <code class="language-plaintext highlighter-rouge">struct</code> untuk mengelola struktur kode dan sedikit tentang <code class="language-plaintext highlighter-rouge">trait</code> dan bagaimana 
+penggunaannya. Karena pembahasan struct dan trait bisa sangat panjang maka disini saya hanya menjelaskan secara umum belum sampai mendalam.</p>
+
+<p>Kemudian kita juga akan mengenal apa itu keyword <code class="language-plaintext highlighter-rouge">self</code> di Rust. Karena jika kamu sudah menggunakan struct dan ingin mengimplementasi 
+method pada struk Rust tentu akan bertemu dengan keyword <code class="language-plaintext highlighter-rouge">self</code>. Dan juga Rust memiliki keyword <code class="language-plaintext highlighter-rouge">Self</code> (dengan huruf S besar) yang akan 
+menunjuk ke nama struct yang sedang di <code class="language-plaintext highlighter-rouge">impl</code>. 
+<code class="language-plaintext highlighter-rouge">self</code> (dengan huruf s kecil) pada rust biasanya digunakan pada saat deklarasi method untuk mengakses anggota struct, ya method kalau 
+dalam pemrograman berbasis objek adalah fungsi yang menempel pada objek. <code class="language-plaintext highlighter-rouge">self</code> mirip self pada python atau this pada Javascript.
+Penggunaan <code class="language-plaintext highlighter-rouge">self</code> pada Rust biasanya pada tipe data <code class="language-plaintext highlighter-rouge">struct</code>/<code class="language-plaintext highlighter-rouge">enum</code>.</p>
+
+<h2 id="mengenal-struct">Mengenal Struct</h2>
+
+<p>Struct atau structure adalah tipe data custom yang membolehkanmu untuk memberinya nama dan mempaketkan nilai yang saling berhubungan 
+dan membuatnya memiliki arti. Jika kamu terbiasa dengan bahasa pemrograman OOP <code class="language-plaintext highlighter-rouge">struct</code> itu mirip <code class="language-plaintext highlighter-rouge">class</code></p>
+
+<h4 id="mendefinisikan-dan-instantiating-struct">Mendefinisikan dan instantiating struct</h4>
+
+<p>Karena arti <code class="language-plaintext highlighter-rouge">instantiating</code> bahasa Indonesia menurut saya agak aneh maka saya gunakan bahasa inggris saja. Karena seharusnya 
+instantiating kalau dalam OOP berarti <code class="language-plaintext highlighter-rouge">new NamaKlass</code>. Ok kita balik lagi ke struk, pertama kita akan belajar cara mendefinisikan struct.
+Untuk mendefinisikan struct dapat digunakan keyword <code class="language-plaintext highlighter-rouge">struct</code> diikuti nama struk kemudian didalam kurung kurawal kita definisikan nama 
+dan tipe data anggota struk atau biasa dikenal dengan istilah <code class="language-plaintext highlighter-rouge">fields</code>.</p>
+
+<p>Untuk lebih memahami struk mari kita lihat contoh berikut ini:</p>
+
+<figure class="highlight"><pre><code class="language-rust" data-lang="rust"><span class="k">struct</span> <span class="n">User</span> <span class="p">{</span>
+    <span class="n">id</span><span class="p">:</span> <span class="nb">i32</span><span class="p">,</span>
+    <span class="n">username</span><span class="p">:</span> <span class="nb">String</span><span class="p">,</span>
+    <span class="n">email</span><span class="p">:</span> <span class="nb">String</span><span class="p">,</span>
+    <span class="n">active</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>Jadi disini kita membuat struk dengan nama <code class="language-plaintext highlighter-rouge">User</code> dan memiliki 4 fields yaitu <code class="language-plaintext highlighter-rouge">id, username, email dan active</code>. Masing-masing memiliki tipe data.</p>
+
+<p>Untuk menggunakannya kita perlu membuat instance dari struk dengan memberikan nilai-nilai pada field yang ada pada struk. Untuk contohnya bisa dilihat pada kode berikut ini:</p>
+
+<figure class="highlight"><pre><code class="language-rust" data-lang="rust"><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="p">{</span>
+        <span class="n">id</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> 
+        <span class="n">username</span><span class="p">:</span> <span class="nn">String</span><span class="p">::</span><span class="nf">from</span><span class="p">(</span><span class="s">"agus"</span><span class="p">),</span> 
+        <span class="n">email</span><span class="p">:</span> <span class="nn">String</span><span class="p">::</span><span class="nf">from</span><span class="p">(</span><span class="s">"agus@gmail.com"</span><span class="p">),</span>
+        <span class="n">active</span><span class="p">:</span> <span class="k">true</span><span class="p">,</span>
+    <span class="p">};</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>Untuk mengakses field pada struk bisa menggunakan notasi dot <code class="language-plaintext highlighter-rouge">(.)</code>. Jika kita hanya ingin mendapatkan email saja maka kita bisa 
+gunakan <code class="language-plaintext highlighter-rouge">user.email</code> dimanapun kita ingin menginginkan nilai ini. Jika instance struct mutable(dapat diubah) kita bisa merubah nilai dari field tersebut menggunakan notasi dot.
+Kode berikut menunjukkan bagaimana cara mengganti nilai pada field <code class="language-plaintext highlighter-rouge">email</code> dari instansi <code class="language-plaintext highlighter-rouge">User</code>.</p>
+
+<figure class="highlight"><pre><code class="language-rust" data-lang="rust"><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="k">mut</span> <span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="p">{</span>
+        <span class="n">id</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> 
+        <span class="n">username</span><span class="p">:</span> <span class="nn">String</span><span class="p">::</span><span class="nf">from</span><span class="p">(</span><span class="s">"agus"</span><span class="p">),</span> 
+        <span class="n">email</span><span class="p">:</span> <span class="nn">String</span><span class="p">::</span><span class="nf">from</span><span class="p">(</span><span class="s">"agus@gmail.com"</span><span class="p">),</span>
+        <span class="n">active</span><span class="p">:</span> <span class="k">true</span><span class="p">,</span>
+    <span class="p">};</span>
+    <span class="n">user</span><span class="py">.email</span> <span class="o">=</span> <span class="s">"hello@gmail.com"</span><span class="p">;</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>Perlu dicatat bahwa seluruh instance harus mutable; Rust tidak membolehkan kita untuk menandai hanya field tertentu saja yang dapat diubah.</p>
+
+<h3 id="mengenal-impl-dan-self">Mengenal <code class="language-plaintext highlighter-rouge">impl</code> dan <code class="language-plaintext highlighter-rouge">self</code></h3>
+
+<p>Untuk mendefinisikan method pada struk kita bisa menggunakan keyword <code class="language-plaintext highlighter-rouge">impl</code> diikuti dengan nama struk yang ingin di implementasi method.
+Contoh berikut ini akan mengimpl method <code class="language-plaintext highlighter-rouge">print</code> pada struk <code class="language-plaintext highlighter-rouge">User</code>.</p>
+
+<figure class="highlight"><pre><code class="language-rust" data-lang="rust"><span class="k">impl</span> <span class="n">Struct</span> <span class="p">{</span>
+    <span class="k">fn</span> <span class="nf">print</span><span class="p">(</span><span class="o">&amp;</span><span class="k">self</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nd">println!</span><span class="p">(</span><span class="s">"ID: {}, Username: {}, Email: {}, Active: {}"</span><span class="p">,</span>
+            <span class="k">self</span><span class="py">.id</span><span class="p">,</span> <span class="k">self</span><span class="py">.username</span><span class="p">,</span> <span class="k">self</span><span class="py">.email</span><span class="p">,</span> <span class="k">self</span><span class="py">.active</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">fn</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="p">{</span>
+        <span class="n">id</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> 
+        <span class="n">username</span><span class="p">:</span> <span class="nn">String</span><span class="p">::</span><span class="nf">from</span><span class="p">(</span><span class="s">"agus"</span><span class="p">),</span> 
+        <span class="n">email</span><span class="p">:</span> <span class="nn">String</span><span class="p">::</span><span class="nf">from</span><span class="p">(</span><span class="s">"agus@gmail.com"</span><span class="p">),</span>
+        <span class="n">active</span><span class="p">:</span> <span class="k">true</span><span class="p">,</span>
+    <span class="p">};</span>
+    <span class="n">user</span><span class="nf">.print</span><span class="p">();</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>Jika kode diatas dijalankan maka memberikan output seperti ini:</p>
+
+<p>Disini <code class="language-plaintext highlighter-rouge">self</code> mirip <code class="language-plaintext highlighter-rouge">this</code> pada javascript yang akan bisa mengakses field pada struct karena <code class="language-plaintext highlighter-rouge">impl User</code>. Kalau kode diatas ditulis dengan javascript akan seperti ini</p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">class</span> <span class="nx">User</span> <span class="p">{</span>
+  <span class="nx">id</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="nx">username</span><span class="p">;</span>
+  <span class="nl">email</span><span class="p">:</span>
+  <span class="nx">active</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+
+  <span class="nx">print</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`ID: </span><span class="p">${</span><span class="k">this</span><span class="p">.</span><span class="nx">id</span><span class="p">}</span><span class="s2">, Username: </span><span class="p">${</span><span class="k">this</span><span class="p">.</span><span class="nx">username</span><span class="p">}</span><span class="s2">, 
+      Email: </span><span class="p">${</span><span class="k">this</span><span class="p">.</span><span class="nx">email</span><span class="p">}</span><span class="s2">, Active: </span><span class="p">${</span><span class="k">this</span><span class="p">.</span><span class="nx">active</span><span class="p">}</span><span class="s2">`</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>Jika kita mendefinisikan method pada struct dengan <code class="language-plaintext highlighter-rouge">impl</code> namun pada parameter fungsi tidak ada <code class="language-plaintext highlighter-rouge">self/&amp;self/&amp;mut self</code> maka fungsi tersebut akan menjadi static. 
+Kita tidak perlu menginstansi struct sebelum menggunakan fungsi tersebut. Biasanya digunakan untuk membuat fungsi instatnsi struck/ model builder begitu. 
+Kalau dalam javascript mirip fungsi static pada class, untuk lebih jelasnya bisa diliat pada kode berikut:</p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">class</span> <span class="nx">User</span> <span class="p">{</span>
+  <span class="kd">static</span> <span class="nx">add</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">x</span> <span class="o">+</span> <span class="nx">y</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`</span><span class="p">${</span><span class="nx">x</span><span class="p">}</span><span class="s2"> + </span><span class="p">${</span><span class="nx">y</span><span class="p">}</span><span class="s2"> = </span><span class="p">${</span><span class="nx">result</span><span class="p">}</span><span class="s2">`</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nx">User</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span></code></pre></figure>
+
+<p>Bisa dilihat pada kode di atas bahwa untuk mengakses fungsi <code class="language-plaintext highlighter-rouge">add</code> kita langsung memanggil nama klass dan nama fungsinya tanpa harus instansi terlebih dulu. 
+Nah pada Rust kurang lebih mirip dengan javascript dengan perbedaan bahwa kita tidak bisa mengakses field struck.</p>
+
+<figure class="highlight"><pre><code class="language-rust" data-lang="rust"><span class="k">impl</span> <span class="n">User</span> <span class="p">{</span>
+    <span class="k">fn</span> <span class="nf">new</span><span class="p">(</span><span class="n">id</span><span class="p">:</span> <span class="nb">i32</span><span class="p">,</span> <span class="n">username</span><span class="p">:</span> <span class="nb">String</span><span class="p">,</span> <span class="n">email</span><span class="p">:</span> <span class="nb">String</span><span class="p">,</span> <span class="n">active</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="n">User</span> <span class="p">{</span>
+        <span class="n">User</span> <span class="p">{</span>
+            <span class="n">id</span><span class="p">,</span> 
+            <span class="n">username</span><span class="p">,</span> 
+            <span class="n">email</span><span class="p">,</span>
+            <span class="n">active</span><span class="p">,</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>Untuk memanggil fungsi static maka kita bisa gunakan tanda <code class="language-plaintext highlighter-rouge">::</code> setelah nama struck. contoh:</p>
+
+<figure class="highlight"><pre><code class="language-rust" data-lang="rust"><span class="k">let</span> <span class="n">user</span> <span class="o">=</span> <span class="nn">User</span><span class="p">::</span><span class="nf">new</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s">"agus"</span><span class="nf">.to_owned</span><span class="p">(),</span> <span class="s">"agus@gmail.com"</span><span class="nf">.to_owned</span><span class="p">(),</span> <span class="k">true</span><span class="p">);</span></code></pre></figure>
+
+<p>Pada definisi fungsi <code class="language-plaintext highlighter-rouge">new</code> di atas terdapat tipe kembalian berupa struct <code class="language-plaintext highlighter-rouge">User</code>, agar lebih idiom ke Rust maka kita bisa 
+menggantinya dengan <code class="language-plaintext highlighter-rouge">Self</code>, <code class="language-plaintext highlighter-rouge">Self</code> akan mengembalikan struct sesuai dengan yang di <code class="language-plaintext highlighter-rouge">impl</code>. seperti pada contoh code di atas 
+jika <code class="language-plaintext highlighter-rouge">Self</code> didalam <code class="language-plaintext highlighter-rouge">impl User</code> maka akan mengembalikan struct <code class="language-plaintext highlighter-rouge">User</code>. Keuntungan menggunakan <code class="language-plaintext highlighter-rouge">Self</code> dari pada nama struct adalah 
+jika struct berubah kita tidak perlu merubah tipe kembaliannya.</p>
+
+<p>Contoh kode yang sudah diganti dengan <code class="language-plaintext highlighter-rouge">Self</code>:</p>
+
+<figure class="highlight"><pre><code class="language-rust" data-lang="rust"><span class="k">impl</span> <span class="n">User</span> <span class="p">{</span>
+    <span class="k">fn</span> <span class="nf">new</span><span class="p">(</span><span class="n">id</span><span class="p">:</span> <span class="nb">i32</span><span class="p">,</span> <span class="n">username</span><span class="p">:</span> <span class="nb">String</span><span class="p">,</span> <span class="n">email</span><span class="p">:</span> <span class="nb">String</span><span class="p">,</span> <span class="n">active</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="n">Self</span> <span class="p">{</span>
+        <span class="n">Self</span> <span class="p">{</span>
+            <span class="n">id</span><span class="p">,</span> 
+            <span class="n">username</span><span class="p">,</span> 
+            <span class="n">email</span><span class="p">,</span>
+            <span class="n">active</span><span class="p">,</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></figure>
+
+<h3 id="mengenal-trait">Mengenal Trait</h3>
+
+<p>Trait adalah kumpulan definisi fungsi yang belum diimplementasi, trait dapat berisi 1 atau lebih definisi fungsi. 
+Namun trait juga dapat berisi implementasi default dari suatu fungsi yang akan dipakai jika struct/enum/type 
+tidak mengimplementasi definisi fungsi pada trait.</p>
+
+<p>Contoh definisi trait pada trait <code class="language-plaintext highlighter-rouge">std::io::Read</code></p>
+
+<figure class="highlight"><pre><code class="language-rust" data-lang="rust"><span class="k">pub</span> <span class="k">trait</span> <span class="n">Read</span> <span class="p">{</span>
+    <span class="k">fn</span> <span class="nf">read</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span> <span class="k">self</span><span class="p">,</span> <span class="n">buf</span><span class="p">:</span> <span class="o">&amp;</span><span class="k">mut</span> <span class="p">[</span><span class="nb">u8</span><span class="p">])</span> <span class="k">-&gt;</span> <span class="n">Result</span><span class="o">&lt;</span><span class="nb">usize</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>Pada kode diatas saya mengambil contoh satu fungsi <code class="language-plaintext highlighter-rouge">read</code> pada trait <code class="language-plaintext highlighter-rouge">Read</code> dimana parameternya berupa <code class="language-plaintext highlighter-rouge">&amp;mut [u8]</code> yang artinya kita harus menyediakan 
+variabel mutable dengan tipe slice u8. Semua tipe yang mengimplementasi trait <code class="language-plaintext highlighter-rouge">Read</code> kita dapat mengakses fungsi <code class="language-plaintext highlighter-rouge">read</code> tersebut. Kita ambil contoh dari struct File pada module 
+<code class="language-plaintext highlighter-rouge">std::fs::File</code>.</p>
+
+<figure class="highlight"><pre><code class="language-rust" data-lang="rust"><span class="k">use</span> <span class="nn">std</span><span class="p">::</span><span class="nn">io</span><span class="p">::</span><span class="nn">prelude</span><span class="p">::</span><span class="o">*</span><span class="p">;</span>
+<span class="k">use</span> <span class="nn">std</span><span class="p">::</span><span class="n">io</span><span class="p">;</span>
+<span class="k">use</span> <span class="nn">std</span><span class="p">::</span><span class="nn">fs</span><span class="p">::</span><span class="n">File</span><span class="p">;</span>
+
+<span class="k">fn</span> <span class="nf">main</span><span class="p">()</span> <span class="k">-&gt;</span> <span class="nn">io</span><span class="p">::</span><span class="n">Result</span><span class="o">&lt;</span><span class="p">()</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="k">mut</span> <span class="n">f</span> <span class="o">=</span> <span class="nn">File</span><span class="p">::</span><span class="nf">open</span><span class="p">(</span><span class="s">"foo.txt"</span><span class="p">)</span><span class="o">?</span><span class="p">;</span>
+    <span class="k">let</span> <span class="k">mut</span> <span class="n">buffer</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">;</span> <span class="mi">10</span><span class="p">];</span>
+
+    <span class="k">let</span> <span class="n">n</span> <span class="o">=</span> <span class="n">f</span><span class="nf">.read</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span> <span class="n">buffer</span><span class="p">)</span><span class="o">?</span><span class="p">;</span>
+    <span class="nd">println!</span><span class="p">(</span><span class="s">"Hasil: {:?}"</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">buffer</span><span class="p">[</span><span class="o">..</span><span class="n">n</span><span class="p">]);</span>
+
+    <span class="nf">Ok</span><span class="p">(())</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>Karena struct <code class="language-plaintext highlighter-rouge">File</code> mengimplementasi trait <code class="language-plaintext highlighter-rouge">Read</code> maka kita bisa menggunakan fungsi <code class="language-plaintext highlighter-rouge">read</code> untuk membaca file. Pada kode di atas pertama 
+kita membuka file pada kode <code class="language-plaintext highlighter-rouge">let mut f</code>, kemudian kita membuat buffer file <code class="language-plaintext highlighter-rouge">let mut buffer</code> dengan nilai 0 sebanyak 10. Lalu pada <code class="language-plaintext highlighter-rouge">let n</code> kita baca file <code class="language-plaintext highlighter-rouge">f.read(&amp;mut buffer)?</code> dan taruh pada 
+variabel <code class="language-plaintext highlighter-rouge">buffer</code>.</p>
+
+<p>Kemudian kita mencetak datanya sesuai dengan hasil pembacaan dari varibel <code class="language-plaintext highlighter-rouge">n</code> berapa banyak yang sudah dibaca <code class="language-plaintext highlighter-rouge">&amp;buffer[..n]</code>.</p>
+
+<p>Contoh lain penggunaan trait</p>
+
+<figure class="highlight"><pre><code class="language-rust" data-lang="rust"><span class="k">struct</span> <span class="n">News</span><span class="p">;</span>
+<span class="k">struct</span> <span class="n">Blog</span><span class="p">;</span>
+
+<span class="k">trait</span> <span class="n">Summary</span> <span class="p">{</span>
+    <span class="k">fn</span> <span class="nf">read_more</span><span class="p">(</span><span class="o">&amp;</span><span class="k">self</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="nb">String</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">impl</span> <span class="n">Summary</span> <span class="k">for</span> <span class="n">News</span> <span class="p">{</span>
+    <span class="k">fn</span> <span class="nf">read_more</span><span class="p">(</span><span class="o">&amp;</span><span class="k">self</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="nb">String</span> <span class="p">{</span>
+        <span class="s">"Baca berita lagi.."</span><span class="nf">.to_owned</span><span class="p">()</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">impl</span> <span class="n">Summary</span> <span class="k">for</span> <span class="n">Blog</span> <span class="p">{</span>
+    <span class="k">fn</span> <span class="nf">read_more</span><span class="p">(</span><span class="o">&amp;</span><span class="k">self</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="nb">String</span> <span class="p">{</span>
+        <span class="s">"Baca blog lagi.."</span><span class="nf">.to_owned</span><span class="p">()</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">fn</span> <span class="nf">print_summary</span><span class="p">(</span><span class="n">sum</span><span class="p">:</span> <span class="k">impl</span> <span class="n">Summary</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="p">{</span>
+    <span class="nd">println!</span><span class="p">(</span><span class="s">"{}"</span><span class="p">,</span> <span class="n">sum</span><span class="nf">.read_more</span><span class="p">());</span>
+<span class="p">}</span>
+
+<span class="k">fn</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="n">news</span> <span class="o">=</span> <span class="n">News</span><span class="p">;</span>
+    <span class="k">let</span> <span class="n">blog</span> <span class="o">=</span> <span class="n">Blog</span><span class="p">;</span>
+    <span class="nf">print_summary</span><span class="p">(</span><span class="n">news</span><span class="p">);</span>
+    <span class="nf">print_summary</span><span class="p">(</span><span class="n">blog</span><span class="p">);</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>Dapat dilihat pada kode di atas bahwa kita mendefinisikan 2 buah struk <code class="language-plaintext highlighter-rouge">News</code> dan <code class="language-plaintext highlighter-rouge">Blog</code>, dan juga trait <code class="language-plaintext highlighter-rouge">Summary</code>. Lalu mengimplementasi 
+trait <code class="language-plaintext highlighter-rouge">Summary</code> untuk struk <code class="language-plaintext highlighter-rouge">News</code> dan <code class="language-plaintext highlighter-rouge">Blog</code> dengan default implementasi pada fungsi <code class="language-plaintext highlighter-rouge">read_more</code>. Kita juga membuat fungsi <code class="language-plaintext highlighter-rouge">print_summary</code> 
+dengan parameter <code class="language-plaintext highlighter-rouge">sum</code> dengan aturan bahwa <code class="language-plaintext highlighter-rouge">sum</code> harus implement dari trait <code class="language-plaintext highlighter-rouge">Summary</code>. Selama <code class="language-plaintext highlighter-rouge">sum</code> mengimplementasi dari trait <code class="language-plaintext highlighter-rouge">Summary</code> maka 
+kode akan berjalan.</p>
+
+<p>Untuk lebih memahami trait kita bisa mengubah kode di atas ke dalam bahasa PHP. kurang lebih kodenya seperti ini:</p>
+
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="kd">interface</span> <span class="nc">Summary</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">read_more</span><span class="p">():</span> <span class="kt">string</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nc">News</span> <span class="kd">implements</span> <span class="nc">Summary</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">read_more</span><span class="p">():</span> <span class="kt">string</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="s1">'Baca berita lagi..'</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nc">Blog</span> <span class="kd">implements</span> <span class="nc">Summary</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">read_more</span><span class="p">():</span> <span class="kt">string</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="s1">'Baca blog lagi..'</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">function</span> <span class="n">print_summary</span><span class="p">(</span><span class="kt">Summary</span> <span class="nv">$sum</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="nv">$sum</span><span class="o">-&gt;</span><span class="nf">read_more</span><span class="p">(),</span> <span class="kc">PHP_EOL</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nv">$news</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">News</span><span class="p">();</span>
+<span class="nv">$blog</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Blog</span><span class="p">();</span>
+<span class="nf">print_summary</span><span class="p">(</span><span class="nv">$news</span><span class="p">);</span>
+<span class="nf">print_summary</span><span class="p">(</span><span class="nv">$blog</span><span class="p">);</span></code></pre></figure>
+
+<p>Karena di PHP tidak ada struk maka disini saya pake class. Semoga bermanfaat.</p>
+
+  </div><a class="u-url" href="/rust/2021/12/30/mengenal-struct-self-pada-rust.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper"><div class="footer-col-wrapper">
+      <div class="footer-col footer-col-3"><ul class="social-media-list"><li><a href="https://github.com/susilolab"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">susilolab</span></a></li><li><a href="https://instagram.com/mas.agus"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#instagram"></use></svg> <span class="username">mas.agus</span></a></li><li><a href="https://www.twitter.com/susil0"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">susil0</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>&quot;Sebaik-baik manusia adalah yang paling bermanfaat bagi manusia&quot; (HR. Ahmad, ath-Thabrani, ad-Daruqutni)</p>
+        <p>&copy;2021&nbsp;Agus Susilo</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
