@@ -17,7 +17,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="susilolab" />
 <script type="application/ld+json">
-{"description":"“Sebaik-baik manusia adalah yang paling bermanfaat bagi manusia” (HR. Ahmad, ath-Thabrani, ad-Daruqutni)","headline":"susilolab","author":{"@type":"Person","name":"Agus Susilo"},"@type":"WebSite","name":"susilolab","url":"https://susilolab.github.io/","@context":"https://schema.org"}</script>
+{"url":"https://susilolab.github.io/","author":{"@type":"Person","name":"Agus Susilo"},"@type":"WebSite","description":"“Sebaik-baik manusia adalah yang paling bermanfaat bagi manusia” (HR. Ahmad, ath-Thabrani, ad-Daruqutni)","headline":"susilolab","name":"susilolab","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://susilolab.github.io/feed.xml" title="susilolab" /><script>
 if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1")) {
@@ -46,7 +46,7 @@ if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNo
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="susilolab" />
 <script type="application/ld+json">
-{"description":"“Sebaik-baik manusia adalah yang paling bermanfaat bagi manusia” (HR. Ahmad, ath-Thabrani, ad-Daruqutni)","headline":"susilolab","author":{"@type":"Person","name":"Agus Susilo"},"@type":"WebSite","name":"susilolab","url":"https://susilolab.github.io/","@context":"https://schema.org"}</script>
+{"url":"https://susilolab.github.io/","author":{"@type":"Person","name":"Agus Susilo"},"@type":"WebSite","description":"“Sebaik-baik manusia adalah yang paling bermanfaat bagi manusia” (HR. Ahmad, ath-Thabrani, ad-Daruqutni)","headline":"susilolab","name":"susilolab","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -78,7 +78,22 @@ if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNo
 <main class="page-content" aria-label="Content">
       <div class="wrapper">
         <div class="home"><h2 class="post-list-heading">Posts</h2>
-    <ul class="post-list"><li><span class="post-meta">Jan 24, 2022</span>
+    <ul class="post-list"><li><span class="post-meta">Feb 15, 2022</span>
+        <h3>
+          <a class="post-link" href="/php/2022/02/15/mendapatkan-raw-query-dari-active-record-yii2.html">
+            Mendapatkan Raw Sql dari ActiveRecord Yii2
+          </a>
+        </h3>
+        <p>Tips singkat cara mendapatkan <code class="language-plaintext highlighter-rouge">raw sql</code> dari ActiveRecord pada Yii2. Cukup hilang fungsi chain <code class="language-plaintext highlighter-rouge">one</code>/<code class="language-plaintext highlighter-rouge">all</code>/<code class="language-plaintext highlighter-rouge">scalar</code>/dll 
+dan tambahkan <code class="language-plaintext highlighter-rouge">createCommand()-&gt;getRawSql()</code>.</p>
+
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="nv">$user</span> <span class="o">=</span> <span class="nc">User</span><span class="o">::</span><span class="nf">find</span><span class="p">()</span><span class="o">-&gt;</span><span class="nf">where</span><span class="p">([</span><span class="s1">'id'</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">]);</span>
+<span class="k">echo</span> <span class="nv">$user</span><span class="o">-&gt;</span><span class="nf">createCommand</span><span class="p">()</span><span class="o">-&gt;</span><span class="nf">getRawSql</span><span class="p">(),</span> <span class="kc">PHP_EOL</span><span class="p">;</span></code></pre></figure>
+
+
+
+        
+      </li><li><span class="post-meta">Jan 24, 2022</span>
         <h3>
           <a class="post-link" href="/php/2022/01/24/cara-menggunakan-class-class-pada-yii-db-conditions.html">
             Cara menggunakan class-class pada yii\db\conditions
@@ -204,19 +219,6 @@ berarti kita sama, saya juga pernah mengalaminya.</p>
         
           <a href="/elixir/2020/11/14/seting-iex-exs-untuk-mempercepat-debugging-elixir.html" class="read-more">Read more</a>
         
-      </li><li><span class="post-meta">Nov 13, 2020</span>
-        <h3>
-          <a class="post-link" href="/rust/2020/11/13/json-encode-dan-decode-pada-rust.html">
-            JSON encode dan decode pada Rust
-          </a>
-        </h3>
-        <p>Hari ini saya ingin berbagi sedikit ilmu tentang bagaimana encode dan decode json objek di bahasa pemgrograman Rust. Karena saya masih newbie di Rust mohon dikoreksi jika terdapat 
-kesalahan pada artikel ini. Ok, langsung saja pertama-tama kita buat project baru dengan nama <code class="language-plaintext highlighter-rouge">demo-json</code>. Silahkan ketikan perintah berikut untuk membuat project baru</p>
-
-
-        
-          <a href="/rust/2020/11/13/json-encode-dan-decode-pada-rust.html" class="read-more">Read more</a>
-        
       </li></ul>
     
     <div class="pagination">
@@ -243,6 +245,10 @@ kesalahan pada artikel ini. Ok, langsung saja pertama-tama kita buat project bar
         
           
             <a href="/page5/">5</a>
+          
+        
+          
+            <a href="/page6/">6</a>
           
         
                
