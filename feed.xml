@@ -1,4 +1,34 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="https://susilolab.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://susilolab.github.io/" rel="alternate" type="text/html" /><updated>2022-08-25T08:53:06+07:00</updated><id>https://susilolab.github.io/feed.xml</id><title type="html">susilolab</title><subtitle>&quot;Sebaik-baik manusia adalah yang paling bermanfaat bagi manusia&quot; (HR. Ahmad, ath-Thabrani, ad-Daruqutni)</subtitle><author><name>Agus Susilo</name></author><entry><title type="html">Menggunakan db selain default pada Yii2 migration</title><link href="https://susilolab.github.io/php/2022/08/25/menggunakan-db-selain-default-pada-yii2-migration.html" rel="alternate" type="text/html" title="Menggunakan db selain default pada Yii2 migration" /><published>2022-08-25T06:00:00+07:00</published><updated>2022-08-25T06:00:00+07:00</updated><id>https://susilolab.github.io/php/2022/08/25/menggunakan-db-selain-default-pada-yii2-migration</id><content type="html" xml:base="https://susilolab.github.io/php/2022/08/25/menggunakan-db-selain-default-pada-yii2-migration.html">&lt;p&gt;&lt;img src=&quot;/assets/img/yii-logo.svg&quot; alt=&quot;yii framework&quot; /&gt;&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="https://susilolab.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://susilolab.github.io/" rel="alternate" type="text/html" /><updated>2022-08-26T09:58:15+07:00</updated><id>https://susilolab.github.io/feed.xml</id><title type="html">susilolab</title><subtitle>&quot;Sebaik-baik manusia adalah yang paling bermanfaat bagi manusia&quot; (HR. Ahmad, ath-Thabrani, ad-Daruqutni)</subtitle><author><name>Agus Susilo</name></author><entry><title type="html">Peco aplikasi untuk menyaring data yang interaktif dan mudah</title><link href="https://susilolab.github.io/linux/2022/08/26/peco-aplikasi-untuk-menyaring-data-yang-interaktif-dan-mudah.html" rel="alternate" type="text/html" title="Peco aplikasi untuk menyaring data yang interaktif dan mudah" /><published>2022-08-26T05:00:00+07:00</published><updated>2022-08-26T05:00:00+07:00</updated><id>https://susilolab.github.io/linux/2022/08/26/peco-aplikasi-untuk-menyaring-data-yang-interaktif-dan-mudah</id><content type="html" xml:base="https://susilolab.github.io/linux/2022/08/26/peco-aplikasi-untuk-menyaring-data-yang-interaktif-dan-mudah.html">&lt;p&gt;&lt;img src=&quot;/assets/img/peco-tool.gif&quot; alt=&quot;peco tool&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Jika kamu adalah seorang devops/programmer yang suka dengan cli maka tool ini akan sangat cocok sebagai aplikasi harian 
+yang akan memudahkanmu dalam menyaring data dari proses lain ataupun dari file log dan sejenisnya. Biasanya saya akan menggunakan 
+perintah grep untuk menyaring data dari proses &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ps ax&lt;/code&gt; saat mencari sebuah proses. Nah dengan aplikasi &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;peco&lt;/code&gt; bagaimana?.
+&lt;!--more--&gt;&lt;/p&gt;
+
+&lt;p&gt;Dengan menggunakan &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;peco&lt;/code&gt; hal-hal seperti menyaring data dari perintah &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ls&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ps ax&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cat /var/log/nginx/error.log | grep 404&lt;/code&gt; akan menjadi sangat mudah dan interaktif.
+Contoh saat kita ingin menyaring data dari proses &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ps ax | grep php&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/peco-tool.png&quot; alt=&quot;peco tool&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Bisa dilihat pada gambar di atas saat kita mengetik kata &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;php&lt;/code&gt; peco langsung menyaring semua baris yang mengandung kata &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;php&lt;/code&gt;. Masya Allah sangat membantu :)&lt;/p&gt;
+
+&lt;h2 id=&quot;instalasi&quot;&gt;Instalasi&lt;/h2&gt;
+
+&lt;p&gt;Kamu bisa install peco dengan perintah berikut ini sesuai dengan OS atau distribusi linux jika menggunakannya.&lt;/p&gt;
+
+&lt;p&gt;macOS&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;brew install peco&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Debian/Ubuntu&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sudo apt install peco&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Archlinux&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sudo pacman -S peco&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Sekian semoga bermanfaat.&lt;/p&gt;</content><author><name>Agus Susilo</name></author><category term="linux" /><summary type="html">Jika kamu adalah seorang devops/programmer yang suka dengan cli maka tool ini akan sangat cocok sebagai aplikasi harian yang akan memudahkanmu dalam menyaring data dari proses lain ataupun dari file log dan sejenisnya. Biasanya saya akan menggunakan perintah grep untuk menyaring data dari proses ps ax saat mencari sebuah proses. Nah dengan aplikasi peco bagaimana?.</summary></entry><entry><title type="html">Menggunakan db selain default pada Yii2 migration</title><link href="https://susilolab.github.io/php/2022/08/25/menggunakan-db-selain-default-pada-yii2-migration.html" rel="alternate" type="text/html" title="Menggunakan db selain default pada Yii2 migration" /><published>2022-08-25T06:00:00+07:00</published><updated>2022-08-25T06:00:00+07:00</updated><id>https://susilolab.github.io/php/2022/08/25/menggunakan-db-selain-default-pada-yii2-migration</id><content type="html" xml:base="https://susilolab.github.io/php/2022/08/25/menggunakan-db-selain-default-pada-yii2-migration.html">&lt;p&gt;&lt;img src=&quot;/assets/img/yii-logo.svg&quot; alt=&quot;yii framework&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Secara default Yii 2 migration menggunakan database dengan nama &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;db&lt;/code&gt; hal ini dapat dicek pada config database dibawah subkey &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;components&lt;/code&gt; 
 namun jika kita memiliki banyak koneksi maka kita harus menyebutkan database mana yang akan dipakai pada fungsi &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;init&lt;/code&gt; pada tiap file migrate.
@@ -735,20 +765,4 @@ modul &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Mix.Gen
 &lt;span class=&quot;no&quot;&gt;MyApp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;hello&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;embed_template&lt;/code&gt; akan menghasilkan fungsi private sesuai dengan namanya. Misal parameter nama diisi 
-&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;:sample&lt;/code&gt; maka nama fungsinya akan menjadi &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sample_template&lt;/code&gt; dan hanya bisa diakses didalam modul itu sendiri.&lt;/p&gt;</content><author><name>Agus Susilo</name></author><category term="elixir" /><summary type="html">Jika ingin membuat generator untuk Ecto versimu sendiri, templatenya bisa menggunakan fungsi dari modul Mix.Generator.</summary></entry><entry><title type="html">Mengekstrak file dari mercurial hg</title><link href="https://susilolab.github.io/linux/2021/10/13/mengekstrak-file-dari-mercurial.html" rel="alternate" type="text/html" title="Mengekstrak file dari mercurial hg" /><published>2021-10-13T06:00:00+07:00</published><updated>2021-10-13T06:00:00+07:00</updated><id>https://susilolab.github.io/linux/2021/10/13/mengekstrak-file-dari-mercurial</id><content type="html" xml:base="https://susilolab.github.io/linux/2021/10/13/mengekstrak-file-dari-mercurial.html">&lt;p&gt;Sebagai seorang software engineer tentu tak lepas dari git/hg (mercurial) dan tentu saja tak lepas dari kesalahan.
-Pernah mem-merge 2 perubahan kode yang berbeda ? dan tak sengaja menghapus perubahan rekan setim ?. Kalau Anda pernah mengalaminya
-berarti kita sama, saya juga pernah mengalaminya. 
-&lt;!--more--&gt;&lt;/p&gt;
-
-&lt;p&gt;Tidak perlu khawatir file-filemu masih bisa diambil selama sudah di commit. Cara ini akan mengambil file dari sebuah repositori di &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;hg&lt;/code&gt; berdasarkan nomor revisi. 
-Tetapi cara ini hanya bisa dilakukan dengan command line. Caranya seperti berikut:&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$ hg cat -r no_revisi lokasi_file &amp;gt; lokasi_tujuan&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;Contoh:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;hg &lt;span class=&quot;nb&quot;&gt;cat&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-r&lt;/span&gt; 2562 protected/models/User.php &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; /home/user/User.php&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Perintah di atas akan menyimpan file &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;User.php&lt;/code&gt; dari revisi no 2562 ke folder &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/home/user&lt;/code&gt; dengan nama &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;User.php&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;Demikian tips singkat ini semoga bermanfaat.&lt;/p&gt;</content><author><name>Agus Susilo</name></author><category term="linux" /><summary type="html">Sebagai seorang software engineer tentu tak lepas dari git/hg (mercurial) dan tentu saja tak lepas dari kesalahan. Pernah mem-merge 2 perubahan kode yang berbeda ? dan tak sengaja menghapus perubahan rekan setim ?. Kalau Anda pernah mengalaminya berarti kita sama, saya juga pernah mengalaminya.</summary></entry></feed>
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;:sample&lt;/code&gt; maka nama fungsinya akan menjadi &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sample_template&lt;/code&gt; dan hanya bisa diakses didalam modul itu sendiri.&lt;/p&gt;</content><author><name>Agus Susilo</name></author><category term="elixir" /><summary type="html">Jika ingin membuat generator untuk Ecto versimu sendiri, templatenya bisa menggunakan fungsi dari modul Mix.Generator.</summary></entry></feed>
