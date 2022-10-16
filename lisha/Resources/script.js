@@ -197,28 +197,10 @@ function boot() {
     document.addEventListener("mousemove", handleMouseMove);
     var style = document.createElement("link");
     style.setAttribute("rel", "stylesheet");
-    style.setAttribute("href", "Resources/style.css");
+    style.setAttribute("href", "lisha/Resources/style.css");
     document.querySelector("head").appendChild(style);
     workingThreadFunction();
     generateTOC();
 }
 
 window.onload = boot;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
