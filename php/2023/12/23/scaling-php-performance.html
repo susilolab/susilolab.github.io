@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Scaling PHP Application | susilolab</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="Scaling PHP Application" />
+<meta name="author" content="Agus Susilo" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Hari ini saya ingin ngobrol tentang performa aplikasi yang dibuat dengan bahasa PHP karena ditempat kerja saya sedang membicarakan tentang berapa banyak pengguna yang dapat online sekaligus pada aplikasi kami. Benarkah aplikasi PHP bisa discale up?" />
+<meta property="og:description" content="Hari ini saya ingin ngobrol tentang performa aplikasi yang dibuat dengan bahasa PHP karena ditempat kerja saya sedang membicarakan tentang berapa banyak pengguna yang dapat online sekaligus pada aplikasi kami. Benarkah aplikasi PHP bisa discale up?" />
+<link rel="canonical" href="https://susilolab.github.io/php/2023/12/23/scaling-php-performance.html" />
+<meta property="og:url" content="https://susilolab.github.io/php/2023/12/23/scaling-php-performance.html" />
+<meta property="og:site_name" content="susilolab" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2023-12-23T07:00:00+07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Scaling PHP Application" />
+<script type="application/ld+json">
+{"headline":"Scaling PHP Application","dateModified":"2023-12-23T07:00:00+07:00","datePublished":"2023-12-23T07:00:00+07:00","url":"https://susilolab.github.io/php/2023/12/23/scaling-php-performance.html","author":{"@type":"Person","name":"Agus Susilo"},"description":"Hari ini saya ingin ngobrol tentang performa aplikasi yang dibuat dengan bahasa PHP karena ditempat kerja saya sedang membicarakan tentang berapa banyak pengguna yang dapat online sekaligus pada aplikasi kami. Benarkah aplikasi PHP bisa discale up?","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://susilolab.github.io/php/2023/12/23/scaling-php-performance.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://susilolab.github.io/feed.xml" title="susilolab" /><script>
+if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1")) {
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-173956394-1', 'auto');
+  ga('send', 'pageview');
+}
+</script>
+  
+<!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Scaling PHP Application | susilolab</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="Scaling PHP Application" />
+<meta name="author" content="Agus Susilo" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Hari ini saya ingin ngobrol tentang performa aplikasi yang dibuat dengan bahasa PHP karena ditempat kerja saya sedang membicarakan tentang berapa banyak pengguna yang dapat online sekaligus pada aplikasi kami. Benarkah aplikasi PHP bisa discale up?" />
+<meta property="og:description" content="Hari ini saya ingin ngobrol tentang performa aplikasi yang dibuat dengan bahasa PHP karena ditempat kerja saya sedang membicarakan tentang berapa banyak pengguna yang dapat online sekaligus pada aplikasi kami. Benarkah aplikasi PHP bisa discale up?" />
+<link rel="canonical" href="https://susilolab.github.io/php/2023/12/23/scaling-php-performance.html" />
+<meta property="og:url" content="https://susilolab.github.io/php/2023/12/23/scaling-php-performance.html" />
+<meta property="og:site_name" content="susilolab" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2023-12-23T07:00:00+07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Scaling PHP Application" />
+<script type="application/ld+json">
+{"headline":"Scaling PHP Application","dateModified":"2023-12-23T07:00:00+07:00","datePublished":"2023-12-23T07:00:00+07:00","url":"https://susilolab.github.io/php/2023/12/23/scaling-php-performance.html","author":{"@type":"Person","name":"Agus Susilo"},"description":"Hari ini saya ingin ngobrol tentang performa aplikasi yang dibuat dengan bahasa PHP karena ditempat kerja saya sedang membicarakan tentang berapa banyak pengguna yang dapat online sekaligus pada aplikasi kami. Benarkah aplikasi PHP bisa discale up?","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://susilolab.github.io/php/2023/12/23/scaling-php-performance.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  
+  
+
+
+
+
+
+
+
+</head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">susilolab</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a><a class="page-link" href="/categories/">Categories</a><a class="page-link" href="/portfolio/">My Portfolio</a><a class="page-link" href="/rust-book/">Rust Book</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Scaling PHP Application</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2023-12-23T07:00:00+07:00" itemprop="datePublished">Dec 23, 2023
+      </time>
+      
+      
+      • categories:  
+      
+      <a href="/categories/#php">php</a>
+      
+      
+      </p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>Hari ini saya ingin ngobrol tentang performa aplikasi yang dibuat dengan bahasa <code class="language-plaintext highlighter-rouge">PHP</code> karena ditempat kerja 
+saya sedang membicarakan tentang berapa banyak pengguna yang dapat online sekaligus pada aplikasi kami. Benarkah aplikasi <strong>PHP</strong> bisa discale up?
+<!--more--></p>
+
+<p>Rekan tim kemudian 
+membenchmark/mengukur performa dengan tool <code class="language-plaintext highlighter-rouge">apache benchmark</code> (<code class="language-plaintext highlighter-rouge">ab</code>) pada halaman landing page saja. Dengan jumlah request 
+20k dan concurrentnya 20k lebih dari itu tool benchmark tidak mau jalan. Namun untuk mengetahui berapa jumlah maksimal 
+user yang dapat online pada web tidak sesederhana itu. Ada banyak parameter lain yang harus dipertimbangkan.
+Mengutip dari <code class="language-plaintext highlighter-rouge">servebolt.com</code> bahwa mengukur jumlah maksimal user yang dapat online harus memperhatikan beberapa parameter 
+seperti berapa lama user online pada tiap sesi, rata-rata user mengklik tiap detik, jumlah maksimal request per detik dan
+parameter tersebut bisa kita dapatkan dari google analytic.</p>
+
+<p>Dari data tersebut baru kita bisa mengetahui jumlah maksimal user yang dapat online pada web kita yaitu dengan 
+mengkalikan maksimal request perdetik dikali 60, dikali klik frekuensi user perdetik maka akan didapat maksimal user 
+yang dapat online secara simultan. Lalu bagaimana cara meningkatkan performa web kita?</p>
+
+<h3 id="meningkatkan-performa-aplikasi-php">Meningkatkan performa aplikasi PHP</h3>
+
+<p>Ada beberapa cara meningkatkan performa web atau istilahnya optimalisasi yaitu</p>
+<ol>
+  <li>Mengoptimalkan query <code class="language-plaintext highlighter-rouge">select</code>. Query yang yang tidak optimal akan memperlambat akses web, hal yang harus adalah 
+hindari penggunaan <code class="language-plaintext highlighter-rouge">select *</code> pada saat query ke database. Jika tidak membutuhkan semua kolom maka sebutkan 
+nama kolom pada saat select.</li>
+  <li>Gunakan index pada tabel secara tepat sesuai kebutuhan. Index pada tabel dapat mempercepat proses query database.</li>
+  <li>Gunakan cache pada data yang sering diakses. Cache dapat mempercepat akses data tanpa perlu query ke database. 
+Tool yang bisa digunakan di antaranya <code class="language-plaintext highlighter-rouge">Redis</code> atau <code class="language-plaintext highlighter-rouge">Memcached</code>.</li>
+  <li>Menyederhanakan dan mengoptimalkan kode. Kode yang tidak optimal dan komplek akan sangat berpengaruh pada kecepatan 
+karena terlalu banyak logic yang tidak perlu.</li>
+  <li>Menambah ram, cpu atau bahkan jumlah server. Hal ini merupakan pilihan terakhir jika optimasi dari sisi software 
+sudah maksimal.</li>
+</ol>
+
+<h3 id="penggunaan-job-queue-background-process-worker">Penggunaan Job Queue, Background Process, Worker</h3>
+
+<p>Jika kode sudah dioptimalkan, <code class="language-plaintext highlighter-rouge">query</code> juga sudah dibuat seminimal mungkin dan sudah menggunakan teknik <code class="language-plaintext highlighter-rouge">cache</code> namun proses masih 
+lambat maka perlu adanya pemisahan proses yang berat ke dalam <code class="language-plaintext highlighter-rouge">job queue</code> atau <code class="language-plaintext highlighter-rouge">background proses</code></p>
+
+<h3 id="penggunaan-teknologi-async">Penggunaan Teknologi Async</h3>
+
+<p>Penggunaan async dapat membantu mempercepat proses karena fungsi dapat dieksekusi secara concurent dan non blocking, itu artinya suatu proses 
+dapat ditunda dan dilanjut eksekusi berdasarkan dari penjadwalan yang disebut dengan <code class="language-plaintext highlighter-rouge">event loop</code>. Untuk <strong>PHP</strong> merubah fungsi-fungsi pada aplikasi yang sudah berjalan 
+dengan fungsi async akan membutuhkan waktu dan sumber daya yang tidak sedikit.</p>
+
+<p>Karena pada dasarnya <strong>PHP</strong> tidak dirancang dari awal untuk melakukan sesuatu secara async, bawaan <strong>PHP</strong> semua fungsi berjalan secara berurutan. Oleh karena menerapkan teknologi async 
+akan butuh waktu yang tidak sebentar dan pembiasaanya dengan event loop. Tetapi pada versi 8.1 php mulai menyertakan fitur dasar yang akan memudahkan penggunakan async pada fungsi yaitu
+<code class="language-plaintext highlighter-rouge">fiber</code>, <strong>fiber</strong> memungkinkan suatu fungsi dapat di pause dan diresume.</p>
+
+<p>Keuntungan lain dengan adanya fiber ini adalah memungkinkan kode async bisa terlihat seperti sinkronous kode dan pustaka seperti <code class="language-plaintext highlighter-rouge">amphp</code> dan <code class="language-plaintext highlighter-rouge">reactphp</code> sudah menerapkan fiber pada pustakanya.</p>
+
+<p>Jika penggunaan pustaka async dirasa masih kurang cepat maka perlu menginstall modul php seperti <code class="language-plaintext highlighter-rouge">event</code>, <code class="language-plaintext highlighter-rouge">ev</code> atau <code class="language-plaintext highlighter-rouge">uv</code>, modul ini mirip dengan event loop yang dipake pada nodejs.</p>
+
+<p>Pilihan terakhir adalah bisa menggunakan teknologi <code class="language-plaintext highlighter-rouge">openswoole</code> atau <code class="language-plaintext highlighter-rouge">swoole</code>, teknologi ini paket lengkap karena banyar fitur yang ditawarkan seperti event driven, coroutine (mirip goroutine),
+websocket server, grpc, multiprocessing dll. Namun modul ini membutuhkan kompilasi waktu yang cukup lama.</p>
+
+<h3 id="hybrid-system">Hybrid System</h3>
+
+<p>Hybrid sistem artinya menambah bahasa aplikasi baru dan itu artinya butuh programmer lagi yang paham bahasa baru tersebut, seperti Go, Rust atau Nodejs.</p>
+
+<h3 id="penggunaan-grpc">Penggunaan GRPC</h3>
+
+  </div><a class="u-url" href="/php/2023/12/23/scaling-php-performance.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper"><div class="footer-col-wrapper">
+      <div class="footer-col footer-col-3"><ul class="social-media-list"><li><a href="https://github.com/susilolab"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">susilolab</span></a></li><li><a href="https://instagram.com/mas.agus"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#instagram"></use></svg> <span class="username">mas.agus</span></a></li><li><a href="https://www.twitter.com/susil0"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">susil0</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>&quot;Sebaik-baik manusia adalah yang paling bermanfaat bagi manusia&quot; (HR. Ahmad, ath-Thabrani, ad-Daruqutni)</p>
+        <p>&copy;2023&nbsp;Agus Susilo</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Memahami scope pada javascript | susilolab</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="Memahami scope pada javascript" />
+<meta name="author" content="Agus Susilo" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Scope/lingkup pada javascript menjelaskan masa hidup dan visibility suatu variabel. Variabel tidak tampak diluar dimana variabel itu dideklarasikan. Javascript mempunyai lingkup module, lingkup fungsi, lingkup blok, lingkup lexical dan lingkup global." />
+<meta property="og:description" content="Scope/lingkup pada javascript menjelaskan masa hidup dan visibility suatu variabel. Variabel tidak tampak diluar dimana variabel itu dideklarasikan. Javascript mempunyai lingkup module, lingkup fungsi, lingkup blok, lingkup lexical dan lingkup global." />
+<link rel="canonical" href="https://susilolab.github.io/javascript/2022/07/31/memahami-scope-pada-javascript.html" />
+<meta property="og:url" content="https://susilolab.github.io/javascript/2022/07/31/memahami-scope-pada-javascript.html" />
+<meta property="og:site_name" content="susilolab" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-07-31T05:00:00+07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Memahami scope pada javascript" />
+<script type="application/ld+json">
+{"headline":"Memahami scope pada javascript","dateModified":"2022-07-31T05:00:00+07:00","datePublished":"2022-07-31T05:00:00+07:00","url":"https://susilolab.github.io/javascript/2022/07/31/memahami-scope-pada-javascript.html","author":{"@type":"Person","name":"Agus Susilo"},"description":"Scope/lingkup pada javascript menjelaskan masa hidup dan visibility suatu variabel. Variabel tidak tampak diluar dimana variabel itu dideklarasikan. Javascript mempunyai lingkup module, lingkup fungsi, lingkup blok, lingkup lexical dan lingkup global.","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://susilolab.github.io/javascript/2022/07/31/memahami-scope-pada-javascript.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://susilolab.github.io/feed.xml" title="susilolab" /><script>
+if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1")) {
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-173956394-1', 'auto');
+  ga('send', 'pageview');
+}
+</script>
+  
+<!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Memahami scope pada javascript | susilolab</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="Memahami scope pada javascript" />
+<meta name="author" content="Agus Susilo" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Scope/lingkup pada javascript menjelaskan masa hidup dan visibility suatu variabel. Variabel tidak tampak diluar dimana variabel itu dideklarasikan. Javascript mempunyai lingkup module, lingkup fungsi, lingkup blok, lingkup lexical dan lingkup global." />
+<meta property="og:description" content="Scope/lingkup pada javascript menjelaskan masa hidup dan visibility suatu variabel. Variabel tidak tampak diluar dimana variabel itu dideklarasikan. Javascript mempunyai lingkup module, lingkup fungsi, lingkup blok, lingkup lexical dan lingkup global." />
+<link rel="canonical" href="https://susilolab.github.io/javascript/2022/07/31/memahami-scope-pada-javascript.html" />
+<meta property="og:url" content="https://susilolab.github.io/javascript/2022/07/31/memahami-scope-pada-javascript.html" />
+<meta property="og:site_name" content="susilolab" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-07-31T05:00:00+07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Memahami scope pada javascript" />
+<script type="application/ld+json">
+{"headline":"Memahami scope pada javascript","dateModified":"2022-07-31T05:00:00+07:00","datePublished":"2022-07-31T05:00:00+07:00","url":"https://susilolab.github.io/javascript/2022/07/31/memahami-scope-pada-javascript.html","author":{"@type":"Person","name":"Agus Susilo"},"description":"Scope/lingkup pada javascript menjelaskan masa hidup dan visibility suatu variabel. Variabel tidak tampak diluar dimana variabel itu dideklarasikan. Javascript mempunyai lingkup module, lingkup fungsi, lingkup blok, lingkup lexical dan lingkup global.","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://susilolab.github.io/javascript/2022/07/31/memahami-scope-pada-javascript.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  
+  
+
+
+
+
+
+
+
+</head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">susilolab</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a><a class="page-link" href="/categories/">Categories</a><a class="page-link" href="/portfolio/">My Portfolio</a><a class="page-link" href="/rust-book/">Rust Book</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Memahami scope pada javascript</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2022-07-31T05:00:00+07:00" itemprop="datePublished">Jul 31, 2022
+      </time>
+      
+      
+      • categories:  
+      
+      <a href="/categories/#javascript">javascript</a>
+      
+      
+      </p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>Scope/lingkup pada javascript menjelaskan masa hidup dan visibility suatu variabel. 
+Variabel tidak tampak diluar dimana variabel itu dideklarasikan. Javascript mempunyai lingkup module, 
+lingkup fungsi, lingkup blok, lingkup lexical dan lingkup global.</p>
+
+<!--more-->
+
+<h3 id="lingkup-global">Lingkup global</h3>
+
+<p>Variabel yang dideklarasikan diluar fungsi, blok atau modul mempunyai lingkup global. Variabel 
+dilingkup global dapat diakses dari manasaja didalam aplikasi.</p>
+
+<p>Contoh:
+<code class="language-plaintext highlighter-rouge">https://medium.com/programming-essentials/an-introduction-to-scope-in-javascript-cbd957022652</code></p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">const</span> <span class="nx">POS_END</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="kd">function</span> <span class="nx">hello</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">POS_END</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nx">World</span>
+<span class="p">{</span>
+  <span class="nx">run</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">scriptPos</span> <span class="o">=</span> <span class="nx">getPos</span><span class="p">()</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">scriptPos</span> <span class="o">===</span> <span class="nx">POS_END</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">POS_END</span><span class="p">)</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span></code></pre></figure>
+
+<h3 id="lingkup-module">Lingkup module</h3>
+
+<p>Variabel yang dideklarasikan diluar fungsi tetapi didalam module tetap disebut variabel global tetapi 
+dalam lingkup module dan tersembunyi dari module lain kecuali disebutkan secara eksplisit.</p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// user.js</span>
+<span class="kd">const</span> <span class="nx">GROUP_NAME</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">admin</span><span class="dl">'</span>
+<span class="kd">let</span> <span class="nx">name</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">agus</span><span class="dl">'</span>
+<span class="kd">var</span> <span class="nx">users</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">User</span><span class="p">()</span></code></pre></figure>
+
+<p>Dari kode di atas bisa diartikan bahwa const <code class="language-plaintext highlighter-rouge">GROUP_NAME</code>, variabel <code class="language-plaintext highlighter-rouge">name</code> dan <code class="language-plaintext highlighter-rouge">users</code> adalah global terhadap module <code class="language-plaintext highlighter-rouge">user.js</code> karena dideklarasikan diluar fungsi.
+Namun const dan variabel tersebut tidak dapat diakses diluar module <code class="language-plaintext highlighter-rouge">user.js</code>. Untuk bisa diakses diluar modul kita perlu meng-exportnya.</p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// user.js</span>
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">GROUP_NAME</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">admin</span><span class="dl">'</span>
+<span class="k">export</span> <span class="nx">name</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">agus</span><span class="dl">'</span>
+<span class="k">export</span> <span class="nx">users</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">User</span><span class="p">()</span>
+
+<span class="c1">// home.js</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">GROUP_NAME</span><span class="p">,</span> <span class="nx">name</span><span class="p">,</span> <span class="nx">users</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./user</span><span class="dl">'</span></code></pre></figure>
+
+<h3 id="lingkup-fungsi">Lingkup fungsi</h3>
+
+<p>Variabel dan parameter yang dideklarasikan didalam fungsi hanya bisa diakses didalam fungsi, tidak bisa diakses diluar fungsi. Namun terdapat perbedaan pada saat menggunakan <code class="language-plaintext highlighter-rouge">var</code> dan <code class="language-plaintext highlighter-rouge">let</code>. 
+perhatikan fungsi di bawah yang auto-execute yang biasa disebut IIFE.</p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">x</span> <span class="o">=</span> <span class="mi">1</span> 
+
+  <span class="kd">const</span> <span class="nx">foo</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`x dari foo(): </span><span class="p">${</span><span class="nx">x</span><span class="p">}</span><span class="s2">`</span><span class="p">)</span>
+  <span class="p">}</span>
+  <span class="nx">foo</span><span class="p">()</span>
+<span class="p">})()</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span>
+<span class="c1">// x dari foo(): 1</span>
+<span class="c1">// ReferenceError: x is not defined</span></code></pre></figure>
+
+<p>IIFE kependekan dari Immediately Invoked Function Expression dan fungsi yang langsung dieksekusi setelah didefinisikan. Dari kode di atas bisa kita lihat bahwa 
+variable x tidak dapat diakses dari luar fungsi tetapi masih bisa diakses dari dalam fungsi walaupun dalam subfungsi.</p>
+
+<h3 id="lingkup-blok">Lingkup blok</h3>
+
+<p>Lingkup blok didefinisikan dengan tanda kurung kurawal buka <code class="language-plaintext highlighter-rouge">{</code> dan tutup <code class="language-plaintext highlighter-rouge">}</code>.</p>
+
+  </div><a class="u-url" href="/javascript/2022/07/31/memahami-scope-pada-javascript.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper"><div class="footer-col-wrapper">
+      <div class="footer-col footer-col-3"><ul class="social-media-list"><li><a href="https://github.com/susilolab"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">susilolab</span></a></li><li><a href="https://instagram.com/mas.agus"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#instagram"></use></svg> <span class="username">mas.agus</span></a></li><li><a href="https://www.twitter.com/susil0"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">susil0</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>&quot;Sebaik-baik manusia adalah yang paling bermanfaat bagi manusia&quot; (HR. Ahmad, ath-Thabrani, ad-Daruqutni)</p>
+        <p>&copy;2023&nbsp;Agus Susilo</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

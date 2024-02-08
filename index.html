@@ -17,7 +17,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="susilolab" />
 <script type="application/ld+json">
-{"url":"https://susilolab.github.io/","author":{"@type":"Person","name":"Agus Susilo"},"description":"“Sebaik-baik manusia adalah yang paling bermanfaat bagi manusia” (HR. Ahmad, ath-Thabrani, ad-Daruqutni)","@type":"WebSite","headline":"susilolab","name":"susilolab","@context":"https://schema.org"}</script>
+{"headline":"susilolab","url":"https://susilolab.github.io/","author":{"@type":"Person","name":"Agus Susilo"},"description":"“Sebaik-baik manusia adalah yang paling bermanfaat bagi manusia” (HR. Ahmad, ath-Thabrani, ad-Daruqutni)","@type":"WebSite","name":"susilolab","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://susilolab.github.io/feed.xml" title="susilolab" /><script>
 if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1")) {
@@ -46,7 +46,7 @@ if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNo
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="susilolab" />
 <script type="application/ld+json">
-{"url":"https://susilolab.github.io/","author":{"@type":"Person","name":"Agus Susilo"},"description":"“Sebaik-baik manusia adalah yang paling bermanfaat bagi manusia” (HR. Ahmad, ath-Thabrani, ad-Daruqutni)","@type":"WebSite","headline":"susilolab","name":"susilolab","@context":"https://schema.org"}</script>
+{"headline":"susilolab","url":"https://susilolab.github.io/","author":{"@type":"Person","name":"Agus Susilo"},"description":"“Sebaik-baik manusia adalah yang paling bermanfaat bagi manusia” (HR. Ahmad, ath-Thabrani, ad-Daruqutni)","@type":"WebSite","name":"susilolab","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -78,7 +78,144 @@ if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNo
 <main class="page-content" aria-label="Content">
       <div class="wrapper">
         <div class="home"><h2 class="post-list-heading">Posts</h2>
-    <ul class="post-list"><li><span class="post-meta">Sep 5, 2022</span>
+    <ul class="post-list"><li><span class="post-meta">Dec 23, 2023</span>
+        <h3>
+          <a class="post-link" href="/php/2023/12/23/scaling-php-performance.html">
+            Scaling PHP Application
+          </a>
+        </h3>
+        <p>Hari ini saya ingin ngobrol tentang performa aplikasi yang dibuat dengan bahasa <code class="language-plaintext highlighter-rouge">PHP</code> karena ditempat kerja 
+saya sedang membicarakan tentang berapa banyak pengguna yang dapat online sekaligus pada aplikasi kami. Benarkah aplikasi <strong>PHP</strong> bisa discale up?</p>
+
+
+        
+          <a href="/php/2023/12/23/scaling-php-performance.html" class="read-more">Read more</a>
+        
+      </li><li><span class="post-meta">Dec 10, 2023</span>
+        <h3>
+          <a class="post-link" href="/php/2023/12/10/mencari-bugs-tanpa-menjalankan-dengan-phpstan.html">
+            Mencari bugs tanpa menjalankan dengan phpstan
+          </a>
+        </h3>
+        <p>Mengelola aplikasi php jadul adalah hal yang mungkin membosankan karena dari versi phpnya sampe paket-paket sudah usang apalagi jika phpnya masih versi 5.6 haduh, belum lagi bugs yang ada karena aplikasi dikembangkan turun 
+temurun dengan berbagai latar developer yang berbeda. Untuk cara upgrade php dari versi 5.6 ke 8 Insha Allah akan saya bikinkan artikelnya.</p>
+
+<p>Namun jangan khawatir para developer php sudah membuat banyak tool untuk mengatasi hal tersebut, salah satu tool yang ingin saya kenalkan adalah <a href="https://phpstan.org"><strong>PHPStan</strong></a> sebuah static analysis yang dapat 
+membantu menscan kode php tanpa running diproduction untuk mencari bugs yang ada.</p>
+
+<p><img src="/assets/img/2023-12-10-logo-phpstan.png" alt="logo-phpstan" /></p>
+
+<p>Nah kali ini saya ingin berbagi cara penggunaan <strong>PHPStan</strong></p>
+
+
+        
+          <a href="/php/2023/12/10/mencari-bugs-tanpa-menjalankan-dengan-phpstan.html" class="read-more">Read more</a>
+        
+      </li><li><span class="post-meta">Nov 25, 2023</span>
+        <h3>
+          <a class="post-link" href="/rust/2023/11/25/membuat-hello-world-grpc-rust-server-dan-php-client.html">
+            Membuat gRPC Rust Server dan PHP sebagai Client
+          </a>
+        </h3>
+        <p>gRPC adalah framework remote procedure call(rpc) yang dapat berjalan dilingkungan manapun, grpc mendukung banyak bahasa pemrograman. yang membedakan dengan rpc lainnya 
+adalah gRPC menggunakan protokol buffer untuk berbagi data antara server dan client yang dikenal sangat cepat dibanding menggunakan json/xml. grpc ini salah satu cara 
+yang digunakan developer untuk membuat microservice.</p>
+
+
+
+        
+          <a href="/rust/2023/11/25/membuat-hello-world-grpc-rust-server-dan-php-client.html" class="read-more">Read more</a>
+        
+      </li><li><span class="post-meta">Nov 5, 2023</span>
+        <h3>
+          <a class="post-link" href="/php/2023/11/05/merubah-timeout-pada-job-queue-yii2.html">
+            Merubah Timeout pada job queue Yii2
+          </a>
+        </h3>
+        <p>Default timeout pada job queue yii2 adalah 60 detik, terkadang proses yang berjalan lebih dari 60 detik. Supaya job queue dapat berjalan lebih dari 60 detik 
+maka klas job perlu implements dari interface <code class="language-plaintext highlighter-rouge">yii\queue\RetryableJobInterface</code>.</p>
+
+
+
+        
+          <a href="/php/2023/11/05/merubah-timeout-pada-job-queue-yii2.html" class="read-more">Read more</a>
+        
+      </li><li><span class="post-meta">Sep 28, 2023</span>
+        <h3>
+          <a class="post-link" href="/javascript/2023/09/28/alternative-dirname-di-modul-es6.html">
+            Alternative __dirname di module es6
+          </a>
+        </h3>
+        <p>Jika kamu seorang programmer Javascript dan sudah mulai menggunakan modul es6 maka kamu perlu tips singkat ini untuk dapat menggunakan variable <code class="language-plaintext highlighter-rouge">__dirname</code> di scriptmu.
+Karena pada modul es6 variable <code class="language-plaintext highlighter-rouge">__dirname</code> tidak dapat diakses.</p>
+
+
+
+        
+          <a href="/javascript/2023/09/28/alternative-dirname-di-modul-es6.html" class="read-more">Read more</a>
+        
+      </li><li><span class="post-meta">Aug 20, 2023</span>
+        <h3>
+          <a class="post-link" href="/php/2023/08/20/fix-style-koding-di-php-dengan-php-cs-fixer.html">
+            Fix style kodingmu di PHP dengan php cs fixer
+          </a>
+        </h3>
+        <p>Pusing mikir style koding yang berantakan?. ndak usah khawatir, fokus saja pada logik kodemu dan serahkan stylenya pada php coding style fixer.</p>
+
+
+
+        
+          <a href="/php/2023/08/20/fix-style-koding-di-php-dengan-php-cs-fixer.html" class="read-more">Read more</a>
+        
+      </li><li><span class="post-meta">Jan 22, 2023</span>
+        <h3>
+          <a class="post-link" href="/javascript/2023/01/22/membuat-aplikasi-todo-dengan-svelte.html">
+            Membuat Aplikasi Todo dengan Svelte
+          </a>
+        </h3>
+        <p>Svelte adalah pustaka untuk membuat web yang dibuat oleh Rich Harris. Nilai jual utama svelte yaitu tidak menggunakan virutal dom (VDOM) untuk memonitor perubahan data dan
+mengkompilasi ulang html. Svelte akan mengkompile komponen html menjadi native javascript sehingga bisa meniadakan adanya runtime, hal ini akan membuat ukuran aplikasi
+menjadi lebih kecil dibanding pustaka yang menggunakan vdom dan juga performanya jauh lebih cepat.</p>
+
+
+
+        
+          <a href="/javascript/2023/01/22/membuat-aplikasi-todo-dengan-svelte.html" class="read-more">Read more</a>
+        
+      </li><li><span class="post-meta">Jan 8, 2023</span>
+        <h3>
+          <a class="post-link" href="/rust/2023/01/08/contoh-anonymous-function-pada-rust.html">
+            Contoh Closure sederhana pada Rust
+          </a>
+        </h3>
+        <p>Rust memiliki function anonymous yang mirip dengan Ruby yang bisa kita lihat penggunaan 
+tanda <code class="language-plaintext highlighter-rouge">|</code> walaupun tidak 100% sama. berikut ini contoh penggunaan closure/anonymous function 
+pada rust.</p>
+
+<p>Closure pada Rust bisa kita definisikan menggunakan format <code class="language-plaintext highlighter-rouge">||</code> dan <code class="language-plaintext highlighter-rouge">|| {}</code> jika statementnya lebih dari satu baris atau 
+closure memiliki tipe kembalian.</p>
+
+
+        
+          <a href="/rust/2023/01/08/contoh-anonymous-function-pada-rust.html" class="read-more">Read more</a>
+        
+      </li><li><span class="post-meta">Sep 18, 2022</span>
+        <h3>
+          <a class="post-link" href="/rust/2022/09/18/membuat-echo-server-tcp-dengan-rust.html">
+            Membuat Echo Server TCP dengan Tokio Rust
+          </a>
+        </h3>
+        <p>Tokio adalah pustaka untuk membuat aplikasi async di Rust, karena di std lib Rust tidak menyertakan event loop dan lainnya yang berhubungan async await. 
+Maka user dapat menggunakan lib dari luar std lib. Pustaka lain yang bisa digunakan adalah <code class="language-plaintext highlighter-rouge">async-std</code>, namun untuk kali ini kita akan menggunakan tokio 
+karena alasan lebih familiar saja.</p>
+
+<p>Kali ini kita akan membuat aplikasi sederhana yaitu TCP Echo Server dan client. Pertama-tama kita buat dulu project baru dengan <code class="language-plaintext highlighter-rouge">cargo</code></p>
+
+
+        
+          <a href="/rust/2022/09/18/membuat-echo-server-tcp-dengan-rust.html" class="read-more">Read more</a>
+        
+      </li><li><span class="post-meta">Sep 5, 2022</span>
         <h3>
           <a class="post-link" href="/linux/2022/09/05/highlight-neovim-tidak-jalan-di-tmux.html">
             Highlight neovim tidak jalan di tmux
@@ -91,136 +228,6 @@ if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNo
 
         
           <a href="/linux/2022/09/05/highlight-neovim-tidak-jalan-di-tmux.html" class="read-more">Read more</a>
-        
-      </li><li><span class="post-meta">Aug 26, 2022</span>
-        <h3>
-          <a class="post-link" href="/linux/2022/08/26/peco-aplikasi-untuk-menyaring-data-yang-interaktif-dan-mudah.html">
-            Peco aplikasi untuk menyaring data yang interaktif dan mudah
-          </a>
-        </h3>
-        <p><img src="/assets/img/peco-tool.gif" alt="peco tool" /></p>
-
-<p>Jika kamu adalah seorang devops/programmer yang suka dengan cli maka tool ini akan sangat cocok sebagai aplikasi harian 
-yang akan memudahkanmu dalam menyaring data dari proses lain ataupun dari file log dan sejenisnya. Biasanya saya akan menggunakan 
-perintah grep untuk menyaring data dari proses <code class="language-plaintext highlighter-rouge">ps ax</code> saat mencari sebuah proses. Nah dengan aplikasi <code class="language-plaintext highlighter-rouge">peco</code> bagaimana?.</p>
-
-
-        
-          <a href="/linux/2022/08/26/peco-aplikasi-untuk-menyaring-data-yang-interaktif-dan-mudah.html" class="read-more">Read more</a>
-        
-      </li><li><span class="post-meta">Aug 25, 2022</span>
-        <h3>
-          <a class="post-link" href="/php/2022/08/25/menggunakan-db-selain-default-pada-yii2-migration.html">
-            Menggunakan db selain default pada Yii2 migration
-          </a>
-        </h3>
-        <p><img src="/assets/img/yii-logo.svg" alt="yii framework" /></p>
-
-<p>Secara default Yii 2 migration menggunakan database dengan nama <code class="language-plaintext highlighter-rouge">db</code> hal ini dapat dicek pada config database dibawah subkey <code class="language-plaintext highlighter-rouge">components</code> 
-namun jika kita memiliki banyak koneksi maka kita harus menyebutkan database mana yang akan dipakai pada fungsi <code class="language-plaintext highlighter-rouge">init</code> pada tiap file migrate.</p>
-
-
-        
-          <a href="/php/2022/08/25/menggunakan-db-selain-default-pada-yii2-migration.html" class="read-more">Read more</a>
-        
-      </li><li><span class="post-meta">Feb 15, 2022</span>
-        <h3>
-          <a class="post-link" href="/php/2022/02/15/mendapatkan-raw-query-dari-active-record-yii2.html">
-            Mendapatkan Raw Sql dari ActiveRecord Yii2
-          </a>
-        </h3>
-        <p>Tips singkat cara mendapatkan <code class="language-plaintext highlighter-rouge">raw sql</code> dari ActiveRecord pada Yii2. Cukup hilang fungsi chain <code class="language-plaintext highlighter-rouge">one</code>/<code class="language-plaintext highlighter-rouge">all</code>/<code class="language-plaintext highlighter-rouge">scalar</code>/dll 
-dan tambahkan <code class="language-plaintext highlighter-rouge">createCommand()-&gt;getRawSql()</code>.</p>
-
-<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="nv">$user</span> <span class="o">=</span> <span class="nc">User</span><span class="o">::</span><span class="nf">find</span><span class="p">()</span><span class="o">-&gt;</span><span class="nf">where</span><span class="p">([</span><span class="s1">'id'</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">]);</span>
-<span class="k">echo</span> <span class="nv">$user</span><span class="o">-&gt;</span><span class="nf">createCommand</span><span class="p">()</span><span class="o">-&gt;</span><span class="nf">getRawSql</span><span class="p">(),</span> <span class="kc">PHP_EOL</span><span class="p">;</span></code></pre></figure>
-
-
-
-        
-      </li><li><span class="post-meta">Jan 24, 2022</span>
-        <h3>
-          <a class="post-link" href="/php/2022/01/24/cara-menggunakan-class-class-pada-yii-db-conditions.html">
-            Cara menggunakan class-class pada yii\db\conditions
-          </a>
-        </h3>
-        <p>Hari ini saya ingin membagi tips tentang cara penggunaan class yang ada pada namespace <code class="language-plaintext highlighter-rouge">yii\db\conditions</code> yang berguna saat kita membuat query yang komplek. Yii itu powerfull tetapi dokumentasinya kurang lengkap dan kurangnya contoh-contoh penggunaan klas/fungsi.</p>
-
-
-        
-          <a href="/php/2022/01/24/cara-menggunakan-class-class-pada-yii-db-conditions.html" class="read-more">Read more</a>
-        
-      </li><li><span class="post-meta">Dec 30, 2021</span>
-        <h3>
-          <a class="post-link" href="/rust/2021/12/30/mengenal-struct-self-pada-rust.html">
-            Mengenal Struct, self dan Self pada Rust
-          </a>
-        </h3>
-        <p>Rust merupakan bahasa pemrograman sistem yang tidak berbasis objek namun penggunaan <code class="language-plaintext highlighter-rouge">struct</code> dan <code class="language-plaintext highlighter-rouge">trait</code> konsepnya mirip<br />
-pada bahasa pemgrograman oop(berbasis objek). 
-Rust tidak menggunakan klas untuk mengatur struktur kode, melainkan menggunakan struk untuk mewakili object/klas 
-dan <code class="language-plaintext highlighter-rouge">trait</code> untuk mewakili behaviornya atau dalam bahasa lain disebut dengan <code class="language-plaintext highlighter-rouge">interface</code>.</p>
-
-
-        
-          <a href="/rust/2021/12/30/mengenal-struct-self-pada-rust.html" class="read-more">Read more</a>
-        
-      </li><li><span class="post-meta">Oct 25, 2021</span>
-        <h3>
-          <a class="post-link" href="/php/2021/10/25/early-return-in-php.html">
-            Early return in PHP
-          </a>
-        </h3>
-        <p>Sebagai seorang programmer tentu selalu ingin meningkatkan kualitas kodenya agar ringkas dan mudah dipahami. Nah kali ini saya ingin berbagi sedikit tip 
-tentang early return di PHP, apa itu early return?. Sesuai dengan namanya <code class="language-plaintext highlighter-rouge">mengembalikan lebih awal</code> yaitu mengembalikan nilai dari suatu fungsi lebih 
-awal. Keuntungan mengembalikan nilai lebih awal akan membuat kode lebih ringkas dan dapat menghindari if bersarang. Coba bandingkan kedua fungsi di bawah ini</p>
-
-
-        
-          <a href="/php/2021/10/25/early-return-in-php.html" class="read-more">Read more</a>
-        
-      </li><li><span class="post-meta">Oct 24, 2021</span>
-        <h3>
-          <a class="post-link" href="/deno/2021/10/24/deno-filesystem.html">
-            Deno File System
-          </a>
-        </h3>
-        <p>Deno adalah secure runtime untuk Javascript dan Typescript menggunakan javascript engine v8 buatan Google dan juga
-dibangun dengan bahasa pemrograman Rust. Pembuatnya adalah orang yang sama yang membuat Nodejs. 
-Versi stabilnya dirilis pada tanggal 13 Mei 2020.</p>
-
-<p>Pada kesempatan kali sesuai dengan judul artikel yaitu tentang file sistem di Deno, kita akan mengulik sedikit tentang 
-file system di Deno seperti membaca dan menulis file, membuat dan menghapus folder, menyalin file/folder dll.</p>
-
-
-        
-          <a href="/deno/2021/10/24/deno-filesystem.html" class="read-more">Read more</a>
-        
-      </li><li><span class="post-meta">Oct 21, 2021</span>
-        <h3>
-          <a class="post-link" href="/php/2021/10/21/passing-argument-by-reference-in-php.html">
-            Passing argument by reference in PHP
-          </a>
-        </h3>
-        <p>Bagi programmer PHP tentu tidak asing lagi dengan namanya argumen pada fungsi, namun tahukah teman-teman bahwa argumen fungsi pada PHP defaultnya 
-dilewatkan berdasar nilai. Jadi variabel yang dilewatkan pada fungsi akan disalin kedalam fungsi. Mari kita lihat contoh berikut</p>
-
-
-        
-          <a href="/php/2021/10/21/passing-argument-by-reference-in-php.html" class="read-more">Read more</a>
-        
-      </li><li><span class="post-meta">Oct 15, 2021</span>
-        <h3>
-          <a class="post-link" href="/php/2021/10/15/return-objek-pada-cdbcommand-yii.html">
-            Return Objek pada CDbCommand Yii1
-          </a>
-        </h3>
-        <p>CDbCommand pada Yii1 defaultnya mengembalikan array pada fungsi-fungsi seperti queryAll dan queryRow. Agar kembaliannya 
-berupa objek kita bisa gunakan fungsi <code class="language-plaintext highlighter-rouge">setFetchMode</code>.</p>
-
-
-        
-          <a href="/php/2021/10/15/return-objek-pada-cdbcommand-yii.html" class="read-more">Read more</a>
         
       </li></ul>
     
@@ -254,6 +261,22 @@ berupa objek kita bisa gunakan fungsi <code class="language-plaintext highlighte
             <a href="/page6/">6</a>
           
         
+          
+            <a href="/page7/">7</a>
+          
+        
+          
+            <a href="/page8/">8</a>
+          
+        
+          
+            <a href="/page9/">9</a>
+          
+        
+          
+            <a href="/page10/">10</a>
+          
+        
                
         
           <a href="/page2/" class="next">Next &raquo;</a>
@@ -273,7 +296,7 @@ berupa objek kita bisa gunakan fungsi <code class="language-plaintext highlighte
 
       <div class="footer-col footer-col-3">
         <p>&quot;Sebaik-baik manusia adalah yang paling bermanfaat bagi manusia&quot; (HR. Ahmad, ath-Thabrani, ad-Daruqutni)</p>
-        <p>&copy;2022&nbsp;Agus Susilo</p>
+        <p>&copy;2023&nbsp;Agus Susilo</p>
       </div>
     </div>
 

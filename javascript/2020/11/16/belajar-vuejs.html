@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Belajar Reactjs dan Vuejs | susilolab</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="Belajar Reactjs dan Vuejs" />
+<meta name="author" content="Agus Susilo" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Reactjs Kali ini saya ingin belajar Reactjs dan Vuejs serta membandingkan seberapa cepat kita belajar React atau Vue. Perbandingan ini mungkin subjektif karena saya sudah familiar dengan Vue akan lebih condong ke Vue. Walaupun library pertama kali yang saya pelajari adalah React. Artikel ini saya tulis karena termotivasi teman saya yang sudah belajar React dan mengatakan seolah-olah belajar Vue itu lebih susah." />
+<meta property="og:description" content="Reactjs Kali ini saya ingin belajar Reactjs dan Vuejs serta membandingkan seberapa cepat kita belajar React atau Vue. Perbandingan ini mungkin subjektif karena saya sudah familiar dengan Vue akan lebih condong ke Vue. Walaupun library pertama kali yang saya pelajari adalah React. Artikel ini saya tulis karena termotivasi teman saya yang sudah belajar React dan mengatakan seolah-olah belajar Vue itu lebih susah." />
+<link rel="canonical" href="https://susilolab.github.io/javascript/2020/11/16/belajar-vuejs.html" />
+<meta property="og:url" content="https://susilolab.github.io/javascript/2020/11/16/belajar-vuejs.html" />
+<meta property="og:site_name" content="susilolab" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-11-16T06:00:00+07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Belajar Reactjs dan Vuejs" />
+<script type="application/ld+json">
+{"headline":"Belajar Reactjs dan Vuejs","dateModified":"2020-11-16T06:00:00+07:00","datePublished":"2020-11-16T06:00:00+07:00","url":"https://susilolab.github.io/javascript/2020/11/16/belajar-vuejs.html","author":{"@type":"Person","name":"Agus Susilo"},"description":"Reactjs Kali ini saya ingin belajar Reactjs dan Vuejs serta membandingkan seberapa cepat kita belajar React atau Vue. Perbandingan ini mungkin subjektif karena saya sudah familiar dengan Vue akan lebih condong ke Vue. Walaupun library pertama kali yang saya pelajari adalah React. Artikel ini saya tulis karena termotivasi teman saya yang sudah belajar React dan mengatakan seolah-olah belajar Vue itu lebih susah.","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://susilolab.github.io/javascript/2020/11/16/belajar-vuejs.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://susilolab.github.io/feed.xml" title="susilolab" /><script>
+if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1")) {
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-173956394-1', 'auto');
+  ga('send', 'pageview');
+}
+</script>
+  
+<!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Belajar Reactjs dan Vuejs | susilolab</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="Belajar Reactjs dan Vuejs" />
+<meta name="author" content="Agus Susilo" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Reactjs Kali ini saya ingin belajar Reactjs dan Vuejs serta membandingkan seberapa cepat kita belajar React atau Vue. Perbandingan ini mungkin subjektif karena saya sudah familiar dengan Vue akan lebih condong ke Vue. Walaupun library pertama kali yang saya pelajari adalah React. Artikel ini saya tulis karena termotivasi teman saya yang sudah belajar React dan mengatakan seolah-olah belajar Vue itu lebih susah." />
+<meta property="og:description" content="Reactjs Kali ini saya ingin belajar Reactjs dan Vuejs serta membandingkan seberapa cepat kita belajar React atau Vue. Perbandingan ini mungkin subjektif karena saya sudah familiar dengan Vue akan lebih condong ke Vue. Walaupun library pertama kali yang saya pelajari adalah React. Artikel ini saya tulis karena termotivasi teman saya yang sudah belajar React dan mengatakan seolah-olah belajar Vue itu lebih susah." />
+<link rel="canonical" href="https://susilolab.github.io/javascript/2020/11/16/belajar-vuejs.html" />
+<meta property="og:url" content="https://susilolab.github.io/javascript/2020/11/16/belajar-vuejs.html" />
+<meta property="og:site_name" content="susilolab" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-11-16T06:00:00+07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Belajar Reactjs dan Vuejs" />
+<script type="application/ld+json">
+{"headline":"Belajar Reactjs dan Vuejs","dateModified":"2020-11-16T06:00:00+07:00","datePublished":"2020-11-16T06:00:00+07:00","url":"https://susilolab.github.io/javascript/2020/11/16/belajar-vuejs.html","author":{"@type":"Person","name":"Agus Susilo"},"description":"Reactjs Kali ini saya ingin belajar Reactjs dan Vuejs serta membandingkan seberapa cepat kita belajar React atau Vue. Perbandingan ini mungkin subjektif karena saya sudah familiar dengan Vue akan lebih condong ke Vue. Walaupun library pertama kali yang saya pelajari adalah React. Artikel ini saya tulis karena termotivasi teman saya yang sudah belajar React dan mengatakan seolah-olah belajar Vue itu lebih susah.","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://susilolab.github.io/javascript/2020/11/16/belajar-vuejs.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  
+  
+
+
+
+
+
+
+
+</head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">susilolab</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a><a class="page-link" href="/categories/">Categories</a><a class="page-link" href="/portfolio/">My Portfolio</a><a class="page-link" href="/rust-book/">Rust Book</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Belajar Reactjs dan Vuejs</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2020-11-16T06:00:00+07:00" itemprop="datePublished">Nov 16, 2020
+      </time>
+      
+      
+      • categories:  
+      
+      <a href="/categories/#javascript">javascript</a>
+      
+      
+      </p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <h3 id="reactjs">Reactjs</h3>
+
+<p>Kali ini saya ingin belajar Reactjs dan Vuejs serta membandingkan seberapa cepat kita belajar React atau Vue. 
+Perbandingan ini mungkin subjektif karena saya sudah familiar dengan Vue akan lebih condong ke Vue.
+Walaupun library pertama kali yang saya pelajari adalah React.
+Artikel ini saya tulis karena termotivasi teman saya yang sudah belajar React dan mengatakan seolah-olah belajar Vue itu lebih susah.
+<!--more--></p>
+
+<p>Ok, langsung kita mulai saja. Pertama kita akan mencoba belajar React dulu membuat aplikasi todo sederhana
+Pertama-tama buat proyek React dengan menggunakan <code class="language-plaintext highlighter-rouge">npx</code>.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ npx create-react-app myreact
+</code></pre></div></div>
+
+<p>Dan kita akan mendapatkan struktur folder seperti ini</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>myreact
+- node_modules
+- package.json
+- public
+- README.md
+--+ src
+    - App.css
+    - App.js
+    - App.test.js
+    - index.css
+    - index.js
+    - logo.svg
+    - reportWebVitals.js
+    - setupTests.js 
+- yarn.lock
+</code></pre></div></div>
+
+<p>Dari struktur aplikasi ini yang akan kita perhatikan lebih hanya file <code class="language-plaintext highlighter-rouge">App.js</code> dan <code class="language-plaintext highlighter-rouge">index.js</code>,
+karena bootstrap aplikasi ada pada file <code class="language-plaintext highlighter-rouge">index.js</code> dan satu komponen ada pada file <code class="language-plaintext highlighter-rouge">App.js</code>.</p>
+
+<p>Kita bahas file index.js dulu</p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="k">import</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">ReactDOM</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-dom</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="dl">'</span><span class="s1">./index.css</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">App</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./App</span><span class="dl">'</span><span class="p">;</span>
+<span class="c1">// import reportWebVitals from './reportWebVitals';</span>
+
+<span class="nx">ReactDOM</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span>
+  <span class="o">&lt;</span><span class="nx">React</span><span class="p">.</span><span class="nx">StrictMode</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="nx">App</span> <span class="o">/&gt;</span>
+  <span class="o">&lt;</span><span class="sr">/React.StrictMode&gt;</span><span class="err">,
+</span>  <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">root</span><span class="dl">'</span><span class="p">)</span>
+<span class="p">);</span>
+
+<span class="c1">// reportWebVitals();</span></code></pre></figure>
+
+<p>Jika kita lihat struktur aplikasinya cukup sederhana dimana, pertama mengimport klas React, terus 
+ReactDOM untuk merender komponen, import file <code class="language-plaintext highlighter-rouge">css</code> dan komponen <code class="language-plaintext highlighter-rouge">App</code>. Kemudian ReactDOM.render akan 
+merender aplikasi ke dalam elemen dengan id <code class="language-plaintext highlighter-rouge">root</code>.</p>
+
+<p>Kemudian buka file <code class="language-plaintext highlighter-rouge">App.js</code></p>
+
+<figure class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="k">import</span> <span class="nx">logo</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./logo.svg</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="dl">'</span><span class="s1">./App.css</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">function</span> <span class="nx">App</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className</span><span class="p">=</span><span class="s">"App"</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">header</span> <span class="na">className</span><span class="p">=</span><span class="s">"App-header"</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">img</span> <span class="na">src</span><span class="p">=</span><span class="si">{</span><span class="nx">logo</span><span class="si">}</span> <span class="na">className</span><span class="p">=</span><span class="s">"App-logo"</span> <span class="na">alt</span><span class="p">=</span><span class="s">"logo"</span> <span class="p">/&gt;</span>
+        <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>
+          Edit <span class="p">&lt;</span><span class="nt">code</span><span class="p">&gt;</span>src/App.js<span class="p">&lt;/</span><span class="nt">code</span><span class="p">&gt;</span> and save to reload.
+        <span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">a</span>
+          <span class="na">className</span><span class="p">=</span><span class="s">"App-link"</span>
+          <span class="na">href</span><span class="p">=</span><span class="s">"https://reactjs.org"</span>
+          <span class="na">target</span><span class="p">=</span><span class="s">"_blank"</span>
+          <span class="na">rel</span><span class="p">=</span><span class="s">"noopener noreferrer"</span>
+        <span class="p">&gt;</span>
+          Learn React
+        <span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">header</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">App</span><span class="p">;</span></code></pre></figure>
+
+<p>Dapat dilihat pada source code di atas bahwa React memisah file-file asset seperti css dan gambar terpisah 
+dengan file komponen dan kita harus mengimportnya dengan syntax es6 module. Default komponen pada React disarankan menggunakan 
+function daripada menggunakan class.</p>
+
+<h3 id="rendering-data">Rendering data</h3>
+
+<p>Untuk merender data ke component React menggunakan syntax kurung kurawal <code class="language-plaintext highlighter-rouge">{data}</code>, didalamnya bisa berupa variabel, component, fungsi js atau statement</p>
+
+<figure class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="kd">function</span> <span class="nx">App</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className</span><span class="p">=</span><span class="s">"App"</span><span class="p">&gt;</span>
+    <span class="si">{</span><span class="cm">/* ... */</span><span class="si">}</span>
+    <span class="si">{</span><span class="nx">myname</span><span class="si">}</span>
+    <span class="si">{</span><span class="cm">/* ... */</span><span class="si">}</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">);</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>Contoh component</p>
+
+<figure class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="kd">function</span> <span class="nx">App</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">button</span> <span class="o">=</span> <span class="p">&lt;</span><span class="nt">button</span><span class="p">&gt;</span>Hello<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className</span><span class="p">=</span><span class="s">"App"</span><span class="p">&gt;</span>
+    <span class="si">{</span><span class="cm">/* ... */</span><span class="si">}</span>
+    <span class="si">{</span><span class="nx">button</span><span class="si">}</span>
+    <span class="si">{</span><span class="cm">/* ... */</span><span class="si">}</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">);</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>Contoh fungsi</p>
+
+<figure class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="kd">function</span> <span class="nx">App</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className</span><span class="p">=</span><span class="s">"App"</span><span class="p">&gt;</span>
+    <span class="si">{</span><span class="cm">/* ... */</span><span class="si">}</span>
+    <span class="p">&lt;</span><span class="nt">button</span> <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">setCount</span><span class="p">(</span><span class="nx">count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="si">}</span><span class="p">&gt;</span>Klik saya<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+    <span class="si">{</span><span class="cm">/* ... */</span><span class="si">}</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">);</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>Contoh statement dan component</p>
+
+<figure class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="kd">function</span> <span class="nx">App</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">show</span> <span class="o">=</span> <span class="kc">true</span>
+
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className</span><span class="p">=</span><span class="s">"App"</span><span class="p">&gt;</span>
+    <span class="si">{</span><span class="cm">/* ... */</span><span class="si">}</span>
+    <span class="si">{</span><span class="nx">show</span> <span class="o">&amp;&amp;</span> <span class="p">&lt;</span><span class="nt">button</span><span class="p">&gt;</span>Klik saya<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span><span class="si">}</span>
+    <span class="si">{</span><span class="cm">/* ... */</span><span class="si">}</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">);</span>
+<span class="p">}</span></code></pre></figure>
+
+<h3 id="handle-event">Handle event</h3>
+
+<p>Untuk menghandle sebuah even klik, kita perlu membuat fungsi yang akan ditempatkan pada even <code class="language-plaintext highlighter-rouge">onClick</code></p>
+
+<figure class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="kd">const</span> <span class="nx">handleClick</span> <span class="o">=</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">e</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Clicked</span><span class="dl">'</span><span class="p">);</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>Kemudian letakan pada elemen yang akan dikenai event, misalnya link dan tempatkan event pada 
+atribut <code class="language-plaintext highlighter-rouge">onClick</code> diikuti kurung kurawal.</p>
+
+<figure class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="nx">onClick</span><span class="o">=</span><span class="p">{</span><span class="nx">handleClick</span><span class="p">}</span></code></pre></figure>
+
+<p>Kode lengkapnya seperti ini</p>
+
+<figure class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="kd">function</span> <span class="nx">App</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">handleClick</span> <span class="o">=</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">e</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Clicked</span><span class="dl">'</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className</span><span class="p">=</span><span class="s">"App"</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">header</span> <span class="na">className</span><span class="p">=</span><span class="s">"App-header"</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">img</span> <span class="na">src</span><span class="p">=</span><span class="si">{</span><span class="nx">logo</span><span class="si">}</span> <span class="na">className</span><span class="p">=</span><span class="s">"App-logo"</span> <span class="na">alt</span><span class="p">=</span><span class="s">"logo"</span> <span class="p">/&gt;</span>
+        <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>
+          Edit <span class="p">&lt;</span><span class="nt">code</span><span class="p">&gt;</span>src/App.js<span class="p">&lt;/</span><span class="nt">code</span><span class="p">&gt;</span> and save to reload.
+        <span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">a</span>
+          <span class="na">className</span><span class="p">=</span><span class="s">"App-link"</span>
+          <span class="na">href</span><span class="p">=</span><span class="s">"https://reactjs.org"</span>
+          <span class="na">target</span><span class="p">=</span><span class="s">"_blank"</span>
+          <span class="na">rel</span><span class="p">=</span><span class="s">"noopener noreferrer"</span>
+          <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="nx">handleClick</span><span class="si">}</span>
+        <span class="p">&gt;</span>
+          Learn React
+        <span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">header</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">);</span>
+<span class="p">}</span></code></pre></figure>
+
+<h3 id="property">Property</h3>
+
+<p>Kita dapat melewatkan data ke komponen anak menggunakan property. Buat file Hello.jsx sejajar dengan file App.js dengan
+argumen <code class="language-plaintext highlighter-rouge">props</code> nama. Kemudian copas kode dibawah ini</p>
+
+<figure class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="k">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nx">Hello</span><span class="p">({</span> <span class="nx">name</span> <span class="p">})</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;&gt;</span>
+      <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Hello <span class="si">{</span><span class="nx">name</span><span class="si">}</span>!<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span> 
+    <span class="p">&lt;/&gt;</span>
+  <span class="p">)</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>Kemudian kita bisa import komponen Hello didalam file App.js dan letakan komponen Hello sebelum penutup div</p>
+
+<figure class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="c1">// ...</span>
+<span class="k">import</span> <span class="nx">Hello</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./Hello</span><span class="dl">'</span>
+
+<span class="kd">function</span> <span class="nx">App</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className</span><span class="p">=</span><span class="s">"App"</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">header</span> <span class="na">className</span><span class="p">=</span><span class="s">"App-header"</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">img</span> <span class="na">src</span><span class="p">=</span><span class="si">{</span><span class="nx">logo</span><span class="si">}</span> <span class="na">className</span><span class="p">=</span><span class="s">"App-logo"</span> <span class="na">alt</span><span class="p">=</span><span class="s">"logo"</span> <span class="p">/&gt;</span>
+        <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>
+          Edit <span class="p">&lt;</span><span class="nt">code</span><span class="p">&gt;</span>src/App.js<span class="p">&lt;/</span><span class="nt">code</span><span class="p">&gt;</span> and save to reload.
+        <span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">a</span>
+          <span class="na">className</span><span class="p">=</span><span class="s">"App-link"</span>
+          <span class="na">href</span><span class="p">=</span><span class="s">"https://reactjs.org"</span>
+          <span class="na">target</span><span class="p">=</span><span class="s">"_blank"</span>
+          <span class="na">rel</span><span class="p">=</span><span class="s">"noopener noreferrer"</span>
+        <span class="p">&gt;</span>
+          Learn React
+        <span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">header</span><span class="p">&gt;</span>
+
+      <span class="p">&lt;</span><span class="nc">Hello</span> <span class="na">name</span><span class="p">=</span><span class="s">"Agus"</span> <span class="p">/&gt;</span> <span class="si">{</span><span class="cm">/* letakan disini */</span><span class="si">}</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">)</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>Dan akan muncul tulisan <code class="language-plaintext highlighter-rouge">Hello Agus</code> pada browser</p>
+
+<p><img src="/assets/img/001-belajar-vuejs.png" alt="Hello react" /></p>
+
+<h3 id="conditional-dan-looping">Conditional dan Looping</h3>
+
+<p>Conditional pada react menggunakan fungsi javascript dan tidak ada tambahan syntax baru seperti pada Vue. Ada 3 cara dalam conditional di React, 
+pertama mengggunakan <code class="language-plaintext highlighter-rouge">if else</code> dan diletakkan sebelum return jsx, kedua menggunakan ternary if <code class="language-plaintext highlighter-rouge">exp ? stmt : stmt</code> dan yang ketiga menggunakan operator 
+<code class="language-plaintext highlighter-rouge">&amp;&amp;</code> untuk if tanpa else.</p>
+
+<figure class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="k">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nx">Hello</span><span class="p">({</span> <span class="nx">name</span> <span class="p">})</span> <span class="p">{</span>
+  <span class="nx">button</span> <span class="o">=</span> <span class="p">&lt;</span><span class="nt">button</span><span class="p">&gt;</span>Foo<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">name</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">Agus</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">button</span> <span class="o">=</span> <span class="p">&lt;</span><span class="nt">button</span><span class="p">&gt;</span>Bar<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+  <span class="p">}</span>
+
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;&gt;</span><span class="si">{</span><span class="nx">button</span><span class="si">}</span><span class="p">&lt;/&gt;</span>
+  <span class="p">)</span>
+<span class="p">}</span></code></pre></figure>
+
+<h3 id="state">State</h3>
+
+<p>Ok saya bingung bagaimana cara menaruh local state, mungkin kita harus merubah komponen dari function 
+ke klas. Setelah mencari-cari di google ternyata kita bisa menggunakan Hooks. kita bisa mengimport 
+fungsi <code class="language-plaintext highlighter-rouge">useState</code> dari module <code class="language-plaintext highlighter-rouge">react</code>.</p>
+
+<p>Kita akan membuat component baru dengan nama <code class="language-plaintext highlighter-rouge">Counter</code> untuk menampilkan angka, button increment dan decrement</p>
+
+<figure class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="k">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nx">Counter</span> <span class="p">()</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">count</span><span class="p">,</span> <span class="nx">setCount</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Anda sudah mengklik <span class="si">{</span><span class="nx">count</span><span class="si">}</span> kali<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">button</span> <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">setCount</span><span class="p">(</span><span class="nx">count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="si">}</span><span class="p">&gt;</span>+<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">button</span> <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">setCount</span><span class="p">(</span><span class="nx">count</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="si">}</span><span class="p">&gt;</span>-<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">)</span>
+<span class="p">}</span></code></pre></figure>
+
+
+  </div><a class="u-url" href="/javascript/2020/11/16/belajar-vuejs.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper"><div class="footer-col-wrapper">
+      <div class="footer-col footer-col-3"><ul class="social-media-list"><li><a href="https://github.com/susilolab"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">susilolab</span></a></li><li><a href="https://instagram.com/mas.agus"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#instagram"></use></svg> <span class="username">mas.agus</span></a></li><li><a href="https://www.twitter.com/susil0"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">susil0</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>&quot;Sebaik-baik manusia adalah yang paling bermanfaat bagi manusia&quot; (HR. Ahmad, ath-Thabrani, ad-Daruqutni)</p>
+        <p>&copy;2023&nbsp;Agus Susilo</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

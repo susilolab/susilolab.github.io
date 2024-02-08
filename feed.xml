@@ -1,4 +1,246 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="https://susilolab.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://susilolab.github.io/" rel="alternate" type="text/html" /><updated>2022-09-05T08:43:53+07:00</updated><id>https://susilolab.github.io/feed.xml</id><title type="html">susilolab</title><subtitle>&quot;Sebaik-baik manusia adalah yang paling bermanfaat bagi manusia&quot; (HR. Ahmad, ath-Thabrani, ad-Daruqutni)</subtitle><author><name>Agus Susilo</name></author><entry><title type="html">Highlight neovim tidak jalan di tmux</title><link href="https://susilolab.github.io/linux/2022/09/05/highlight-neovim-tidak-jalan-di-tmux.html" rel="alternate" type="text/html" title="Highlight neovim tidak jalan di tmux" /><published>2022-09-05T05:00:00+07:00</published><updated>2022-09-05T05:00:00+07:00</updated><id>https://susilolab.github.io/linux/2022/09/05/highlight-neovim-tidak-jalan-di-tmux</id><content type="html" xml:base="https://susilolab.github.io/linux/2022/09/05/highlight-neovim-tidak-jalan-di-tmux.html">&lt;p&gt;&lt;img src=&quot;/assets/img/vim-tmux-02.png&quot; alt=&quot;vim+tmux&quot; /&gt;&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="https://susilolab.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://susilolab.github.io/" rel="alternate" type="text/html" /><updated>2023-12-23T23:48:02+07:00</updated><id>https://susilolab.github.io/feed.xml</id><title type="html">susilolab</title><subtitle>&quot;Sebaik-baik manusia adalah yang paling bermanfaat bagi manusia&quot; (HR. Ahmad, ath-Thabrani, ad-Daruqutni)</subtitle><author><name>Agus Susilo</name></author><entry><title type="html">Scaling PHP Application</title><link href="https://susilolab.github.io/php/2023/12/23/scaling-php-performance.html" rel="alternate" type="text/html" title="Scaling PHP Application" /><published>2023-12-23T07:00:00+07:00</published><updated>2023-12-23T07:00:00+07:00</updated><id>https://susilolab.github.io/php/2023/12/23/scaling-php-performance</id><content type="html" xml:base="https://susilolab.github.io/php/2023/12/23/scaling-php-performance.html">&lt;p&gt;Hari ini saya ingin ngobrol tentang performa aplikasi yang dibuat dengan bahasa &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;PHP&lt;/code&gt; karena ditempat kerja 
+saya sedang membicarakan tentang berapa banyak pengguna yang dapat online sekaligus pada aplikasi kami. Benarkah aplikasi &lt;strong&gt;PHP&lt;/strong&gt; bisa discale up?
+&lt;!--more--&gt;&lt;/p&gt;
+
+&lt;p&gt;Rekan tim kemudian 
+membenchmark/mengukur performa dengan tool &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;apache benchmark&lt;/code&gt; (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ab&lt;/code&gt;) pada halaman landing page saja. Dengan jumlah request 
+20k dan concurrentnya 20k lebih dari itu tool benchmark tidak mau jalan. Namun untuk mengetahui berapa jumlah maksimal 
+user yang dapat online pada web tidak sesederhana itu. Ada banyak parameter lain yang harus dipertimbangkan.
+Mengutip dari &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;servebolt.com&lt;/code&gt; bahwa mengukur jumlah maksimal user yang dapat online harus memperhatikan beberapa parameter 
+seperti berapa lama user online pada tiap sesi, rata-rata user mengklik tiap detik, jumlah maksimal request per detik dan
+parameter tersebut bisa kita dapatkan dari google analytic.&lt;/p&gt;
+
+&lt;p&gt;Dari data tersebut baru kita bisa mengetahui jumlah maksimal user yang dapat online pada web kita yaitu dengan 
+mengkalikan maksimal request perdetik dikali 60, dikali klik frekuensi user perdetik maka akan didapat maksimal user 
+yang dapat online secara simultan. Lalu bagaimana cara meningkatkan performa web kita?&lt;/p&gt;
+
+&lt;h3 id=&quot;meningkatkan-performa-aplikasi-php&quot;&gt;Meningkatkan performa aplikasi PHP&lt;/h3&gt;
+
+&lt;p&gt;Ada beberapa cara meningkatkan performa web atau istilahnya optimalisasi yaitu&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;Mengoptimalkan query &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;select&lt;/code&gt;. Query yang yang tidak optimal akan memperlambat akses web, hal yang harus adalah 
+hindari penggunaan &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;select *&lt;/code&gt; pada saat query ke database. Jika tidak membutuhkan semua kolom maka sebutkan 
+nama kolom pada saat select.&lt;/li&gt;
+  &lt;li&gt;Gunakan index pada tabel secara tepat sesuai kebutuhan. Index pada tabel dapat mempercepat proses query database.&lt;/li&gt;
+  &lt;li&gt;Gunakan cache pada data yang sering diakses. Cache dapat mempercepat akses data tanpa perlu query ke database. 
+Tool yang bisa digunakan di antaranya &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Redis&lt;/code&gt; atau &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Memcached&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;Menyederhanakan dan mengoptimalkan kode. Kode yang tidak optimal dan komplek akan sangat berpengaruh pada kecepatan 
+karena terlalu banyak logic yang tidak perlu.&lt;/li&gt;
+  &lt;li&gt;Menambah ram, cpu atau bahkan jumlah server. Hal ini merupakan pilihan terakhir jika optimasi dari sisi software 
+sudah maksimal.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;penggunaan-job-queue-background-process-worker&quot;&gt;Penggunaan Job Queue, Background Process, Worker&lt;/h3&gt;
+
+&lt;p&gt;Jika kode sudah dioptimalkan, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;query&lt;/code&gt; juga sudah dibuat seminimal mungkin dan sudah menggunakan teknik &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cache&lt;/code&gt; namun proses masih 
+lambat maka perlu adanya pemisahan proses yang berat ke dalam &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;job queue&lt;/code&gt; atau &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;background proses&lt;/code&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;penggunaan-teknologi-async&quot;&gt;Penggunaan Teknologi Async&lt;/h3&gt;
+
+&lt;p&gt;Penggunaan async dapat membantu mempercepat proses karena fungsi dapat dieksekusi secara concurent dan non blocking, itu artinya suatu proses 
+dapat ditunda dan dilanjut eksekusi berdasarkan dari penjadwalan yang disebut dengan &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;event loop&lt;/code&gt;. Untuk &lt;strong&gt;PHP&lt;/strong&gt; merubah fungsi-fungsi pada aplikasi yang sudah berjalan 
+dengan fungsi async akan membutuhkan waktu dan sumber daya yang tidak sedikit.&lt;/p&gt;
+
+&lt;p&gt;Karena pada dasarnya &lt;strong&gt;PHP&lt;/strong&gt; tidak dirancang dari awal untuk melakukan sesuatu secara async, bawaan &lt;strong&gt;PHP&lt;/strong&gt; semua fungsi berjalan secara berurutan. Oleh karena menerapkan teknologi async 
+akan butuh waktu yang tidak sebentar dan pembiasaanya dengan event loop. Tetapi pada versi 8.1 php mulai menyertakan fitur dasar yang akan memudahkan penggunakan async pada fungsi yaitu
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;fiber&lt;/code&gt;, &lt;strong&gt;fiber&lt;/strong&gt; memungkinkan suatu fungsi dapat di pause dan diresume.&lt;/p&gt;
+
+&lt;p&gt;Keuntungan lain dengan adanya fiber ini adalah memungkinkan kode async bisa terlihat seperti sinkronous kode dan pustaka seperti &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;amphp&lt;/code&gt; dan &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;reactphp&lt;/code&gt; sudah menerapkan fiber pada pustakanya.&lt;/p&gt;
+
+&lt;p&gt;Jika penggunaan pustaka async dirasa masih kurang cepat maka perlu menginstall modul php seperti &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;event&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ev&lt;/code&gt; atau &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;uv&lt;/code&gt;, modul ini mirip dengan event loop yang dipake pada nodejs.&lt;/p&gt;
+
+&lt;p&gt;Pilihan terakhir adalah bisa menggunakan teknologi &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;openswoole&lt;/code&gt; atau &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;swoole&lt;/code&gt;, teknologi ini paket lengkap karena banyar fitur yang ditawarkan seperti event driven, coroutine (mirip goroutine),
+websocket server, grpc, multiprocessing dll. Namun modul ini membutuhkan kompilasi waktu yang cukup lama.&lt;/p&gt;
+
+&lt;h3 id=&quot;hybrid-system&quot;&gt;Hybrid System&lt;/h3&gt;
+
+&lt;p&gt;Hybrid sistem artinya menambah bahasa aplikasi baru dan itu artinya butuh programmer lagi yang paham bahasa baru tersebut, seperti Go, Rust atau Nodejs.&lt;/p&gt;
+
+&lt;h3 id=&quot;penggunaan-grpc&quot;&gt;Penggunaan GRPC&lt;/h3&gt;</content><author><name>Agus Susilo</name></author><category term="php" /><summary type="html">Hari ini saya ingin ngobrol tentang performa aplikasi yang dibuat dengan bahasa PHP karena ditempat kerja saya sedang membicarakan tentang berapa banyak pengguna yang dapat online sekaligus pada aplikasi kami. Benarkah aplikasi PHP bisa discale up?</summary></entry><entry><title type="html">Mencari bugs tanpa menjalankan dengan phpstan</title><link href="https://susilolab.github.io/php/2023/12/10/mencari-bugs-tanpa-menjalankan-dengan-phpstan.html" rel="alternate" type="text/html" title="Mencari bugs tanpa menjalankan dengan phpstan" /><published>2023-12-10T05:00:00+07:00</published><updated>2023-12-10T05:00:00+07:00</updated><id>https://susilolab.github.io/php/2023/12/10/mencari-bugs-tanpa-menjalankan-dengan-phpstan</id><content type="html" xml:base="https://susilolab.github.io/php/2023/12/10/mencari-bugs-tanpa-menjalankan-dengan-phpstan.html">&lt;p&gt;Mengelola aplikasi php jadul adalah hal yang mungkin membosankan karena dari versi phpnya sampe paket-paket sudah usang apalagi jika phpnya masih versi 5.6 haduh, belum lagi bugs yang ada karena aplikasi dikembangkan turun 
+temurun dengan berbagai latar developer yang berbeda. Untuk cara upgrade php dari versi 5.6 ke 8 Insha Allah akan saya bikinkan artikelnya.&lt;/p&gt;
+
+&lt;p&gt;Namun jangan khawatir para developer php sudah membuat banyak tool untuk mengatasi hal tersebut, salah satu tool yang ingin saya kenalkan adalah &lt;a href=&quot;https://phpstan.org&quot;&gt;&lt;strong&gt;PHPStan&lt;/strong&gt;&lt;/a&gt; sebuah static analysis yang dapat 
+membantu menscan kode php tanpa running diproduction untuk mencari bugs yang ada.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/2023-12-10-logo-phpstan.png&quot; alt=&quot;logo-phpstan&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Nah kali ini saya ingin berbagi cara penggunaan &lt;strong&gt;PHPStan&lt;/strong&gt;
+&lt;!--more--&gt;&lt;/p&gt;
+
+&lt;p&gt;Didalam gRPC aplikasi client dapat langsung memanggil fungsi di server pada mesin yang berbeda seperti jika fungsi tersebut adalah objek lokal, hal ini membuatmu lebih mudah 
+untuk membuat aplikasi dan servis yang terdistribusi.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/2023-12-10-demo-phpstan.png&quot; alt=&quot;demo-phpstan&quot; /&gt;
+Gambaran tentang gRPC bisa dilihat pada diagram dibawah ini.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/grpc-overview.svg&quot; alt=&quot;diagram-grpc&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Dapat dilihat pada gambar bahwa server grpc dibuat dengan bahasa c++ sedangkan 2 client menggunakan Ruby dan Java. Hal ini bisa dilakukan karena masing-masing kode baik 
+server maupun client memiliki interface yang sama hasil dari file &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.proto&lt;/code&gt;. masing-masing dari server dan client akan digeneratekan kode berdasarkan file &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.proto&lt;/code&gt; 
+sehingga walaupun hasil generate kodenya berbeda bahasa tetap bisa berkomunikasi.&lt;/p&gt;
+
+&lt;p&gt;Dan kali ini saya ingin mengenalkan cara membuat server grpc dengan Rust dan clientnya dengan PHP. Mengapa memilih menggunakan Rust?. Pertama karena saya ingin lebih mendalami Rust, 
+yang kedua adalah karena faktor safety (keamanan) bukan kecepatan. Karena di Rust kalau sudah bisa terkompile Insha Allah kode kita aman hehehe.&lt;/p&gt;
+
+&lt;p&gt;Kemudian kenapa untuk client pake PHP karena bahasa ini sudah lama banget saya pake dari saya SMK dan juga tempat saya bekerja masih menggunakan PHP sebagai bahasa utama walaupun 
+sekarang sudah campur dengan bahasa lain.&lt;/p&gt;
+
+&lt;p&gt;Jadi saya ingin menguji gRPC ini ditempat saya bekerja agar kode baru pada fitur baru tidak terlalu semrawut.&lt;/p&gt;
+
+&lt;p&gt;Sebelum kita ngoding saya ingin memberikan daftar kebutuhan yang harus diinstall di lokal development baik Rust maupun PHP.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;protoc&lt;/strong&gt; untuk mengenerate stub kode khusus di PHP, karena di Rust tidak perlu protoc ini.&lt;/li&gt;
+  &lt;li&gt;grpc php plugin&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Agus Susilo</name></author><category term="php" /><summary type="html">Mengelola aplikasi php jadul adalah hal yang mungkin membosankan karena dari versi phpnya sampe paket-paket sudah usang apalagi jika phpnya masih versi 5.6 haduh, belum lagi bugs yang ada karena aplikasi dikembangkan turun temurun dengan berbagai latar developer yang berbeda. Untuk cara upgrade php dari versi 5.6 ke 8 Insha Allah akan saya bikinkan artikelnya. Namun jangan khawatir para developer php sudah membuat banyak tool untuk mengatasi hal tersebut, salah satu tool yang ingin saya kenalkan adalah PHPStan sebuah static analysis yang dapat membantu menscan kode php tanpa running diproduction untuk mencari bugs yang ada. Nah kali ini saya ingin berbagi cara penggunaan PHPStan</summary></entry><entry><title type="html">Membuat gRPC Rust Server dan PHP sebagai Client</title><link href="https://susilolab.github.io/rust/2023/11/25/membuat-hello-world-grpc-rust-server-dan-php-client.html" rel="alternate" type="text/html" title="Membuat gRPC Rust Server dan PHP sebagai Client" /><published>2023-11-25T05:00:00+07:00</published><updated>2023-11-25T05:00:00+07:00</updated><id>https://susilolab.github.io/rust/2023/11/25/membuat-hello-world-grpc-rust-server-dan-php-client</id><content type="html" xml:base="https://susilolab.github.io/rust/2023/11/25/membuat-hello-world-grpc-rust-server-dan-php-client.html">&lt;p&gt;gRPC adalah framework remote procedure call(rpc) yang dapat berjalan dilingkungan manapun, grpc mendukung banyak bahasa pemrograman. yang membedakan dengan rpc lainnya 
+adalah gRPC menggunakan protokol buffer untuk berbagi data antara server dan client yang dikenal sangat cepat dibanding menggunakan json/xml. grpc ini salah satu cara 
+yang digunakan developer untuk membuat microservice.&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;p&gt;Didalam gRPC aplikasi client dapat langsung memanggil fungsi di server pada mesin yang berbeda seperti jika fungsi tersebut adalah objek lokal, hal ini membuatmu lebih mudah 
+untuk membuat aplikasi dan servis yang terdistribusi.&lt;/p&gt;
+
+&lt;p&gt;Gambaran tentang gRPC bisa dilihat pada diagram dibawah ini.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/grpc-overview.svg&quot; alt=&quot;diagram-grpc&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Dapat dilihat pada gambar bahwa server grpc dibuat dengan bahasa c++ sedangkan 2 client menggunakan Ruby dan Java. Hal ini bisa dilakukan karena masing-masing kode baik 
+server maupun client memiliki interface yang sama hasil dari file &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.proto&lt;/code&gt;. masing-masing dari server dan client akan digeneratekan kode berdasarkan file &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.proto&lt;/code&gt; 
+sehingga walaupun hasil generate kodenya berbeda bahasa tetap bisa berkomunikasi.&lt;/p&gt;
+
+&lt;p&gt;Dan kali ini saya ingin mengenalkan cara membuat server grpc dengan Rust dan clientnya dengan PHP. Mengapa memilih menggunakan Rust?. Pertama karena saya ingin lebih mendalami Rust, 
+yang kedua adalah karena faktor safety (keamanan) bukan kecepatan. Karena di Rust kalau sudah bisa terkompile Insha Allah kode kita aman hehehe.&lt;/p&gt;
+
+&lt;p&gt;Kemudian kenapa untuk client pake PHP karena bahasa ini sudah lama banget saya pake dari saya SMK dan juga tempat saya bekerja masih menggunakan PHP sebagai bahasa utama walaupun 
+sekarang sudah campur dengan bahasa lain.&lt;/p&gt;
+
+&lt;p&gt;Jadi saya ingin menguji gRPC ini ditempat saya bekerja agar kode baru pada fitur baru tidak terlalu semrawut.&lt;/p&gt;
+
+&lt;p&gt;Sebelum kita ngoding saya ingin memberikan daftar kebutuhan yang harus diinstall di lokal development baik Rust maupun PHP.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;protoc&lt;/strong&gt; untuk mengenerate stub kode khusus di PHP, karena di Rust tidak perlu protoc ini.&lt;/li&gt;
+  &lt;li&gt;grpc php plugin&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Agus Susilo</name></author><category term="rust" /><summary type="html">gRPC adalah framework remote procedure call(rpc) yang dapat berjalan dilingkungan manapun, grpc mendukung banyak bahasa pemrograman. yang membedakan dengan rpc lainnya adalah gRPC menggunakan protokol buffer untuk berbagi data antara server dan client yang dikenal sangat cepat dibanding menggunakan json/xml. grpc ini salah satu cara yang digunakan developer untuk membuat microservice.</summary></entry><entry><title type="html">Merubah Timeout pada job queue Yii2</title><link href="https://susilolab.github.io/php/2023/11/05/merubah-timeout-pada-job-queue-yii2.html" rel="alternate" type="text/html" title="Merubah Timeout pada job queue Yii2" /><published>2023-11-05T05:00:00+07:00</published><updated>2023-11-05T05:00:00+07:00</updated><id>https://susilolab.github.io/php/2023/11/05/merubah-timeout-pada-job-queue-yii2</id><content type="html" xml:base="https://susilolab.github.io/php/2023/11/05/merubah-timeout-pada-job-queue-yii2.html">&lt;p&gt;Default timeout pada job queue yii2 adalah 60 detik, terkadang proses yang berjalan lebih dari 60 detik. Supaya job queue dapat berjalan lebih dari 60 detik 
+maka klas job perlu implements dari interface &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;yii\queue\RetryableJobInterface&lt;/code&gt;.&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;p&gt;contoh:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;kn&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;yii\base\BaseObject&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;DemoJob&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;BaseObject&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;\&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;yii\queue\RetryableJobInterface&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;execute&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$queue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&apos;hello world&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;getTtr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;120&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;canRetry&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$attempt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>Agus Susilo</name></author><category term="php" /><summary type="html">Default timeout pada job queue yii2 adalah 60 detik, terkadang proses yang berjalan lebih dari 60 detik. Supaya job queue dapat berjalan lebih dari 60 detik maka klas job perlu implements dari interface yii\queue\RetryableJobInterface.</summary></entry><entry><title type="html">Alternative __dirname di module es6</title><link href="https://susilolab.github.io/javascript/2023/09/28/alternative-dirname-di-modul-es6.html" rel="alternate" type="text/html" title="Alternative __dirname di module es6" /><published>2023-09-28T05:00:00+07:00</published><updated>2023-09-28T05:00:00+07:00</updated><id>https://susilolab.github.io/javascript/2023/09/28/alternative-dirname-di-modul-es6</id><content type="html" xml:base="https://susilolab.github.io/javascript/2023/09/28/alternative-dirname-di-modul-es6.html">&lt;p&gt;Jika kamu seorang programmer Javascript dan sudah mulai menggunakan modul es6 maka kamu perlu tips singkat ini untuk dapat menggunakan variable &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;__dirname&lt;/code&gt; di scriptmu.
+Karena pada modul es6 variable &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;__dirname&lt;/code&gt; tidak dapat diakses.&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;p&gt;Bagaimana mengetahui bahwa aplikasi kita sudah menggunakan modul es6?. hal ini bisa dilihat dari cara import sebuah modul, sebelum modul es6 cara import modul menggunakan syntax
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;require&lt;/code&gt;. Contoh:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-javascript&quot; data-lang=&quot;javascript&quot;&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;app&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;express&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;sedangkan pada modul es6 sudah menggunakan syntax &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;import&lt;/code&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-javascript&quot; data-lang=&quot;javascript&quot;&gt;&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;app&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;express&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Hal ini ditandai dengan adanya properti konfig dengan nama &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;type&lt;/code&gt; dan bernilai &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;module&lt;/code&gt; pada file &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;package.json&lt;/code&gt;. Nah jika sudah menggunakan modul es6 maka variable &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;__dirname&lt;/code&gt; tidak dapat dipakai lagi.
+Untuk itu berikut ini ada caranya membuat semisal &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;__dirname&lt;/code&gt;, kamu cukup salin saja kode berikut dan variable &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;__dirname&lt;/code&gt; sudah bisa digunakan.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-javascript&quot; data-lang=&quot;javascript&quot;&gt;&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;dirname&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;fileURLToPath&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;__dirname&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;dirname&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;fileURLToPath&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;meta&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;semoga bermanfaat.&lt;/p&gt;</content><author><name>Agus Susilo</name></author><category term="javascript" /><summary type="html">Jika kamu seorang programmer Javascript dan sudah mulai menggunakan modul es6 maka kamu perlu tips singkat ini untuk dapat menggunakan variable __dirname di scriptmu. Karena pada modul es6 variable __dirname tidak dapat diakses.</summary></entry><entry><title type="html">Fix style kodingmu di PHP dengan php cs fixer</title><link href="https://susilolab.github.io/php/2023/08/20/fix-style-koding-di-php-dengan-php-cs-fixer.html" rel="alternate" type="text/html" title="Fix style kodingmu di PHP dengan php cs fixer" /><published>2023-08-20T05:00:00+07:00</published><updated>2023-08-20T05:00:00+07:00</updated><id>https://susilolab.github.io/php/2023/08/20/fix-style-koding-di-php-dengan-php-cs-fixer</id><content type="html" xml:base="https://susilolab.github.io/php/2023/08/20/fix-style-koding-di-php-dengan-php-cs-fixer.html">&lt;p&gt;Pusing mikir style koding yang berantakan?. ndak usah khawatir, fokus saja pada logik kodemu dan serahkan stylenya pada php coding style fixer.&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;p&gt;Komen config neovim jika di tempat saya berlokasi di &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;~/.config/nvim/init.vim&lt;/code&gt; pada keyword &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;set termguicolors&lt;/code&gt; dengan menggunakan &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&quot;&lt;/code&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-vim&quot; data-lang=&quot;vim&quot;&gt;&lt;span class=&quot;c&quot;&gt;&quot; set termguicolors&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Kemudian tutup dan buka kembali terminal kamu dan cobalah untuk menjalankan tmux lalu vim maka highlightnya akan berjalan kembali&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/vim-tmux-01.png&quot; alt=&quot;vim+tmux&quot; /&gt;&lt;/p&gt;</content><author><name>Agus Susilo</name></author><category term="php" /><summary type="html">Pusing mikir style koding yang berantakan?. ndak usah khawatir, fokus saja pada logik kodemu dan serahkan stylenya pada php coding style fixer.</summary></entry><entry><title type="html">Membuat Aplikasi Todo dengan Svelte</title><link href="https://susilolab.github.io/javascript/2023/01/22/membuat-aplikasi-todo-dengan-svelte.html" rel="alternate" type="text/html" title="Membuat Aplikasi Todo dengan Svelte" /><published>2023-01-22T05:00:00+07:00</published><updated>2023-01-22T05:00:00+07:00</updated><id>https://susilolab.github.io/javascript/2023/01/22/membuat-aplikasi-todo-dengan-svelte</id><content type="html" xml:base="https://susilolab.github.io/javascript/2023/01/22/membuat-aplikasi-todo-dengan-svelte.html">&lt;p&gt;Svelte adalah pustaka untuk membuat web yang dibuat oleh Rich Harris. Nilai jual utama svelte yaitu tidak menggunakan virutal dom (VDOM) untuk memonitor perubahan data dan
+mengkompilasi ulang html. Svelte akan mengkompile komponen html menjadi native javascript sehingga bisa meniadakan adanya runtime, hal ini akan membuat ukuran aplikasi
+menjadi lebih kecil dibanding pustaka yang menggunakan vdom dan juga performanya jauh lebih cepat.&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-svelte&quot; data-lang=&quot;svelte&quot;&gt;&amp;lt;script&amp;gt;
+  let msg = &apos;hello world&apos;
+&amp;lt;/script&amp;gt;
+
+&amp;lt;div&amp;gt;{msg}&amp;lt;/div&amp;gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>Agus Susilo</name></author><category term="javascript" /><summary type="html">Svelte adalah pustaka untuk membuat web yang dibuat oleh Rich Harris. Nilai jual utama svelte yaitu tidak menggunakan virutal dom (VDOM) untuk memonitor perubahan data dan mengkompilasi ulang html. Svelte akan mengkompile komponen html menjadi native javascript sehingga bisa meniadakan adanya runtime, hal ini akan membuat ukuran aplikasi menjadi lebih kecil dibanding pustaka yang menggunakan vdom dan juga performanya jauh lebih cepat.</summary></entry><entry><title type="html">Contoh Closure sederhana pada Rust</title><link href="https://susilolab.github.io/rust/2023/01/08/contoh-anonymous-function-pada-rust.html" rel="alternate" type="text/html" title="Contoh Closure sederhana pada Rust" /><published>2023-01-08T05:00:00+07:00</published><updated>2023-01-08T05:00:00+07:00</updated><id>https://susilolab.github.io/rust/2023/01/08/contoh-anonymous-function-pada-rust</id><content type="html" xml:base="https://susilolab.github.io/rust/2023/01/08/contoh-anonymous-function-pada-rust.html">&lt;p&gt;Rust memiliki function anonymous yang mirip dengan Ruby yang bisa kita lihat penggunaan 
+tanda &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;|&lt;/code&gt; walaupun tidak 100% sama. berikut ini contoh penggunaan closure/anonymous function 
+pada rust.&lt;/p&gt;
+
+&lt;p&gt;Closure pada Rust bisa kita definisikan menggunakan format &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;||&lt;/code&gt; dan &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;|| {}&lt;/code&gt; jika statementnya lebih dari satu baris atau 
+closure memiliki tipe kembalian.
+&lt;!--more--&gt;&lt;/p&gt;
+
+&lt;p&gt;Contoh closure paling sederhana tanpa adanya argument dan tipe kembalian.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;demo&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;nd&quot;&gt;println!&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Hello closure.&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;demo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Contoh closure dengan argument.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;greeting&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;nd&quot;&gt;println!&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Hello {name}.&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;greeting&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Contoh closure dengan argument dan tipe kembalian.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;add&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;i32&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;i32&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;i32&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;res&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;println!&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Hasil 1 + 2 = {res}&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>Agus Susilo</name></author><category term="rust" /><summary type="html">Rust memiliki function anonymous yang mirip dengan Ruby yang bisa kita lihat penggunaan tanda | walaupun tidak 100% sama. berikut ini contoh penggunaan closure/anonymous function pada rust. Closure pada Rust bisa kita definisikan menggunakan format || dan || {} jika statementnya lebih dari satu baris atau closure memiliki tipe kembalian.</summary></entry><entry><title type="html">Membuat Echo Server TCP dengan Tokio Rust</title><link href="https://susilolab.github.io/rust/2022/09/18/membuat-echo-server-tcp-dengan-rust.html" rel="alternate" type="text/html" title="Membuat Echo Server TCP dengan Tokio Rust" /><published>2022-09-18T05:00:00+07:00</published><updated>2022-09-18T05:00:00+07:00</updated><id>https://susilolab.github.io/rust/2022/09/18/membuat-echo-server-tcp-dengan-rust</id><content type="html" xml:base="https://susilolab.github.io/rust/2022/09/18/membuat-echo-server-tcp-dengan-rust.html">&lt;p&gt;Tokio adalah pustaka untuk membuat aplikasi async di Rust, karena di std lib Rust tidak menyertakan event loop dan lainnya yang berhubungan async await. 
+Maka user dapat menggunakan lib dari luar std lib. Pustaka lain yang bisa digunakan adalah &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;async-std&lt;/code&gt;, namun untuk kali ini kita akan menggunakan tokio 
+karena alasan lebih familiar saja.&lt;/p&gt;
+
+&lt;p&gt;Kali ini kita akan membuat aplikasi sederhana yaitu TCP Echo Server dan client. Pertama-tama kita buat dulu project baru dengan &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cargo&lt;/code&gt;
+&lt;!--more--&gt;&lt;/p&gt;
+
+&lt;p&gt;Untuk membuat project baru ketikan perintah ini&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cargo new echo_server&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Lalu masuk ke folder &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;echo_server&lt;/code&gt; dan tambahkan pustaka tokio pada baris setelah &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;[dependencies]&lt;/code&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[dependencies]
+tokio = { version = &quot;1&quot;, features = [&quot;full&quot;] }
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Kemudian edit file &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;src/main.rs&lt;/code&gt;. Pertama kita akan mengimport struk &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;TcpListener&lt;/code&gt; dan trait &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;AsyncReadExt&lt;/code&gt; dan &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;AsyncWriteExt&lt;/code&gt; dari tokio&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;tokio&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nn&quot;&gt;net&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TcpListener&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;tokio&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nn&quot;&gt;io&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;::{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;AsyncReadExt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;AsyncWriteExt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Lalu pada main kita rubah menjadi async agar dapat memproses async function.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;tokio&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nn&quot;&gt;net&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TcpListener&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;tokio&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nn&quot;&gt;io&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;::{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;AsyncReadExt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;AsyncWriteExt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+
+&lt;span class=&quot;nd&quot;&gt;#[tokio::main]&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;async&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Result&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Box&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dyn&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nn&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Error&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>Agus Susilo</name></author><category term="rust" /><summary type="html">Tokio adalah pustaka untuk membuat aplikasi async di Rust, karena di std lib Rust tidak menyertakan event loop dan lainnya yang berhubungan async await. Maka user dapat menggunakan lib dari luar std lib. Pustaka lain yang bisa digunakan adalah async-std, namun untuk kali ini kita akan menggunakan tokio karena alasan lebih familiar saja. Kali ini kita akan membuat aplikasi sederhana yaitu TCP Echo Server dan client. Pertama-tama kita buat dulu project baru dengan cargo</summary></entry><entry><title type="html">Highlight neovim tidak jalan di tmux</title><link href="https://susilolab.github.io/linux/2022/09/05/highlight-neovim-tidak-jalan-di-tmux.html" rel="alternate" type="text/html" title="Highlight neovim tidak jalan di tmux" /><published>2022-09-05T05:00:00+07:00</published><updated>2022-09-05T05:00:00+07:00</updated><id>https://susilolab.github.io/linux/2022/09/05/highlight-neovim-tidak-jalan-di-tmux</id><content type="html" xml:base="https://susilolab.github.io/linux/2022/09/05/highlight-neovim-tidak-jalan-di-tmux.html">&lt;p&gt;&lt;img src=&quot;/assets/img/vim-tmux-02.png&quot; alt=&quot;vim+tmux&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Jika highlight line pada vim/neovim kamu tidak jalan pada saat menggunakan tmux kamu bisa edit confignya seperti ini:
 &lt;!--more--&gt;&lt;/p&gt;
@@ -9,751 +251,4 @@
 
 &lt;p&gt;Kemudian tutup dan buka kembali terminal kamu dan cobalah untuk menjalankan tmux lalu vim maka highlightnya akan berjalan kembali&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/img/vim-tmux-01.png&quot; alt=&quot;vim+tmux&quot; /&gt;&lt;/p&gt;</content><author><name>Agus Susilo</name></author><category term="linux" /><summary type="html">Jika highlight line pada vim/neovim kamu tidak jalan pada saat menggunakan tmux kamu bisa edit confignya seperti ini:</summary></entry><entry><title type="html">Peco aplikasi untuk menyaring data yang interaktif dan mudah</title><link href="https://susilolab.github.io/linux/2022/08/26/peco-aplikasi-untuk-menyaring-data-yang-interaktif-dan-mudah.html" rel="alternate" type="text/html" title="Peco aplikasi untuk menyaring data yang interaktif dan mudah" /><published>2022-08-26T05:00:00+07:00</published><updated>2022-08-26T05:00:00+07:00</updated><id>https://susilolab.github.io/linux/2022/08/26/peco-aplikasi-untuk-menyaring-data-yang-interaktif-dan-mudah</id><content type="html" xml:base="https://susilolab.github.io/linux/2022/08/26/peco-aplikasi-untuk-menyaring-data-yang-interaktif-dan-mudah.html">&lt;p&gt;&lt;img src=&quot;/assets/img/peco-tool.gif&quot; alt=&quot;peco tool&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Jika kamu adalah seorang devops/programmer yang suka dengan cli maka tool ini akan sangat cocok sebagai aplikasi harian 
-yang akan memudahkanmu dalam menyaring data dari proses lain ataupun dari file log dan sejenisnya. Biasanya saya akan menggunakan 
-perintah grep untuk menyaring data dari proses &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ps ax&lt;/code&gt; saat mencari sebuah proses. Nah dengan aplikasi &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;peco&lt;/code&gt; bagaimana?.
-&lt;!--more--&gt;&lt;/p&gt;
-
-&lt;p&gt;Dengan menggunakan &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;peco&lt;/code&gt; hal-hal seperti menyaring data dari perintah &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ls&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ps ax&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cat /var/log/nginx/error.log | grep 404&lt;/code&gt; akan menjadi sangat mudah dan interaktif.
-Contoh saat kita ingin menyaring data dari proses &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ps ax | grep php&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/img/peco-tool.png&quot; alt=&quot;peco tool&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Bisa dilihat pada gambar di atas saat kita mengetik kata &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;php&lt;/code&gt; peco langsung menyaring semua baris yang mengandung kata &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;php&lt;/code&gt;. Masya Allah sangat membantu :)&lt;/p&gt;
-
-&lt;h2 id=&quot;instalasi&quot;&gt;Instalasi&lt;/h2&gt;
-
-&lt;p&gt;Kamu bisa install peco dengan perintah berikut ini sesuai dengan OS atau distribusi linux jika menggunakannya.&lt;/p&gt;
-
-&lt;p&gt;macOS&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;brew install peco&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;Debian/Ubuntu&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sudo apt install peco&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;Archlinux&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sudo pacman -S peco&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;Sekian semoga bermanfaat.&lt;/p&gt;</content><author><name>Agus Susilo</name></author><category term="linux" /><summary type="html">Jika kamu adalah seorang devops/programmer yang suka dengan cli maka tool ini akan sangat cocok sebagai aplikasi harian yang akan memudahkanmu dalam menyaring data dari proses lain ataupun dari file log dan sejenisnya. Biasanya saya akan menggunakan perintah grep untuk menyaring data dari proses ps ax saat mencari sebuah proses. Nah dengan aplikasi peco bagaimana?.</summary></entry><entry><title type="html">Menggunakan db selain default pada Yii2 migration</title><link href="https://susilolab.github.io/php/2022/08/25/menggunakan-db-selain-default-pada-yii2-migration.html" rel="alternate" type="text/html" title="Menggunakan db selain default pada Yii2 migration" /><published>2022-08-25T06:00:00+07:00</published><updated>2022-08-25T06:00:00+07:00</updated><id>https://susilolab.github.io/php/2022/08/25/menggunakan-db-selain-default-pada-yii2-migration</id><content type="html" xml:base="https://susilolab.github.io/php/2022/08/25/menggunakan-db-selain-default-pada-yii2-migration.html">&lt;p&gt;&lt;img src=&quot;/assets/img/yii-logo.svg&quot; alt=&quot;yii framework&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Secara default Yii 2 migration menggunakan database dengan nama &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;db&lt;/code&gt; hal ini dapat dicek pada config database dibawah subkey &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;components&lt;/code&gt; 
-namun jika kita memiliki banyak koneksi maka kita harus menyebutkan database mana yang akan dipakai pada fungsi &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;init&lt;/code&gt; pada tiap file migrate.
-&lt;!--more--&gt;&lt;/p&gt;
-
-&lt;p&gt;Untuk merubah koneksi database ke selain default maka kita perlu mensetnya pada fungsi &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;init&lt;/code&gt; pada tiap file migrate. Misalnya kita ingin merubah 
-koneksi dari default ke &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;db1&lt;/code&gt; maka kita bisa set ke property &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;db&lt;/code&gt;. berikut kodenya:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
-
-&lt;span class=&quot;kn&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;yii\db\Migration&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;m161220_091743_create_user_table&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Migration&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;init&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;db&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&apos;db1&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;parent&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;init&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;c1&quot;&gt;// public function safeUp() {}&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;// public function safeDown() {}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Dengan begitu maka pada saat migrate dijalankan operasi akan dilakukan ke nama database yang sesuai dengan informasi koneksi yaitu &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;db1&lt;/code&gt;. sekian semoga 
-bermanfaat.&lt;/p&gt;</content><author><name>Agus Susilo</name></author><category term="php" /><summary type="html">Secara default Yii 2 migration menggunakan database dengan nama db hal ini dapat dicek pada config database dibawah subkey components namun jika kita memiliki banyak koneksi maka kita harus menyebutkan database mana yang akan dipakai pada fungsi init pada tiap file migrate.</summary></entry><entry><title type="html">Mendapatkan Raw Sql dari ActiveRecord Yii2</title><link href="https://susilolab.github.io/php/2022/02/15/mendapatkan-raw-query-dari-active-record-yii2.html" rel="alternate" type="text/html" title="Mendapatkan Raw Sql dari ActiveRecord Yii2" /><published>2022-02-15T06:03:00+07:00</published><updated>2022-02-15T06:03:00+07:00</updated><id>https://susilolab.github.io/php/2022/02/15/mendapatkan-raw-query-dari-active-record-yii2</id><content type="html" xml:base="https://susilolab.github.io/php/2022/02/15/mendapatkan-raw-query-dari-active-record-yii2.html">&lt;p&gt;Tips singkat cara mendapatkan &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;raw sql&lt;/code&gt; dari ActiveRecord pada Yii2. Cukup hilang fungsi chain &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;one&lt;/code&gt;/&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;all&lt;/code&gt;/&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;scalar&lt;/code&gt;/dll 
-dan tambahkan &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;createCommand()-&amp;gt;getRawSql()&lt;/code&gt;.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$user&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;User&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;find&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;where&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&apos;id&apos;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$user&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;createCommand&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;getRawSql&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;PHP_EOL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>Agus Susilo</name></author><category term="php" /><summary type="html">Tips singkat cara mendapatkan raw sql dari ActiveRecord pada Yii2. Cukup hilang fungsi chain one/all/scalar/dll dan tambahkan createCommand()-&amp;gt;getRawSql(). $user = User::find()-&amp;gt;where([&apos;id&apos; =&amp;gt; 1]); echo $user-&amp;gt;createCommand()-&amp;gt;getRawSql(), PHP_EOL;</summary></entry><entry><title type="html">Cara menggunakan class-class pada yii\db\conditions</title><link href="https://susilolab.github.io/php/2022/01/24/cara-menggunakan-class-class-pada-yii-db-conditions.html" rel="alternate" type="text/html" title="Cara menggunakan class-class pada yii\db\conditions" /><published>2022-01-24T06:01:00+07:00</published><updated>2022-01-24T06:01:00+07:00</updated><id>https://susilolab.github.io/php/2022/01/24/cara-menggunakan-class-class-pada-yii-db-conditions</id><content type="html" xml:base="https://susilolab.github.io/php/2022/01/24/cara-menggunakan-class-class-pada-yii-db-conditions.html">&lt;p&gt;Hari ini saya ingin membagi tips tentang cara penggunaan class yang ada pada namespace &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;yii\db\conditions&lt;/code&gt; yang berguna saat kita membuat query yang komplek. Yii itu powerfull tetapi dokumentasinya kurang lengkap dan kurangnya contoh-contoh penggunaan klas/fungsi.
-&lt;!--more--&gt;&lt;/p&gt;
-
-&lt;h4 id=&quot;simplecondition&quot;&gt;&lt;strong&gt;SimpleCondition&lt;/strong&gt;&lt;/h4&gt;
-
-&lt;p&gt;Ok kita mulai dari klas &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;SimpleCondition&lt;/code&gt;, sesuai dengan namanya klas ini untuk kondisi yang simple-simple aja. Operator yang dapat diguanakan adalah &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;=&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;gt;&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;gt;=&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;=&lt;/code&gt;, dan &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;!=&lt;/code&gt;.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$cond&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;SimpleCondition&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&apos;id&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&apos;=&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;$row&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;User&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;find&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;where&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$cond&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;one&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;// select * from user where id = 1&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Untuk mendapatkan raw sql dari &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ActiveQuery&lt;/code&gt; kita bisa gunakan fungsi &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;getRawSql&lt;/code&gt;. Dari contoh kode di atas kita bisa buang &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;one&lt;/code&gt; dan tinggal echo seperti ini:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;mf&quot;&gt;...&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;$row&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;User&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;find&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;where&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$cond&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$row&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;createCommand&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;getRawSql&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;PHP_EOL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;// select * from user where id = 1&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Klas &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;SimpleCondition&lt;/code&gt; ini bisa kita gabung dengan klas &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;AndCondition&lt;/code&gt; atau &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;OrCondition&lt;/code&gt; untuk membuat query yang komplek. Untuk menggabungnya kita buat array yang berisi SimpleCondition, lalu kita taruh pada constructor &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;AndCondition&lt;/code&gt; atau &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;OrConditon&lt;/code&gt;. Kita lihat contohnya berikut:&lt;/p&gt;
-
-&lt;h4 id=&quot;andcondition&quot;&gt;&lt;strong&gt;AndCondition&lt;/strong&gt;&lt;/h4&gt;
-
-&lt;p&gt;Klas untuk menggabungkan kondisi dari &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;SimpleCondition&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;OrCondition&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;AndCondition&lt;/code&gt; atau yang kompatible dengan parameter klas ini.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$cond&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;SimpleCondition&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&apos;id&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&apos;=&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;SimpleConditon&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&apos;id&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&apos;=&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)];&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;$where&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;AndCondition&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$cond&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;$row&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;User&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;find&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;where&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$where&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;all&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;// select * user where id = 1 and id = 2&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;h4 id=&quot;orcondition&quot;&gt;&lt;strong&gt;OrCondition&lt;/strong&gt;&lt;/h4&gt;
-
-&lt;p&gt;Atau dengan &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;OrCondition&lt;/code&gt;, cara masih sama kita masukan array yang berisi &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;SimpleCondition&lt;/code&gt; kedalam constructor.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$cond&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;SimpleCondition&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&apos;id&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&apos;=&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;SimpleConditon&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&apos;id&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&apos;=&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)];&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;$where&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;OrCondition&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$cond&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;$row&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;User&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;find&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;where&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$where&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;all&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;// select * user where id = 1 or id = 2&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Dari dua klas ini &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;OrCondition&lt;/code&gt; dan &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;AndCondition&lt;/code&gt; kita bisa gunakan untuk menggabung query yang lebih komplek.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$cond1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;SimpleCondition&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&apos;id&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&apos;&amp;gt;=&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; 
-    &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;SimpleCondition&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&apos;id&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&apos;&amp;lt;=&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;$cond2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;SimpleCondition&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&apos;level_id&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&apos;=&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;$cond3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;SimpleCondition&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&apos;username&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&apos;=&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&apos;admin&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;$where&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;AndCondition&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;AndCondition&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;OrCondition&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$cond1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$cond2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]),&lt;/span&gt;
-    &lt;span class=&quot;nv&quot;&gt;$cond3&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;$row&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;User&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;find&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;where&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$where&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;all&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;// SELECT * FROM `user` WHERE (((`id` &amp;gt;= 1) OR (`id` &amp;lt;= 3)) AND (`level_id` = 1)) AND (`username` = &apos;admin&apos;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Catatan bahwa &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;AndCondition&lt;/code&gt; dan &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;OrCondition&lt;/code&gt; hanya bisa menerima array dari &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;SimpleCondition&lt;/code&gt; bukan array dari array seperti &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;new AndCondition([[new SimpleCondition, new SimpleCondition]])&lt;/code&gt;. atau hasil dari &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;AndCondition&lt;/code&gt; dan &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;OrCondition&lt;/code&gt; itu sendiri.&lt;/p&gt;
-
-&lt;h4 id=&quot;betweencondition&quot;&gt;&lt;strong&gt;BetweenCondition&lt;/strong&gt;&lt;/h4&gt;
-
-&lt;p&gt;Kita lanjut ke klas &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;BetweenCondition&lt;/code&gt;, klas ini menerima parameter &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;column&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;operator&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;intervalStart&lt;/code&gt; dan &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;intervalEnd&lt;/code&gt;. Parameter operator bisa berupa &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;BETWEEN&lt;/code&gt; atau &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;NOT BETWEEN&lt;/code&gt;.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$where&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;BetweenCondition&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&apos;id&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&apos;BETWEEN&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;$row&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;User&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;find&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;where&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$where&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;all&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;// SELECT * FROM `user` WHERE `id` BETWEEN 1 AND 4&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Klas ini juga bisa digunakan untuk &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;AndCondition&lt;/code&gt; dan &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;OrCondition&lt;/code&gt;.&lt;/p&gt;
-
-&lt;h4 id=&quot;betweencolumnscondition&quot;&gt;&lt;strong&gt;BetweenColumnsCondition&lt;/strong&gt;&lt;/h4&gt;
-
-&lt;p&gt;Klas ini mirip dengan &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;BetweenCondition&lt;/code&gt; tetapi intervalnya menggunakan kolumn dari pada value.
-Klas ini menerima parameter &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;value&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;operator&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;intervalStartColumn&lt;/code&gt; dan &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;intervalEndColumn&lt;/code&gt;. Parameter operator bisa berupa &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;BETWEEN&lt;/code&gt; atau &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;NOT BETWEEN&lt;/code&gt;. Untuk melihat perbedaannya kita lihat potongan kode berikut ini:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$where&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;BetweenColumnsCondition&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&apos;BETWEEN&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&apos;min_value&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&apos;max_value&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;$row&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Demo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;find&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;where&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$where&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$row&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;createCommand&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;getRawSql&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;PHP_EOL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;// SELECT * FROM `demo` WHERE 10 BETWEEN min_value AND max_value&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;h4 id=&quot;existscondition&quot;&gt;&lt;strong&gt;ExistsCondition&lt;/strong&gt;&lt;/h4&gt;
-
-&lt;p&gt;Klas ini untuk digunakan untuk memeriksa subquery ada atau tidak, parameter yang harus dilewatkan yaitu &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;operator&lt;/code&gt; exists/not exists 
-dan ekpresi (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;yii\db\Expression&lt;/code&gt;).&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$where&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ExistsCondition&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
-    &lt;span class=&quot;s1&quot;&gt;&apos;EXISTS&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; 
-    &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;\&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;yii\db\Expression&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&apos;SELECT level_id FROM user_level WHERE level_id = 1&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;$rows&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;User&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;find&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;where&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$where&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$rows&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;createCommand&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;getRawSql&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;PHP_EOL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;// SELECT * FROM `user` WHERE EXISTS &lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;// SELECT level_id FROM user_level WHERE level_id = 1&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;h4 id=&quot;incondition&quot;&gt;&lt;strong&gt;InCondition&lt;/strong&gt;&lt;/h4&gt;
-
-&lt;p&gt;Klas ini digunakan untuk query syntax &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;in&lt;/code&gt; dan &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;not in&lt;/code&gt;. Operator yang bisa digunakan adalah &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;IN&lt;/code&gt; dan &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;NOT IN&lt;/code&gt;.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$where&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;InCondition&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&apos;id&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&apos;IN&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;$row&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;User&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;find&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;where&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$where&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$row&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;createCommand&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;getRawSql&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;PHP_EOL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;// SELECT * FROM `user` WHERE `id` IN (1, 2)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;h4 id=&quot;likecondition&quot;&gt;&lt;strong&gt;LikeCondition&lt;/strong&gt;&lt;/h4&gt;
-
-&lt;p&gt;Klas ini untuk query kondisi like, operator yang digunakan bisa berupa &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;like&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;not like&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;or like&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;or not like&lt;/code&gt;&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$where&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;LikeCondition&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&apos;username&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&apos;LIKE&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&apos;admin&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;$row&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;User&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;find&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;where&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$where&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$row&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;createCommand&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;getRawSql&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;PHP_EOL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;// SELECT * FROM `user` WHERE `username` LIKE `%admin%`&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Value bisa berupa string atau array, jika value berupa array maka operator yang akan digunakan adalah &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;AND&lt;/code&gt;.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$where&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;LikeCondition&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&apos;username&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&apos;LIKE&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&apos;admin&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&apos;user&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;$row&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;User&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;find&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;where&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$where&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$row&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;createCommand&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;getRawSql&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;PHP_EOL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;// SELECT * FROM `user` WHERE `username` LIKE `%admin%` AND `username` LIKE `%user%`&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;h4 id=&quot;notcondition&quot;&gt;&lt;strong&gt;NotCondition&lt;/strong&gt;&lt;/h4&gt;
-
-&lt;p&gt;Klas ini digunakan untuk membalik kondisi yang dilewatkan pada parameter. Misalnya pada kode diatas kita mencari username yang 
-mengandung kata &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;admin&lt;/code&gt;, kita bisa balik kondisinya menjadi yang &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;tidak&lt;/code&gt; mengandung user &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;admin&lt;/code&gt; dengan klas ini.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$likeCond&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;LikeCondition&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&apos;username&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&apos;LIKE&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&apos;admin&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;$where&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;NotCondition&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$likeCond&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;$row&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;User&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;find&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;where&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$where&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$row&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;createCommand&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;getRawSql&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;PHP_EOL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;// SELECT * FROM `user` WHERE NOT(`username` LIKE `%admin%`)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Atau bisa juga untuk membalik kondisi pada saat kita mencari user yang idnya bukan 1&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$eqCond&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;SimpleCondition&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&apos;id&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&apos;=&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;$where&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;NotCondition&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$eqCond&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;$row&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;User&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;find&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;where&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$where&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$row&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;createCommand&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;getRawSql&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;PHP_EOL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;// SELECT * FROM `user` WHERE NOT(`id` = 1)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Oke dari klas-klas di atas kita membuat query kondisi komplek yang kemudian dapat digunakan pada kondisi &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;where&lt;/code&gt; ActiveQuery/Query. 
-Dan juga kode kita akan menjadi lebih ringkas karena kita bisa memisahkan query yang komplek kedalam fungsi-fungsi yang lebih kecil.&lt;/p&gt;
-
-&lt;p&gt;Sekian.&lt;/p&gt;</content><author><name>Agus Susilo</name></author><category term="php" /><summary type="html">Hari ini saya ingin membagi tips tentang cara penggunaan class yang ada pada namespace yii\db\conditions yang berguna saat kita membuat query yang komplek. Yii itu powerfull tetapi dokumentasinya kurang lengkap dan kurangnya contoh-contoh penggunaan klas/fungsi.</summary></entry><entry><title type="html">Mengenal Struct, self dan Self pada Rust</title><link href="https://susilolab.github.io/rust/2021/12/30/mengenal-struct-self-pada-rust.html" rel="alternate" type="text/html" title="Mengenal Struct, self dan Self pada Rust" /><published>2021-12-30T05:00:00+07:00</published><updated>2021-12-30T05:00:00+07:00</updated><id>https://susilolab.github.io/rust/2021/12/30/mengenal-struct-self-pada-rust</id><content type="html" xml:base="https://susilolab.github.io/rust/2021/12/30/mengenal-struct-self-pada-rust.html">&lt;p&gt;Rust merupakan bahasa pemrograman sistem yang tidak berbasis objek namun penggunaan &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;struct&lt;/code&gt; dan &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;trait&lt;/code&gt; konsepnya mirip&lt;br /&gt;
-pada bahasa pemgrograman oop(berbasis objek). 
-Rust tidak menggunakan klas untuk mengatur struktur kode, melainkan menggunakan struk untuk mewakili object/klas 
-dan &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;trait&lt;/code&gt; untuk mewakili behaviornya atau dalam bahasa lain disebut dengan &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;interface&lt;/code&gt;.
-&lt;!--more--&gt;&lt;/p&gt;
-
-&lt;p&gt;Kali ini saya ingin mengenalkan sedikit tentang &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;struct&lt;/code&gt; untuk mengelola struktur kode dan sedikit tentang &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;trait&lt;/code&gt; dan bagaimana 
-penggunaannya. Karena pembahasan struct dan trait bisa sangat panjang maka disini saya hanya menjelaskan secara umum belum sampai mendalam.&lt;/p&gt;
-
-&lt;p&gt;Kemudian kita juga akan mengenal apa itu keyword &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;self&lt;/code&gt; di Rust. Karena jika kamu sudah menggunakan struct dan ingin mengimplementasi 
-method pada struk Rust tentu akan bertemu dengan keyword &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;self&lt;/code&gt;. Dan juga Rust memiliki keyword &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Self&lt;/code&gt; (dengan huruf S besar) yang akan 
-menunjuk ke nama struct yang sedang di &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;impl&lt;/code&gt;. 
-&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;self&lt;/code&gt; (dengan huruf s kecil) pada rust biasanya digunakan pada saat deklarasi method untuk mengakses anggota struct, ya method kalau 
-dalam pemrograman berbasis objek adalah fungsi yang menempel pada objek. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;self&lt;/code&gt; mirip self pada python atau this pada Javascript.
-Penggunaan &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;self&lt;/code&gt; pada Rust biasanya pada tipe data &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;struct&lt;/code&gt;/&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;enum&lt;/code&gt;.&lt;/p&gt;
-
-&lt;h2 id=&quot;mengenal-struct&quot;&gt;Mengenal Struct&lt;/h2&gt;
-
-&lt;p&gt;Struct atau structure adalah tipe data custom yang membolehkanmu untuk memberinya nama dan mempaketkan nilai yang saling berhubungan 
-dan membuatnya memiliki arti. Jika kamu terbiasa dengan bahasa pemrograman OOP &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;struct&lt;/code&gt; itu mirip &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;class&lt;/code&gt;&lt;/p&gt;
-
-&lt;h4 id=&quot;mendefinisikan-dan-instantiating-struct&quot;&gt;Mendefinisikan dan instantiating struct&lt;/h4&gt;
-
-&lt;p&gt;Karena arti &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;instantiating&lt;/code&gt; bahasa Indonesia menurut saya agak aneh maka saya gunakan bahasa inggris saja. Karena seharusnya 
-instantiating kalau dalam OOP berarti &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;new NamaKlass&lt;/code&gt;. Ok kita balik lagi ke struk, pertama kita akan belajar cara mendefinisikan struct.
-Untuk mendefinisikan struct dapat digunakan keyword &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;struct&lt;/code&gt; diikuti nama struk kemudian didalam kurung kurawal kita definisikan nama 
-dan tipe data anggota struk atau biasa dikenal dengan istilah &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;fields&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;Untuk lebih memahami struk mari kita lihat contoh berikut ini:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;User&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;i32&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;username&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;email&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;active&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;bool&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Jadi disini kita membuat struk dengan nama &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;User&lt;/code&gt; dan memiliki 4 fields yaitu &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;id, username, email dan active&lt;/code&gt;. Masing-masing memiliki tipe data.&lt;/p&gt;
-
-&lt;p&gt;Untuk menggunakannya kita perlu membuat instance dari struk dengan memberikan nilai-nilai pada field yang ada pada struk. Untuk contohnya bisa dilihat pada kode berikut ini:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span class=&quot;k&quot;&gt;fn&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;user&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;User&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; 
-        &lt;span class=&quot;n&quot;&gt;username&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;from&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;agus&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; 
-        &lt;span class=&quot;n&quot;&gt;email&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;from&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;agus@gmail.com&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;active&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Untuk mengakses field pada struk bisa menggunakan notasi dot &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;(.)&lt;/code&gt;. Jika kita hanya ingin mendapatkan email saja maka kita bisa 
-gunakan &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;user.email&lt;/code&gt; dimanapun kita ingin menginginkan nilai ini. Jika instance struct mutable(dapat diubah) kita bisa merubah nilai dari field tersebut menggunakan notasi dot.
-Kode berikut menunjukkan bagaimana cara mengganti nilai pada field &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;email&lt;/code&gt; dari instansi &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;User&lt;/code&gt;.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span class=&quot;k&quot;&gt;fn&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;mut&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;user&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;User&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; 
-        &lt;span class=&quot;n&quot;&gt;username&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;from&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;agus&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; 
-        &lt;span class=&quot;n&quot;&gt;email&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;from&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;agus@gmail.com&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;active&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;.email&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;hello@gmail.com&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Perlu dicatat bahwa seluruh instance harus mutable; Rust tidak membolehkan kita untuk menandai hanya field tertentu saja yang dapat diubah.&lt;/p&gt;
-
-&lt;h3 id=&quot;mengenal-impl-dan-self&quot;&gt;Mengenal &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;impl&lt;/code&gt; dan &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;self&lt;/code&gt;&lt;/h3&gt;
-
-&lt;p&gt;Untuk mendefinisikan method pada struk kita bisa menggunakan keyword &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;impl&lt;/code&gt; diikuti dengan nama struk yang ingin di implementasi method.
-Contoh berikut ini akan mengimpl method &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;print&lt;/code&gt; pada struk &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;User&lt;/code&gt;.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span class=&quot;k&quot;&gt;impl&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Struct&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;fn&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;nd&quot;&gt;println!&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;ID: {}, Username: {}, Email: {}, Active: {}&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-            &lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;.id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;.username&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;.email&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;.active&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;fn&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;user&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;User&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; 
-        &lt;span class=&quot;n&quot;&gt;username&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;from&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;agus&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; 
-        &lt;span class=&quot;n&quot;&gt;email&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;from&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;agus@gmail.com&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;active&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;.print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Jika kode diatas dijalankan maka memberikan output seperti ini:&lt;/p&gt;
-
-&lt;p&gt;Disini &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;self&lt;/code&gt; mirip &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;this&lt;/code&gt; pada javascript yang akan bisa mengakses field pada struct karena &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;impl User&lt;/code&gt;. Kalau kode diatas ditulis dengan javascript akan seperti ini&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-javascript&quot; data-lang=&quot;javascript&quot;&gt;&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;User&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;id&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;username&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;nl&quot;&gt;email&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;active&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-  &lt;span class=&quot;nx&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;`ID: &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;, Username: &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;username&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;, 
-      Email: &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;email&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;, Active: &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;active&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Jika kita mendefinisikan method pada struct dengan &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;impl&lt;/code&gt; namun pada parameter fungsi tidak ada &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;self/&amp;amp;self/&amp;amp;mut self&lt;/code&gt; maka fungsi tersebut akan menjadi static. 
-Kita tidak perlu menginstansi struct sebelum menggunakan fungsi tersebut. Biasanya digunakan untuk membuat fungsi instatnsi struck/ model builder begitu. 
-Kalau dalam javascript mirip fungsi static pada class, untuk lebih jelasnya bisa diliat pada kode berikut:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-javascript&quot; data-lang=&quot;javascript&quot;&gt;&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;User&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;y&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt; + &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt; = &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;nx&quot;&gt;User&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Bisa dilihat pada kode di atas bahwa untuk mengakses fungsi &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;add&lt;/code&gt; kita langsung memanggil nama klass dan nama fungsinya tanpa harus instansi terlebih dulu. 
-Nah pada Rust kurang lebih mirip dengan javascript dengan perbedaan bahwa kita tidak bisa mengakses field struck.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span class=&quot;k&quot;&gt;impl&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;User&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;fn&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;new&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;i32&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;username&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;email&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;active&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;bool&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;User&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;User&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; 
-            &lt;span class=&quot;n&quot;&gt;username&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; 
-            &lt;span class=&quot;n&quot;&gt;email&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;active&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Untuk memanggil fungsi static maka kita bisa gunakan tanda &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;::&lt;/code&gt; setelah nama struck. contoh:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;user&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;User&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;new&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;agus&quot;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;.to_owned&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;agus@gmail.com&quot;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;.to_owned&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Pada definisi fungsi &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;new&lt;/code&gt; di atas terdapat tipe kembalian berupa struct &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;User&lt;/code&gt;, agar lebih idiom ke Rust maka kita bisa 
-menggantinya dengan &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Self&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Self&lt;/code&gt; akan mengembalikan struct sesuai dengan yang di &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;impl&lt;/code&gt;. seperti pada contoh code di atas 
-jika &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Self&lt;/code&gt; didalam &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;impl User&lt;/code&gt; maka akan mengembalikan struct &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;User&lt;/code&gt;. Keuntungan menggunakan &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Self&lt;/code&gt; dari pada nama struct adalah 
-jika struct berubah kita tidak perlu merubah tipe kembaliannya.&lt;/p&gt;
-
-&lt;p&gt;Contoh kode yang sudah diganti dengan &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Self&lt;/code&gt;:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span class=&quot;k&quot;&gt;impl&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;User&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;fn&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;new&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;i32&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;username&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;email&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;active&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;bool&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Self&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;Self&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; 
-            &lt;span class=&quot;n&quot;&gt;username&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; 
-            &lt;span class=&quot;n&quot;&gt;email&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;active&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;h3 id=&quot;mengenal-trait&quot;&gt;Mengenal Trait&lt;/h3&gt;
-
-&lt;p&gt;Trait adalah kumpulan definisi fungsi yang belum diimplementasi, trait dapat berisi 1 atau lebih definisi fungsi. 
-Namun trait juga dapat berisi implementasi default dari suatu fungsi yang akan dipakai jika struct/enum/type 
-tidak mengimplementasi definisi fungsi pada trait.&lt;/p&gt;
-
-&lt;p&gt;Contoh definisi trait pada trait &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;std::io::Read&lt;/code&gt;&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span class=&quot;k&quot;&gt;pub&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;trait&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Read&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;fn&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;read&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;mut&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;buf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;mut&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;u8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Result&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;usize&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Pada kode diatas saya mengambil contoh satu fungsi &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;read&lt;/code&gt; pada trait &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Read&lt;/code&gt; dimana parameternya berupa &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;amp;mut [u8]&lt;/code&gt; yang artinya kita harus menyediakan 
-variabel mutable dengan tipe slice u8. Semua tipe yang mengimplementasi trait &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Read&lt;/code&gt; kita dapat mengakses fungsi &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;read&lt;/code&gt; tersebut. Kita ambil contoh dari struct File pada module 
-&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;std::fs::File&lt;/code&gt;.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nn&quot;&gt;io&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nn&quot;&gt;prelude&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;io&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nn&quot;&gt;fs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;File&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;fn&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;io&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Result&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;mut&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;f&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;File&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;open&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;foo.txt&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;mut&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;buffer&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
-
-    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;.read&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;mut&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;buffer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;nd&quot;&gt;println!&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Hasil: {:?}&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;buffer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;..&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
-
-    &lt;span class=&quot;nf&quot;&gt;Ok&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(())&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Karena struct &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;File&lt;/code&gt; mengimplementasi trait &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Read&lt;/code&gt; maka kita bisa menggunakan fungsi &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;read&lt;/code&gt; untuk membaca file. Pada kode di atas pertama 
-kita membuka file pada kode &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;let mut f&lt;/code&gt;, kemudian kita membuat buffer file &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;let mut buffer&lt;/code&gt; dengan nilai 0 sebanyak 10. Lalu pada &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;let n&lt;/code&gt; kita baca file &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;f.read(&amp;amp;mut buffer)?&lt;/code&gt; dan taruh pada 
-variabel &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;buffer&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;Kemudian kita mencetak datanya sesuai dengan hasil pembacaan dari varibel &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;n&lt;/code&gt; berapa banyak yang sudah dibaca &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;amp;buffer[..n]&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;Contoh lain penggunaan trait&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;News&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Blog&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;trait&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Summary&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;fn&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;read_more&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;impl&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Summary&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;News&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;fn&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;read_more&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;s&quot;&gt;&quot;Baca berita lagi..&quot;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;.to_owned&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;impl&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Summary&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Blog&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;fn&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;read_more&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;s&quot;&gt;&quot;Baca blog lagi..&quot;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;.to_owned&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;fn&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;print_summary&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;impl&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Summary&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nd&quot;&gt;println!&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;{}&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;.read_more&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;());&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;fn&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;news&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;News&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;blog&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Blog&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;nf&quot;&gt;print_summary&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;news&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;nf&quot;&gt;print_summary&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;blog&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Dapat dilihat pada kode di atas bahwa kita mendefinisikan 2 buah struk &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;News&lt;/code&gt; dan &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Blog&lt;/code&gt;, dan juga trait &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Summary&lt;/code&gt;. Lalu mengimplementasi 
-trait &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Summary&lt;/code&gt; untuk struk &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;News&lt;/code&gt; dan &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Blog&lt;/code&gt; dengan default implementasi pada fungsi &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;read_more&lt;/code&gt;. Kita juga membuat fungsi &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;print_summary&lt;/code&gt; 
-dengan parameter &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sum&lt;/code&gt; dengan aturan bahwa &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sum&lt;/code&gt; harus implement dari trait &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Summary&lt;/code&gt;. Selama &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sum&lt;/code&gt; mengimplementasi dari trait &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Summary&lt;/code&gt; maka 
-kode akan berjalan.&lt;/p&gt;
-
-&lt;p&gt;Untuk lebih memahami trait kita bisa mengubah kode di atas ke dalam bahasa PHP. kurang lebih kodenya seperti ini:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;kd&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Summary&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;read_more&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;():&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;News&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Summary&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;read_more&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;():&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;string&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&apos;Baca berita lagi..&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Blog&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Summary&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;read_more&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;():&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;string&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&apos;Baca blog lagi..&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;print_summary&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Summary&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$sum&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;read_more&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;PHP_EOL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;nv&quot;&gt;$news&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;News&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;$blog&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Blog&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-&lt;span class=&quot;nf&quot;&gt;print_summary&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$news&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;nf&quot;&gt;print_summary&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$blog&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Karena di PHP tidak ada struk maka disini saya pake class. Semoga bermanfaat.&lt;/p&gt;</content><author><name>Agus Susilo</name></author><category term="rust" /><summary type="html">Rust merupakan bahasa pemrograman sistem yang tidak berbasis objek namun penggunaan struct dan trait konsepnya mirip pada bahasa pemgrograman oop(berbasis objek). Rust tidak menggunakan klas untuk mengatur struktur kode, melainkan menggunakan struk untuk mewakili object/klas dan trait untuk mewakili behaviornya atau dalam bahasa lain disebut dengan interface.</summary></entry><entry><title type="html">Early return in PHP</title><link href="https://susilolab.github.io/php/2021/10/25/early-return-in-php.html" rel="alternate" type="text/html" title="Early return in PHP" /><published>2021-10-25T07:00:00+07:00</published><updated>2021-10-25T07:00:00+07:00</updated><id>https://susilolab.github.io/php/2021/10/25/early-return-in-php</id><content type="html" xml:base="https://susilolab.github.io/php/2021/10/25/early-return-in-php.html">&lt;p&gt;Sebagai seorang programmer tentu selalu ingin meningkatkan kualitas kodenya agar ringkas dan mudah dipahami. Nah kali ini saya ingin berbagi sedikit tip 
-tentang early return di PHP, apa itu early return?. Sesuai dengan namanya &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mengembalikan lebih awal&lt;/code&gt; yaitu mengembalikan nilai dari suatu fungsi lebih 
-awal. Keuntungan mengembalikan nilai lebih awal akan membuat kode lebih ringkas dan dapat menghindari if bersarang. Coba bandingkan kedua fungsi di bawah ini
-&lt;!--more--&gt;&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;c1&quot;&gt;// Fungsi 1
-&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;isUserSubcribe&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$userId&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;bool&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ContentSubscribe&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;find&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;where&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&apos;user_id&apos;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$userId&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;one&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;// Fungsi 2
-&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;isUserSubcribe&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$userId&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;bool&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ContentSubscribe&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;find&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;where&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&apos;user_id&apos;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$userId&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;one&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Terlihat bahwa fungsi no 2 lebih ringkas dengan penggunaan early return. Early return juga akan sangat membantu pada kode yang banyak menggunakan 
-if bersarang.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;checkAccess&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$userId&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$page&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;bool&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;AuthItem&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;find&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;where&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&apos;user_id&apos;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$userId&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;one&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;page&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$page&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Kode di atas bisa diringkas lagi menggunakan early return.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;checkAccess&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$userId&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$page&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;bool&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;AuthItem&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;find&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;where&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&apos;user_id&apos;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$userId&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;one&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-    
-    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;page&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$page&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;// Atau logiknya bisa disederhanakan
-&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;checkAccess&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$userId&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$page&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;bool&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;AuthItem&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;find&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;where&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&apos;user_id&apos;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$userId&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;one&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;page&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$page&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-    
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Cukup sekian, semoga dapat memberikan manfaat bagi teman-teman.&lt;/p&gt;</content><author><name>Agus Susilo</name></author><category term="php" /><summary type="html">Sebagai seorang programmer tentu selalu ingin meningkatkan kualitas kodenya agar ringkas dan mudah dipahami. Nah kali ini saya ingin berbagi sedikit tip tentang early return di PHP, apa itu early return?. Sesuai dengan namanya mengembalikan lebih awal yaitu mengembalikan nilai dari suatu fungsi lebih awal. Keuntungan mengembalikan nilai lebih awal akan membuat kode lebih ringkas dan dapat menghindari if bersarang. Coba bandingkan kedua fungsi di bawah ini</summary></entry><entry><title type="html">Deno File System</title><link href="https://susilolab.github.io/deno/2021/10/24/deno-filesystem.html" rel="alternate" type="text/html" title="Deno File System" /><published>2021-10-24T07:00:00+07:00</published><updated>2021-10-24T07:00:00+07:00</updated><id>https://susilolab.github.io/deno/2021/10/24/deno-filesystem</id><content type="html" xml:base="https://susilolab.github.io/deno/2021/10/24/deno-filesystem.html">&lt;p&gt;Deno adalah secure runtime untuk Javascript dan Typescript menggunakan javascript engine v8 buatan Google dan juga
-dibangun dengan bahasa pemrograman Rust. Pembuatnya adalah orang yang sama yang membuat Nodejs. 
-Versi stabilnya dirilis pada tanggal 13 Mei 2020.&lt;/p&gt;
-
-&lt;p&gt;Pada kesempatan kali sesuai dengan judul artikel yaitu tentang file sistem di Deno, kita akan mengulik sedikit tentang 
-file system di Deno seperti membaca dan menulis file, membuat dan menghapus folder, menyalin file/folder dll.
-&lt;!--more--&gt;&lt;/p&gt;
-
-&lt;p&gt;Sebelum masuk ke bahasan utama alangkah lebih baiknya jika mengenal cara menjalankan deno dulu, jadi untuk menjalankan typescript dengan 
-deno gunakan command &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;deno run &amp;lt;nama-script&amp;gt;&lt;/code&gt;. Mungkin agak sedikit asing dan berbeda dengan &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nodejs&lt;/code&gt; yang tidak memerlukan perintah kedua 
-yaitu &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;run&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;Namun bagiku hal itu akan mempermudah dan membedakan dengan command lain mengingat deno menyertakan banyak command dalam satu binary.
-Seperti &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;deno fmt&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;deno doc&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;deno lint&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;deno info&lt;/code&gt; dan lain-lain. Berikut daftar lengkapnya&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;deno run nama-script.ts/nama-script.js&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Deno juga mengharuskan kita untuk menyebut permisi apa saja pada saat menjalankan script seperti &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--allow-read&lt;/code&gt; jika didalam 
-script terdapat pembacaan file, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--allow-write&lt;/code&gt; jika terjadi penulisan ke file dll.&lt;/p&gt;
-
-&lt;table&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;-A, –allow-all&lt;/td&gt;
-      &lt;td&gt;Mengizinkan semua permisi. Ini menonaktifkan permisi&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;–allow-env&lt;/td&gt;
-      &lt;td&gt;Mengizinkan akses environment&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;–allow-hrtime&lt;/td&gt;
-      &lt;td&gt;Mengizinkan pengukuran waktu resolusi-tinggi&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;–allow-net&lt;/td&gt;
-      &lt;td&gt;Mengizinkan akses jaringan&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;–allow-plugin&lt;/td&gt;
-      &lt;td&gt;Mengizinkan plugin. Catat bahwa &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--allow-plugin&lt;/code&gt; fitur tidak stabil&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;–allow-read&lt;/td&gt;
-      &lt;td&gt;Mengizinkan akses pembacaan ke sistem file&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;–allow-write&lt;/td&gt;
-      &lt;td&gt;Mengizinkan akses ke penulisan sistem file. kamu juga dapat menyebutkan nama file/folder yang diakses&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;–allow-run&lt;/td&gt;
-      &lt;td&gt;Mengizinkan menjalankan subprocess&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p&gt;Contoh penggunaan opsi permisi&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;deno run &lt;span class=&quot;nt&quot;&gt;--allow-read&lt;/span&gt; read_file.ts
-&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;deno run &lt;span class=&quot;nt&quot;&gt;--allow-write&lt;/span&gt; write_file.ts&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p class=&quot;note-tip&quot;&gt;&lt;strong&gt;Catatan:&lt;/strong&gt; Deno memerlukan tambahan opsi pada saat menjalankannya sebagai contoh &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--allow-read&lt;/code&gt; untuk mengijinkan 
-deno untuk membaca file/ menyalin file/folder.&lt;/p&gt;
-
-&lt;h3 id=&quot;baca-file&quot;&gt;Baca File&lt;/h3&gt;
-
-&lt;p&gt;Untuk membaca file Deno menyediakan fungsi &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;readFile&lt;/code&gt; pada namespace Deno. Buat file dengan nama &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;read_file.ts&lt;/code&gt; 
-kemudian salin kode berikut ini:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-typescript&quot; data-lang=&quot;typescript&quot;&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;decoder&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;TextDecoder&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;utf-8&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;data&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;await&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Deno&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;readFile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;copy_file.ts&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;decoder&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;decode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Karena fungsi &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Deno.readFile&lt;/code&gt; menghasilkan data array byte maka perlu didecode menggunakan klas &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;TextDecoder&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p class=&quot;note-tip&quot;&gt;perlu tambahan opsi &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--allow-read&lt;/code&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;menulis-file&quot;&gt;Menulis File&lt;/h3&gt;
-
-&lt;p&gt;Untuk menulis file kita dapat menggunakan fungsi &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Deno.writeFile&lt;/code&gt; dimana argumen pertama adalah nama file, kedua data yang bertype
-Uint8Array sehingga harus diencode menggunakan klas &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;TextEncoder&lt;/code&gt; dan argumen terakhir adalah opsi lain seperti mode permisi,
-append yang berguna untuk menambahkan data jika file sudah ada.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-typescript&quot; data-lang=&quot;typescript&quot;&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;encoder&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;TextEncoder&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;data&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;encoder&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;encode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;Hello world!&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;await&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Deno&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;writeFile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;/tmp/hello.txt&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;await&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Deno&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;writeFile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;/tmp/hello.txt&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;mode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mo&quot;&gt;0o777&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;await&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Deno&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;writeFile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;/tmp/hello.txt&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p class=&quot;note-tip&quot;&gt;memerlukan ijin &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--allow-write&lt;/code&gt;, dan &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--allow-read&lt;/code&gt; jika opsi &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;create&lt;/code&gt; bernilai false&lt;/p&gt;
-
-&lt;h3 id=&quot;membuat-folder&quot;&gt;Membuat Folder&lt;/h3&gt;
-
-&lt;p&gt;Untuk membuat folder kita bisa menggunakan fungsi &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Deno.mkdir&lt;/code&gt;, argumen yang wajib disediakan adalah nama folder sedangkan
-opsi yang bisa ditambahkan adalah mode permisi dan recursive yang bernilai boolean.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-typescript&quot; data-lang=&quot;typescript&quot;&gt;&lt;span class=&quot;k&quot;&gt;await&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Deno&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;mkdir&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;/tmp/hello&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;await&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Deno&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;mkdir&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;/tmp/hello&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;recursive&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;await&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Deno&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;mkdir&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;/tmp/hello&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;mode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mo&quot;&gt;0o777&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p class=&quot;note-tip&quot;&gt;memerlukan ijin &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--allow-write&lt;/code&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;menghapus-filefolder&quot;&gt;Menghapus File/Folder&lt;/h3&gt;
-
-&lt;p&gt;Untuk menghapus file/folder kita bisa menggunakan fungsi &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Deno.remove&lt;/code&gt; dimana kita bisa menambahkan opsi recursive atau tidak pada
-saat menghapus folder.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-typescript&quot; data-lang=&quot;typescript&quot;&gt;&lt;span class=&quot;k&quot;&gt;await&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Deno&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;remove&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;/tmp/hello.txt&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;await&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Deno&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;remove&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;/tmp/nama_folder&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;await&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Deno&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;remove&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;/tmp/nama_folder&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;recursive&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p class=&quot;note-tip&quot;&gt;memerlukan ijin &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--allow-write&lt;/code&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;menyalin-file&quot;&gt;Menyalin File&lt;/h3&gt;
-
-&lt;p&gt;Untuk menyalin file kita bisa menggunakan fungsi &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Deno.copyFile&lt;/code&gt; dengan argumen pertama berupa sumber file dan argumen kedua berupa
-tujuan file.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-typescript&quot; data-lang=&quot;typescript&quot;&gt;&lt;span class=&quot;k&quot;&gt;await&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Deno&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;copyFile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;/tmp/hello.txt&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;/tmp/world.txt&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p class=&quot;note-tip&quot;&gt;memerlukan ijin &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--allow-write&lt;/code&gt; dan &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--allow-read&lt;/code&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;menyalin-folder&quot;&gt;Menyalin Folder&lt;/h3&gt;
-
-&lt;p&gt;Untuk menyalin folder namespace Deno tidak menyediakannya untuk itu kita menggunakan fungsi dari standard
-library yaitu &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;copy&lt;/code&gt; dan menambahkan opsi &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--unstable&lt;/code&gt; pada saat menjalankan karena memang library belum stabil.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-typescript&quot; data-lang=&quot;typescript&quot;&gt;&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;copy&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;https://deno.land/std@0.54.0/fs/mod.ts&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;nx&quot;&gt;copy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;/home/user/big-project&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;/tmp/big-project&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p class=&quot;note-tip&quot;&gt;memerlukan ijin &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--allow-read&lt;/code&gt; dan &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--allow-write&lt;/code&gt; dan juga opsi &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--unstable&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;sekian.&lt;/p&gt;</content><author><name>Agus Susilo</name></author><category term="deno" /><category term="deno" /><category term="typescript" /><summary type="html">Deno adalah secure runtime untuk Javascript dan Typescript menggunakan javascript engine v8 buatan Google dan juga dibangun dengan bahasa pemrograman Rust. Pembuatnya adalah orang yang sama yang membuat Nodejs. Versi stabilnya dirilis pada tanggal 13 Mei 2020. Pada kesempatan kali sesuai dengan judul artikel yaitu tentang file sistem di Deno, kita akan mengulik sedikit tentang file system di Deno seperti membaca dan menulis file, membuat dan menghapus folder, menyalin file/folder dll.</summary></entry><entry><title type="html">Passing argument by reference in PHP</title><link href="https://susilolab.github.io/php/2021/10/21/passing-argument-by-reference-in-php.html" rel="alternate" type="text/html" title="Passing argument by reference in PHP" /><published>2021-10-21T07:00:00+07:00</published><updated>2021-10-21T07:00:00+07:00</updated><id>https://susilolab.github.io/php/2021/10/21/passing-argument-by-reference-in-php</id><content type="html" xml:base="https://susilolab.github.io/php/2021/10/21/passing-argument-by-reference-in-php.html">&lt;p&gt;Bagi programmer PHP tentu tidak asing lagi dengan namanya argumen pada fungsi, namun tahukah teman-teman bahwa argumen fungsi pada PHP defaultnya 
-dilewatkan berdasar nilai. Jadi variabel yang dilewatkan pada fungsi akan disalin kedalam fungsi. Mari kita lihat contoh berikut
-&lt;!--more--&gt;&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;inc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$num&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nv&quot;&gt;$num&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;nv&quot;&gt;$i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;nf&quot;&gt;inc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;nf&quot;&gt;inc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$i&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;PHP_EOL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Bisa tebak nilai yang ada didalam variabel &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$i&lt;/code&gt;?, apakah angka 2 karena fungsi &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;inc&lt;/code&gt; dijalankan 2 kali? atau angka 1?.
-Jawabannya karena nilai yang dilewatkan ke fungsi &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;inc&lt;/code&gt; oleh nilai maka setiap kali &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;inc&lt;/code&gt; dipanggil nilai &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$i&lt;/code&gt; akan di naikan 1,
-namun peningkatan nilai tersebut hanya pada lingkup fungsi, diluar fungsi nilai &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$i&lt;/code&gt; akan tetap 1.&lt;/p&gt;
-
-&lt;p&gt;Agar nilai &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$i&lt;/code&gt; tetap bertambah setelah fungsi &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;inc&lt;/code&gt; dipanggil, variabel yang dilewatkan harus dengan referensi. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;amp;&lt;/code&gt; dapat digunakan 
-untuk melewatkan argument dengan referensi.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;inc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$num&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nv&quot;&gt;$num&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;nv&quot;&gt;$i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;nf&quot;&gt;inc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;nf&quot;&gt;inc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$i&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;PHP_EOL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Setelah argument fungsi ditambah referensi maka nilai yang dilewatkan pada fungsi akan merubah juga ada variabel 
-diluar fungsi. Oleh karena hasil dari perubahan ini nilai &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$i&lt;/code&gt; adalah 3. Contoh push data ke array&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;add_lang&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;array&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$langs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$lang_name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nv&quot;&gt;$langs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$lang_name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;nv&quot;&gt;$langs&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[];&lt;/span&gt;
-&lt;span class=&quot;nf&quot;&gt;add_langs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$langs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&apos;PHP&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;nf&quot;&gt;add_langs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$langs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&apos;Rust&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-&lt;span class=&quot;nb&quot;&gt;print_r&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$langs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Output: Array([0] =&amp;gt; PHP, [1] =&amp;gt; Rust)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Contoh lain penggunaan pass by reference di Yii 2. Jadi kita akan memecah kondisi query ke dalam fungsi sehingga query yang komplek dapat lebih ringkas dan tidak terkumpul dalam satu fungsi saja.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Demo&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;wherePublic&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Query&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$query&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;nv&quot;&gt;$query&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;andWhere&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&apos;public&apos;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;actionIndex&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;nv&quot;&gt;$query&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Query&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;select&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&apos;*&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;from&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&apos;user&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-        &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;wherePublic&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$query&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-        &lt;span class=&quot;nb&quot;&gt;print_r&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$query&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;createCommand&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;getRawSql&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;());&lt;/span&gt;
-        &lt;span class=&quot;c1&quot;&gt;// output: SELECT * FROM `demo_user` `u` WHERE `publish`=1
-&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Pada fungsi &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;wherePublic&lt;/code&gt; argumentnya dilewatkan berdasarkan reference dengan ditandai dengan &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;amp;&lt;/code&gt; sehingga variabel &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$query&lt;/code&gt; akan dimodif didalam fungsi. 
-Kemudian pada saat memanggil fungsinya tidak perlu menggunakan tanda &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;amp;&lt;/code&gt;, tanda &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;amp;&lt;/code&gt; cukup pada definisi fungsi saja.&lt;/p&gt;
-
-&lt;p&gt;Sekian semoga dapat memberi manfaat&lt;/p&gt;</content><author><name>Agus Susilo</name></author><category term="php" /><summary type="html">Bagi programmer PHP tentu tidak asing lagi dengan namanya argumen pada fungsi, namun tahukah teman-teman bahwa argumen fungsi pada PHP defaultnya dilewatkan berdasar nilai. Jadi variabel yang dilewatkan pada fungsi akan disalin kedalam fungsi. Mari kita lihat contoh berikut</summary></entry><entry><title type="html">Return Objek pada CDbCommand Yii1</title><link href="https://susilolab.github.io/php/2021/10/15/return-objek-pada-cdbcommand-yii.html" rel="alternate" type="text/html" title="Return Objek pada CDbCommand Yii1" /><published>2021-10-15T05:00:00+07:00</published><updated>2021-10-15T05:00:00+07:00</updated><id>https://susilolab.github.io/php/2021/10/15/return-objek-pada-cdbcommand-yii</id><content type="html" xml:base="https://susilolab.github.io/php/2021/10/15/return-objek-pada-cdbcommand-yii.html">&lt;p&gt;CDbCommand pada Yii1 defaultnya mengembalikan array pada fungsi-fungsi seperti queryAll dan queryRow. Agar kembaliannya 
-berupa objek kita bisa gunakan fungsi &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;setFetchMode&lt;/code&gt;.
-&lt;!--more--&gt;&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Yii&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;app&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;db&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;createCommand&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;setFetchMode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;\&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;PDO&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;FETCH_OBJ&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;select&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&apos;id, username&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;from&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&apos;user&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;where&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&apos;publish = 1&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;queryAll&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;foreach&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$result&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$val&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$val&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&apos; =&amp;gt; &apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$val&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;username&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Untuk daftar lengkapnya bisa di lihat di web &lt;a href=&quot;https://www.php.net/manual/en/pdostatement.fetch.php&quot;&gt;https://www.php.net/manual/en/pdostatement.fetch.php&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Sekian&lt;/p&gt;</content><author><name>Agus Susilo</name></author><category term="php" /><category term="php" /><summary type="html">CDbCommand pada Yii1 defaultnya mengembalikan array pada fungsi-fungsi seperti queryAll dan queryRow. Agar kembaliannya berupa objek kita bisa gunakan fungsi setFetchMode.</summary></entry></feed>
+&lt;p&gt;&lt;img src=&quot;/assets/img/vim-tmux-01.png&quot; alt=&quot;vim+tmux&quot; /&gt;&lt;/p&gt;</content><author><name>Agus Susilo</name></author><category term="linux" /><summary type="html">Jika highlight line pada vim/neovim kamu tidak jalan pada saat menggunakan tmux kamu bisa edit confignya seperti ini:</summary></entry></feed>

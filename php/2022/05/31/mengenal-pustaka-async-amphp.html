@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Mengenal pustaka async Amphp | susilolab</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="Mengenal pustaka async Amphp" />
+<meta name="author" content="Agus Susilo" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="PHP merupakan bahasa pemrograman scripting yang sangat popular untuk pengembangan web, 80% dari webserver jalan dengan bahasa PHP. Alasan memilih PHP untuk pengembangan web karena salah satunya harga hosting yang relatif terjangkau dan juga deployment yang mudah. Namun seiring berkembangnya zaman dengan munculnya Nodejs yaitu javascript runtime server maka para developer banyak yang beralih ke Nodejs. Apa kelebihan Nodejs dibanding dengan PHP?" />
+<meta property="og:description" content="PHP merupakan bahasa pemrograman scripting yang sangat popular untuk pengembangan web, 80% dari webserver jalan dengan bahasa PHP. Alasan memilih PHP untuk pengembangan web karena salah satunya harga hosting yang relatif terjangkau dan juga deployment yang mudah. Namun seiring berkembangnya zaman dengan munculnya Nodejs yaitu javascript runtime server maka para developer banyak yang beralih ke Nodejs. Apa kelebihan Nodejs dibanding dengan PHP?" />
+<link rel="canonical" href="https://susilolab.github.io/php/2022/05/31/mengenal-pustaka-async-amphp.html" />
+<meta property="og:url" content="https://susilolab.github.io/php/2022/05/31/mengenal-pustaka-async-amphp.html" />
+<meta property="og:site_name" content="susilolab" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-05-31T06:00:00+07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Mengenal pustaka async Amphp" />
+<script type="application/ld+json">
+{"headline":"Mengenal pustaka async Amphp","dateModified":"2022-05-31T06:00:00+07:00","datePublished":"2022-05-31T06:00:00+07:00","url":"https://susilolab.github.io/php/2022/05/31/mengenal-pustaka-async-amphp.html","author":{"@type":"Person","name":"Agus Susilo"},"description":"PHP merupakan bahasa pemrograman scripting yang sangat popular untuk pengembangan web, 80% dari webserver jalan dengan bahasa PHP. Alasan memilih PHP untuk pengembangan web karena salah satunya harga hosting yang relatif terjangkau dan juga deployment yang mudah. Namun seiring berkembangnya zaman dengan munculnya Nodejs yaitu javascript runtime server maka para developer banyak yang beralih ke Nodejs. Apa kelebihan Nodejs dibanding dengan PHP?","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://susilolab.github.io/php/2022/05/31/mengenal-pustaka-async-amphp.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://susilolab.github.io/feed.xml" title="susilolab" /><script>
+if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1")) {
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-173956394-1', 'auto');
+  ga('send', 'pageview');
+}
+</script>
+  
+<!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Mengenal pustaka async Amphp | susilolab</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="Mengenal pustaka async Amphp" />
+<meta name="author" content="Agus Susilo" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="PHP merupakan bahasa pemrograman scripting yang sangat popular untuk pengembangan web, 80% dari webserver jalan dengan bahasa PHP. Alasan memilih PHP untuk pengembangan web karena salah satunya harga hosting yang relatif terjangkau dan juga deployment yang mudah. Namun seiring berkembangnya zaman dengan munculnya Nodejs yaitu javascript runtime server maka para developer banyak yang beralih ke Nodejs. Apa kelebihan Nodejs dibanding dengan PHP?" />
+<meta property="og:description" content="PHP merupakan bahasa pemrograman scripting yang sangat popular untuk pengembangan web, 80% dari webserver jalan dengan bahasa PHP. Alasan memilih PHP untuk pengembangan web karena salah satunya harga hosting yang relatif terjangkau dan juga deployment yang mudah. Namun seiring berkembangnya zaman dengan munculnya Nodejs yaitu javascript runtime server maka para developer banyak yang beralih ke Nodejs. Apa kelebihan Nodejs dibanding dengan PHP?" />
+<link rel="canonical" href="https://susilolab.github.io/php/2022/05/31/mengenal-pustaka-async-amphp.html" />
+<meta property="og:url" content="https://susilolab.github.io/php/2022/05/31/mengenal-pustaka-async-amphp.html" />
+<meta property="og:site_name" content="susilolab" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-05-31T06:00:00+07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Mengenal pustaka async Amphp" />
+<script type="application/ld+json">
+{"headline":"Mengenal pustaka async Amphp","dateModified":"2022-05-31T06:00:00+07:00","datePublished":"2022-05-31T06:00:00+07:00","url":"https://susilolab.github.io/php/2022/05/31/mengenal-pustaka-async-amphp.html","author":{"@type":"Person","name":"Agus Susilo"},"description":"PHP merupakan bahasa pemrograman scripting yang sangat popular untuk pengembangan web, 80% dari webserver jalan dengan bahasa PHP. Alasan memilih PHP untuk pengembangan web karena salah satunya harga hosting yang relatif terjangkau dan juga deployment yang mudah. Namun seiring berkembangnya zaman dengan munculnya Nodejs yaitu javascript runtime server maka para developer banyak yang beralih ke Nodejs. Apa kelebihan Nodejs dibanding dengan PHP?","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://susilolab.github.io/php/2022/05/31/mengenal-pustaka-async-amphp.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  
+  
+
+
+
+
+
+
+
+</head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">susilolab</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a><a class="page-link" href="/categories/">Categories</a><a class="page-link" href="/portfolio/">My Portfolio</a><a class="page-link" href="/rust-book/">Rust Book</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Mengenal pustaka async Amphp</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2022-05-31T06:00:00+07:00" itemprop="datePublished">May 31, 2022
+      </time>
+      
+      
+      • categories:  
+      
+      <a href="/categories/#php">php</a>
+      
+      
+      </p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p><img src="/assets/img/20220531-amp-logo.png" alt="amphp" /></p>
+
+<p>PHP merupakan bahasa pemrograman scripting yang sangat popular untuk pengembangan web, 80% dari webserver jalan dengan bahasa PHP.
+Alasan memilih PHP untuk pengembangan web karena salah satunya harga hosting yang relatif terjangkau dan juga deployment yang mudah.
+Namun seiring berkembangnya zaman dengan munculnya Nodejs yaitu javascript runtime server maka para developer banyak yang beralih ke Nodejs.
+Apa kelebihan Nodejs dibanding dengan PHP?
+<!--more--></p>
+
+<p>Salah salah satu fitur utama yang menjadi keunggulan Nodejs adalah karena Nodejs berjalan secara asynchronous sehingga membuat eksekusi script menjadi 
+lebih cepat bahkan sangat cepat walaupun Nodejs cuma single thread. Apakah PHP juga bisa berjalan secara asynchronous?. Jawaban sederhananya bisa, 
+namun karena desain awal PHP tidak diciptakan untuk jalan secara asynchronous maka hal ini butuh usaha yang tidak mudah. Malah aplikasi kita akan 
+menjadi sangat komplek.</p>
+
+<p>Namun jangan berkecil hati karena para komunitas developer PHP sudah membuatkan pustaka yang akan membuat kita sedikit lebih mudah dalam mengembangkan aplikasi 
+yang berjalan secara asynchronous penuh. Salah satu pustaka yang akan kita bahas kali ini adalah <code class="language-plaintext highlighter-rouge">amphp</code> sebuah pustaka untuk membangun aplikasi asynchronous.</p>
+
+<p><code class="language-plaintext highlighter-rouge">Amphp</code> menyediakan pondasi pustaka untuk membuat aplikasi async, mulai dari <code class="language-plaintext highlighter-rouge">Event Loop</code>, <code class="language-plaintext highlighter-rouge">Promises</code>, <code class="language-plaintext highlighter-rouge">Coroutines</code>, <code class="language-plaintext highlighter-rouge">Iterators</code> dan <code class="language-plaintext highlighter-rouge">Streams</code>. <code class="language-plaintext highlighter-rouge">Event Loop</code> bertugas 
+untuk mengatur pembagian tugas dari tiap operasi async. <code class="language-plaintext highlighter-rouge">Promises</code> sebagai tempat menampung hasil dari operasi async dimana jika pada 
+synchronous program memblok sampai hasilnya tersedia, program asynchronous mengembalikan tempat penampung yang mana akan diisi dengan hasil 
+operasi async kemudian jika datanya sudah siap.</p>
+
+<p><code class="language-plaintext highlighter-rouge">Coroutines</code> adalah fungsi yang dapat diinterupsi yang mana dapat dijeda dan dilanjutkan. Amp menggunakan <code class="language-plaintext highlighter-rouge">Generator</code> untuk mengkonsumsi promise tanpa callbacks.
+<code class="language-plaintext highlighter-rouge">Iterators</code> berguna untuk membantu memproses data berupa koleksi, jadi data dapat dikonsumsi tanpa harus menunggu semua data siap. <code class="language-plaintext highlighter-rouge">Streams</code> berguna untuk membuat 
+pekerjaan dengan input/output menjadi lebih mudah dalam dunia async seperti baca tulis file.</p>
+
+<h3 id="pustaka-utama-amp">Pustaka utama Amp</h3>
+
+<p>Berikut ini pustaka utama Amp:</p>
+
+<ul>
+  <li><a href="https://amphp.org/amp/">amp</a></li>
+  <li><a href="https://amphp.org/byte-stream/">byte-stream</a></li>
+  <li><a href="https://amphp.org/cache/">cache</a></li>
+  <li><a href="https://amphp.org/serialization/">serialization</a></li>
+  <li><a href="https://amphp.org/react-adapter/">react-adapter</a></li>
+  <li><a href="https://amphp.org/socket/">socket</a></li>
+  <li><a href="https://amphp.org/dns/">dns</a></li>
+  <li><a href="https://amphp.org/sync/">sync</a></li>
+</ul>
+
+<p>Amp juga menyediakan pustakan lainnya yang berhubungan dengan Http server, Http client, Multiprocessing, Persistence dan lain-lain. untuk selengkap bisa dicek dihalaman web <a href="https://amphp.org">amphp</a></p>
+
+<h3 id="penggunaan">Penggunaan</h3>
+
+<p>Setelah mengenal teori dari async mari kita lihat bagaimana penggunaan pustaka amphp ini. Karena PHP pada dasarnya merupakan 
+sinkron semua dan tidak ada konsep event loop. maka untuk menggunakan pustaka ini harus kita letakkan didalam event loop.
+Event loop itu seperti pengatur tugas dari operasi async, jika suatu operasi dijalankan ia tidak menghalangi operasi lain 
+untuk berjalan. Jadi kode kita akan berjalan secara concurrent, concurrent bisa kita analogikan seperti seorang chef yang bisa memasak banyak masakan dalam satu waktu tanpa harus menunggu satu masakan selesai dulu baru memasak yang lain.</p>
+
+<p>Kode async harus kita masukan kedalam event loop, untuk menjalankan event loop kita bisa gunakan fungsi <code class="language-plaintext highlighter-rouge">run</code> pada class <code class="language-plaintext highlighter-rouge">Loop</code></p>
+
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="c1">// hello_async.php</span>
+<span class="k">require</span> <span class="k">__DIR__</span> <span class="mf">.</span> <span class="s1">'/vendor/autoload.php'</span><span class="p">;</span>
+
+<span class="kn">use</span> <span class="nc">Amp\Loop</span><span class="p">;</span>
+
+<span class="k">function</span> <span class="n">tick</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s2">"tick</span><span class="se">\n</span><span class="s2">"</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">echo</span> <span class="s2">"--sebelum Loop::run()</span><span class="se">\n</span><span class="s2">"</span><span class="p">;</span>
+
+<span class="nc">Loop</span><span class="o">::</span><span class="nf">run</span><span class="p">(</span><span class="k">static</span> <span class="k">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="nc">Loop</span><span class="o">::</span><span class="nf">repeat</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="s2">"tick"</span><span class="p">);</span>
+    <span class="nc">Loop</span><span class="o">::</span><span class="nf">delay</span><span class="p">(</span><span class="mi">5000</span><span class="p">,</span> <span class="s2">"Amp</span><span class="se">\\</span><span class="s2">Loop::stop"</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="k">echo</span> <span class="s2">"--sesudah Loop::run()</span><span class="se">\n</span><span class="s2">"</span><span class="p">;</span></code></pre></figure>
+
+<p>Jika kita jalankan dengan perintah <code class="language-plaintext highlighter-rouge">php hello_async.php</code> maka akan tampil dikonsol kamu hasil seperti ini:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>--sebelum Loop::run()
+tick
+tick
+tick
+tick
+--sesudah Loop::run()
+</code></pre></div></div>
+
+<p>Jika kita perhatikan sekilas tidak ada bedanya dengan kode php yang siknronus. Namun jika kita perhatikan 
+dengan lebih seksama maka akan kita temukan perbedaannya yaitu pada fungsi <code class="language-plaintext highlighter-rouge">repeat</code> yang akan menjadwalkan fungsi <code class="language-plaintext highlighter-rouge">tick</code> tiap satu detik mencetak 
+kata tick yang jika dilakukan pada kode sinkronus tidak bisa karena tidak ada penjadwalan tugas. dan juga pada fungsi <code class="language-plaintext highlighter-rouge">delay</code> yang menunda eksekusi 
+program setelah 5 detik dan kemudian event loop akan berhenti (lihat pada parameter kedua <code class="language-plaintext highlighter-rouge">Amp\Loop::stop</code>).</p>
+
+  </div><a class="u-url" href="/php/2022/05/31/mengenal-pustaka-async-amphp.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper"><div class="footer-col-wrapper">
+      <div class="footer-col footer-col-3"><ul class="social-media-list"><li><a href="https://github.com/susilolab"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">susilolab</span></a></li><li><a href="https://instagram.com/mas.agus"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#instagram"></use></svg> <span class="username">mas.agus</span></a></li><li><a href="https://www.twitter.com/susil0"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">susil0</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>&quot;Sebaik-baik manusia adalah yang paling bermanfaat bagi manusia&quot; (HR. Ahmad, ath-Thabrani, ad-Daruqutni)</p>
+        <p>&copy;2023&nbsp;Agus Susilo</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Pindah dari shell Bash ke fish | susilolab</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="Pindah dari shell Bash ke fish" />
+<meta name="author" content="Agus Susilo" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Kali ini saya ingin bercerita tentang kepindahan saya dari bash/zsh ke fish. Kenapa pindah dari bash ke fish?" />
+<meta property="og:description" content="Kali ini saya ingin bercerita tentang kepindahan saya dari bash/zsh ke fish. Kenapa pindah dari bash ke fish?" />
+<link rel="canonical" href="https://susilolab.github.io/linux/2022/07/10/pindah-dari-shell-bash-ke-fish.html" />
+<meta property="og:url" content="https://susilolab.github.io/linux/2022/07/10/pindah-dari-shell-bash-ke-fish.html" />
+<meta property="og:site_name" content="susilolab" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-07-10T06:00:00+07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Pindah dari shell Bash ke fish" />
+<script type="application/ld+json">
+{"headline":"Pindah dari shell Bash ke fish","dateModified":"2022-07-10T06:00:00+07:00","datePublished":"2022-07-10T06:00:00+07:00","url":"https://susilolab.github.io/linux/2022/07/10/pindah-dari-shell-bash-ke-fish.html","author":{"@type":"Person","name":"Agus Susilo"},"description":"Kali ini saya ingin bercerita tentang kepindahan saya dari bash/zsh ke fish. Kenapa pindah dari bash ke fish?","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://susilolab.github.io/linux/2022/07/10/pindah-dari-shell-bash-ke-fish.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://susilolab.github.io/feed.xml" title="susilolab" /><script>
+if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1")) {
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-173956394-1', 'auto');
+  ga('send', 'pageview');
+}
+</script>
+  
+<!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Pindah dari shell Bash ke fish | susilolab</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="Pindah dari shell Bash ke fish" />
+<meta name="author" content="Agus Susilo" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Kali ini saya ingin bercerita tentang kepindahan saya dari bash/zsh ke fish. Kenapa pindah dari bash ke fish?" />
+<meta property="og:description" content="Kali ini saya ingin bercerita tentang kepindahan saya dari bash/zsh ke fish. Kenapa pindah dari bash ke fish?" />
+<link rel="canonical" href="https://susilolab.github.io/linux/2022/07/10/pindah-dari-shell-bash-ke-fish.html" />
+<meta property="og:url" content="https://susilolab.github.io/linux/2022/07/10/pindah-dari-shell-bash-ke-fish.html" />
+<meta property="og:site_name" content="susilolab" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-07-10T06:00:00+07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Pindah dari shell Bash ke fish" />
+<script type="application/ld+json">
+{"headline":"Pindah dari shell Bash ke fish","dateModified":"2022-07-10T06:00:00+07:00","datePublished":"2022-07-10T06:00:00+07:00","url":"https://susilolab.github.io/linux/2022/07/10/pindah-dari-shell-bash-ke-fish.html","author":{"@type":"Person","name":"Agus Susilo"},"description":"Kali ini saya ingin bercerita tentang kepindahan saya dari bash/zsh ke fish. Kenapa pindah dari bash ke fish?","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://susilolab.github.io/linux/2022/07/10/pindah-dari-shell-bash-ke-fish.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  
+  
+
+
+
+
+
+
+
+</head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">susilolab</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a><a class="page-link" href="/categories/">Categories</a><a class="page-link" href="/portfolio/">My Portfolio</a><a class="page-link" href="/rust-book/">Rust Book</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Pindah dari shell Bash ke fish</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2022-07-10T06:00:00+07:00" itemprop="datePublished">Jul 10, 2022
+      </time>
+      
+      
+      • categories:  
+      
+      <a href="/categories/#linux">linux</a>
+      
+      
+      </p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p><img src="/assets/img/2022-07-10-fish-shell.png" alt="fish shell" /></p>
+
+<p>Kali ini saya ingin bercerita tentang kepindahan saya dari bash/zsh ke fish. Kenapa pindah dari bash ke fish?
+<!--more--></p>
+
+<p>Alasan pertama yaitu karena fish menyediakan autocomplete berdasarkan history command, yang kedua adalah scriptingnya menurutku lebih mudah dan enak 
+apalagi kalau background kamu adalah programmer.</p>
+
+<h3 id="instalasi">Instalasi</h3>
+
+<p>Untuk install fish cukup ketik command berikut jika kamu kamu pakai OS archlinux</p>
+
+<p><code class="language-plaintext highlighter-rouge">sudo pacman -S fish</code></p>
+
+<p>Untuk fedora</p>
+
+<p><code class="language-plaintext highlighter-rouge">sudo dnf install fish</code></p>
+
+<p>Untuk ubuntu</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt-add-repository ppa:fish-shell/release-3
+sudo apt-get update &amp;&amp; sudo apt-get install
+</code></pre></div></div>
+
+<h3 id="merubah-default-shell">Merubah default shell</h3>
+
+<p>Cek dulu daftar shell yang ada dengan command <code class="language-plaintext highlighter-rouge">chsh -l</code></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/bin/sh
+/bin/bash
+/bin/zsh
+/usr/bin/zsh
+/bin/dash
+/usr/bin/git-shell
+/usr/bin/fish
+/bin/fish
+</code></pre></div></div>
+
+<p>Kemudian ubah default shell ke fish dengan command berikut</p>
+
+<p><code class="language-plaintext highlighter-rouge">sudo chsh -s /bin/fish</code></p>
+
+<p>Jika hanya ingin merubah default shell untuk satu user yang aktif saja hilangkan <code class="language-plaintext highlighter-rouge">sudo</code> pada command di atas.</p>
+
+<h3 id="konfigurasi-shell-fish">Konfigurasi shell fish</h3>
+
+<p>Lokasi file config fish berada pada file <code class="language-plaintext highlighter-rouge">$HOME/.config/fish/config.fish</code>, berbeda dengan bash atau zsh yang berada pada <code class="language-plaintext highlighter-rouge">$HOME/.bashrc</code> dan <code class="language-plaintext highlighter-rouge">$HOME/.zshrc</code>.
+Pada folder <code class="language-plaintext highlighter-rouge">$HOME/.config/fish</code> ini juga berisi config2 lain seperti autocomplete dan juga config plugins.</p>
+
+<h3 id="seting-path">Seting PATH</h3>
+
+<p>Untuk seting pada fish bisa menggunakan fungsi bawaan shell fish yaitu <code class="language-plaintext highlighter-rouge">set</code>, fungsi ini mirip dengan <code class="language-plaintext highlighter-rouge">export</code> pada shell bash/zsh. Namun tidak terbatas pada seting PATH,
+fungsi ini juga untuk membuat variabel pada shell fish. Contoh cara seting PATH pada fish</p>
+
+<pre><code class="language-fish">set PATH "$HOME/.bin" $PATH
+</code></pre>
+
+<p>Agar setingan PATH dapat permanent maka perlu ditaruh pada file <code class="language-plaintext highlighter-rouge">.config/fish/config.fish</code> dan tambahkan opsi <code class="language-plaintext highlighter-rouge">-gx</code>. Contoh confignya:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>set -gx VOLTA_HOME "$HOME/.volta"
+set -gx SCCACHE_DIR "$HOME/.cache/sccache"
+set -gx PATH "$VOLTA_HOME/bin" $PATH
+</code></pre></div></div>
+
+<h3 id="alias-command">Alias command</h3>
+
+<p>Untuk menambahkan alias command juga dapat ditambahkan pada file <code class="language-plaintext highlighter-rouge">.config/fish/config.fish</code>. Contoh:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>alias grep rg
+alias cat bat
+</code></pre></div></div>
+
+<p>Config di atas akan menambahkan alias command <code class="language-plaintext highlighter-rouge">grep</code> dan akan menjalankan command <code class="language-plaintext highlighter-rouge">rg</code>, sedangkan untuk yang bawahnya akan menjalankan command <code class="language-plaintext highlighter-rouge">bat</code> pada 
+saat user mengetik perintah <code class="language-plaintext highlighter-rouge">cat</code>.</p>
+
+<h3 id="refresh-config">Refresh config</h3>
+
+<p>Pada shell bash untuk merefresh config kita biasa menggunakan command <code class="language-plaintext highlighter-rouge">source ~/.bashrc</code>. Untuk shell fish sendiri juga sama perintahnya untuk merefresh config yaitu 
+dengan perintah <code class="language-plaintext highlighter-rouge">source ~/.config/fish/config.fish</code>.</p>
+
+<h3 id="set-variabel">Set variabel</h3>
+
+<p>Seting variabel pada fish sama seperti pada saat seting path yaitu menggunakan perintah <code class="language-plaintext highlighter-rouge">set</code>. contoh:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>set name Agus
+echo $name
+</code></pre></div></div>
+
+<p>Jika nama mengandung spasi maka apit dengan petik dua</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>set name "folder test"
+echo $name
+</code></pre></div></div>
+
+<p>Jika kita membuat folder dengan var $name maka fish akan membuatkan satu folder dengan nama “folder test” bukan 2 folder yaitu <code class="language-plaintext highlighter-rouge">folder</code> dan <code class="language-plaintext highlighter-rouge">test</code> seperti pada shell bash/zsh</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>set name "folder test"
+mkdir tmp/$name
+</code></pre></div></div>
+
+<h3 id="tema">Tema</h3>
+
+<p>Fish shell juga dapat dirubah tampilan sesuai selera kita, untuk itu kita bisa menginstall <a href="https://github.com/oh-my-fish/oh-my-fish">oh-my-fish</a> agar pengaturan paket dan tema lebih mudah.</p>
+
+<p><img src="/assets/img/ohmyfish-bobthefish.gif" alt="bobthefish-theme" /></p>
+
+<p>Untuk menginstall tema <code class="language-plaintext highlighter-rouge">bobthefish</code> pastikan ohmyfish sudah terinstall dan gunakan untuk menginstall paket dan tema. untuk menginstallnya ketik command berikut ini:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>omf install bobthefish
+</code></pre></div></div>
+
+<p>Kemudian untuk menerapkan tema yang baru diinstall ketik</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>omf theme bobthefish
+</code></pre></div></div>
+
+<p>Sekian dan terima kasih</p>
+
+
+  </div><a class="u-url" href="/linux/2022/07/10/pindah-dari-shell-bash-ke-fish.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper"><div class="footer-col-wrapper">
+      <div class="footer-col footer-col-3"><ul class="social-media-list"><li><a href="https://github.com/susilolab"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">susilolab</span></a></li><li><a href="https://instagram.com/mas.agus"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#instagram"></use></svg> <span class="username">mas.agus</span></a></li><li><a href="https://www.twitter.com/susil0"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">susil0</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>&quot;Sebaik-baik manusia adalah yang paling bermanfaat bagi manusia&quot; (HR. Ahmad, ath-Thabrani, ad-Daruqutni)</p>
+        <p>&copy;2023&nbsp;Agus Susilo</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
