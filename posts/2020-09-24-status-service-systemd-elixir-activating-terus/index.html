@@ -1,0 +1,33 @@
+<!doctype html><html><head lang=en><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><title>Status service systemd Elixir activating terus - susilolab</title><meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=description content="
+Jadi ini ceritanya saya ada pekerjaan untuk merubah salah satu fungsi pada aplikasi di kantor ke bahasa Elixir,
+pada saat aplikasi sudah siap dideploy ke server production status servisnya tidak normal, selalu activating terus.
+Sebelumnya saya mencoba mengirim data ke servis untuk memastikan apakah aplikasinya jalan apa tidak. Ternyata aplikasinya jalan,
+itu artinya tidak ada masalah diaplikasi."><meta property="og:image" content><meta property="og:title" content="Status service systemd Elixir activating terus"><meta property="og:description" content="
+Jadi ini ceritanya saya ada pekerjaan untuk merubah salah satu fungsi pada aplikasi di kantor ke bahasa Elixir,
+pada saat aplikasi sudah siap dideploy ke server production status servisnya tidak normal, selalu activating terus.
+Sebelumnya saya mencoba mengirim data ke servis untuk memastikan apakah aplikasinya jalan apa tidak. Ternyata aplikasinya jalan,
+itu artinya tidak ada masalah diaplikasi."><meta property="og:type" content="article"><meta property="og:url" content="https://susilolab.github.io/posts/2020-09-24-status-service-systemd-elixir-activating-terus/"><meta property="article:section" content="posts"><meta property="article:published_time" content="2020-09-24T07:00:00+00:00"><meta property="article:modified_time" content="2020-09-24T07:00:00+00:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="Status service systemd Elixir activating terus"><meta name=twitter:description content="
+Jadi ini ceritanya saya ada pekerjaan untuk merubah salah satu fungsi pada aplikasi di kantor ke bahasa Elixir,
+pada saat aplikasi sudah siap dideploy ke server production status servisnya tidak normal, selalu activating terus.
+Sebelumnya saya mencoba mengirim data ke servis untuk memastikan apakah aplikasinya jalan apa tidak. Ternyata aplikasinya jalan,
+itu artinya tidak ada masalah diaplikasi."><script src=https://susilolab.github.io/js/feather.min.js></script><link href=https://susilolab.github.io/css/fonts.eeaf17fd5344c59efcf7fc5c93b898a92cd323eda28c7f1546bbb5f99b42f174.css rel=stylesheet><link rel=stylesheet type=text/css media=screen href=https://susilolab.github.io/css/main.c7dbc780852ad2fc2aae08ae19f1dea5e34c4ef11a83ab0f9b0a025b148de8a1.css></head><body><div class=container><div class=header-wrapper><header class=header-app><div class=main><a href=https://susilolab.github.io/>susilolab</a></div><nav class=navmain><a href=/>Home</a>
+<a href=/posts>All posts</a>
+<a href=/portfolio>My Portfolio</a>
+<a href=/about>About</a>
+<a href=/tags>Tags</a>
+<a href=/categories>Categories</a></nav></header></div><div class=border-top></div><div class=content><main><article><div class=title><h1 class=title>Status service systemd Elixir activating terus</h1><div class=meta><i data-feather=calendar></i> 24 Sep 2020</div><div class=page-categories><a href=/categories/linux/>linux</a></div></div><section class=body><p><img src=/img/20200806-elixir-systemd.png alt=elixir-systemd></p><p>Jadi ini ceritanya saya ada pekerjaan untuk merubah salah satu fungsi pada aplikasi di kantor ke bahasa Elixir,
+pada saat aplikasi sudah siap dideploy ke server production status servisnya tidak normal, selalu <code>activating</code> terus.
+Sebelumnya saya mencoba mengirim data ke servis untuk memastikan apakah aplikasinya jalan apa tidak. Ternyata aplikasinya jalan,
+itu artinya tidak ada masalah diaplikasi.</p><p>Kemudian saya coba otak-atik service di systemdnya, setelah beberapa lama baru ketahuan setelah tak coba didatacenter.
+Penyebabnya ada pada <code>type</code> service pada file konfigurasinya. Awalnya saya pakai type <code>forking</code> dan setelah ganti ke type <code>simple</code>,
+Alhamdulillah normal.</p><pre tabindex=0><code class=language-conf data-lang=conf>[Unit]
+...
+
+[Service]
+Type=simple
+...
+
+[Install]
+WantedBy = multi-user.target</code></pre><p><img src=/img/20200924-elixir-systemd.png alt=elixir-systemd></p><p>Alasan kenapa setelah saya ganti typenya ke <code>simple</code> menjadi normal karena type simple cocok jika aplikasi yang akan dijadikan
+service memiliki karakteristik aplikasinya jalan dan prompt tidak mengembalikan apa-apa sampai kita tekan <code>Ctrl+C</code> atau menghentikan servisnya.</p><p>Type <code>forking</code> cocok jika karakteristik aplikasi pada saat jalan langsung mengembalikan sesuatu dan servis tetep jalan.</p><p>Sekian, semoga bermanfaat.</p></section><div class=post-tags></div></article></main><footer style=display:flex;justify-content:space-between><div style=width:50%><ul class=social-wrapper><li><a class=soc href=https://github.com/susilolab rel=me title=susilolab><i data-feather=github></i><span class=soc-name>GitHub</span></a></li><li><a class=soc href=https://twitter.com/susil0/ rel=me title=susil0><i data-feather=twitter></i><span class=soc-name>Twitter</span></a></li><li><a class=soc href=https://gitlab.com/susilolab/ rel=me title=susilolab><i data-feather=gitlab></i><span class=soc-name>GitLab</span></a></li></ul></div><div class=footer-info><p>"Sebaik-baik manusia adalah yang paling bermanfaat bagi manusia" (HR. Ahmad, ath-Thabrani, ad-Daruqutni)</p><p>2024 © susilolab | <a href=https://github.com/athul/archie>Archie Theme</a> | Built with <a href=https://gohugo.io>Hugo</a></p></div></footer><script>feather.replace()</script></div></div></body></html>
